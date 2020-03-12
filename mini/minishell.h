@@ -33,6 +33,12 @@ void		ft_print_prompt();
 void		ft_parse_line(t_struct *data);
 void		ft_treat(t_struct *data, char *line);
 
+
+//------------------------------- CMD ------------------------------------
+
+
+
+
 //------------------------------- LIB ------------------------------------
 
 //	ft_init_data(&data);
@@ -44,4 +50,5 @@ void		ft_treat(t_struct *data, char *line);
 //	ft_split_shell(char *str, char sep);
 
 //------------------------------------------------------------------------
+
 #endif
