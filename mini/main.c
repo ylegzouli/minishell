@@ -17,9 +17,10 @@ int		ft_start(t_struct *data)
 {
 	char *line;
 
-	while(data->exit = 0)
+	while(data->exit == 0)
 	{
 		ft_print_prompt();
+		//fork?
 		get_next_line(0, &line);
 		ft_lstadd_front(data->historic, line);
 		ft_parse_line(&data);
@@ -42,6 +43,7 @@ void		ft_parse_line(t_struct *data)
 	cmd = ft_split_shell(data->historic->line, ';');
 	while (cmd[i])
 	{
+		//fork?
 		ft_treat(cmd[i], lst_cmd);
 		i++;
 	}
