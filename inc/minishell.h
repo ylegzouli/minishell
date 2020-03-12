@@ -6,24 +6,26 @@
 # include <stdlib.h>
 # include <stdio.h>
 
+#define SUCCESS			0
+#define ERROR_MALLOC	1
+
 typedef struct	s_hist
 {
 	char			*line
 	struct s_hist	*next;
-
 }				t_cmd;
 
 typedef struct	s_cmd
 {
 	char 			*line;
 	char 			*ret;
-
+	struct s_cmd	*next;
 }				t_cmd;
 
 typedef struct	s_data
 {
 	t_hist 			*historic;
-
+	t_cmd			*lst_cmd;
 }				t_data;
 
 //------------------------------ MINISHELL --------------------------------
@@ -40,7 +42,7 @@ void		ft_treat(t_struct *data, char *line);
 
 
 //------------------------------- LIB ------------------------------------
-
+//	ft_strdup
 //	ft_init_data(&data);
 
 //	ft_init_lst(new);
