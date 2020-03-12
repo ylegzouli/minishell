@@ -1,8 +1,4 @@
-
-int			ft_start();
-void		ft_print_prompt();
-void		ft_parse_line(char *line);
-
+#include "minishell.h"
 
 int		main(int ac, char **av)
 {
@@ -56,13 +52,3 @@ void		ft_treat(t_struct *data, char *line)
 	cmd = ft_split_shell(line, '|');
 
 }	
-
-	
-
-//	ft_init_lst(new);
-//	ft_init_data(&data);
-//	ft_lstadd_back(lst_cmd, new);
-//	ft_lstadd_front(lst_cmd, new);
-//	ft_split_shell(char *, char);
-
-
