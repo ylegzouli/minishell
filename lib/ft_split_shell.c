@@ -83,7 +83,7 @@ static char		*ft_create_str(const char *str, char charset)
 	return (str_ret);
 }
 
-char			**ft_split(char const *str, char charset)
+char			**ft_split_shell(char const *str, char charset)
 {
 	int		i;
 	int		j;

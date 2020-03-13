@@ -1,7 +1,6 @@
-#include "../inc/minishell"
+#include "../inc/minishell.h"
 
-
-void			ft_lstadd_front_hist(t_data *data, char *line)
+int			ft_lstadd_front_hist(t_data *data, char *line)
 {
 	t_hist	*new;
 
@@ -9,12 +8,12 @@ void			ft_lstadd_front_hist(t_data *data, char *line)
 		return (ERROR_MALLOC);
 	new->line = ft_strdup(line);
 	new->next = data->historic->next;
-	data->historic = &new;
+	data->historic = new;
 	return (SUCCESS);
 }
 
 void			ft_lstadd_front_cmd(t_data *data, t_cmd *new)
 {
 	new->next = data->lst_cmd->next;
-	data->lst_cmd = &new;
+	data->lst_cmd = new;
 }

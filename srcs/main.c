@@ -2,14 +2,14 @@
 
 int		main(int ac, char **av)
 {
-	t_struct	data;
+	t_data	data;
 
 	ft_init_data(&data);
 	ft_start(&data);
 	return (0);
 }
 
-int		ft_start(t_struct *data)
+int		ft_start(t_data *data)
 {
 	char *line;
 
@@ -18,22 +18,22 @@ int		ft_start(t_struct *data)
 		ft_print_prompt();
 		//fork?
 		get_next_line(0, &line);
-		ft_lstadd_front_hist(&data, line);
-		ft_parse_line(&data);
+		ft_lstadd_front_hist(data, line);
+		ft_parse_line(data);
 	}
 	return (0);
 }
 
 void		ft_print_prompt()
 {
-	write(1, "--->", 4);
+	write(1, "---> ", 5);
 }
 
 /*
 **split cmd
 */
 
-void		ft_parse_line(t_struct *data)
+void		ft_parse_line(t_data *data)
 {
 	char	**cmd;
 	int		i;
@@ -52,7 +52,7 @@ void		ft_parse_line(t_struct *data)
 **parse cmd
 */
 
-void		ft_treat(t_struct *data, char *line)
+void		ft_treat(t_data *data, char *line)
 {
 	char 	**cmd;
 	int		i;
@@ -61,7 +61,9 @@ void		ft_treat(t_struct *data, char *line)
 	i = 0;
 	while (cmd[i])
 	{
-		//----->
+		//-----
+		printf("%s\n", cmd[i]);
+		//-----
 		i++;
 	}
 }	
