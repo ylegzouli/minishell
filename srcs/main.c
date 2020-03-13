@@ -26,7 +26,7 @@ int		ft_start(t_data *data)
 
 void		ft_print_prompt()
 {
-	write(1, "---> ", 5);
+	write(1, "minishell$> ", 12);
 }
 
 /*
