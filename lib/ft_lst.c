@@ -1,4 +1,4 @@
-#include "minishell"
+#include "../inc/minishell"
 
 
 void			ft_lstadd_front_hist(t_data *data, char *line)

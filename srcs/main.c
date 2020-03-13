@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 int		main(int ac, char **av)
 {
@@ -32,11 +32,14 @@ void		ft_print_prompt()
 /*
 **split cmd
 */
+
 void		ft_parse_line(t_struct *data)
 {
 	char	**cmd;
+	int		i;
 	
 	cmd = ft_split_shell(data->historic->line, ';');
+	i = 0;
 	while (cmd[i])
 	{
 		//fork?
@@ -48,10 +51,17 @@ void		ft_parse_line(t_struct *data)
 /*
 **parse cmd
 */
+
 void		ft_treat(t_struct *data, char *line)
 {
 	char 	**cmd;
+	int		i;
 
 	cmd = ft_split_shell(line, '|');
-
+	i = 0;
+	while (cmd[i])
+	{
+		//----->
+		i++;
+	}
 }	

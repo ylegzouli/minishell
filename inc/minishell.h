@@ -42,14 +42,14 @@ void		ft_treat(t_struct *data, char *line);
 
 
 //------------------------------- LIB ------------------------------------
-//	ft_strdup
-//	ft_init_data(&data);
 
-//	ft_init_lst(new);
+void		ft_init_data(t_data *data);
+void		ft_init_lst(t_cmd *lst_cmd);
+void		ft_lstadd_front_hist(t_data *data, char *line);
+void		ft_lstadd_front_cmd(t_data *data, t_cmd *new);
+char		**ft_split_shell(char const *str, char charset);
 //	ft_lstadd_back(lst_cmd, new);
-//	ft_lstadd_front(lst_cmd, new);
-
-//	ft_split_shell(char *str, char sep);
+//	ft_strdup
 
 //------------------------------------------------------------------------
 
