@@ -6,6 +6,7 @@ int		main(int ac, char **av)
 
 	ft_init_data(&data);
 	ft_start(&data);
+	//ft_free_data(&data);
 	return (0);
 }
 
@@ -46,6 +47,7 @@ void		ft_parse_line(t_data *data)
 		ft_treat(data, cmd[i]);
 		i++;
 	}
+	//ft_free_split(cmd);
 }
 
 /*
@@ -69,6 +71,7 @@ void		ft_treat(t_data *data, char *line)
 		//------------------------
 		i++;
 	}
+	//ft_free_split(cmd);
 }
 
 
