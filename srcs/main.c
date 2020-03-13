@@ -30,6 +30,8 @@ void		ft_print_prompt()
 	write(1, "minishell$> ", 12);
 }
 
+//-------------------------------------------------------------
+
 /*
 **split cmd
 */
@@ -39,8 +41,8 @@ void		ft_parse_line(t_data *data)
 	char	**cmd;
 	int		i;
 	
-	cmd = ft_split_shell(data->historic->line, ';');
 	i = 0;
+	cmd = ft_split_shell(data->historic->line, ';');
 	while (cmd[i])
 	{
 		//fork?
@@ -57,21 +59,29 @@ void		ft_parse_line(t_data *data)
 void		ft_treat(t_data *data, char *line)
 {
 	char 	**cmd;
+//	t_cmd	*new_cmd;
 	int		i;
 
-	cmd = ft_split_shell(line, '|');
 	i = 0;
+	cmd = ft_split_shell(line, '|');
 	while (cmd[i])
 	{
+		// ft_init_lst(new_cmd);
+		// get_cmd(new_cmd, cmd[i]);
+		// get_input(data, new_cmd, cmd[i], i);
+		// get_result(data, new_cmd); 
+		// ft_lstadd_front_cmd(data, new_cmd);
+		
 		//------------------------
 		if (ft_strncmp(cmd[i], "exit", 4) == 0)
 			data->exit = 1;
 		else
 			printf("%s\n", cmd[i]);
 		//------------------------
+		
 		i++;
 	}
 	//ft_free_split(cmd);
 }
 
-
+//-------------------------------------------------------------

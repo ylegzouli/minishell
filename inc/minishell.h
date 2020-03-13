@@ -18,8 +18,9 @@ typedef struct	s_hist
 
 typedef struct	s_cmd
 {
-	char 			*line;
-	char 			*ret;
+	int				cmd;
+	char			*input;
+	void			*result;	
 	struct s_cmd	*next;
 }				t_cmd;
 
