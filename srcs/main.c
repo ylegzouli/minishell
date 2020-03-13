@@ -61,9 +61,14 @@ void		ft_treat(t_data *data, char *line)
 	i = 0;
 	while (cmd[i])
 	{
-		//-----
-		printf("%s\n", cmd[i]);
-		//-----
+		//------------------------
+		if (ft_strncmp(cmd[i], "exit", 4) == 0)
+			data->exit = 1;
+		else
+			printf("%s\n", cmd[i]);
+		//------------------------
 		i++;
 	}
-}	
+}
+
+
