@@ -56,7 +56,7 @@ void		ft_treat(t_data *data, char *line)
 	cmd = ft_split_shell(line, '|');
 	while (cmd[i] && !(data->exit))
 	{
-//		ft_init_lst(new_cmd);
+		ft_init_lst(new_cmd);
 		get_cmd(data, new_cmd, cmd[i]);
 //		ft_lstadd_front_cmd(data, new_cmd);
 		i++;
@@ -97,9 +97,8 @@ void		get_cmd(t_data *data, t_cmd *new_cmd, char *cmd)
 void		get_cmd2(t_data *data, t_cmd *new_cmd, char **tmp)
 {
 	if (ft_strcmp(tmp[0], "pwd") == 0)
-	{
-		printf("%s\n", data->path);
-	//	new_cmd->ret = pwd();
+	{	
+		pwd(data->path);
 	}
 	else if (ft_strcmp(tmp[0], "export") == 0)
 	{

@@ -20,8 +20,8 @@ typedef struct	s_cmd
 {
 	char			*input;
 	char			*result;	
-	struct s_cmd	*next;
 	int				ret;
+	struct s_cmd	*next;
 }				t_cmd;
 
 typedef struct	s_data
@@ -45,7 +45,7 @@ void		get_cmd2(t_data *data, t_cmd *new_cmd, char **tmp);
 
 //------------------------------- CMD ------------------------------------
 
-
+void		pwd(char *path);
 
 
 //------------------------------- LIB ------------------------------------

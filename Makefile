@@ -13,7 +13,7 @@ OBJ_PATH = ./obj
 OBJLIB_PATH = ./obj
 
 INC_NAME =	minishell.h
-SRC_NAME =	main.c 
+SRC_NAME =	main.c cmd.c 
 LIB_NAME =	ft_init.c ft_lst.c ft_split_shell.c get_next_line.c \
 			get_next_line_utils.c ft_strdup.c ft_strcmp.c ft_split.c
 

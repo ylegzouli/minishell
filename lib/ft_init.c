@@ -22,10 +22,9 @@ int			ft_init_lst(t_cmd *lst_cmd)
 {
 	if (!(lst_cmd = malloc(sizeof(t_cmd))))
 		return (ERROR_MALLOC);
-//	lst_cmd->cmd = 0;
 	lst_cmd->input = NULL;
 	lst_cmd->result = NULL;
-	lst_cmd->next = NULL;
 	lst_cmd->ret = 0;
+	lst_cmd->next = NULL;
 	return (SUCCESS);
 }
