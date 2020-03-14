@@ -31,6 +31,7 @@ size_t			ft_strlcpy(char *dest, char const *src, size_t size);
 char			*ft_strnstr(const char *str, const char *to_find, size_t len);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t			ft_strlen(const char *s);
+int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_strdup(const char *s1);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_substr(char const *s, unsigned int start, size_t len);

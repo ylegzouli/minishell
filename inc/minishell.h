@@ -18,10 +18,10 @@ typedef struct	s_hist
 
 typedef struct	s_cmd
 {
-	int				cmd;
 	char			*input;
-	void			*result;	
+	char			*result;	
 	struct s_cmd	*next;
+	int				ret;
 }				t_cmd;
 
 typedef struct	s_data
@@ -29,6 +29,7 @@ typedef struct	s_data
 	t_hist 			*historic;
 	t_cmd			*lst_cmd;
 	int				exit;
+	char			path[1000];
 }				t_data;
 
 //------------------------------ MINISHELL --------------------------------
@@ -38,6 +39,9 @@ void		ft_print_prompt();
 void		ft_parse_line(t_data *data);
 void		ft_treat(t_data *data, char *line);
 
+void		get_cmd(t_data *data, t_cmd *new_cmd, char *cmd);
+void		get_cmd2(t_data *data, t_cmd *new_cmd, char **tmp);
+
 
 //------------------------------- CMD ------------------------------------
 
@@ -46,12 +50,11 @@ void		ft_treat(t_data *data, char *line);
 
 //------------------------------- LIB ------------------------------------
 
-void		ft_init_data(t_data *data);
-void		ft_init_lst(t_cmd *lst_cmd);
+int			ft_init_data(t_data *data);
+int			ft_init_lst(t_cmd *lst_cmd);
 int			ft_lstadd_front_hist(t_data *data, char *line);
 void		ft_lstadd_front_cmd(t_data *data, t_cmd *new);
 char		**ft_split_shell(char const *str, char charset);
-//	ft_lstadd_back(lst_cmd, new);
 
 //------------------------------------------------------------------------
 
