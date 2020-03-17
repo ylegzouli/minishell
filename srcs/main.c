@@ -54,6 +54,7 @@ void		ft_treat(t_data *data, char *line)
 
 	i = 0;
 	cmd = ft_split_shell(line, '|');
+	ft_init_lst(new_cmd);
 	while (cmd[i] && !(data->exit))
 	{
 		ft_init_lst(new_cmd);
@@ -82,6 +83,8 @@ void		get_cmd(t_data *data, t_cmd *new_cmd, char *cmd)
 	//	get_opt();	
 	//	get_input();
 	//	new_cmd->ret = echo(new_cmd->input, new_cmd->result);
+		char *str = 0;
+		echo(cmd, str);
 	}
 	else if (ft_strcmp(tmp[0], "cd") == 0)
 	{

@@ -6,6 +6,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
+# include <limits.h>
 
 # define SUCCESS			0
 # define ERROR_MALLOC		1
@@ -46,6 +48,7 @@ void		get_cmd2(t_data *data, t_cmd *new_cmd, char **tmp);
 //------------------------------- CMD ------------------------------------
 
 void		pwd(char *path);
+int			echo(char *input, char *result);
 
 
 //------------------------------- LIB ------------------------------------
@@ -55,6 +58,8 @@ int			ft_init_lst(t_cmd *lst_cmd);
 int			ft_lstadd_front_hist(t_data *data, char *line);
 void		ft_lstadd_front_cmd(t_data *data, t_cmd *new);
 char		**ft_split_shell(char const *str, char charset);
+void		ft_init_tab(int	*tab, int len);
+char 		*ft_add_char(char *str, char c);
 
 //------------------------------------------------------------------------
 

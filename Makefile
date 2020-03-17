@@ -13,9 +13,10 @@ OBJ_PATH = ./obj
 OBJLIB_PATH = ./obj
 
 INC_NAME =	minishell.h
-SRC_NAME =	main.c cmd.c 
+SRC_NAME =	main.c cmd.c echo.c
 LIB_NAME =	ft_init.c ft_lst.c ft_split_shell.c get_next_line.c \
-			get_next_line_utils.c ft_strdup.c ft_strcmp.c ft_split.c
+			get_next_line_utils.c ft_strdup.c ft_strcmp.c ft_split.c\
+			ft_add_char.c ft_init_tab.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJLIB_NAME = $(LIB_NAME:.c=.o)
