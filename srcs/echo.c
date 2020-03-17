@@ -4,17 +4,17 @@ int			ft_add_fd(int *fd, char *input, int *i)
 {
 	int		j;
 	char	*path;
-//	int		flag;
+	int		flag;
 
 	j = 0;
 	path = 0;
 	while (j < OPEN_MAX && fd[j] != 0)
 		j++;
 	*i += 1;
-//	flag = 00000100;
+	flag = 0;
 	if (input[*i] == input[*i - 1])
 	{
-//		flag = 00000002;
+		flag = 1;
 		*i += 1;
 	}
 	while (input[*i] == ' ')
@@ -24,9 +24,12 @@ int			ft_add_fd(int *fd, char *input, int *i)
 		path = ft_add_char(path, input[*i]);
 		*i += 1;
 	}
-//	if ((fd[j] = open(path, flag)) == -1)
-	if ((fd[j] = open(path, O_CREAT | O_RDWR | O_APPEND )) == -1)
-		return (1);
+	if (flag == 0)
+		if ((fd[j] = open(path, O_CREAT | O_RDWR | O_TRUNC)) == -1)
+			return (1);	
+	if (flag == 1)
+		if ((fd[j] = open(path, O_CREAT | O_RDWR | O_APPEND )) == -1)
+			return (1);	
 	return (0);
 }
 
@@ -34,16 +37,24 @@ int			ft_parse_echo(char *input, int *fd, char **result)
 {
 	int		i;
 	int		opt;
+	char	quote;
 
 	i = 0;
 	opt = 0;
-//	if (input[0] == '-' && input[0] == 'n' && input[0] == ' ')
-//	{
-//		i = 3;
-//		opt = 1;
-//	}
+	quote = 0;
+	if (input[0] && input[1] && input[2] &&
+		input[0] == '-' && input[1] == 'n' && input[2] == ' ')
+	{
+		i = 3;
+		opt = 1;
+	}
 	while (input[i])
 	{
+		if (input[i] == quote)
+			quote = 0;
+		else if (quote == 0 && (input[i] == '"' || input[i] == 39))
+			if (i == 0 || input[i - 1] != 92)
+				quote = input[i];
 		if (input[i] == '>' || input[i] == '<')
 		{
 			if (ft_add_fd(fd, input, &i))
@@ -53,8 +64,8 @@ int			ft_parse_echo(char *input, int *fd, char **result)
 			*result = ft_add_char(*result, input[i]);
 		i++;
 	}
-//if opt
-	*result = ft_add_char(*result, '\n');
+	if (opt == 0)
+		*result = ft_add_char(*result, '\n');
 	return (0);
 }
 
