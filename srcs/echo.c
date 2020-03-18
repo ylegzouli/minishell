@@ -95,7 +95,9 @@ int			echo(char *input, char *result)
 		{
 			write(fd[i], &result[j], 1);
 			j++;
-		}	
+		}
+		if (fd[i] != 0)
+			close(fd[i]);
 		i++;
 	}
 	return (0);
