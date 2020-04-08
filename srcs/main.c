@@ -75,6 +75,7 @@ void		get_cmd(t_data *data, t_cmd *new_cmd, char *cmd)
 	if (ft_strcmp(tmp[0], "exit") == 0)
 	{
 		printf("exit\n");
+		//il faut une fonction de nettoyage ici
 		data->exit = 1;
 	}
 	else if (ft_strcmp(tmp[0], "echo") == 0)
@@ -101,7 +102,7 @@ void		get_cmd2(t_data *data, t_cmd *new_cmd, char **tmp)
 {
 	if (ft_strcmp(tmp[0], "pwd") == 0)
 	{	
-		pwd(data->path);
+		ft_pwd(data);
 	}
 	else if (ft_strcmp(tmp[0], "export") == 0)
 	{
@@ -116,6 +117,11 @@ void		get_cmd2(t_data *data, t_cmd *new_cmd, char **tmp)
 	else if (ft_strcmp(tmp[0], "env") == 0)
 	{
 		printf("env\n");
+	//	new_cmd->ret = env();
+	}
+	else if (ft_strcmp(tmp[0], "$?") == 0)
+	{
+		check_return(data);
 	//	new_cmd->ret = env();
 	}
 	else if (tmp[0])

@@ -12,6 +12,8 @@
 # define SUCCESS			0
 # define ERROR_MALLOC		1
 
+# define OPEN_MAX 256 // bug sur ordi arthur sinon
+
 typedef struct	s_hist
 {
 	char			*line;
@@ -47,7 +49,8 @@ void		get_cmd2(t_data *data, t_cmd *new_cmd, char **tmp);
 
 //------------------------------- CMD ------------------------------------
 
-void		pwd(char *path);
+void		ft_pwd(t_data *data);
+void		check_return(t_data *data);
 int			echo(char *input, char *result);
 
 
