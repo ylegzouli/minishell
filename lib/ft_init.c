@@ -7,7 +7,7 @@ int			ft_init_data(t_data *data)
 	i = -1;
 	while (i++ < 1000)
 		data->path[i] = '\0';
-	data->path[0] = '/';
+	find_path(data);
 	if (!(data->historic = malloc(sizeof(t_hist))))
 		return (ERROR_MALLOC);
 	data->historic->next = NULL;
@@ -18,13 +18,22 @@ int			ft_init_data(t_data *data)
 	return (SUCCESS);
 }
 
-int			ft_init_lst(t_cmd *lst_cmd)
+int			ft_init_lst(t_cmd **lst_cmd)
 {
-	if (!(lst_cmd = malloc(sizeof(t_cmd))))
+	if (!(*lst_cmd = malloc(sizeof(t_cmd))))
 		return (ERROR_MALLOC);
-	lst_cmd->input = NULL;
-	lst_cmd->result = NULL;
-	lst_cmd->ret = 0;
-	lst_cmd->next = NULL;
+	(*lst_cmd)->cmd = -1;
+	(*lst_cmd)->input = -1;
+	(*lst_cmd)->output = -1;
+
+	(*lst_cmd)->fd_in = -1;
+	if (!((*lst_cmd)->fd_out = malloc(sizeof(t_list))))
+		return (ERROR_MALLOC);
+	(*lst_cmd)->fd_out->content = 0;
+	(*lst_cmd)->fd_out->next = NULL;
+	(*lst_cmd)->result = NULL;
+	(*lst_cmd)->ret = 0;
+	
+	(*lst_cmd)->next = NULL;
 	return (SUCCESS);
 }

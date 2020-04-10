@@ -17,3 +17,14 @@ void			ft_lstadd_front_cmd(t_data *data, t_cmd *new)
 	new->next = data->lst_cmd->next;
 	data->lst_cmd = new;
 }
+
+
+void			ft_lstadd_back_cmd(t_cmd *new)
+{
+	t_cmd	*tmp;
+
+	tmp = g_data->lst_cmd;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+}

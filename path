@@ -1,8 +1,0 @@
-srcs/main.c:	while(data->exit == 0)
-srcs/main.c:	cmd = ft_split_shell(data->historic->line, ';');
-srcs/main.c:	while (cmd[i] && !(data->exit))
-srcs/main.c:	while (cmd[i] && !(data->exit))
-srcs/main.c:		data->exit = 1;
-srcs/main.c:	//	new_cmd->ret = cd(new_cmd->input, data->path);
-srcs/pwd.c://	data->path = ft_strdup(getcwd(tmp, 1000));
-srcs/pwd.c:	write(1, data->path, ft_strlen(data->path));

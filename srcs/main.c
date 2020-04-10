@@ -1,9 +1,12 @@
 #include "../inc/minishell.h"
 
+t_data          *g_data;
+
 int		main(int ac, char **av)
 {
 	t_data	data;
 
+	g_data = &data;
 	ft_init_data(&data);
 	ft_start(&data);
 	//ft_free_data(&data);
@@ -51,22 +54,31 @@ void		ft_treat(t_data *data, char *line)
 	char 	**cmd;
 	t_cmd	*new_cmd;
 	int		i;
+	int		size;
 
 	i = 0;
+	size = 0;
 	cmd = ft_split_shell(line, '|');
-	ft_init_lst(new_cmd);
+	while (cmd[size])
+		size++;
 	while (cmd[i] && !(data->exit))
 	{
-		ft_init_lst(new_cmd);
-		get_cmd(data, new_cmd, cmd[i]);
-//		ft_lstadd_front_cmd(data, new_cmd);
+		ft_init_lst(&new_cmd);
+		get_output(new_cmd, cmd[i], i, size);
+		clean_fdout(&new_cmd->fd_out);
+		get_cmd(new_cmd, cmd[i]);
+
+//		printf("---output = %d ---\n", new_cmd->output);
+		printf("cmd= %d\ninput= %d\noutput= %d\nfd_in= %d\nresult= %s\nret= %d\n-----\n", new_cmd->cmd, new_cmd->input, new_cmd->output, new_cmd->fd_in, new_cmd->result,  new_cmd->ret);		
+
+//		ft_lstadd_back_cmd(new_cmd);
 		i++;
 	}
 	//ft_free_split(cmd);
 }
 
 //-------------------------------------------------------------
-
+/*
 void		get_cmd(t_data *data, t_cmd *new_cmd, char *cmd)
 {
 	char **tmp;
@@ -121,11 +133,11 @@ void		get_cmd2(t_data *data, t_cmd *new_cmd, char **tmp)
 	}
 	else if (ft_strcmp(tmp[0], "$?") == 0)
 	{
-		check_return(data);
+//		check_return(data);
 	//	new_cmd->ret = env();
 	}
 	else if (tmp[0])
 		printf("command not found\n");
 }
-
+*/
 //-------------------------------------------------------------
