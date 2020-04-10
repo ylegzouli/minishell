@@ -1,0 +1,5 @@
+1. Pb en cas de redirection '<' ET '>' dans le meme commande.
+
+2. Revoir l'utilisation des pipes (en input) sur un vrai shell.
+
+3. 

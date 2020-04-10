@@ -41,13 +41,12 @@ typedef struct	s_hist
 typedef struct	s_cmd
 {
 	int				cmd;
-	int				input;
 	int				output;
-
-	char			**arg;
-	int				fd_in;
 	t_list			*fd_out;
-
+	
+	int				input;
+	int				fd_in;
+	char			**arg;
 	char			*result;	
 	int				ret;
 
@@ -78,12 +77,12 @@ extern      t_data *g_data;
 //------------------------------ MINISHELL --------------------------------
 
 int			ft_start(t_data *data);
+int			ft_init_data(t_data *data);
+int			ft_init_lst(t_cmd **lst_cmd);
 void		ft_print_prompt();
 void		ft_parse_line(t_data *data);
 void		ft_treat(t_data *data, char *line);
 
-//void		get_cmd(t_data *data, t_cmd *new_cmd, char *cmd);
-//void		get_cmd2(t_data *data, t_cmd *new_cmd, char **tmp);
 //void		check_return(t_data *data);
 //void		print_lst(t_list *li);
 
@@ -95,6 +94,7 @@ int			open_file(char *str, int opt);
 void		clean_fdout(t_list **fd);
 char		*get_path(char *str);
 void		get_cmd(t_cmd *new_cmd, char *cmd);
+int         get_input(t_cmd *new_cmd, char *cmd, int i, int size);
 
 //------------------------------- CMD ------------------------------------
 
@@ -103,8 +103,6 @@ int			echo(char *input, char *result);
 
 //------------------------------- LIB ------------------------------------
 
-int			ft_init_data(t_data *data);
-int			ft_init_lst(t_cmd **lst_cmd);
 void		find_path(t_data *data);
 void		ft_lstadd_back_cmd(t_cmd *new);
 void		ft_lstadd_front_cmd(t_data *data, t_cmd *new);

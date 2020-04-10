@@ -31,6 +31,7 @@ int			get_fd(t_cmd *new_cmd, char *cmd)
 		free(path);
 		i++;
 	}
+	//ft_free_split(tmp);
 	return (0);
 }
 
