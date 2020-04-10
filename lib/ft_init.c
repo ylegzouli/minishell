@@ -25,7 +25,6 @@ int			ft_init_lst(t_cmd **lst_cmd)
 	(*lst_cmd)->cmd = -1;
 	(*lst_cmd)->input = -1;
 	(*lst_cmd)->output = -1;
-
 	(*lst_cmd)->fd_in = -1;
 	if (!((*lst_cmd)->fd_out = malloc(sizeof(t_list))))
 		return (ERROR_MALLOC);

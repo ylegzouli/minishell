@@ -69,7 +69,7 @@ void		ft_treat(t_data *data, char *line)
 		get_cmd(new_cmd, cmd[i]);
 
 //		printf("---output = %d ---\n", new_cmd->output);
-		printf("cmd= %d\ninput= %d\noutput= %d\nfd_in= %d\nresult= %s\nret= %d\n-----\n", new_cmd->cmd, new_cmd->input, new_cmd->output, new_cmd->fd_in, new_cmd->result,  new_cmd->ret);		
+		printf("cmd= %d\noutput= %d\ninput= %d\nfd_in= %d\nresult= %s\nret= %d\n-----\n", new_cmd->cmd, new_cmd->output, new_cmd->input, new_cmd->fd_in, new_cmd->result,  new_cmd->ret);		
 
 //		ft_lstadd_back_cmd(new_cmd);
 		i++;
