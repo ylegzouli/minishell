@@ -13,3 +13,9 @@
 4. 	Variable global g_data ok, mais aucune modif faite sur les fonctions qui etaient deja ecrite. ca marche, mais c'est pas propre.
 
 5.	Modif a faire dans get_input pour save les arguments dans **arg.
+
+6.	Attention au parsing des variables d'env, il doit etre fait dans la boucle de parsing (juste av get_output) 
+	EX: export SALUT=5 ; echo $SALUT ; unset SALUT ; echo $SALUT
+	output: $> 5
+			$> 
+			minishell$>
