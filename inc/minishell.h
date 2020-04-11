@@ -109,6 +109,7 @@ void		ft_lstadd_front_cmd(t_data *data, t_cmd *new);
 int			ft_lstadd_front_hist(t_data *data, char *line);
 char		**ft_split_shell(char const *str, char charset);
 char		**ft_split_sh(char const *str, char charset);
+char		*ft_strchr_shell(char const *s, int c);
 void		ft_init_tab(int	*tab, int len);
 char 		*ft_add_char(char *str, char c);
 
