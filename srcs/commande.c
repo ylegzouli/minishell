@@ -31,7 +31,7 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 	char	*path;
 
 	tmp = ft_split_shell(cmd, '<');
-	if (tmp[1])
+	if (tmp[1] && new_cmd->fd_in == -1)
 	{
 		new_cmd->input = REDIRECT;
 		path = get_path(ft_strtrim(tmp[1], " "));

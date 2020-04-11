@@ -1,5 +1,6 @@
-1. Pb en cas de redirection '<' ET '>' dans le meme commande.
+1. Pb en cas de redirection '<' ET '>' dans le meme commande. 		[ok]
 
 2. Revoir l'utilisation des pipes (en input) sur un vrai shell.
 
-3. 
+3. Revoir utilisation des redirection '<' sur un vrai shell.
+ 

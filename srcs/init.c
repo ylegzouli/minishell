@@ -32,7 +32,6 @@ int			ft_init_lst(t_cmd **lst_cmd)
 	(*lst_cmd)->fd_out->next = NULL;
 	(*lst_cmd)->result = NULL;
 	(*lst_cmd)->ret = 0;
-	
 	(*lst_cmd)->next = NULL;
 	return (SUCCESS);
 }

@@ -13,6 +13,7 @@ int			get_output(t_cmd *new_cmd, char *cmd, int i, int size)
 int			get_fd(t_cmd *new_cmd, char *cmd)
 {
 	char		**tmp;
+	char 		**tmp2;
 	int			i;
 	int			fd;
 	char		*path;
@@ -21,8 +22,16 @@ int			get_fd(t_cmd *new_cmd, char *cmd)
 	i = 1;
 	while (tmp[i])
 	{
+		if (ft_strchr(tmp[i], '<'))
+		{
+			get_input(new_cmd, tmp[i], 0, 0);
+			tmp2 = ft_split_shell(tmp[i], '<');
+			path = get_path(ft_strtrim(tmp2[0], " >"));
+			//ft_free_split(tmp2);
+		}
+		else
+			path = get_path(ft_strtrim(tmp[i], " >"));
 		new_cmd->output = REDIRECT;
-		path = get_path(ft_strtrim(tmp[i], " >"));
 		if (tmp[i][0] == '>' && tmp[i][1] != '>')
 			fd = open_file(path, 1);
 		else
