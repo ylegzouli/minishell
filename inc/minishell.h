@@ -43,7 +43,6 @@ typedef struct	s_cmd
 	int				cmd;
 	int				output;
 	t_list			*fd_out;
-	
 	int				input;
 	int				fd_in;
 	char			**arg;
@@ -80,14 +79,11 @@ int			ft_start(t_data *data);
 int			ft_init_data(t_data *data);
 int			ft_init_lst(t_cmd **lst_cmd);
 void		ft_print_prompt();
-void		ft_parse_line(t_data *data);
-void		ft_treat(t_data *data, char *line);
-
-//void		check_return(t_data *data);
-//void		print_lst(t_list *li);
 
 //------------------------------ PARSING ---------------------------------
 
+void		ft_parse_line(t_data *data);
+void		ft_parse_cmd(t_data *data, char *line);
 int			get_output(t_cmd *new_cmd, char *cmd, int i, int size);
 int			get_fd(t_cmd *new_cmd, char *cmd);
 int			open_file(char *str, int opt);
@@ -112,6 +108,8 @@ char		**ft_split_sh(char const *str, char charset);
 char		*ft_strchr_shell(char const *s, int c);
 void		ft_init_tab(int	*tab, int len);
 char 		*ft_add_char(char *str, char c);
+//void		check_return(t_data *data);
+//void		print_lst(t_list *li);
 
 //------------------------------------------------------------------------
 

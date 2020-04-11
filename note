@@ -11,3 +11,5 @@
 		le vrai shell n'envoi pas le contenu de test.txt dans echo ? a voir
 
 4. 	Variable global g_data ok, mais aucune modif faite sur les fonctions qui etaient deja ecrite. ca marche, mais c'est pas propre.
+
+5.	Modif a faire dans get_input pour save les arguments dans **arg.
