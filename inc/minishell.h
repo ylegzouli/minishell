@@ -45,17 +45,16 @@ typedef struct	s_cmd
 	t_list			*fd_out;
 	int				input;
 	int				fd_in;
-	char			**arg;
+	char			*arg;
 	char			*result;	
-	int				ret;
-
 	struct s_cmd	*next;
 }				t_cmd;
 
-typedef	struct	s_env
+typedef struct	s_env
 {
 	char			*name;
 	char			*value;
+	char			**var_non_export_yet;
 	struct s_env	*next;
 }				t_env;
 
@@ -68,7 +67,7 @@ typedef struct	s_data
 	int				exit;
 	char			path[1000];
 	char			*pipe;
-
+	int				ret;
 }				t_data;
 
 extern      t_data *g_data;
@@ -77,14 +76,17 @@ extern      t_data *g_data;
 
 int			ft_start(t_data *data);
 int			ft_init_data(t_data *data);
+//int			ft_init_env();
 int			ft_init_lst(t_cmd **lst_cmd);
 void		ft_print_prompt();
 void		ft_exec_line(t_data *data);
 void		executor(t_data *data, char *line);
+void		ft_exec_cmd(t_cmd *cmd);
 
 //------------------------------ PARSING ---------------------------------
 
 int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size);
+//int			parse_env(t_env *env, char *line);
 int			get_output(t_cmd *new_cmd, char *cmd, int i, int size);
 int			get_fd(t_cmd *new_cmd, char *cmd);
 char		*get_path(char *str);
@@ -92,11 +94,14 @@ int			open_file(char *str, int opt);
 void		clean_fdout(t_list **fd);
 void		get_cmd(t_cmd *new_cmd, char *cmd);
 int         get_input(t_cmd *new_cmd, char *cmd, int i, int size);
+void		get_arg(char **arg, char *str);
 
 //------------------------------- CMD ------------------------------------
 
 void		pwd(t_data *data);
-int			echo(char *input, char *result);
+int			echo(char *input, char **result);
+int         export(t_env *env, char *s);
+void		unset(t_env *env, char *s);
 
 //------------------------------- LIB ------------------------------------
 
@@ -109,6 +114,8 @@ char		**ft_split_sh(char const *str, char charset);
 char		*ft_strchr_shell(char const *s, int c);
 void		ft_init_tab(int	*tab, int len);
 char 		*ft_add_char(char *str, char c);
+int			check_variable_env(t_env *env, char *s);
+
 //void		check_return(t_data *data);
 //void		print_lst(t_list *li);
 

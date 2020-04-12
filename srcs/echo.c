@@ -1,5 +1,5 @@
 #include "../inc/minishell.h"
-
+/*
 int			ft_add_fd(int *fd, char *input, int *i)
 {
 	int		j;
@@ -32,14 +32,14 @@ int			ft_add_fd(int *fd, char *input, int *i)
 			return (1);	
 	return (0);
 }
-
+*/
 int			ft_parse_echo(char *input, int *fd, char **result)
 {
 	int		i;
 	int		opt;
 	char	quote;
 
-	i = 4;
+	i = 0;
 	opt = 0;
 	quote = 0;
 	while (input[i] == ' ')
@@ -65,7 +65,7 @@ int			ft_parse_echo(char *input, int *fd, char **result)
 			}
 		if (quote == 0 && (input[i] == '>' || input[i] == '<'))
 		{
-			if (ft_add_fd(fd, input, &i))
+		//	if (ft_add_fd(fd, input, &i))
 				return (1);
 		}
 		else if (quote != 0 || input[i] != ' ' || (input[i - 1] != ' '))
@@ -78,7 +78,7 @@ int			ft_parse_echo(char *input, int *fd, char **result)
 	return (0);
 }
 
-int			echo(char *input, char *result)
+int			echo(char *input, char **result)
 {
 	int		i;
 	int		j;
@@ -86,9 +86,9 @@ int			echo(char *input, char *result)
 
 	i = 0;
 	ft_init_tab(fd, OPEN_MAX);
-	if (ft_parse_echo(input, fd, &result))
+	if (ft_parse_echo(input, fd, result))
 		return (1);
-	while (i == 0 || fd[i] != 0)
+/*	while (i == 0 || fd[i] != 0)
 	{
 		j = 0;
 		while (result[j])
@@ -99,6 +99,6 @@ int			echo(char *input, char *result)
 		if (fd[i] != 0)
 			close(fd[i]);
 		i++;
-	}
+	}*/
 	return (0);
 }

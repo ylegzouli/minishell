@@ -2,7 +2,7 @@
 
 int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 {
-	//ft_parse_env();
+	//parse_env(g_data->lst_env, cmd);
 	get_output(new_cmd, cmd, i, size);
 	clean_fdout(&new_cmd->fd_out);
 	get_cmd(new_cmd, cmd);
@@ -52,6 +52,25 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 		new_cmd->input = PIPE;
 	else if (!tmp[1])
 		new_cmd->input = ARG;
+	get_arg(&new_cmd->arg, tmp[0]);
 	//ft_free_split(tmp);
 	return (0);
+}
+
+void		get_arg(char **arg, char *str)
+{
+	int		i;
+	char 	**tmp;
+
+	i = 0;
+	printf("str=[%s] --- arg=[%s]\n", str, *arg);
+	tmp = ft_split_shell(str, '>');
+	while (tmp[0][i] == ' ')
+		i++;
+	while (tmp[0][i] != ' ')
+		i++;
+	while (tmp[0][i] == ' ')
+		i++;
+	*arg = ft_strdup(ft_strtrim(&tmp[0][i], " "));
+	//ft_free_split(tmp);
 }

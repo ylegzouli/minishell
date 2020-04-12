@@ -13,10 +13,21 @@ int			ft_init_data(t_data *data)
 	data->historic->next = NULL;
 	if (!(data->lst_cmd = malloc(sizeof(t_cmd))))
 		return (ERROR_MALLOC);
+	if (!(data->lst_env = malloc(sizeof(t_env))))
+		return (ERROR_MALLOC);
 	data->lst_cmd->next = NULL;
 	data->exit = 0;
+	data->ret = 0;
+	data->pipe = NULL;
 	return (SUCCESS);
 }
+
+/*
+int			ft_init_env()
+{
+	return (0);
+}
+*/
 
 int			ft_init_lst(t_cmd **lst_cmd)
 {
@@ -31,7 +42,7 @@ int			ft_init_lst(t_cmd **lst_cmd)
 	(*lst_cmd)->fd_out->content = 0;
 	(*lst_cmd)->fd_out->next = NULL;
 	(*lst_cmd)->result = NULL;
-	(*lst_cmd)->ret = 0;
 	(*lst_cmd)->next = NULL;
 	return (SUCCESS);
 }
+

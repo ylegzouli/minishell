@@ -19,3 +19,8 @@
 	output: $> 5
 			$> 
 			minishell$>
+
+7.	Segfault si rien apres la commande:
+	EX:	$> [echo bonjour]	(ok)
+		$> [echo ]     		(ok)
+		$> [echo]			(not ok)
