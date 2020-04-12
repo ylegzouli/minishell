@@ -22,8 +22,7 @@ int		ft_start(t_data *data)
 		ft_print_prompt();
 		get_next_line(0, &line);
 		ft_lstadd_front_hist(data, line);
-		ft_parse_line(data);
-		//ft_exec_cmd();
+		ft_exec_line(data);
 	}
 	return (0);
 }

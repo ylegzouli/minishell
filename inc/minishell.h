@@ -79,16 +79,17 @@ int			ft_start(t_data *data);
 int			ft_init_data(t_data *data);
 int			ft_init_lst(t_cmd **lst_cmd);
 void		ft_print_prompt();
+void		ft_exec_line(t_data *data);
+void		executor(t_data *data, char *line);
 
 //------------------------------ PARSING ---------------------------------
 
-void		ft_parse_line(t_data *data);
-void		ft_parse_cmd(t_data *data, char *line);
+int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size);
 int			get_output(t_cmd *new_cmd, char *cmd, int i, int size);
 int			get_fd(t_cmd *new_cmd, char *cmd);
+char		*get_path(char *str);
 int			open_file(char *str, int opt);
 void		clean_fdout(t_list **fd);
-char		*get_path(char *str);
 void		get_cmd(t_cmd *new_cmd, char *cmd);
 int         get_input(t_cmd *new_cmd, char *cmd, int i, int size);
 

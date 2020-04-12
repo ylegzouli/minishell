@@ -44,6 +44,26 @@ int			get_fd(t_cmd *new_cmd, char *cmd)
 	return (0);
 }
 
+char		*get_path(char *str)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	if (str[0] == '/')
+		return (str);
+	else
+	{
+		while (g_data->path[i] != 0)
+			i++;
+		if (g_data->path[i - 1] != '/')
+			g_data->path[i] = '/';
+		tmp = ft_strjoin(g_data->path, str);
+		g_data->path[i] = 0;
+		return (tmp);
+	}
+}
+	
 int			open_file(char *str, int opt)
 {
 	int		fd;
@@ -65,26 +85,6 @@ void		clean_fdout(t_list **fd)
 		tmp = *fd;
 		*fd = (*fd)->next;
 		free(tmp);
-	}
-}
-
-char		*get_path(char *str)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	if (str[0] == '/')
-		return (str);
-	else
-	{
-		while (g_data->path[i] != 0)
-			i++;
-		if (g_data->path[i - 1] != '/')
-			g_data->path[i] = '/';
-		tmp = ft_strjoin(g_data->path, str);
-		g_data->path[i] = 0;
-		return (tmp);
 	}
 }
 
