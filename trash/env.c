@@ -1,5 +1,5 @@
 #include "../inc/minishell.h"
-
+/*
 typedef struct 		s_env
 {
 	char			*name;
@@ -7,7 +7,7 @@ typedef struct 		s_env
 	char			**var_non_export_yet;
 	struct s_env	*next;
 }					t_env;
-
+*/
 extern char **environ;
 
 size_t	ft_strlen(const char *str)
@@ -65,6 +65,7 @@ int			check_variable_env(/*t_data *data, */ t_env *env, char *s)
 	}
 	return (0);
 }
+
 
 int			new_variable_env(/*t_data *data,*/t_env *env, char *s)
 	//										 s = "bonjour=5" par exemple
@@ -130,6 +131,82 @@ void			delete_var_env(/*t_data *data, */t_env *env, char *s)
 	//data->ret = 0;
 }   // unset est toujours en return = 0 dans bash
 
+int		size_var_env_not_found(char *line)
+{
+	int		i;
+	int		size;
+
+	i = 0;
+	size = 0;
+	while (line[i] && line[i] != '$')
+		i++;
+	i++;
+	while (line[i + size] && line[i + size] != ' ')
+		size++;
+	return (size);
+}
+
+char	*var_env_not_found(t_env *env, char *line)
+{
+	int		i;
+	int		len_var;
+	int		size;
+	char 	*ret;
+
+	i = 0;
+	len_var = size_var_env_not_found(line);
+	size = ft_strlen(line) - 1 - len_var + 1;
+	if (!(ret = malloc(sizeof(char) * (size))))
+		return (0);
+	ret[size] = '\0';
+	while (line[i] && line[i] != '$')
+	{
+		ret[i] = line[i];
+		i++;
+	}
+	while (line[i])
+	{
+		ret[i] = line[i + len_var + 1];
+		i++;
+	}
+//	free(line); je l'ai mis en dur dans la stakc le premier pour l'instant
+	return (ret);
+}
+
+char 	*var_env_found(t_env *env, char *line, t_env *tmp)
+{
+	int		i;
+	int		j;
+	int		size;
+	char 	*ret;
+
+	i = 0;
+	j = 0;
+	size = ft_strlen(line) - 1 - ft_strlen(tmp->name)
+			+ ft_strlen(tmp->value) + 1;
+	if (!(ret = malloc(sizeof(char) * (size))))
+		return (0);
+	ret[size] = '\0';
+	while (line[i] && line[i] != '$' && (ft_strncmp(line + i + 1,
+				tmp->name, ft_strlen(tmp->name)) != 0))
+	{
+		ret[i] = line[i];
+		i++;
+	}
+	while (tmp->value[j])
+	{
+		ret[i + j] = tmp->value[j];
+		j++;
+	}
+	while (line[i])
+	{
+		ret[i + j] = line[i + ft_strlen(tmp->name) + 1];
+		i++;
+	}
+//	free(line); je l'ai mis en dur dans la stakc le premier pour l'instant
+	return (ret);
+}
+
 // retourne un char * ? 
 int			look_for_env_var(/*t_data *data, */t_env *env, char *line)
 {
@@ -138,31 +215,35 @@ int			look_for_env_var(/*t_data *data, */t_env *env, char *line)
 	char	*res;
 
 	i = 0;
-	while (line[i])
+	res = line;
+	while (res[i])
 	{
 		tmp = env;
-		while (line[i] && line[i] != '$')
+		while (res[i] && res[i] != '$')
 			i++;
-		if (line[i])
+		if (res[i])
 		{
-			while (tmp && (ft_strncmp(line + i + 1,
+			while (tmp && (ft_strncmp(res + i + 1,
 				tmp->name, ft_strlen(tmp->name)) != 0))
 				tmp = tmp->next;
-			if (tmp)	
-				write(1, "yoyo\n", 5);	
-			if (tmp != 0 && (line[i + ft_strlen(tmp->name)] &&
-		(line[i + ft_strlen(tmp->name)] == ' ')) ||
-		line[i + ft_strlen(tmp->name)])
-				printf("Je dois remplacer ici \n");
-
+			if (tmp != 0 && (res[i + 1 + ft_strlen(tmp->name)] &&
+		(res[i + 1 + ft_strlen(tmp->name)] == ' ') ||
+		res[i + 1 + ft_strlen(tmp->name)] == '\0'))
+			{
+				res = var_env_found(env, res, tmp);
+				printf("Remplacement: \n%s\n", res);
+			}
 			else
-				printf("Je dois supprimer $");
+			{
+				res = var_env_not_found(env, res);
+				printf("Delete: \n%s\n", res);
+			}
 		}
 		i++;
 	}
 }
 
-
+// création de l'historique
 //int			start_env(t_data *data, t_env *env)
 int main()
 {
@@ -228,7 +309,7 @@ int main()
 	   }
 		*/
 
-	char str[27] = "echo '$var2 $mamal $etnon' ";
+	char str[38] = "echo $var2 $var1 $mama $nopnop $youpi";
 	//devrait pas remplacer mamal
 	look_for_env_var(env, str);
 	
