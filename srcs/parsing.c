@@ -66,7 +66,7 @@ void		get_arg(char **arg, char *str)
 	tmp = ft_split_shell(str, '>');
 	while (tmp[0][i] == ' ')
 		i++;
-	while (tmp[0][i] != ' ')
+	while (tmp[0][i] && tmp[0][i] != ' ')
 		i++;
 	while (tmp[0][i] == ' ')
 		i++;

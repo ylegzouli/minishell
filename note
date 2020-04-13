@@ -1,6 +1,6 @@
 0. 	Utilisation de libft.a, a suprr avant de rendre !!
 
-1.	[ok] Pb en cas de redirection '<' ET '>' dans la meme commande.
+[ok] 1.	Pb en cas de redirection '<' ET '>' dans la meme commande.
 
 2. 	Revoir l'utilisation des pipes (en input) sur un vrai shell.
 	EX: echo "salut=3" | export 
@@ -12,20 +12,20 @@
 
 4. 	Variable global g_data ok, mais aucune modif faite sur les fonctions qui etaient deja ecrite. ca marche, mais c'est pas propre.
 
-5.	Modif a faire dans get_input pour save les arguments dans **arg.
+[ok] 5.	Modif a faire dans get_input pour save les arguments dans **arg.
 
-6.	Attention au parsing des variables d'env, il doit etre fait dans la boucle de parsing (juste av get_output) 
+[ok] 6.	 Attention au parsing des variables d'env, il doit etre fait dans la boucle de parsing (juste av get_output) 
 	EX: export SALUT=5 ; echo $SALUT ; unset SALUT ; echo $SALUT
 	output: $> 5
 			$> 
 			minishell$>
 
-7.	Segfault si rien apres la commande:
+[ok] 7.	Segfault si rien apres la commande:
 	EX:	$> [echo bonjour]	(ok)
 		$> [echo ]     		(ok)
 		$> [echo]			(not ok)
 
 8.  Il faudra vérifier si c'est pas une varibale d'env = nouvelle valeur.
 
-9.  "export" sans arg = env trier alpha
+9.  "export" sans arg = env trier alpha (avec export devant ?)
 

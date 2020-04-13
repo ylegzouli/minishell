@@ -33,7 +33,9 @@ void		executor(t_data *data, char *line)
 		ft_parse(new_cmd, cmd[i], i, size);
 		ft_exec_cmd(new_cmd);
 		//ft_print_result();
-		//ft_lstadd_back_cmd(new_cmd);
+		
+		//ft_lstadd_back_cmd(new_cmd); 
+		//-> pas utile de save dans une liste ? Plus utile de free la struct cmd ici ?
 		i++;
 
 		printf("cmd= %d\noutput= %d\ninput= %d\nfd_in= %d\narg= [%s]\nresult= [%s]\nret= %d\n-----\n", new_cmd->cmd, new_cmd->output, new_cmd->input, new_cmd->fd_in, new_cmd->arg, new_cmd->result,  g_data->ret);
@@ -44,15 +46,17 @@ void		executor(t_data *data, char *line)
 void		ft_exec_cmd(t_cmd *cmd)
 {
 	if (cmd->cmd == ECHO)
-			echo(cmd->arg, &cmd->result);
+		echo(cmd->arg, &cmd->result);
+	else if (cmd->cmd == EXIT)
+		g_data->exit = 1; //ft_exit()   (don't quit if output = PIPE)
 	else if (cmd->cmd == EXPORT)
 		export(g_data->lst_env, cmd->arg);
-	//else if (cmd->cmd == ENV)
-		//
 	else if (cmd->cmd == UNSET)
 		unset(g_data->lst_env, cmd->arg);
 	else if (cmd->cmd == PWD)
 		pwd(g_data);
+	//else if (cmd->cmd == ENV)
+		//
 	else
 		printf("Commande fausse, ou pas encore build.\n");
 }
