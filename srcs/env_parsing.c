@@ -61,7 +61,7 @@ static char 	*var_env_found(t_env *env, char *line, t_env *tmp)
 	return (ret);
 }
 
-int			look_for_env_var(t_env *env, char *line)
+char		*parse_env(t_env *env, char *line)
 {
 	t_env 	*tmp;
 	int		i;
@@ -82,16 +82,11 @@ int			look_for_env_var(t_env *env, char *line)
 			if (tmp != 0 && (res[i + 1 + ft_strlen(tmp->name)] &&
 		(res[i + 1 + ft_strlen(tmp->name)] == ' ') ||
 		res[i + 1 + ft_strlen(tmp->name)] == '\0'))
-			{
 				res = var_env_found(env, res, tmp);
-//				printf("Remplacement: \n%s\n", res);
-			}
 			else
-			{
 				res = var_env_not_found(env, res);
-//				printf("Delete: \n%s\n", res);
-			}
 		}
 		i++;
+		return (res);
 	}
 }

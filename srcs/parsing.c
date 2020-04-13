@@ -2,7 +2,7 @@
 
 int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 {
-	//parse_env(g_data->lst_env, cmd);
+	cmd = parse_env(g_data->lst_env, cmd);
 	get_output(new_cmd, cmd, i, size);
 	clean_fdout(&new_cmd->fd_out);
 	get_cmd(new_cmd, cmd);
@@ -29,7 +29,7 @@ void        get_cmd(t_cmd *new_cmd, char *cmd)
 		new_cmd->cmd = UNSET;
 	else if (ft_strcmp(tmp[0], "env") == 0)
 		new_cmd->cmd = ENV;
-	else if (tmp[0])
+	else if (tmp[0]) // ajouter les var env = new value
 		new_cmd->cmd = NOTFOUND;
 	//ft_free_split(tmp);
 }
@@ -63,7 +63,6 @@ void		get_arg(char **arg, char *str)
 	char 	**tmp;
 
 	i = 0;
-	printf("str=[%s] --- arg=[%s]\n", str, *arg);
 	tmp = ft_split_shell(str, '>');
 	while (tmp[0][i] == ' ')
 		i++;

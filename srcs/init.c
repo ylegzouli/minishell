@@ -23,7 +23,7 @@ int			ft_init_data(t_data *data)
 }
 
 
-int			ft_init_env(t_env *env)
+int			ft_init_env(t_data *data)
 {
 	int		i;
 	int		size;
@@ -66,7 +66,9 @@ int			ft_init_env(t_env *env)
 		i++;
 	}
 	tmp->next = 0;
-	env = begin;
+//	env = begin;
+	g_data->lst_env = begin;
+	return (0);
 }
 
 int			ft_init_lst(t_cmd **lst_cmd)

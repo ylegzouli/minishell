@@ -32,7 +32,7 @@ int			get_fd(t_cmd *new_cmd, char *cmd)
 		else
 			path = get_path(ft_strtrim(tmp[i], " >"));
 		new_cmd->output = REDIRECT;
-		if (tmp[i][0] == '>' && tmp[i][1] != '>')
+		if (tmp[i][0] == '>' && tmp[i][1] != '>') // attention
 			fd = open_file(path, 1);
 		else
 			fd = open_file(path, 2);
@@ -56,7 +56,7 @@ char		*get_path(char *str)
 	{
 		while (g_data->path[i] != 0)
 			i++;
-		if (g_data->path[i - 1] != '/')
+		if (g_data->path[i - 1] != '/') // attention !
 			g_data->path[i] = '/';
 		tmp = ft_strjoin(g_data->path, str);
 		g_data->path[i] = 0;

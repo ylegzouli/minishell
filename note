@@ -24,3 +24,8 @@
 	EX:	$> [echo bonjour]	(ok)
 		$> [echo ]     		(ok)
 		$> [echo]			(not ok)
+
+8.  Il faudra vérifier si c'est pas une varibale d'env = nouvelle valeur.
+
+9.  "export" sans arg = env trier alpha
+

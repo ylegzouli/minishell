@@ -8,8 +8,7 @@ int		main(int ac, char **av)
 
 	g_data = &data;
 	ft_init_data(&data);
-	g_data->pipe = ft_strdup("yoyoyo");
-//	ft_init_env();
+	ft_init_env(&data);
 	ft_start(&data);
 	//ft_free_data(&data);
 	return (0);
