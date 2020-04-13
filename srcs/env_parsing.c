@@ -102,6 +102,6 @@ char		*parse_env(t_env *env, char *line)
 				res = var_env_not_found(env, res);
 		}
 		i++;
-		return (res);
 	}
+	return (res);
 }
