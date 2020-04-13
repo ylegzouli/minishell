@@ -18,7 +18,7 @@ LIB_NAME =	ft_lst.c ft_split_shell.c ft_strchr_shell.c ft_split_sh.c get_next_li
 			get_next_line_utils.c ft_strdup.c ft_strcmp.c ft_split.c \
 			ft_add_char.c ft_init_tab.c ft_bzero.c ft_strlcpy.c ft_strchr.c \
 			env_parsing.c ft_strncmp.c ft_strlen.c ft_lstadd_back.c ft_lstnew_malloc.c \
-			ft_strtrim.c
+			ft_strtrim.c ft_lstsize.c ft_memcpy.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJLIB_NAME = $(LIB_NAME:.c=.o)
