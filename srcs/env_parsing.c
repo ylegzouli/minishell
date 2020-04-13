@@ -95,8 +95,8 @@ char		*parse_env(t_env *env, char *line)
 				tmp->name, ft_strlen(tmp->name)) != 0))
 				tmp = tmp->next;
 			if (tmp != 0 && (res[i + 1 + ft_strlen(tmp->name)] &&
-		(res[i + 1 + ft_strlen(tmp->name)] == ' ') ||
-		res[i + 1 + ft_strlen(tmp->name)] == '\0'))
+		(res[i + 1 + ft_strlen(tmp->name)] == ' ')) ||
+		res[i + 1 + ft_strlen(tmp->name)] == '\0')
 				res = var_env_found(env, res, tmp);
 			else
 				res = var_env_not_found(env, res);
