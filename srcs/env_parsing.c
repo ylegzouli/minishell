@@ -1,5 +1,20 @@
 #include "../inc/minishell.h"
 
+static int		size_var_env_not_found(char *line)
+{
+	int		i;
+	int		size;
+
+	i = 0;
+	size = 0;
+	while (line[i] && line[i] != '$')
+		i++;
+	i++;
+	while (line[i + size] && line[i + size] != ' ')
+		size++;
+	return (size);
+}
+
 static char			*var_env_not_found(t_env *env, char *line)
 {
 	int		i;

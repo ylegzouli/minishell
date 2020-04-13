@@ -1,13 +1,4 @@
 #include "../inc/minishell.h"
-/*
-typedef struct 		s_env
-{
-	char			*name;
-	char			*value;
-	char			**var_non_export_yet;
-	struct s_env	*next;
-}					t_env;
-*/
 extern char **environ;
 
 size_t	ft_strlen(const char *str)

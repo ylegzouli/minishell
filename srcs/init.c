@@ -23,7 +23,7 @@ int			ft_init_data(t_data *data)
 }
 
 
-int			ft_init_env(t_data *data)
+int			ft_init_env(t_env *env)
 {
 	int		i;
 	int		size;
@@ -31,7 +31,6 @@ int			ft_init_env(t_data *data)
 	char 	*s;
 	t_env	*tmp;
 	t_env	*begin;
-	t_env	*env; // devrait etre une variable de la fonction
 
 	i = 1;
 	s = *environ;
