@@ -76,7 +76,7 @@ extern      t_data *g_data;
 
 int			ft_start(t_data *data);
 int			ft_init_data(t_data *data);
-//int			ft_init_env();
+int			ft_init_env(t_env *env);
 int			ft_init_lst(t_cmd **lst_cmd);
 void		ft_print_prompt();
 void		ft_exec_line(t_data *data);
@@ -95,6 +95,8 @@ void		clean_fdout(t_list **fd);
 void		get_cmd(t_cmd *new_cmd, char *cmd);
 int         get_input(t_cmd *new_cmd, char *cmd, int i, int size);
 void		get_arg(char **arg, char *str);
+
+int			look_for_env_var(t_env *env, char *line);
 
 //------------------------------- CMD ------------------------------------
 

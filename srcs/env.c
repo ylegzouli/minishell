@@ -94,3 +94,4 @@ int			check_variable_env(t_env *env, char *s)
 	}
 	return (0);
 }
+

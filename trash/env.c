@@ -231,12 +231,12 @@ int			look_for_env_var(/*t_data *data, */t_env *env, char *line)
 		res[i + 1 + ft_strlen(tmp->name)] == '\0'))
 			{
 				res = var_env_found(env, res, tmp);
-				printf("Remplacement: \n%s\n", res);
+//				printf("Remplacement: \n%s\n", res);
 			}
 			else
 			{
 				res = var_env_not_found(env, res);
-				printf("Delete: \n%s\n", res);
+//				printf("Delete: \n%s\n", res);
 			}
 		}
 		i++;
@@ -310,7 +310,6 @@ int main()
 		*/
 
 	char str[38] = "echo $var2 $var1 $mama $nopnop $youpi";
-	//devrait pas remplacer mamal
 	look_for_env_var(env, str);
 	
 }
