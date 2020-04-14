@@ -2,11 +2,15 @@
 
 char *ft_add_char(char *str, char c)
 {
-	size_t len = 0;
+	size_t len;
+	char *tmp;
+	int i;
+	
+	i = 0;
+	len = 0;
 	if (str)
-		len = strlen(str);
-	char *tmp = malloc(len + 2);
-	int i = 0;
+		len = ft_strlen(str);
+	tmp = malloc(len + 2); // protection
 	while (str && str[i])
 	{
 		tmp[i] = str[i];

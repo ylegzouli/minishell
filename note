@@ -29,3 +29,4 @@
 
 9.  "export" sans arg = env trier alpha
 
+10. soit on enleve int ac char **av du main soit on empeche ac > 1

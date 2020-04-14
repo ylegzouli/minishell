@@ -22,7 +22,6 @@ int			ft_init_data(t_data *data)
 	return (SUCCESS);
 }
 
-
 int			ft_init_env(t_env *env)
 {
 	int		i;
@@ -65,7 +64,6 @@ int			ft_init_env(t_env *env)
 		i++;
 	}
 	tmp->next = 0;
-//	env = begin;
 	g_data->lst_env = begin;
 	return (0);
 }

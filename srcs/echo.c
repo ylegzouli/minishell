@@ -70,10 +70,11 @@ int			ft_parse_echo(char *input, int *fd, char **result)
 		}
 		else if (quote != 0 || input[i] != ' ' || (input[i - 1] != ' '))
 			*result = ft_add_char(*result, input[i]);
+			// il faudrait free *result non ? 
 		i++;
 	}
 	if (opt == 0)
-		*result = ft_add_char(*result, '\n');
+		*result = ft_add_char(*result, '\n'); // il faudrait free *result non?
 //	printf("|%s|\n", *result);
 	return (0);
 }

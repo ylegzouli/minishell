@@ -104,6 +104,7 @@ void				pwd(t_data *data);
 int					echo(char *input, char **result);
 int         		export(t_env *env, char *s);
 void				unset(t_env *env, char *s);
+int					env(t_env *envi, char **res);
 
 //------------------------------- LIB ------------------------------------
 

@@ -43,12 +43,17 @@ void		executor(t_data *data, char *line)
 
 void		ft_exec_cmd(t_cmd *cmd)
 {
+	// il faudrait transformer les cmd en retour int pour les cas d'erreur..
+	// ce qu'on peut faire pour gagner de la place par exemple ce serait :
+	// if (cmd->cmd == ECHO && echo(cmd->arg, &cmd->result) == 1)
+	// 		return (1); ou return(m_error("Erreur sur echo"));
+
 	if (cmd->cmd == ECHO)
 			echo(cmd->arg, &cmd->result);
 	else if (cmd->cmd == EXPORT)
 		export(g_data->lst_env, cmd->arg);
-	//else if (cmd->cmd == ENV)
-		//
+	else if (cmd->cmd == ENV)
+		env(g_data->lst_env, &cmd->result);
 	else if (cmd->cmd == UNSET)
 		unset(g_data->lst_env, cmd->arg);
 	else if (cmd->cmd == PWD)

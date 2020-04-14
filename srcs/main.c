@@ -2,7 +2,7 @@
 
 t_data          *g_data;
 
-int		main(int ac, char **av)
+int		main()
 {
 	t_data	data;
 
