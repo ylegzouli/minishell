@@ -30,7 +30,7 @@ int			exec_file(t_cmd *cmd)
 	return (0);
 }
 
-void		parse_argument();
+void		parse_argument()
 {
 }
 
