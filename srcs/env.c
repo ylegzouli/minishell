@@ -43,12 +43,13 @@ int				env(t_env *env, char **result)
 	return (0);	
 }
 
-static int	init_env_w(t_env *tmp, char *s)
+static int	export_env_w(t_env *tmp, char *s)
 {
 	int		j;
 	int		size;
 
 	size = 0;
+	write(1, "YOYO\n", 5);
 	if (!(tmp = malloc(sizeof(t_env))))
 		return (1);
 	while (s[size] && s[size] != '=')
@@ -68,22 +69,28 @@ static int	init_env_w(t_env *tmp, char *s)
 		tmp->value[size] = s[j + size];
 	tmp->next = 0;
 	g_data->ret = 0;
+	printf("TEST %s  ::  %s = %s\n",s, tmp->name, tmp->value);
 	return (0);
 }
 
 int			command_var_env(t_env *env, t_env *env_w, char *line)
 {
 	int		i;
+	t_env	*tmp;
 
-	i = -1;
-	if (check_variable_env(env, line) == 1)
+	tmp = env_w;
+	printf("%s cccc\n", line);
+	if (check_variable_env(env, line) == 0)
 	{
 		g_data->ret = 0;
 		return (0);
 	}
-	if (!env_w && (i = init_env_w(env_w, line)) == 1)
+	while (tmp)
+		tmp = tmp->next;
+	if (export_env_w(tmp, line) == 1)
 			return (1);
 	
+	return (0);	
 	
 
 }

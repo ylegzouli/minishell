@@ -68,6 +68,7 @@ typedef struct		s_data
 	char			path[1000];
 	char			*pipe;
 	int				ret;
+	char			*cmd_n_found;
 }					t_data;
 
 extern	t_data		*g_data;
