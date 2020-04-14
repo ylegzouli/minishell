@@ -28,7 +28,7 @@
 # define ENV				7
 # define NOTFOUND			8 // verifier si env=xx
 
-//# define OPEN_MAX 256 // bug sur ordi arthur sinon
+# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 //------------------------------------------------------------------------
 
@@ -100,11 +100,11 @@ void				get_arg(char **arg, char *str);
 
 //------------------------------- CMD ------------------------------------
 
-void				pwd(t_data *data);
+void				pwd(t_data *data, char **result);
 int					echo(char *input, char **result);
 int         		export(t_env *env, char *s);
 void				unset(t_env *env, char *s);
-int					env(t_env *envi, char **res);
+int					env(t_env *envi, char **result);
 
 //------------------------------- LIB ------------------------------------
 

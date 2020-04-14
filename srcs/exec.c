@@ -56,12 +56,12 @@ void		ft_exec_cmd(t_cmd *cmd)
 		g_data->exit = 1; //ft_exit()   (don't quit if output = PIPE)
 	else if (cmd->cmd == EXPORT)
 		export(g_data->lst_env, cmd->arg);
+	else if (cmd->cmd == ENV)
+		env(g_data->lst_env, &cmd->result);
 	else if (cmd->cmd == UNSET)
 		unset(g_data->lst_env, cmd->arg);
 	else if (cmd->cmd == PWD)
-		pwd(g_data);
-	//else if (cmd->cmd == ENV)
-		//
+		pwd(g_data, &cmd->result);
 	else
 		printf("Commande fausse, ou pas encore build.\n");
 }
