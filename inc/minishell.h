@@ -8,6 +8,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <sys/types.h> 
+# include <sys/wait.h>
 
 # define SUCCESS			0
 # define ERROR_MALLOC		1
@@ -29,7 +31,7 @@
 # define NOTFOUND			8 // verifier si env=xx
 # define EXEC				9
 
-//# define OPEN_MAX 256 // bug sur ordi arthur sinon
+# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 //------------------------------------------------------------------------
 
