@@ -1,5 +1,37 @@
 #include "../inc/minishell.h"
 
+int			check_variable_env(t_env *env, char *s)
+{
+	t_env		*tmp;
+	int			size;
+	int			i;
+
+	tmp = env;
+	size = 0;
+	i = 0;
+	while (s[size] && s[size] != '=')
+		size++;
+	while (tmp)
+	{
+		if (ft_strncmp(s, tmp->name, size) != 0)
+			tmp = tmp->next;
+		else
+		{
+			free(tmp->value);
+			size++;
+			while (s[i + size])
+				i++;
+			if (!(tmp->value = malloc(sizeof(char) * (i + 1))))
+				return (1);
+			tmp->value[i] = '\0';
+			while (--i >= 0)
+				tmp->value[i] = s[i + size];
+			return (1);
+		}
+	}
+	return (0);
+}
+
 int			export(t_env *env, char *s)
 {
 	t_env 	*tmp;
@@ -63,34 +95,3 @@ void			unset(t_env *env, char *s)
 	g_data->ret = 0;
 }
 
-int			check_variable_env(t_env *env, char *s)
-{
-	t_env		*tmp;
-	int			size;
-	int			i;
-
-	tmp = env;
-	size = 0;
-	i = 0;
-	while (s[size] && s[size] != '=')
-		size++;
-	while (tmp)
-	{
-		if (ft_strncmp(s, tmp->name, size) != 0)
-			tmp = tmp->next;
-		else
-		{
-			free(tmp->value);
-			size++;
-			while (s[i + size])
-				i++;
-			if (!(tmp->value = malloc(sizeof(char) * (i + 1))))
-				return (1);
-			tmp->value[i] = '\0';
-			while (--i >= 0)
-				tmp->value[i] = s[i + size];
-			return (1);
-		}
-	}
-	return (0);
-}

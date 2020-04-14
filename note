@@ -30,3 +30,5 @@
 9.  "export" sans arg = env trier alpha (avec export devant ?)
 
 10. soit on enleve int ac char **av du main soit on empeche ac > 1
+
+11. il faut init g_data->ret à 0

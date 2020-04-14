@@ -54,7 +54,6 @@ typedef struct		s_env
 {
 	char			*name;
 	char			*value;
-	char			**var_non_export_yet;
 	struct s_env	*next;
 }					t_env;
 
@@ -63,6 +62,7 @@ typedef struct		s_data
 	t_hist 			*historic;
 	t_cmd			*lst_cmd;
 	t_env			*lst_env;
+	t_env			*lst_env_waiting;// les bonjour=10 pas encore export
 
 	int				exit;
 	char			path[1000];
@@ -105,6 +105,7 @@ int					echo(char *input, char **result);
 int         		export(t_env *env, char *s);
 void				unset(t_env *env, char *s);
 int					env(t_env *envi, char **result);
+int					command_var_env(t_env *env, t_env *env_w, char *line);
 
 //------------------------------- LIB ------------------------------------
 

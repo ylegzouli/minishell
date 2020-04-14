@@ -63,7 +63,7 @@ void		ft_exec_cmd(t_cmd *cmd)
 	else if (cmd->cmd == PWD)
 		pwd(g_data, &cmd->result);
 	else
-	{	//check command var = XX sans export
+	{	command_var_env(g_data->lst_env, g_data->lst_env_waiting, cmd->arg);
 		printf("Commande fausse, ou pas encore build.\n");
 	}
 }
