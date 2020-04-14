@@ -29,7 +29,7 @@
 # define NOTFOUND			8 // verifier si env=xx
 # define EXEC				9
 
-//# define OPEN_MAX 256 // bug sur ordi arthur sinon
+# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 //------------------------------------------------------------------------
 
@@ -122,6 +122,7 @@ char				*ft_strchr_shell(char const *s, int c);
 void				ft_init_tab(int	*tab, int len);
 char 				*ft_add_char(char *str, char c);
 int					check_variable_env(t_env *env, char *s, int equal);
+int 				check_equal(char *s);
 
 //void		check_return(t_data *data);
 //void		print_lst(t_list *li);
