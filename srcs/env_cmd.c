@@ -1,6 +1,6 @@
 #include "../inc/minishell.h"
 
-int			check_variable_env(t_env *env, char *s)
+int			check_variable_env(t_env *env, char *s, int equal)
 {
 	t_env		*tmp;
 	int			size;
@@ -15,7 +15,7 @@ int			check_variable_env(t_env *env, char *s)
 	{
 		if (ft_strncmp(s, tmp->name, size) != 0)
 			tmp = tmp->next;
-		else
+		else if (equal == 1)
 		{
 			free(tmp->value);
 			size++;
@@ -28,8 +28,55 @@ int			check_variable_env(t_env *env, char *s)
 				tmp->value[i] = s[i + size];
 			return (1);
 		}
+		else if (equal == 0)
+			return (1);
 	}
 	return (0);
+}
+
+int			switch_to_export(t_env *env, t_env *env_w, char *s)
+{
+	t_env 	*tmp;
+	t_env	*tmp2;
+	int		size;
+
+	tmp = env_w;
+	size = 0;
+	while (s[size] && s[size] != '=')
+		size++;
+	while (tmp)
+	{
+		if (ft_strncmp(s, tmp->name, size) != 0)
+		{
+			tmp2 = tmp;
+			tmp = tmp->next;
+		}
+		else
+		{
+			t_env *tmp_e; // pour séparer
+
+			tmp_e = env;
+			while (tmp_e->next)
+				tmp_e = tmp_e->next;
+			tmp_e->next = tmp;
+			tmp2->next = tmp2->next->next;
+			tmp->next = 0;
+			break;
+		}
+	}
+	return (0);
+}
+
+int 		check_equal(char *s)
+{
+	int		i;
+
+	i = 0;
+	while (s[i] && s[i] != '=')
+		i++;
+	if (i < ft_strlen(s))
+		return (1);
+	return (0);			
 }
 
 int			export(t_env *env, char *s)
@@ -40,11 +87,14 @@ int			export(t_env *env, char *s)
 
 	tmp = env;
 	size = 0;
-	if (check_variable_env(env, s) == 1)
-	{
-		g_data->ret = 0;
+	if (check_variable_env(env, s, check_equal(s)) == 1 &&
+		(g_data->ret = 0))
 		return (0);
-	}
+	if (check_variable_env(g_data->lst_env_waiting->next, s,
+		check_equal(s)) == 1)
+		return (switch_to_export(env, g_data->lst_env_waiting, s));
+	if (check_equal(s) == 0)
+		return (0);
 	while (tmp->next)
 		tmp = tmp->next;
 	if (!(tmp->next = malloc(sizeof(t_env))))

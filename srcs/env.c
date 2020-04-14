@@ -49,9 +49,9 @@ static int	export_env_w(t_env *tmp, char *s)
 	int		size;
 
 	size = 0;
-	write(1, "YOYO\n", 5);
-	if (!(tmp = malloc(sizeof(t_env))))
+	if (!(tmp->next = malloc(sizeof(t_env))))
 		return (1);
+	tmp = tmp->next;
 	while (s[size] && s[size] != '=')
 		size++;
 	if (!(tmp->name = malloc(sizeof(char) * (size + 1))))
@@ -69,7 +69,6 @@ static int	export_env_w(t_env *tmp, char *s)
 		tmp->value[size] = s[j + size];
 	tmp->next = 0;
 	g_data->ret = 0;
-	printf("TEST %s  ::  %s = %s\n",s, tmp->name, tmp->value);
 	return (0);
 }
 
@@ -79,19 +78,35 @@ int			command_var_env(t_env *env, t_env *env_w, char *line)
 	t_env	*tmp;
 
 	tmp = env_w;
-	printf("%s cccc\n", line);
-	if (check_variable_env(env, line) == 0)
+	i = 0;
+	if (check_variable_env(env, line) == 1 ||
+		check_variable_env(env_w->next, line) == 1) // mystere
 	{
 		g_data->ret = 0;
 		return (0);
 	}
-	while (tmp)
+	while (tmp->next)
+	{
 		tmp = tmp->next;
+		i++;
+	}
 	if (export_env_w(tmp, line) == 1)
-			return (1);
-	
-	return (0);	
-	
+			return (1);	
+	if (i == 0)
+		env_w = tmp; // debut du mystere
 
+/*	testeur du mystere ici : env_w est sur un truc chelou au debut	
+
+	printf("real i = %d	\n", i);
+	tmp = env_w;
+	i = 0;
+	while (tmp)
+	{
+		printf("i = %d, %s = %s\n", i, tmp->name, tmp->value);
+		i++;
+		tmp=tmp->next;
+	}
+	*/
+	return (0);
 }
 
