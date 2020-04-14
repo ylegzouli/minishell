@@ -28,7 +28,7 @@
 # define ENV				7
 # define NOTFOUND			8 // verifier si env=xx
 
-# define OPEN_MAX 256 // bug sur ordi arthur sinon
+//# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 //------------------------------------------------------------------------
 
@@ -70,8 +70,8 @@ typedef struct		s_data
 	int				ret;
 }					t_data;
 
-extern      t_data 	*g_data;
-extern char 		**environ;
+extern	t_data		*g_data;
+extern	char		**environ;
 
 //------------------------------ MINISHELL --------------------------------
 
