@@ -19,6 +19,7 @@ int			exec_file(t_cmd *cmd)
 	{
 		if (execve(g_data->cmd_n_found, arguments, environnement) == -1)  //--> ajout arg
 			return (1);
+		// Penser a quitter le fork si erreur de lancement (exit())
 	}
 	else if (pid < 0)
 		return (1);

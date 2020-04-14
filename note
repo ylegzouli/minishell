@@ -32,3 +32,5 @@
 10. soit on enleve int ac char **av du main soit on empeche ac > 1
 
 11. il faut init g_data->ret à 0
+
+12. Attention, segfault si mauvaise arguments dans commande_var_env()
