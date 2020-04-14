@@ -62,6 +62,8 @@ void		ft_exec_cmd(t_cmd *cmd)
 		unset(g_data->lst_env, cmd->arg);
 	else if (cmd->cmd == PWD)
 		pwd(g_data, &cmd->result);
+	else if (cmd->cmd == EXEC)
+		exec_file(cmd);
 	else
 	{	command_var_env(g_data->lst_env, g_data->lst_env_waiting, g_data->cmd_n_found);
 		printf("Commande fausse, ou pas encore build.\n");

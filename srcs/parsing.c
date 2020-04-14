@@ -29,6 +29,11 @@ void        get_cmd(t_cmd *new_cmd, char *cmd)
 		new_cmd->cmd = UNSET;
 	else if (ft_strcmp(tmp[0], "env") == 0)
 		new_cmd->cmd = ENV;
+	else if (ft_strncmp(tmp[0], "./", 2) == 0)
+	{
+		g_data->cmd_n_found = tmp[0];
+		new_cmd->cmd = EXEC;
+	}
 	else if (tmp[0]) // ajouter les var env = new value
 	{
 		g_data->cmd_n_found = tmp[0];

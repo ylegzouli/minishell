@@ -27,8 +27,9 @@
 # define UNSET				6
 # define ENV				7
 # define NOTFOUND			8 // verifier si env=xx
+# define EXEC				9
 
-# define OPEN_MAX 256 // bug sur ordi arthur sinon
+//# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 //------------------------------------------------------------------------
 
@@ -107,6 +108,7 @@ int         		export(t_env *env, char *s);
 void				unset(t_env *env, char *s);
 int					env(t_env *envi, char **result);
 int					command_var_env(t_env *env, t_env *env_w, char *line);
+int					exec_file(t_cmd *cmd);
 
 //------------------------------- LIB ------------------------------------
 
