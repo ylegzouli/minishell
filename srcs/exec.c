@@ -63,7 +63,9 @@ void		ft_exec_cmd(t_cmd *cmd)
 	else if (cmd->cmd == PWD)
 		pwd(g_data, &cmd->result);
 	else
+	{	//check command var = XX sans export
 		printf("Commande fausse, ou pas encore build.\n");
+	}
 }
 
 
