@@ -13,7 +13,7 @@
 # include <signal.h>
 # include <dirent.h>
 
-# define OPEN_MAX 256 // bug sur ordi arthur sinon
+//# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 
 # define SUCCESS			0
@@ -121,7 +121,9 @@ char				*get_env_value(t_env *env, char *name);
 int					exec_file(t_cmd *cmd);
 char				*get_result(int tube[2], pid_t pid);
 char				*get_path_bin();
-char				*check_dir();
+char				*check_dir(char *path);
+char				**parse_argument(char *path, char *arg);
+char				*get_name(char *path);
 
 //------------------------------- LIB ------------------------------------
 

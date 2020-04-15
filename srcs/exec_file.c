@@ -12,7 +12,7 @@ int			exec_file(t_cmd *cmd)
 	environnement = ft_split(tmp, '\n');
 	free(tmp);
 	tmp = get_path_bin();
-	//arguments = parse_argument();
+	//arguments = parse_argument(tmp, cmd->arg);
 	arguments = ft_split_shell(cmd->arg, ' ');
 	if (!tmp)
 	{
@@ -46,7 +46,11 @@ int			exec_file(t_cmd *cmd)
 char		*get_path_bin()
 {
 	char 	*path;
+	char	**tmp;
+	char	*tmp2;
+	int		i;
 
+	i = 0;
 	if(g_data->cmd_n_found[0] && (g_data->cmd_n_found[0] == '/'
 		|| g_data->cmd_n_found[0] == '.'))
 	{
@@ -55,8 +59,15 @@ char		*get_path_bin()
 	}
 	else
 	{
-		
-		path = check_dir();
+		tmp = ft_split(get_env_value(g_data->lst_env, "PATH"), ':');
+		while (tmp[i] && path == NULL)
+		{
+			tmp2 = ft_strjoin(tmp[i], "/");
+			path = check_dir(tmp2);
+			free(tmp2);
+			i++;
+		}
+		//ft_free_split(tmp);
 	}
 	return (path);
 }
@@ -71,7 +82,7 @@ char		*check_dir(char *path)
 	{
 		while ((dent = readdir(dir)))
 		{
-			if (ft_strcmp(dent->d_name, g_data->cmd_n_found))
+			if (ft_strcmp(dent->d_name, g_data->cmd_n_found) == 0)
 			{
 				if (dir)
 					closedir(dir);
@@ -84,12 +95,23 @@ char		*check_dir(char *path)
 	return (NULL);
 }
 
-void		parse_argument()
+char		**parse_argument(char *path, char *arg)
 {
-	char 	**arg;
+	char 	**arguments;
+	char	*tmp;
+	char	*name;
 
-	// Ajouter nom du fichier comme 1er arg + attention au \  " '
-//	return (arg);
+	name = get_name(path);
+	tmp = ft_strjoin(name, arg);
+	arguments = ft_split_shell(tmp, ' ');
+	free(name);
+	free(tmp);
+	return (arguments);
+}
+
+char		*get_name(char *path)
+{
+
 }
 
 char		*get_result(int	tube[2], pid_t pid)
@@ -105,6 +127,3 @@ char		*get_result(int	tube[2], pid_t pid)
 		result = ft_add_char(result, buf);
 	return (result);
 }
-
-//-------------------------------------------------------------------
-
