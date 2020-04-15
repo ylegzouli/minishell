@@ -110,3 +110,17 @@ int			command_var_env(t_env *env, t_env *env_w, char *line)
 	return (0);
 }
 
+char		*get_env_value(t_env *env, char *name)
+{
+	t_env 	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->name, name, ft_strlen(name)) != 0)
+			tmp = tmp->next;
+		else
+			return (tmp->value);
+	}
+	return (0);
+}

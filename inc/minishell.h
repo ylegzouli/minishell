@@ -114,6 +114,7 @@ int         		export(t_env *env, char *s);
 void				unset(t_env *env, char *s);
 int					env(t_env *envi, char **result);
 int					command_var_env(t_env *env, t_env *env_w, char *line);
+char				*get_env_value(t_env *env, char *name);
 
 //------------------------------- BIN ------------------------------------
 
