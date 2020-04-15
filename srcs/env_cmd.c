@@ -78,8 +78,34 @@ int 		check_equal(char *s)
 		return (1);
 	return (0);			
 }
+/* WIP
+int			print_env_alpha(t_env *env)
+{
+	int		swapped;
+	t_env 	*tmp1;
+	t_env	*tmp2;
 
+	tmp1 = env;
+	tmp2 = 0;
+	swapped = 1;
 
+	while (swapped != 0)
+	{
+		swapped = 0;
+		while (tmp1 && tmp1->next && tmp1->next != tmp2)
+		{
+			if (ft_strcmp(tmp1->name, tmp2->name) > 0)
+			{
+				swap(tmp1->value, tmp2->value);
+				swapped = 1;
+			}
+			tmp1 = tmp1->next;
+		}
+		tmp2 = tmp1;
+	}
+}*/
+
+// ajouter ici si pas d'argument alors lancer le print alpha
 int			check_arg_export(char *s)
 {
 	int		i;
