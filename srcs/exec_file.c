@@ -61,7 +61,7 @@ char		*get_path_bin()
 	return (path);
 }
 
-char		*check_dir()
+char		*check_dir(char *path)
 {
 	DIR				*dir;
 	struct dirent	*dent;

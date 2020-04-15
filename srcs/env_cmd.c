@@ -79,6 +79,21 @@ int 		check_equal(char *s)
 	return (0);			
 }
 
+
+int			check_arg_export(char *s)
+{
+	int		i;
+
+	i = 0;
+	while (s[i] && s[i] != '=')
+	{
+		if (ft_isalpha(s[i]) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int			export(t_env *env, char *s)
 {
 	t_env 	*tmp;
@@ -87,6 +102,12 @@ int			export(t_env *env, char *s)
 
 	tmp = env;
 	size = 0;
+	if (check_arg_export(s) == 1)
+	{
+		g_data->ret = 2;
+		write(1, "export: bad variable name\n", 26);
+		return (0); // on pourrait mettre au dessus dans la fonction
+	}
 	if (check_variable_env(env, s, check_equal(s)) == 1 &&
 		(g_data->ret = 0))
 		return (0);

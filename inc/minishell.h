@@ -11,6 +11,10 @@
 # include <sys/types.h> 
 # include <sys/wait.h>
 # include <signal.h>
+# include <dirent.h>
+
+# define OPEN_MAX 256 // bug sur ordi arthur sinon
+
 
 # define SUCCESS			0
 # define ERROR_MALLOC		1
@@ -32,7 +36,6 @@
 # define NOTFOUND			8 // verifier si env=xx
 # define EXEC				9
 
-//# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 //------------------------------------------------------------------------
 
