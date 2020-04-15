@@ -13,8 +13,8 @@ OBJ_PATH = ./obj
 OBJLIB_PATH = ./obj
 
 INC_NAME =	minishell.h
-SRC_NAME =	main.c pwd.c echo.c output.c parsing.c init.c exec.c env.c \
-			env_parsing.c env_cmd.c exec_file.c parsing_file.c
+SRC_NAME =	main.c pwd.c echo.c parsing_output.c parsing.c init.c exec_cmd.c env.c \
+			parsing_env.c env_cmd.c exec_file.c parsing_file.c
 LIB_NAME =	ft_lst.c ft_split_shell.c ft_strchr_shell.c ft_split_sh.c get_next_line.c \
 			get_next_line_utils.c ft_strdup.c ft_strcmp.c ft_split.c \
 			ft_add_char.c ft_init_tab.c ft_bzero.c ft_strlcpy.c ft_strchr.c \

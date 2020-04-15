@@ -120,7 +120,7 @@ char				*get_env_value(t_env *env, char *name);
 
 int					exec_file(t_cmd *cmd);
 char				*get_result(int tube[2], pid_t pid);
-int					parsing_file(char ***environnement, char ***arguments, char **tmp, t_cmd *cmd);
+char				*parsing_file(char ***environnement, char ***arguments, char **tmp, t_cmd *cmd);
 char				*get_path_bin();
 char				*check_dir(char *path);
 char				**get_arguments(char *path, char *arg);
