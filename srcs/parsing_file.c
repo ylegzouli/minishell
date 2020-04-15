@@ -5,8 +5,8 @@ char		*parsing_file(char ***environnement, char ***arguments, char **tmp, t_cmd 
 	env(g_data->lst_env, tmp);
 	*environnement = ft_split(*tmp, '\n');
 	free(*tmp);
-	*arguments = get_arguments(*tmp, cmd->arg);
 	*tmp = get_path_bin();
+	*arguments = get_arguments(*tmp, cmd->arg);
 	return (0);
 }
 

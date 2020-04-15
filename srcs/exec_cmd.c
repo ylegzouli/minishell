@@ -33,11 +33,11 @@ void		executor(t_data *data, char *line)
 		ft_parse(new_cmd, cmd[i], i, size);
 		ft_exec_cmd(new_cmd);
 		//ft_print_result();
+		printf("%s", new_cmd->result);
+		i++;
 		
 		//ft_lstadd_back_cmd(new_cmd); 
 		//-> pas utile de save dans une liste ? Plus utile de free la struct cmd ici ?
-		i++;
-		printf("%s", new_cmd->result);
 		//printf("cmd= %d\noutput= %d\ninput= %d\nfd_in= %d\narg= [%s]\nresult= [%s]\nret= %d\n-----\n", new_cmd->cmd, new_cmd->output, new_cmd->input, new_cmd->fd_in, new_cmd->arg, new_cmd->result,  g_data->ret);
 	}
 	//ft_free_split(cmd);

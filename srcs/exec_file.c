@@ -38,7 +38,7 @@ char		*get_result(int	tube[2], pid_t pid)
 	char	*result;
 
 	close(tube[1]);
-	wait(&pid);
+//	wait(&pid);
 	result = malloc(sizeof(char));
 	result[0] = 0;
 	while (read(tube[0], &buf, 1) > 0)
