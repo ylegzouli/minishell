@@ -37,8 +37,8 @@ void		executor(t_data *data, char *line)
 		//ft_lstadd_back_cmd(new_cmd); 
 		//-> pas utile de save dans une liste ? Plus utile de free la struct cmd ici ?
 		i++;
-
-		printf("cmd= %d\noutput= %d\ninput= %d\nfd_in= %d\narg= [%s]\nresult= [%s]\nret= %d\n-----\n", new_cmd->cmd, new_cmd->output, new_cmd->input, new_cmd->fd_in, new_cmd->arg, new_cmd->result,  g_data->ret);
+		printf("%s", new_cmd->result);
+		//printf("cmd= %d\noutput= %d\ninput= %d\nfd_in= %d\narg= [%s]\nresult= [%s]\nret= %d\n-----\n", new_cmd->cmd, new_cmd->output, new_cmd->input, new_cmd->fd_in, new_cmd->arg, new_cmd->result,  g_data->ret);
 	}
 	//ft_free_split(cmd);
 }
