@@ -9,11 +9,14 @@ int			exec_file(t_cmd *cmd)
 
 	env(g_data->lst_env, &tmp);
 	environnement = ft_split(tmp, '\n');
+	free(tmp);
+	//tmp = get_path_bin();
+	//arguments = parse_argument();
 	arguments = ft_split_shell(cmd->arg, ' ');
-	//parsing arguments ( ajouter nom du fichier comme 1er arg + attention au " ' et \ ) 
-	
-	// Ajout d'un check de permissions d'acces au dossier, voir fonction access/chdir
-	//check_dir()  --> return un path ?
+	if (!tmp)
+	{
+		// quittez proprement
+	}
 	pid = fork();
 	if (pid == 0)
 	{
@@ -31,10 +34,30 @@ int			exec_file(t_cmd *cmd)
 	return (0);
 }
 
-void		parse_argument()
+char		*get_path_bin()
 {
+	char 	*path;
+
+	//if(PATH ABSOLU)
+		//path = g_data->cmd_n_found;
+	//else
+		//path = check_dir();
+	return (path);
 }
 
 char		*check_dir()
 {
+	// Tester tous les chemins contenu dans $PATH
+	// pour verifier si le binaire existe
+	return (path);
 }
+
+void		parse_argument()
+{
+	char 	**arg;
+
+	// Ajouter nom du fichier comme 1er arg + attention au \  " '
+	return (arg);
+}
+
+
