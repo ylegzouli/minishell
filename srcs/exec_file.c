@@ -12,8 +12,7 @@ int			exec_file(t_cmd *cmd)
 	environnement = ft_split(tmp, '\n');
 	free(tmp);
 	tmp = get_path_bin();
-	//arguments = parse_argument(tmp, cmd->arg);
-	arguments = ft_split_shell(cmd->arg, ' ');
+	arguments = parse_argument(tmp, cmd->arg);
 	if (!tmp)
 	{
 		// quittez proprement
@@ -104,6 +103,7 @@ char		**parse_argument(char *path, char *arg)
 	name = get_name(path);
 	tmp = ft_strjoin(name, arg);
 	arguments = ft_split_shell(tmp, ' ');
+	//ft_clean_arg();  --> clean " ' \, 
 	free(name);
 	free(tmp);
 	return (arguments);
@@ -111,7 +111,22 @@ char		**parse_argument(char *path, char *arg)
 
 char		*get_name(char *path)
 {
+	int		i;
+	int		size;
+	char	*name;
 
+	size = 0;
+	i = ft_strlen(path) - 1;
+	while (path[i] != '/')
+	{
+		i--;
+		size++;
+	}
+	name = malloc(sizeof(char) * (size + 2));
+	ft_strcpy(name, &path[i]);
+	name[size - 1] = ' ';
+	name[size] = '\0';
+	return (name);
 }
 
 char		*get_result(int	tube[2], pid_t pid)
