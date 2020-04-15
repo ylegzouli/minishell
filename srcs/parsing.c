@@ -30,15 +30,15 @@ void        get_cmd(t_cmd *new_cmd, char *cmd)
 	else if (ft_strcmp(tmp[0], "env") == 0)
 		new_cmd->cmd = ENV;
 	// revoir conditions pour env=new et exec_file
-	else if (ft_strncmp(tmp[0], "./", 2) == 0)
+	else if (tmp[0] && ft_strchr_shell(tmp[0], '='))
 	{
 		g_data->cmd_n_found = tmp[0];
-		new_cmd->cmd = EXEC;
+		new_cmd->cmd = NOTFOUND;
 	}
 	else if (tmp[0])
 	{
 		g_data->cmd_n_found = tmp[0];
-		new_cmd->cmd = NOTFOUND;
+		new_cmd->cmd = EXEC;
 	}
 	//ft_free_split(tmp);
 }

@@ -10,6 +10,7 @@
 # include <limits.h>
 # include <sys/types.h> 
 # include <sys/wait.h>
+# include <signal.h>
 
 # define SUCCESS			0
 # define ERROR_MALLOC		1
@@ -110,7 +111,13 @@ int         		export(t_env *env, char *s);
 void				unset(t_env *env, char *s);
 int					env(t_env *envi, char **result);
 int					command_var_env(t_env *env, t_env *env_w, char *line);
+
+//------------------------------- BIN ------------------------------------
+
 int					exec_file(t_cmd *cmd);
+char				*get_result(int tube[2], pid_t pid);
+char				*get_path_bin();
+char				*check_dir();
 
 //------------------------------- LIB ------------------------------------
 
