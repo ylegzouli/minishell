@@ -34,13 +34,13 @@ void		executor(t_data *data, char *line)
 		ft_parse(new_cmd, cmd[i], i, size);
 		ft_exec_cmd(new_cmd);
 		//ft_print_result();
-		if (new_cmd->cmd != EXEC)
-			printf("%s", new_cmd->result);
+//		write(1, new_cmd->result, ft_strlen(new_cmd->result));
 		i++;
 
 		//ft_lstadd_back_cmd(new_cmd); 
 		//-> pas utile de save dans une liste ? Plus utile de free la struct cmd ici ?
-		//printf("cmd= %d\noutput= %d\ninput= %d\nfd_in= %d\narg= [%s]\nresult= [%s]\nret= %d\n-----\n", new_cmd->cmd, new_cmd->output, new_cmd->input, new_cmd->fd_in, new_cmd->arg, new_cmd->result,  g_data->ret);
+		printf("cmd= %d\noutput= %d\ninput= %d\nfd_in= %d\narg= [%s]\nresult= [%s]\nret= %d\n-----\n", new_cmd->cmd, new_cmd->output, new_cmd->input,
+//		new_cmd->fd_in, new_cmd->arg, new_cmd->result,  g_data->ret);
 	}
 	//ft_free_split(cmd);
 }
@@ -51,7 +51,6 @@ void		ft_exec_cmd(t_cmd *cmd)
 	// ce qu'on peut faire pour gagner de la place par exemple ce serait :
 	// if (cmd->cmd == ECHO && echo(cmd->arg, &cmd->result) == 1)
 	// 		return (1); ou return(m_error("Erreur sur echo"));
-	printf("%d\n", cmd->cmd);
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result);
 	else if (cmd->cmd == CD)
@@ -68,12 +67,13 @@ void		ft_exec_cmd(t_cmd *cmd)
 		pwd(g_data, &cmd->result);
 	else if (cmd->cmd == EXEC)
 	{
-		if (exec_file(cmd))
-		{
+//		if (exec_file(cmd))
+//		{
 			command_var_env(g_data->lst_env, g_data->lst_env_waiting,
 					g_data->cmd_n_found);
+			write(1,"loool\n",6);
 			printf("Command fausse\n");
-		}
+//		}
 	}
 }
 
