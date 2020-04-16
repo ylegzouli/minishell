@@ -9,7 +9,7 @@ void		ft_exec_line(t_data *data)
 	cmd = ft_split_shell(data->historic->line, ';');
 	while (cmd[i] && !(data->exit))
 	{
-//		write(1, "ICI\n", 4);
+		//		write(1, "ICI\n", 4);
 		executor(data, cmd[i]);
 		i++;
 	}
@@ -37,7 +37,7 @@ void		executor(t_data *data, char *line)
 		if (new_cmd->cmd != EXEC)
 			printf("%s", new_cmd->result);
 		i++;
-		
+
 		//ft_lstadd_back_cmd(new_cmd); 
 		//-> pas utile de save dans une liste ? Plus utile de free la struct cmd ici ?
 		//printf("cmd= %d\noutput= %d\ninput= %d\nfd_in= %d\narg= [%s]\nresult= [%s]\nret= %d\n-----\n", new_cmd->cmd, new_cmd->output, new_cmd->input, new_cmd->fd_in, new_cmd->arg, new_cmd->result,  g_data->ret);
@@ -51,7 +51,7 @@ void		ft_exec_cmd(t_cmd *cmd)
 	// ce qu'on peut faire pour gagner de la place par exemple ce serait :
 	// if (cmd->cmd == ECHO && echo(cmd->arg, &cmd->result) == 1)
 	// 		return (1); ou return(m_error("Erreur sur echo"));
-
+	printf("%d\n", cmd->cmd);
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result);
 	else if (cmd->cmd == CD)
@@ -66,18 +66,14 @@ void		ft_exec_cmd(t_cmd *cmd)
 		unset(g_data->lst_env, cmd->arg);
 	else if (cmd->cmd == PWD)
 		pwd(g_data, &cmd->result);
-//	else if (ft_strchr_shell(g_data->cmd_n_found, '='))
-//	{	
-//		command_var_env(g_data->lst_env, g_data->lst_env_waiting,
-//				g_data->cmd_n_found);
-//		//print que si pas reconnu au dessus
-//	//	printf("Commande fausse, ou pas encore build.\n");
-//	}
 	else if (cmd->cmd == EXEC)
+	{
 		if (exec_file(cmd))
 		{
 			command_var_env(g_data->lst_env, g_data->lst_env_waiting,
-				g_data->cmd_n_found);
+					g_data->cmd_n_found);
+			printf("Command fausse\n");
 		}
+	}
 }
 
