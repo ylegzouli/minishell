@@ -120,6 +120,7 @@ int					command_var_env(t_env *env, t_env *env_w, char *line);
 char				*get_env_value(t_env *env, char *name);
 int					switch_to_export(t_env *env, t_env *env_w, char *s);
 void				free_list_env(t_env *env);
+void				free_list_export(t_env *env);
 
 //------------------------------- BIN ------------------------------------
 

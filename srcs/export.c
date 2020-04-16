@@ -1,21 +1,21 @@
 #include "../inc/minishell.h"
 
-void		print_env_ordered(t_env *sort, t_env *env)
+static void		print_env_ordered(t_env *sort, t_env *env)
 {
 	t_env	*tmp;
 
 	tmp = sort;
 	while (tmp)
 	{
-		   write(1, tmp->name, ft_strlen(tmp->name));
-		   write(1, "=", 1);
-		   write(1, get_env_value(env, tmp->name), ft_strlen(get_env_value(env, tmp->name)));
-		   write(1, "\n", 1);
-			tmp = tmp->next;
+		write(1, tmp->name, ft_strlen(tmp->name));
+		write(1, "=", 1);
+		write(1, get_env_value(env, tmp->name), ft_strlen(get_env_value(env, tmp->name)));
+		write(1, "\n", 1);
+		tmp = tmp->next;
 	}
 }
 
-void		list_sort(t_env **begin_list, int (*cmp)())
+static void		list_sort(t_env **begin_list, int (*cmp)())
 {
 	t_env	*ptr;
 	t_env	*ptr2;
@@ -54,6 +54,7 @@ int			create_order_env(t_env *env)
 		if(!(tmp_new->name = malloc(sizeof(char) * (ft_strlen(tmp_o->name) + 1))))
 			return (1);
 		ft_memcpy(tmp_new->name, tmp_o->name, ft_strlen(tmp_o->name));
+		tmp_new->name[ft_strlen(tmp_o->name)] = '\0';
 		tmp_o = tmp_o->next;
 		if (tmp_o)
 		{
@@ -64,11 +65,9 @@ int			create_order_env(t_env *env)
 	}
 	list_sort(&tmp_n_begin, &ft_strcmp);
 	print_env_ordered(tmp_n_begin, env);
-	free_list_env(tmp_n_begin);
+	free_list_export(tmp_n_begin);
 	return (0);
 }
-
-
 
 // ajouter ici si pas d'argument alors lancer le print alpha
 int			check_arg_export(t_env *env, char *s)
