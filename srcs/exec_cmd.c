@@ -33,7 +33,8 @@ void		executor(t_data *data, char *line)
 		ft_parse(new_cmd, cmd[i], i, size);
 		ft_exec_cmd(new_cmd);
 		//ft_print_result();
-		printf("%s", new_cmd->result);
+		if (new_cmd->cmd != EXEC)
+			printf("%s", new_cmd->result);
 		i++;
 		
 		//ft_lstadd_back_cmd(new_cmd); 
