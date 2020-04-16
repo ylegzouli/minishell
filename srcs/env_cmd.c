@@ -31,6 +31,7 @@ int			check_variable_env(t_env *env, char *s, int equal)
 		else if (equal == 0)
 			return (1);
 	}
+	write(1, "yolo", 4);
 	return (0);
 }
 

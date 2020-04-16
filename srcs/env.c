@@ -40,7 +40,6 @@ int				env(t_env *env, char **result)
 	tmp = env;
 	g_data->ret = 0;
 	*result = env_copy(tmp, ret); // il faudrait free *result avant, non?
-	write(1, "yolo", 4);
 	return (0);	
 }
 
@@ -80,8 +79,9 @@ int			command_var_env(t_env *env, t_env *env_w, char *line)
 
 	tmp = env_w;
 	i = 0;
+
 	if (check_variable_env(env, line, check_equal(line)) == 1 ||
-		check_variable_env(env_w->next, line, check_equal(line)) == 1) // mystere
+		check_variable_env(env_w, line, check_equal(line)) == 1) // mystere
 	{
 		g_data->ret = 0;
 		return (0);
