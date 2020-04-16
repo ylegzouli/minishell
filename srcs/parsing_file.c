@@ -76,7 +76,7 @@ char		*get_name(char *path)
 		size++;
 	}
 	name = malloc(sizeof(char) * (size + 2));
-	ft_strcpy(name, &path[i]);
+	ft_strlcpy(name, &path[i], size + 2);
 	name[size - 1] = ' ';
 	name[size] = '\0';
 	return (name);

@@ -13,7 +13,7 @@
 # include <signal.h>
 # include <dirent.h>
 
-//# define OPEN_MAX 256 // bug sur ordi arthur sinon
+# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 
 # define SUCCESS			0
@@ -69,7 +69,7 @@ typedef struct		s_data
 	t_hist 			*historic;
 	t_cmd			*lst_cmd;
 	t_env			*lst_env;
-	t_env			*lst_env_waiting;// les bonjour=10 pas encore export
+	t_env			*lst_env_waiting;
 
 	int				exit;
 	char			path[1000];
@@ -113,8 +113,13 @@ int					echo(char *input, char **result);
 int         		export(t_env *env, char *s);
 void				unset(t_env *env, char *s);
 int					env(t_env *envi, char **result);
+
+//------------------------------- ENV ------------------------------------
+
 int					command_var_env(t_env *env, t_env *env_w, char *line);
 char				*get_env_value(t_env *env, char *name);
+int					switch_to_export(t_env *env, t_env *env_w, char *s);
+void				free_list_env(t_env *env);
 
 //------------------------------- BIN ------------------------------------
 
