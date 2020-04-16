@@ -52,7 +52,6 @@ void		ft_exec_cmd(t_cmd *cmd)
 	// ce qu'on peut faire pour gagner de la place par exemple ce serait :
 	// if (cmd->cmd == ECHO && echo(cmd->arg, &cmd->result) == 1)
 	// 		return (1); ou return(m_error("Erreur sur echo"));
-	write(1, "step1\n", 6);
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result);
 	else if (cmd->cmd == CD)
@@ -69,13 +68,12 @@ void		ft_exec_cmd(t_cmd *cmd)
 		pwd(g_data, &cmd->result);
 	else if (cmd->cmd == EXEC)
 	{
-//		if (exec_file(cmd))
-//		{
+		if (exec_file(cmd))
+		{
 			command_var_env(g_data->lst_env, g_data->lst_env_waiting,
 					g_data->cmd_n_found);
 			printf("Command fausse\n");
-//		}
+		}
 	}
-	write(1, "step2\n", 6);
 }
 
