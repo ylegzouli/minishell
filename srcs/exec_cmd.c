@@ -9,6 +9,7 @@ void		ft_exec_line(t_data *data)
 	cmd = ft_split_shell(data->historic->line, ';');
 	while (cmd[i] && !(data->exit))
 	{
+//		write(1, "ICI\n", 4);
 		executor(data, cmd[i]);
 		i++;
 	}
@@ -53,6 +54,8 @@ void		ft_exec_cmd(t_cmd *cmd)
 
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result);
+	else if (cmd->cmd == CD)
+		cd(cmd->arg);
 	else if (cmd->cmd == EXIT)
 		g_data->exit = 1; //ft_exit()   (don't quit if output = PIPE)
 	else if (cmd->cmd == EXPORT)
@@ -63,16 +66,18 @@ void		ft_exec_cmd(t_cmd *cmd)
 		unset(g_data->lst_env, cmd->arg);
 	else if (cmd->cmd == PWD)
 		pwd(g_data, &cmd->result);
+//	else if (ft_strchr_shell(g_data->cmd_n_found, '='))
+//	{	
+//		command_var_env(g_data->lst_env, g_data->lst_env_waiting,
+//				g_data->cmd_n_found);
+//		//print que si pas reconnu au dessus
+//	//	printf("Commande fausse, ou pas encore build.\n");
+//	}
 	else if (cmd->cmd == EXEC)
-		exec_file(cmd);
-	else if (cmd->cmd == CD)
-		cd(cmd->arg);
-	else
-	{	command_var_env(g_data->lst_env, g_data->lst_env_waiting,
+		if (exec_file(cmd))
+		{
+			command_var_env(g_data->lst_env, g_data->lst_env_waiting,
 				g_data->cmd_n_found);
-		//print que si pas reconnu au dessus
-		printf("Commande fausse, ou pas encore build.\n");
-	}
+		}
 }
-
 
