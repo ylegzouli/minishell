@@ -31,7 +31,6 @@ int			check_variable_env(t_env *env, char *s, int equal)
 		else if (equal == 0)
 			return (1);
 	}
-	write(1, "yolo", 4);
 	return (0);
 }
 
@@ -77,7 +76,7 @@ int 		check_equal(char *s)
 		i++;
 	if (i < ft_strlen(s))
 		return (1);
-	return (0);			
+	return (0);
 }
 
 void			unset(t_env *env, char *s)

@@ -34,7 +34,8 @@ void		executor(t_data *data, char *line)
 		ft_parse(new_cmd, cmd[i], i, size);
 		ft_exec_cmd(new_cmd);
 		//ft_print_result();
-		write(1, new_cmd->result, ft_strlen(new_cmd->result));
+		if (new_cmd->cmd != EXEC && new_cmd->cmd != EXPORT)
+			write(1, new_cmd->result, ft_strlen(new_cmd->result));
 		i++;
 
 		//ft_lstadd_back_cmd(new_cmd); 
@@ -51,6 +52,7 @@ void		ft_exec_cmd(t_cmd *cmd)
 	// ce qu'on peut faire pour gagner de la place par exemple ce serait :
 	// if (cmd->cmd == ECHO && echo(cmd->arg, &cmd->result) == 1)
 	// 		return (1); ou return(m_error("Erreur sur echo"));
+	write(1, "step1\n", 6);
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result);
 	else if (cmd->cmd == CD)
@@ -71,9 +73,9 @@ void		ft_exec_cmd(t_cmd *cmd)
 //		{
 			command_var_env(g_data->lst_env, g_data->lst_env_waiting,
 					g_data->cmd_n_found);
-			write(1,"loool\n",6);
 			printf("Command fausse\n");
 //		}
 	}
+	write(1, "step2\n", 6);
 }
 

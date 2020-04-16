@@ -49,6 +49,7 @@ static int	export_env_w(t_env *tmp, char *s)
 	int		size;
 
 	size = 0;
+
 	if (!(tmp->next = malloc(sizeof(t_env))))
 		return (1);
 	tmp = tmp->next;
@@ -79,7 +80,8 @@ int			command_var_env(t_env *env, t_env *env_w, char *line)
 
 	tmp = env_w;
 	i = 0;
-
+	if (check_equal(line) == 0)
+		return (0);
 	if (check_variable_env(env, line, check_equal(line)) == 1 ||
 		check_variable_env(env_w, line, check_equal(line)) == 1) // mystere
 	{
@@ -93,21 +95,6 @@ int			command_var_env(t_env *env, t_env *env_w, char *line)
 	}
 	if (export_env_w(tmp, line) == 1)
 			return (1);	
-	if (i == 0)
-		env_w = tmp; // debut du mystere
-
-/*	testeur du mystere ici : env_w est sur un truc chelou au debut	
-
-	printf("real i = %d	\n", i);
-	tmp = env_w;
-	i = 0;
-	while (tmp)
-	{
-		printf("i = %d, %s = %s\n", i, tmp->name, tmp->value);
-		i++;
-		tmp=tmp->next;
-	}
-	*/
 	return (0);
 }
 

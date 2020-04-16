@@ -1,19 +1,5 @@
 #include "../inc/minishell.h"
 
-static void		print_env_ordered(t_env *sort, t_env *env)
-{
-	t_env	*tmp;
-
-	tmp = sort;
-	while (tmp)
-	{
-		write(1, tmp->name, ft_strlen(tmp->name));
-		write(1, "=", 1);
-		write(1, get_env_value(env, tmp->name), ft_strlen(get_env_value(env, tmp->name)));
-		write(1, "\n", 1);
-		tmp = tmp->next;
-	}
-}
 
 static void		list_sort(t_env **begin_list, int (*cmp)())
 {
@@ -65,7 +51,6 @@ int			create_order_env(t_env *en, char **result)
 	}
 	list_sort(&tmp_n_begin, &ft_strcmp);
 	env(tmp_n_begin, result);
-//	print_env_ordered(tmp_n_begin, env);
 	free_list_export(tmp_n_begin);
 	return (0);
 }
@@ -107,7 +92,7 @@ int			export(t_env *env, char *s, char **res)
 	if (check_variable_env(env, s, check_equal(s)) == 1 &&
 			(g_data->ret = 0))
 		return (0);
-	if (check_variable_env(g_data->lst_env_waiting->next, s,
+	if (check_variable_env(g_data->lst_env_waiting, s,
 				check_equal(s)) == 1)
 		return (switch_to_export(env, g_data->lst_env_waiting, s));
 	if (check_equal(s) == 0)
@@ -134,5 +119,6 @@ int			export(t_env *env, char *s, char **res)
 		tmp->value[size] = s[j + size];
 	tmp->next = 0;
 	g_data->ret = 0;
+
 	return (0);
 }
