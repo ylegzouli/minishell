@@ -110,7 +110,7 @@ void				get_arg(char **arg, char *str);
 
 void				pwd(t_data *data, char **result);
 int					echo(char *input, char **result);
-int         		export(t_env *env, char *s);
+int         		export(t_env *env, char *s, char **result);
 void				unset(t_env *env, char *s);
 int					env(t_env *envi, char **result);
 int					cd(char *s);

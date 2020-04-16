@@ -34,13 +34,13 @@ void		executor(t_data *data, char *line)
 		ft_parse(new_cmd, cmd[i], i, size);
 		ft_exec_cmd(new_cmd);
 		//ft_print_result();
-//		write(1, new_cmd->result, ft_strlen(new_cmd->result));
+		write(1, new_cmd->result, ft_strlen(new_cmd->result));
 		i++;
 
 		//ft_lstadd_back_cmd(new_cmd); 
 		//-> pas utile de save dans une liste ? Plus utile de free la struct cmd ici ?
-		printf("cmd= %d\noutput= %d\ninput= %d\nfd_in= %d\narg= [%s]\nresult= [%s]\nret= %d\n-----\n", new_cmd->cmd, new_cmd->output, new_cmd->input,
-		new_cmd->fd_in, new_cmd->arg, new_cmd->result,  g_data->ret);
+//		printf("cmd= %d\noutput= %d\ninput= %d\nfd_in= %d\narg= [%s]\nresult= [%s]\nret= %d\n-----\n", new_cmd->cmd, new_cmd->output, new_cmd->input,
+//		new_cmd->fd_in, new_cmd->arg, new_cmd->result,  g_data->ret);
 	}
 	//ft_free_split(cmd);
 }
@@ -58,7 +58,7 @@ void		ft_exec_cmd(t_cmd *cmd)
 	else if (cmd->cmd == EXIT)
 		g_data->exit = 1; //ft_exit()   (don't quit if output = PIPE)
 	else if (cmd->cmd == EXPORT)
-		export(g_data->lst_env, cmd->arg);
+		export(g_data->lst_env, cmd->arg, &cmd->result);
 	else if (cmd->cmd == ENV)
 		env(g_data->lst_env, &cmd->result);
 	else if (cmd->cmd == UNSET)

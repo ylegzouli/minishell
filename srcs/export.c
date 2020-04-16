@@ -39,13 +39,13 @@ static void		list_sort(t_env **begin_list, int (*cmp)())
 	}
 }
 
-int			create_order_env(t_env *env)
+int			create_order_env(t_env *en, char **result)
 {
 	t_env	*tmp_o;
 	t_env	*tmp_new;
 	t_env	*tmp_n_begin;
 
-	tmp_o = env;
+	tmp_o = en;
 	if (!(tmp_new = malloc(sizeof(t_env))))
 			return (1);
 	tmp_n_begin = tmp_new;
@@ -64,20 +64,21 @@ int			create_order_env(t_env *env)
 		}
 	}
 	list_sort(&tmp_n_begin, &ft_strcmp);
-	print_env_ordered(tmp_n_begin, env);
+	env(tmp_n_begin, result);
+//	print_env_ordered(tmp_n_begin, env);
 	free_list_export(tmp_n_begin);
 	return (0);
 }
 
 // ajouter ici si pas d'argument alors lancer le print alpha
-int			check_arg_export(t_env *env, char *s)
+int			check_arg_export(t_env *env, char *s, char **res)
 {
 	int		i;
 
 	i = 0;
 	if (s[0] == '\0')
 	{
-		create_order_env(env);
+		create_order_env(env, res);
 		return (0);
 	}
 	while (s[i] && s[i] != '=')
@@ -89,7 +90,7 @@ int			check_arg_export(t_env *env, char *s)
 	return (0);
 }
 
-int			export(t_env *env, char *s)
+int			export(t_env *env, char *s, char **res)
 {
 	t_env 	*tmp;
 	int 	size;
@@ -97,7 +98,7 @@ int			export(t_env *env, char *s)
 
 	tmp = env;
 	size = 0;
-	if (check_arg_export(env, s) == 1)
+	if (check_arg_export(env, s, res) == 1)
 	{
 		g_data->ret = 2;
 		write(1, "export: bad variable name\n", 26);

@@ -15,7 +15,11 @@ int			ft_init_data(t_data *data)
 		return (ERROR_MALLOC);
 	if (!(data->lst_env = malloc(sizeof(t_env))))
 		return (ERROR_MALLOC);
+	if (!(data->lst_env_waiting = malloc(sizeof(t_env))))
+		return (ERROR_MALLOC);
 	data->lst_cmd->next = NULL;
+	data->lst_env->next = NULL;
+	data->lst_env_waiting->next = NULL;
 	data->exit = 0;
 	data->ret = 0;
 	data->pipe = NULL;
