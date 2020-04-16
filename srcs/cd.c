@@ -58,7 +58,6 @@ int					cd(char *s)
 {
 	if (copy_old_pwd() == 1)
 		return (1);
-	printf("oooo");
 	if (check_cd_path(s) == 1)
 		return (go_up());
 //	else if (check_cd_path(s) == 
