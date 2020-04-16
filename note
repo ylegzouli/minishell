@@ -10,9 +10,7 @@
 
 4. 	Variable global g_data ok, mais aucune modif faite sur les fonctions qui etaient deja ecrite. ca marche, mais c'est pas propre.
 
-8.  Il faudra vérifier si c'est pas une varibale d'env = nouvelle valeur.
 
-9.  "export" sans arg = env trier alpha (avec export devant ?)
 
 10. soit on enleve int ac char **av du main soit on empeche ac > 1
 
