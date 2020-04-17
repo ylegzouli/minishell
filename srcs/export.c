@@ -96,12 +96,12 @@ int			export(t_env *env, char *s2, char **res)
 			g_data->ret = 2;
 			write(1, "export: bad variable name\n", 26);
 		}
-		else if (check_variable_env(env, s, check_equal(s)) == 1)
+		else if (check_variable_env(env, s, check_char(s, '=')) == 1)
 			g_data->ret = 0;
 		else if (check_variable_env(g_data->lst_env_waiting, s,
-					check_equal(s)) == 1)
+					check_char(s, '=')) == 1)
 			switch_to_export(env, g_data->lst_env_waiting, s);
-		else if (check_equal(s) == 1)
+		else if (check_char(s, '=') == 1)
 		{
 			while (tmp->next)
 				tmp = tmp->next;

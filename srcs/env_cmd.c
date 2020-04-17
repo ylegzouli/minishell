@@ -67,12 +67,12 @@ int			switch_to_export(t_env *env, t_env *env_w, char *s)
 	return (0);
 }
 
-int 		check_equal(char *s)
+int 		check_char(char *s, char c)
 {
 	int		i;
 
 	i = 0;
-	while (s[i] && s[i] != '=')
+	while (s[i] && s[i] != c)
 		i++;
 	if (i < ft_strlen(s))
 		return (1);

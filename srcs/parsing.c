@@ -3,11 +3,13 @@
 int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 {
 
-	cmd = parse_env(g_data->lst_env, cmd);
+	if (check_char(cmd, '$') == 1)
+		cmd = parse_env(g_data->lst_env, cmd);
 	get_output(new_cmd, cmd, i, size);
 	clean_fdout(&new_cmd->fd_out);
 	get_cmd(new_cmd, cmd);
 	get_input(new_cmd, cmd, i, size);
+
 	return (0);
 }
 
