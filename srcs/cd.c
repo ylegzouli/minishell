@@ -70,15 +70,12 @@ int					cd(char *s1)
 
 	s2 = ft_split(s1, ' ');  // faudra free
 	s = s2[0];
-	printf("i = %d\n", check_cd_path(s));
 	if (copy_old_pwd() == 1)
 		return (1); //free
 	if (check_cd_path(s) == 1)
 		return (go_up());
 	else if (check_cd_path(s) == 2)
 		return (0);
-//	else if (check_cd_path(s) == 4)
-//		return (go_home());
 	else if (check_cd_path(s) == 3)
 		return (go_there(s)); /// doit envoyer 1 si pas trouvé
 	//free s2
