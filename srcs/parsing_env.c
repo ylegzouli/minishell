@@ -68,7 +68,6 @@ static char			*var_env_not_found(t_env *env, char *line)
 	if (check_var_env_return(line) == 1)
 	{	
 		ret = env_question_found(line);
-		free(line);
 		return (ret);
 	}
 	len_var = size_var_env_not_found(line);
