@@ -112,5 +112,6 @@ void			unset(t_env *env, char *s2)
 		g_data->ret = 0;
 		i++;
 	}
+	/// faudra free le split
 }
 
