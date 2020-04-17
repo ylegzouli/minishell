@@ -124,6 +124,13 @@ int					switch_to_export(t_env *env, t_env *env_w, char *s);
 void				free_list_env(t_env *env);
 void				free_list_export(t_env *env);
 
+//------------------------------- CD  ------------------------------------
+
+int					check_cd_path(char *s);
+int					go_there(char *s);
+int					new_pwd(char *s);
+
+
 //------------------------------- BIN ------------------------------------
 
 int					exec_file(t_cmd *cmd);
