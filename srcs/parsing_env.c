@@ -80,8 +80,8 @@ static char			*var_env_not_found(t_env *env, char *line)
 		ret[i] = line[i];
 	i--;
 	while (line[++i])
-		ret[i] = line[i + len_var + 1];
-	free(line);
+		ret[i] = line[i + len_var + 1];	
+//	free(line); je ne sais pas 
 	return (ret);
 }
 
@@ -96,7 +96,7 @@ static char 	*var_env_found(t_env *env, char *line, t_env *tmp)
 	j = -1;
 	size = ft_strlen(line) - 1 - ft_strlen(tmp->name)
 			+ ft_strlen(tmp->value) + 1;
-	if (!(ret = malloc(sizeof(char) * (size))))
+	if (!(ret = malloc(sizeof(char) * (size + 1))))
 		return (0);
 	ret[size] = '\0';
 	while (line[++i] && line[i] != '$' && (ft_strncmp(line + i + 1,
@@ -109,7 +109,7 @@ static char 	*var_env_found(t_env *env, char *line, t_env *tmp)
 		ret[i + j] = line[i + ft_strlen(tmp->name) + 1];
 		i++;
 	}
-	free(line);
+//	free(line); je ne sais pas 
 	return (ret);
 }
 
@@ -128,18 +128,18 @@ char		*parse_env(t_env *env, char *line)
 			i++;
 		if (res[i])
 		{
-			while (tmp && (ft_strncmp(res + i + 1,
+			while (res[i + 1] && tmp && (ft_strncmp(res + i + 1,
 				tmp->name, ft_strlen(tmp->name)) != 0))
 				tmp = tmp->next;
-			if (tmp != 0 && ((res[i + 1 + ft_strlen(tmp->name)] &&
-		(res[i + 1 + ft_strlen(tmp->name)] == ' ' ||
-		res[i + 1 + ft_strlen(tmp->name)] == '$')) ||
-		res[i + 1 + ft_strlen(tmp->name)] == '\0'))
+			if (res[i + 1] && tmp != 0 && (i + 1 + ft_strlen(tmp->name) >= ft_strlen(res) ||
+		res[i + 1 + ft_strlen(tmp->name)] == '$' ||
+		res[i + 1 + ft_strlen(tmp->name)] == ' '))
 				res = var_env_found(env, res, tmp);
 			else
 				res = var_env_not_found(env, res);
 		}
 		i++;
 	}
+	free(line);
 	return (res);
 }

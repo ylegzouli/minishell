@@ -18,7 +18,7 @@ static int 	go_absolue(char *s)
 		new_pwd(s);
 		return (0);
 	}
-	g_data->ret = 1;
+	g_data->ret = 2;
 	return (1);
 }
 
@@ -40,7 +40,7 @@ static int	go_in_that_dir(char *s)
 	}
 	free(tmp);
 	free(path);
-	g_data->ret = 1;
+	g_data->ret = 2;
 	return (1);
 }
 
@@ -53,8 +53,9 @@ int		go_there(char *s)
 	}
 	else if (from_where(s) == 2)
 	{
-//		if (go_from_home(s) == 1)
-			return (1);
+			write(1, "cd: Not absolute nor relative path\n", 35);
+			g_data->ret = 2;
+			return (0);
 	}
 	else if (from_where(s) == 0)
 	{

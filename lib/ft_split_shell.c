@@ -79,6 +79,7 @@ static char		*ft_create_str(const char *str, char charset, char *quote)
 		i++;
 	if (!(str_ret = malloc((i + 1) * sizeof(char))))
 		return (0);
+	str_ret[i] = '\0';
 	i = 0;
 	while (str[i] && !ft_is_sep(str, charset, quote, i))
 	{

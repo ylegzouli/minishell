@@ -18,6 +18,10 @@
 
 12. Attention, segfault si mauvais arguments dans commande_var_env()
 
+13. erreur sur echo "coucou" "lol" il ne devrait pas y avoir d'espace 
+
+14. erreur chelou sur "echo -n 'coucou' 'lol'", char * pas terminé par \0 je pense
+
 ________________________________________________________________________________________
 
 
