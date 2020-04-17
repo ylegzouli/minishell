@@ -34,8 +34,9 @@ void		executor(t_data *data, char *line)
 		ft_parse(new_cmd, cmd[i], i, size);
 		ft_exec_cmd(new_cmd);
 		//ft_print_result();
-		if (new_cmd->cmd != EXEC && new_cmd->cmd != EXPORT)
-			write(1, new_cmd->result, ft_strlen(new_cmd->result));
+//		if (new_cmd->cmd != EXEC && new_cmd->cmd != EXPORT && new_cmd->cmd != EXIT)
+//			write(1, new_cmd->result, ft_strlen(new_cmd->result));
+		ft_print_result(new_cmd);
 		i++;
 
 		//ft_lstadd_back_cmd(new_cmd); 

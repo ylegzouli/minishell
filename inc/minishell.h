@@ -13,7 +13,7 @@
 # include <signal.h>
 # include <dirent.h>
 
-# define OPEN_MAX 256 // bug sur ordi arthur sinon
+//# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 
 # define SUCCESS			0
@@ -91,6 +91,7 @@ void				ft_print_prompt();
 void				ft_exec_line(t_data *data);
 void				executor(t_data *data, char *line);
 void				ft_exec_cmd(t_cmd *cmd);
+void				ft_print_result(t_cmd *cmd);
 
 //------------------------------ PARSING ---------------------------------
 
@@ -126,7 +127,7 @@ void				free_list_export(t_env *env);
 //------------------------------- BIN ------------------------------------
 
 int					exec_file(t_cmd *cmd);
-char				*get_result(int tube[2], pid_t pid);
+char				*get_result(int tube[2], pid_t pid, t_cmd *cmd);
 char				*parsing_file(char ***environnement, char ***arguments, char **tmp, t_cmd *cmd);
 char				*get_path_bin();
 char				*check_dir(char *path);

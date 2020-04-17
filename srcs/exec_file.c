@@ -16,6 +16,7 @@ int			exec_file(t_cmd *cmd)
 	if (pid == 0)
 	{
 		close(tube[0]);
+	//	dup2(tube[1],3);
 		dup2(tube[1],1);
 		if (execve(tmp, arguments, environnement) == -1)
 			return (1);
@@ -25,32 +26,29 @@ int			exec_file(t_cmd *cmd)
 	else if (pid < 0)
 		return (1);
 	else
-		cmd->result = get_result(tube, pid);
+		cmd->result = get_result(tube, pid, cmd);
 	free(tmp);
 	//ft_free_split(arguments);
 	//ft_free_split(environnement);
 	return (0);
 }
 
-char		*get_result(int	tube[2], pid_t pid)
+char		*get_result(int	tube[2], pid_t pid, t_cmd *cmd)
 {
-	char	buf;
+	char	buf[100];
 	char	*result;
 
 	close(tube[1]);
-//	wait(&pid);
 	result = malloc(sizeof(char));
 	result[0] = 0;
+	if (!tube[0])
+		return (NULL);
 	while (read(tube[0], &buf, 1) > 0)
 	{	
-		result = ft_add_char(result, buf);
-		write(1, &buf, 1);
-		// print_file();
+	//	result = ft_add_char(result, buf);
+		if (cmd->output == STDOUT)
+			write(1, &buf, 1);
 	}
 	wait(&pid);
 	return (result);
-}
-
-void		print_file()
-{
 }

@@ -7,6 +7,7 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 	clean_fdout(&new_cmd->fd_out);
 	get_cmd(new_cmd, cmd);
 	get_input(new_cmd, cmd, i, size);
+//	printf("1=[%s]\n", new_cmd->arg);
 	return (0);
 }
 
@@ -40,6 +41,7 @@ void        get_cmd(t_cmd *new_cmd, char *cmd)
 int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 {
 	char	**tmp;
+	char	*tmp2;
 	int		j;
 	char	*path;
 
@@ -56,6 +58,22 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 	else if (!tmp[1])
 		new_cmd->input = ARG;
 	get_arg(&new_cmd->arg, tmp[0]);
+	if (new_cmd->input == PIPE && new_cmd->cmd == EXEC)
+	{
+		//printf("%s\n", new_cmd->arg);
+		new_cmd->arg = ft_add_char(new_cmd->arg, ' ');
+//		new_cmd->arg = ft_add_char(new_cmd->arg, '"');
+		tmp2 = ft_strjoin(new_cmd->arg, g_data->pipe);
+		//printf("%s\n", tmp2);
+		free(new_cmd->arg);
+		new_cmd->arg = tmp2;
+		new_cmd->arg = ft_add_char(new_cmd->arg, '"');
+		//printf("[%s]\n", new_cmd->arg);
+	}
+//	else if (new_cmd->input == REDIRECT && new_cmd == EXEC)
+//	{
+//		
+//	}
 	//ft_free_split(tmp);
 	return (0);
 }

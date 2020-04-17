@@ -5,9 +5,8 @@ char		*parsing_file(char ***environnement, char ***arguments, char **tmp, t_cmd 
 	env(g_data->lst_env, tmp);
 	*environnement = ft_split(*tmp, '\n');
 	free(*tmp);
-	*tmp = get_path_bin();
-	if (!tmp)
-		return (*tmp);
+	if (!(*tmp = get_path_bin()))
+		return ("1");
 	*arguments = get_arguments(*tmp, cmd->arg);
 	return (0);
 }
@@ -78,9 +77,9 @@ char		*get_name(char *path)
 		size++;
 	}
 	name = malloc(sizeof(char) * (size + 2));
-	ft_strlcpy(name, &path[i], size + 2);
-	name[size - 1] = ' ';
-	name[size] = '\0';
+	ft_strlcpy(name, &path[i + 1], size + 1);
+	name[size] = ' ';
+	name[size + 1] = '\0';
 	return (name);
 }
 

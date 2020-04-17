@@ -73,6 +73,7 @@ int			open_file(char *str, int opt)
 		fd = open(str, O_RDWR | O_CREAT | O_APPEND, 0664);
 	else if (opt == 2)
 		fd = open(str, O_TRUNC | O_RDWR | O_CREAT, 0644);
+//	printf("1=%d\n", fd);
 	return (fd);
 }
 
