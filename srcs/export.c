@@ -1,6 +1,5 @@
 #include "../inc/minishell.h"
 
-
 static void		list_sort(t_env **begin_list, int (*cmp)())
 {
 	t_env	*ptr;
@@ -33,7 +32,7 @@ int			create_order_env(t_env *en, char **result)
 
 	tmp_o = en;
 	if (!(tmp_new = malloc(sizeof(t_env))))
-			return (1);
+		return (1);
 	tmp_n_begin = tmp_new;
 	while (tmp_o)
 	{
@@ -55,7 +54,6 @@ int			create_order_env(t_env *en, char **result)
 	return (0);
 }
 
-// ajouter ici si pas d'argument alors lancer le print alpha
 int			check_arg_export(t_env *env, char *s, char **res)
 {
 	int		i;
@@ -64,7 +62,7 @@ int			check_arg_export(t_env *env, char *s, char **res)
 	if (s[0] == '\0')
 	{
 		create_order_env(env, res);
-		return (0);
+		return (2);
 	}
 	while (s[i] && s[i] != '=')
 	{
@@ -75,50 +73,61 @@ int			check_arg_export(t_env *env, char *s, char **res)
 	return (0);
 }
 
-int			export(t_env *env, char *s, char **res)
+int			export(t_env *env, char *s2, char **res)
 {
 	t_env 	*tmp;
 	int 	size;
 	int		j;
+	int		i;
+	char	**s1;
+	char	*s;
 
-	tmp = env;
-	size = 0;
-	if (check_arg_export(env, s, res) == 1)
+	if (s2[0] == '\0')
+		return (create_order_env(env, res));
+	s1 = ft_split(s2, ' ');
+	i = 0;
+	while (s1[i])
 	{
-		g_data->ret = 2;
-		write(1, "export: bad variable name\n", 26);
-		return (0); // on pourrait mettre au dessus dans la fonction
+		size = 0;
+		s = s1[i];
+		tmp = env;
+		if (check_arg_export(env, s, res) == 1)
+		{
+			g_data->ret = 2;
+			write(1, "export: bad variable name\n", 26);
+		}
+		else if (check_variable_env(env, s, check_equal(s)) == 1)
+			g_data->ret = 0;
+		else if (check_variable_env(g_data->lst_env_waiting, s,
+					check_equal(s)) == 1)
+			switch_to_export(env, g_data->lst_env_waiting, s);
+		else if (check_equal(s) == 1)
+		{
+			while (tmp->next)
+				tmp = tmp->next;
+			if (!(tmp->next = malloc(sizeof(t_env))))
+				return (1);
+			tmp = tmp->next;
+			while (s[size] && s[size] != '=')
+				size++;
+			if (!(tmp->name = malloc(sizeof(char) * (size + 1))))
+				return (1);
+			j = size + 1;
+			tmp->name[size] = '\0';
+			while (--size >= 0)
+				tmp->name[size] = s[size];
+			while (s[size + j])
+				size++;
+			if (!(tmp->value = malloc(sizeof(char) * (size + 1))))
+				return (1);
+			tmp->value[size] = '\0';
+			while (--size >= 0)
+				tmp->value[size] = s[j + size];
+			tmp->next = 0;
+			g_data->ret = 0;
+		}
+		i++;
 	}
-	if (check_variable_env(env, s, check_equal(s)) == 1 &&
-			(g_data->ret = 0))
-		return (0);
-	if (check_variable_env(g_data->lst_env_waiting, s,
-				check_equal(s)) == 1)
-		return (switch_to_export(env, g_data->lst_env_waiting, s));
-	if (check_equal(s) == 0)
-		return (0);
-	while (tmp->next)
-		tmp = tmp->next;
-	if (!(tmp->next = malloc(sizeof(t_env))))
-		return (1);
-	tmp = tmp->next;
-	while (s[size] && s[size] != '=')
-		size++;
-	if (!(tmp->name = malloc(sizeof(char) * (size + 1))))
-		return (1);
-	j = size + 1;
-	tmp->name[size] = '\0';
-	while (--size >= 0)
-		tmp->name[size] = s[size];
-	while (s[size + j])
-		size++;
-	if (!(tmp->value = malloc(sizeof(char) * (size + 1))))
-		return (1);
-	tmp->value[size] = '\0';
-	while (--size >= 0)
-		tmp->value[size] = s[j + size];
-	tmp->next = 0;
-	g_data->ret = 0;
-
+	//free split 
 	return (0);
 }

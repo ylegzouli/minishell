@@ -13,7 +13,7 @@ int			check_variable_env(t_env *env, char *s, int equal)
 		size++;
 	while (tmp)
 	{
-		if (ft_strncmp(s, tmp->name, size) != 0)
+		if (ft_strcmp(s, tmp->name) != 0)
 			tmp = tmp->next;
 		else if (equal == 1)
 		{
@@ -28,8 +28,8 @@ int			check_variable_env(t_env *env, char *s, int equal)
 				tmp->value[i] = s[i + size];
 			return (1);
 		}
-		else if (equal == 0)
-			return (1);
+		else if (equal == 0 && ft_strlen(tmp->name) > 0)
+			return (1);	
 	}
 	return (0);
 }
@@ -79,28 +79,38 @@ int 		check_equal(char *s)
 	return (0);
 }
 
-void			unset(t_env *env, char *s)
+void			unset(t_env *env, char *s2)
 {
 	t_env 	*tmp;
 	t_env	*tmp2;
+	char	**s1;
+	int		i;
+	char	*s;
 
 	tmp = env;
-	while (tmp)
+	s1 = ft_split(s2, ' ');
+	i = 0;
+	while (s1[i])
 	{
-		if (ft_strncmp(s, tmp->name, ft_strlen(s)) != 0)
+		s = s1[i];
+		while (tmp)
 		{
-			tmp2 = tmp;
-			tmp = tmp->next;
+			if (ft_strcmp(s, tmp->name) != 0)
+			{
+				tmp2 = tmp;
+				tmp = tmp->next;
+			}
+			else
+			{
+				free(tmp->value);
+				free(tmp->name);
+				tmp2->next = tmp2->next->next;
+				free(tmp);
+				break;
+			}
 		}
-		else
-		{
-			free(tmp->value);
-			free(tmp->name);
-			tmp2->next = tmp2->next->next;
-			free(tmp);
-			break;
-		}
+		g_data->ret = 0;
+		i++;
 	}
-	g_data->ret = 0;
 }
 
