@@ -13,7 +13,7 @@
 # include <signal.h>
 # include <dirent.h>
 
-# define OPEN_MAX 256 // bug sur ordi arthur sinon
+//# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 
 # define SUCCESS			0
@@ -76,6 +76,10 @@ typedef struct		s_data
 	char			*pipe;
 	int				ret;
 	char			*cmd_n_found;
+
+	int				i;
+	int				size;
+	char			**cmd;
 }					t_data;
 
 extern	t_data		*g_data;

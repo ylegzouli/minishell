@@ -9,7 +9,7 @@ void		ft_exec_line(t_data *data)
 	cmd = ft_split_shell(data->historic->line, ';');
 	while (cmd[i] && !(data->exit))
 	{
-		//		write(1, "ICI\n", 4);
+		//executor2(data, cmd[i]);
 		executor(data, cmd[i]);
 		i++;
 	}
