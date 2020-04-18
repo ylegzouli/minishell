@@ -6,7 +6,7 @@ char		*parsing_file(char ***environnement, char ***arguments, char **tmp, t_cmd 
 	*environnement = ft_split(*tmp, '\n');
 	free(*tmp);
 	if (!(*tmp = get_path_bin()))
-		return ("1");
+		cmd->cmd = NOTFOUND;
 	*arguments = get_arguments(*tmp, cmd->arg);
 	return (0);
 }

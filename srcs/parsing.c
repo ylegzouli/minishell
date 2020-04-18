@@ -2,14 +2,12 @@
 
 int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 {
-
 	if (check_char(cmd, '$') == 1)
 		cmd = parse_env(g_data->lst_env, cmd);
 	get_output(new_cmd, cmd, i, size);
 	clean_fdout(&new_cmd->fd_out);
 	get_cmd(new_cmd, cmd);
 	get_input(new_cmd, cmd, i, size);
-
 	return (0);
 }
 
@@ -60,7 +58,7 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 	else if (!tmp[1])
 		new_cmd->input = ARG;
 	get_arg(&new_cmd->arg, tmp[0]);
-	if (new_cmd->input == PIPE && new_cmd->cmd == EXEC)
+/*	if (new_cmd->input == PIPE && new_cmd->cmd == EXEC)
 	{
 		//printf("%s\n", new_cmd->arg);
 		new_cmd->arg = ft_add_char(new_cmd->arg, ' ');
@@ -71,7 +69,7 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 		new_cmd->arg = tmp2;
 		new_cmd->arg = ft_add_char(new_cmd->arg, '"');
 		//printf("[%s]\n", new_cmd->arg);
-	}
+	}*/
 //	else if (new_cmd->input == REDIRECT && new_cmd == EXEC)
 //	{
 //		

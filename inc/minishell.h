@@ -80,6 +80,7 @@ typedef struct		s_data
 	int				i;
 	int				size;
 	char			**cmd;
+	int				fd;
 }					t_data;
 
 extern	t_data		*g_data;
@@ -93,9 +94,12 @@ int					ft_init_env(t_env *env);
 int					ft_init_lst(t_cmd **lst_cmd);
 void				ft_print_prompt();
 void				ft_exec_line(t_data *data);
-void				executor(t_data *data, char *line);
-void				ft_exec_cmd(t_cmd *cmd);
-void				ft_print_result(t_cmd *cmd);
+int					init_fork(char *line);
+int					executor(t_cmd **cmd, int **tube);
+void				ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path);
+
+//-------------------------------- TMP ----------------------------------
+
 
 //------------------------------ PARSING ---------------------------------
 
@@ -135,11 +139,8 @@ int					check_cd_path(char *s);
 int					go_there(char *s);
 int					new_pwd(char *s);
 
+//------------------------------- FILE ------------------------------------
 
-//------------------------------- BIN ------------------------------------
-
-int					exec_file(t_cmd *cmd);
-char				*get_result(int tube[2], pid_t pid, t_cmd *cmd);
 char				*parsing_file(char ***environnement, char ***arguments, char **tmp, t_cmd *cmd);
 char				*get_path_bin();
 char				*check_dir(char *path);
@@ -159,6 +160,8 @@ void				ft_init_tab(int	*tab, int len);
 char 				*ft_add_char(char *str, char c);
 int					check_variable_env(t_env *env, char *s, int equal);
 int 				check_equal(char *s);
+void				pipe_in(int tube[2]);
+void				pipe_out(int tube[2]);
 
 //void		check_return(t_data *data);
 //void		print_lst(t_list *li);

@@ -13,12 +13,8 @@ void			find_path(t_data *data)
 void			pwd(t_data *data, char **result)
 {
 	find_path(data);
-	*result = data->path;
-	data->ret = 0;
+	write(1, &data->path, ft_strlen(data->path));
+	write(1, "\n", 1);
+//	*result = data->path;
+//	data->ret = 0;
 }
-
-/*
-**		\o/
-**		 |
-**		/ \
-*/		 

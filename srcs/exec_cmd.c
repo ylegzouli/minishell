@@ -9,45 +9,13 @@ void		ft_exec_line(t_data *data)
 	cmd = ft_split_shell(data->historic->line, ';');
 	while (cmd[i] && !(data->exit))
 	{
-		//executor2(data, cmd[i]);
-		executor(data, cmd[i]);
+		init_fork(cmd[i]);
 		i++;
 	}
 	//ft_free_split(cmd);
 }
 
-void		executor(t_data *data, char *line)
-{
-	char 	**cmd;
-	t_cmd	*new_cmd;
-	int		i;
-	int		size;
-
-	i = 0;
-	size = 0;
-	cmd = ft_split_shell(line, '|');
-	while (cmd[size])
-		size++;
-	while (cmd[i] && !(data->exit))
-	{
-		ft_init_lst(&new_cmd);
-		ft_parse(new_cmd, cmd[i], i, size);
-		ft_exec_cmd(new_cmd);
-		//ft_print_result();
-//		if (new_cmd->cmd != EXEC && new_cmd->cmd != EXPORT && new_cmd->cmd != EXIT)
-//			write(1, new_cmd->result, ft_strlen(new_cmd->result));
-		ft_print_result(new_cmd);
-		i++;
-
-		//ft_lstadd_back_cmd(new_cmd); 
-		//-> pas utile de save dans une liste ? Plus utile de free la struct cmd ici ?
-//		printf("cmd= %d\noutput= %d\ninput= %d\nfd_in= %d\narg= [%s]\nresult= [%s]\nret= %d\n-----\n", new_cmd->cmd, new_cmd->output, new_cmd->input,
-//		new_cmd->fd_in, new_cmd->arg, new_cmd->result,  g_data->ret);
-	}
-	//ft_free_split(cmd);
-}
-
-void		ft_exec_cmd(t_cmd *cmd)
+void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 {
 	// il faudrait transformer les cmd en retour int pour les cas d'erreur..
 	// ce qu'on peut faire pour gagner de la place par exemple ce serait :
@@ -68,13 +36,11 @@ void		ft_exec_cmd(t_cmd *cmd)
 	else if (cmd->cmd == PWD)
 		pwd(g_data, &cmd->result);
 	else if (cmd->cmd == EXEC)
+		execve(path, arg, envi);
+	else if (cmd->cmd == NOTFOUND)
 	{
-		if (exec_file(cmd))
-		{
-			command_var_env(g_data->lst_env, g_data->lst_env_waiting,
-					g_data->cmd_n_found);
-			printf("Command fausse\n");
-		}
+		command_var_env(g_data->lst_env, g_data->lst_env_waiting,
+				g_data->cmd_n_found);
+		printf("Command fausse\n");
 	}
 }
-
