@@ -60,6 +60,8 @@ int			executor(t_cmd **cmd, int **tube)
 	{
 		pipe_out(tube[g_data->i]);
 		ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
+		g_data->exit = 1;
+		//kill(pid, SIGTERM);
 	}
 	else if (pid < 0)
 		return (1) ;
