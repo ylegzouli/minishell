@@ -70,6 +70,7 @@ int					cd(char *s1)
 
 	s2 = ft_split(s1, ' ');  // faudra free
 	s = s2[0];
+	printf("chem = %s\n", s1);
 	if (copy_old_pwd() == 1)
 		return (1); //free
 	if (check_cd_path(s) == 1)
