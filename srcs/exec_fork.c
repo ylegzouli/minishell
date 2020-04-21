@@ -59,32 +59,29 @@ int			executor(t_cmd **cmd, int **tube)
 		ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
 	else
 	{
-	pid = fork();
-	if (pid == 0)
-	{
-		pipe_out(tube[g_data->i]);
-		if (is_cmd_write(cmd[g_data->i]) == 1)
-			ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
-		g_data->exit = 1;
-		//kill(pid, SIGTERM);
-	}
-	else if (pid < 0)
-		return (1) ;
-	else if (g_data->i < g_data->size - 1 && !(g_data->exit))
-	{
-		//ft_free_split(arguments);
-		//ft_free_split(environnements);
-//		if (is_cmd_write(cmd[g_data->i]) == 0)
-//			ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
-		pipe_in(tube[g_data->i]);
-		(g_data->i)++;
-		executor(cmd, tube);
-	}
-	else
-	{	
-		//ft_free_split(arguments);   !!!!! free impossible ? !!!!!
-		//ft_free_split(environnements);
-	}
+		pid = fork();
+		if (pid == 0)
+		{
+			pipe_out(tube[g_data->i]);
+			if (is_cmd_write(cmd[g_data->i]) == 1)
+				ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
+			g_data->exit = 1;
+		}
+		else if (pid < 0)
+			return (1) ;
+		else if (g_data->i < g_data->size - 1 && !(g_data->exit))
+		{
+			//ft_free_split(arguments);
+			//ft_free_split(environnements);
+			pipe_in(tube[g_data->i]);
+			(g_data->i)++;
+			executor(cmd, tube);
+		}
+		else
+		{	
+			//ft_free_split(arguments);   !!!!! free impossible ? !!!!!
+			//ft_free_split(environnements);
+		}
 	}
 	return (0);
 }
@@ -93,6 +90,7 @@ void		pipe_in(int tube[2])
 {
 	if (g_data->i < g_data->size - 1)
 	{
+		//redirect(tube);
 		wait(NULL);
 		close(tube[1]);
 		dup2(tube[0], STDIN_FILENO);

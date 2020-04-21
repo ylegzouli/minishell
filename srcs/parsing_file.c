@@ -89,6 +89,8 @@ char		**get_arguments(char *path, char *arg)
 	char	*tmp;
 	char	*name;
 
+	if (!path)
+		return (NULL);
 	name = get_name(path);
 	tmp = ft_strjoin(name, arg);
 	arguments = ft_split_shell(tmp, ' ');

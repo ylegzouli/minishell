@@ -13,7 +13,7 @@
 # include <signal.h>
 # include <dirent.h>
 
-# define OPEN_MAX 256 // bug sur ordi arthur sinon
+//# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 
 # define SUCCESS			0
@@ -100,6 +100,7 @@ void				ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path);
 
 //-------------------------------- TMP ----------------------------------
 
+void        redirect(int tube[2]);
 
 //------------------------------ PARSING ---------------------------------
 

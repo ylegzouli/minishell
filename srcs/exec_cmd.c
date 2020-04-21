@@ -58,3 +58,17 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 		printf("Command fausse\n");
 	}
 }
+
+void		redirect(int tube[2])
+{
+	char		buf;
+	char		*result;
+
+	result = ft_strdup("");
+	while (read(tube[0], &buf, 1) > 0)
+	{
+		// ?? trouver une condition d'arret ?? //
+		result = ft_add_char(result, buf);
+	}	
+	printf("[%s][%c]\n", result, buf);
+}
