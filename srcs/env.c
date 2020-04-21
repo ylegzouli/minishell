@@ -20,7 +20,7 @@ static char		*env_copy(t_env *tmp, char *ret)
 	return (ret);
 }
 
-int				env(t_env *env, char **result)
+int				env(t_env *env, char **result, int print)
 {
 	int		size;
 	t_env	*tmp;
@@ -40,6 +40,11 @@ int				env(t_env *env, char **result)
 	tmp = env;
 	g_data->ret = 0;
 	*result = env_copy(tmp, ret); // il faudrait free *result avant, non?
+	if (print == 1)
+	{
+		write(1, *result, ft_strlen(*result));
+		free(*result);
+	}
 	return (0);	
 }
 

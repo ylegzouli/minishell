@@ -16,5 +16,5 @@ void			pwd(t_data *data, char **result)
 	write(1, &data->path, ft_strlen(data->path));
 	write(1, "\n", 1);
 //	*result = data->path;
-//	data->ret = 0;
+	g_data->ret = 0;
 }

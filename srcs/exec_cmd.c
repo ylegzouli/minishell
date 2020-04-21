@@ -15,6 +15,20 @@ void		ft_exec_line(t_data *data)
 	//ft_free_split(cmd);
 }
 
+int			is_cmd_write(t_cmd *cmd)
+{
+	if (cmd->cmd == ECHO || cmd->cmd == ENV || cmd->cmd == PWD)
+		return (1);
+	if (cmd->cmd == EXEC) // ca prend en compte les not found
+		return (1);
+	if (cmd->cmd == EXPORT)
+	{
+		if (cmd->arg[0] == '\0')
+			return (1);
+	}
+	return (0);
+}
+
 void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 {
 	// il faudrait transformer les cmd en retour int pour les cas d'erreur..
@@ -30,7 +44,7 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 	else if (cmd->cmd == EXPORT)
 		export(g_data->lst_env, cmd->arg, &cmd->result);
 	else if (cmd->cmd == ENV)
-		env(g_data->lst_env, &cmd->result);
+		env(g_data->lst_env, &cmd->result, 1);
 	else if (cmd->cmd == UNSET)
 		unset(g_data->lst_env, cmd->arg);
 	else if (cmd->cmd == PWD)

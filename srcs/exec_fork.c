@@ -56,10 +56,12 @@ int			executor(t_cmd **cmd, int **tube)
     if (cmd[g_data->i]->cmd == EXEC) 
 		parsing_file(&environnement, &arguments, &tmp, cmd[g_data->i]);
 	pid = fork();
+//	printf("cmd = %d, write = %d\n", cmd[g_data->i]->cmd, is_cmd_write(cmd[g_data->i]));
 	if (pid == 0)
 	{
 		pipe_out(tube[g_data->i]);
-		ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
+		if (is_cmd_write(cmd[g_data->i]) == 1)
+			ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
 		g_data->exit = 1;
 		//kill(pid, SIGTERM);
 	}
@@ -69,6 +71,8 @@ int			executor(t_cmd **cmd, int **tube)
 	{
 		//ft_free_split(arguments);
 		//ft_free_split(environnements);
+		if (is_cmd_write(cmd[g_data->i]) == 0)
+			ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
 		pipe_in(tube[g_data->i]);
 		(g_data->i)++;
 		executor(cmd, tube);

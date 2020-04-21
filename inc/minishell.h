@@ -13,7 +13,7 @@
 # include <signal.h>
 # include <dirent.h>
 
-//# define OPEN_MAX 256 // bug sur ordi arthur sinon
+# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 
 # define SUCCESS			0
@@ -113,6 +113,7 @@ void				clean_fdout(t_list **fd);
 void				get_cmd(t_cmd *new_cmd, char *cmd);
 int					get_input(t_cmd *new_cmd, char *cmd, int i, int size);
 void				get_arg(char **arg, char *str);
+int					is_cmd_write(t_cmd *cmd);
 
 
 //------------------------------- CMD ------------------------------------
@@ -121,7 +122,7 @@ void				pwd(t_data *data, char **result);
 int					echo(char *input, char **result);
 int         		export(t_env *env, char *s, char **result);
 void				unset(t_env *env, char *s);
-int					env(t_env *envi, char **result);
+int					env(t_env *envi, char **result, int print);
 int					cd(char *s);
 
 //------------------------------- ENV ------------------------------------

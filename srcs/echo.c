@@ -73,8 +73,11 @@ int			ft_parse_echo(char *input, int *fd, char **result)
 			// il faudrait free *result non ? 
 		i++;
 	}
+	write(1, *result, ft_strlen(*result));
 	if (opt == 0)
-		*result = ft_add_char(*result, '\n'); // il faudrait free *result non?
+		write(1, "\n", 1);
+//		*result = ft_add_char(*result, '\n');
+	free(*result);
 //	printf("|%s|\n", *result);
 	return (0);
 }

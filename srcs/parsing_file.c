@@ -2,7 +2,7 @@
 
 char		*parsing_file(char ***environnement, char ***arguments, char **tmp, t_cmd *cmd)
 {
-	env(g_data->lst_env, tmp);
+	env(g_data->lst_env, tmp, 0);
 	*environnement = ft_split(*tmp, '\n');
 	free(*tmp);
 	if (!(*tmp = get_path_bin()))

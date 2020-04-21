@@ -49,7 +49,7 @@ int			create_order_env(t_env *en, char **result)
 		}
 	}
 	list_sort(&tmp_n_begin, &ft_strcmp);
-	env(tmp_n_begin, result);
+	env(tmp_n_begin, result, 1);
 	free_list_export(tmp_n_begin);
 	return (0);
 }

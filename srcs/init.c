@@ -42,7 +42,7 @@ int			ft_init_env(t_env *env)
 
 	i = 1;
 	s = *environ;
-	while (environ[i])
+	while (environ[i - 1])
 	{
 		if (!(env = malloc(sizeof(t_env))))
 			return (1); // return(m_error("Erreur: malloc t_env."));
@@ -67,7 +67,7 @@ int			ft_init_env(t_env *env)
 		s = *(environ+i);
 		env->next = 0;
 		if (i == 1)
-			begin = env; // oui je sais c'est moche ... une idée?
+			begin = env;
 		tmp = env;
 		env = env->next;
 		i++;
