@@ -139,6 +139,7 @@ int					check_char(char *s, char c);
 int					check_cd_path(char *s);
 int					go_there(char *s);
 int					new_pwd(char *s);
+int					copy_old_pwd();
 
 //------------------------------- FILE ------------------------------------
 

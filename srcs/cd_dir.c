@@ -29,17 +29,19 @@ static int	go_in_that_dir(char *s)
 
 	if (!(tmp = ft_strjoin("/", s)))
 		return (1);
-	if (!(path = ft_strjoin(get_env_value(g_data->lst_env, "PWD"), tmp)))
+	if (!(path = ft_strjoin(g_data->path, tmp)))
 		return (1);
 	if (chdir(path) == 0)
 	{
+		copy_old_pwd();
 		new_pwd(path);
 		free(path);
 		free(tmp);
 		return (0);
 	}
-	free(tmp);
+	chdir(get_env_value(g_data->lst_env, "PWD"));
 	free(path);
+	free(tmp);
 	g_data->ret = 2;
 	return (1);
 }
