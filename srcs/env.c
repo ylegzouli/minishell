@@ -11,7 +11,8 @@ static char		*env_copy(t_env *tmp, char *ret)
 		i += ft_strlen(tmp->name);
 		ret[i] = '=';
 		i++;
-		ft_memcpy(ret + i, get_env_value(g_data->lst_env, tmp->name), ft_strlen(get_env_value(g_data->lst_env, tmp->name)));
+		ft_memcpy(ret + i, get_env_value(g_data->lst_env, tmp->name),
+		ft_strlen(get_env_value(g_data->lst_env, tmp->name)));
 		i += ft_strlen(get_env_value(g_data->lst_env, tmp->name));
 		ret[i] = '\n';
 		i++;
@@ -30,7 +31,8 @@ int				env(t_env *env, char **result, int print)
 	tmp = env;
 	while (tmp)
 	{
-		size += ft_strlen(tmp->name) + 1 + ft_strlen(get_env_value(g_data->lst_env, tmp->name)) + 1;
+		size += ft_strlen(tmp->name) + 1 + ft_strlen(get_env_value(g_data->lst_env,
+		tmp->name)) + 1;
 		tmp = tmp->next;
 	}
 	size++;
@@ -39,7 +41,7 @@ int				env(t_env *env, char **result, int print)
 	ret[size] = '\0';	
 	tmp = env;
 	g_data->ret = 0;
-	*result = env_copy(tmp, ret); // il faudrait free *result avant, non?
+	*result = env_copy(tmp, ret);
 	if (print == 1)
 	{
 		write(1, *result, ft_strlen(*result));
@@ -54,7 +56,6 @@ static int	export_env_w(t_env *tmp, char *s)
 	int		size;
 
 	size = 0;
-
 	if (!(tmp->next = malloc(sizeof(t_env))))
 		return (1);
 	tmp = tmp->next;
@@ -88,7 +89,7 @@ int			command_var_env(t_env *env, t_env *env_w, char *line)
 	if (check_char(line, '=') == 0)
 		return (0);
 	if (check_variable_env(env, line, check_char(line, '=')) == 1 ||
-		check_variable_env(env_w, line, check_char(line, '=')) == 1) // mystere
+		check_variable_env(env_w, line, check_char(line, '=')) == 1)
 	{
 		g_data->ret = 0;
 		return (0);

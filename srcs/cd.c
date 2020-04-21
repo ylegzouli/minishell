@@ -1,5 +1,20 @@
 #include "../inc/minishell.h"
 
+int					check_cd_path(char *s)
+{
+	if (s)
+	{
+		if (s[0] == '.' && s[1] == '.')
+			return (1);
+		else if (s[0] == '.' && (s[1] == '\0' || s[1] == ' '))
+			return (2);
+		else if (s[0] != '\0')
+			return (3);
+		else
+			return (4);
+	}
+}
+
 int			copy_old_pwd()
 {
 	t_env 	*tmp;
@@ -69,7 +84,7 @@ int					cd(char *s1)
 	int			i;
 
 	i = -1;
-	s2 = ft_split(s1, ' ');  // faudra free
+	s2 = ft_split(s1, ' ');
 	s = s2[0];
 	while (check_cd_path(s + 3 * ++i) == 1)
 		go_up();
@@ -80,17 +95,13 @@ int					cd(char *s1)
 		free(s2);
 		return (0);
 	}
-	if (check_cd_path(s + 3 * i) == 2)
-		copy_old_pwd();
 	else if (check_cd_path(s + 3 * i) == 3)
 	{
 		go_there(s + 3 * i);
 		free(s2);
 		return (0);
 	}
-	if (copy_old_pwd() == 1)
-		return (1); //free
+	copy_old_pwd();
 	free(s2);
 	return (0);
-
 }

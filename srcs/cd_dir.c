@@ -1,6 +1,5 @@
 #include "../inc/minishell.h"
 
-
 static int	from_where(char *s)
 {
 	if (s[0] == '/')
