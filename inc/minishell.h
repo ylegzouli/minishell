@@ -97,6 +97,7 @@ void				ft_exec_line(t_data *data);
 int					init_fork(char *line);
 int					executor(t_cmd **cmd, int **tube);
 void				ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path);
+void				signal_quit(int sig);
 
 //-------------------------------- TMP ----------------------------------
 

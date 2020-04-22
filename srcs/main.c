@@ -20,6 +20,8 @@ int		ft_start(t_data *data)
 
 	while(data->exit == 0)
 	{
+		signal(SIGQUIT, signal_quit);
+		signal(SIGINT, signal_quit);
 		ft_print_prompt();
 		get_next_line(0, &line);
 		ft_lstadd_front_hist(data, line);
