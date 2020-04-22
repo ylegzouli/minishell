@@ -164,7 +164,7 @@ void				ft_init_tab(int	*tab, int len);
 char 				*ft_add_char(char *str, char c);
 int					check_variable_env(t_env *env, char *s, int equal);
 int 				check_equal(char *s);
-void				pipe_in(int tube[2]);
+void				pipe_in(int tube[2], t_cmd *cmd);
 void				pipe_out(int tube[2]);
 
 //void		check_return(t_data *data);

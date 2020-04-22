@@ -73,7 +73,7 @@ int			executor(t_cmd **cmd, int **tube)
 		{
 			//ft_free_split(arguments);
 			//ft_free_split(environnements);
-			pipe_in(tube[g_data->i]);
+			pipe_in(tube[g_data->i], cmd[g_data->i]);
 			(g_data->i)++;
 			executor(cmd, tube);
 		}
@@ -86,12 +86,13 @@ int			executor(t_cmd **cmd, int **tube)
 	return (0);
 }
 
-void		pipe_in(int tube[2])
+void		pipe_in(int tube[2], t_cmd *cmd)
 {
 	if (g_data->i < g_data->size - 1)
 	{
-		//redirect(tube);
-		wait(NULL);
+//		redirect(tube);
+		if (cmd->cmd != EXEC)
+			wait(NULL);
 		close(tube[1]);
 		dup2(tube[0], STDIN_FILENO);
 	}
