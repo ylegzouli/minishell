@@ -4,7 +4,7 @@ static int	from_where(char *s)
 {
 	if (s[0] == '/')
 		return (1);
-	else if (s[0] == '~')
+	else if (s[0] == '~' || s[0] == '\0')
 		return (2);
 	else
 		return (0);
@@ -36,6 +36,7 @@ static int	go_in_that_dir(char *s)
 		new_pwd(path);
 		free(path);
 		free(tmp);
+		g_data->ret = 0;
 		return (0);
 	}
 	chdir(get_env_value(g_data->lst_env, "PWD"));
@@ -54,7 +55,8 @@ int		go_there(char *s)
 	}
 	else if (from_where(s) == 2)
 	{
-			write(1, "cd: Not absolute nor relative path\n", 35);
+			write(1, "cd: can't go in that dir\n", 25);
+			chdir(get_env_value(g_data->lst_env, "PWD"));
 			g_data->ret = 2;
 			return (0);
 	}

@@ -95,13 +95,11 @@ int					cd(char *s1)
 		free(s2);
 		return (0);
 	}
-	else if (check_cd_path(s + 3 * i) == 3)
+	else if (s[2 * i] == '.' || check_cd_path(s + 3 * i) == 3)
 	{
 		go_there(s + 3 * i);
 		free(s2);
 		return (0);
 	}
-	copy_old_pwd();
-	free(s2);
-	return (0);
+	return (0); // je crois que cette ligne ne sert plus
 }

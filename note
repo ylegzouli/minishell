@@ -20,8 +20,7 @@
 
 13. erreur sur echo "coucou" "lol" il ne devrait pas y avoir d'espace 
 
-14. erreur chelou sur "echo -n 'coucou' 'lol'", char * pas terminé par \0 je pense
-
+14. Echo n'a pas l'air de changer g_data->ret
 ________________________________________________________________________________________
 
 
