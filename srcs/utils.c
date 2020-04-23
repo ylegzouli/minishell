@@ -1,25 +1,29 @@
 #include "../inc/minishell.h"
 
-char *ft_strrstr_without(char *str, char *to_find)
+int					size_int(int n)
 {
-	int i;
-	int j;
-	int	lastpos;
+	int		i;
 
 	i = 0;
-	lastpos = 0;
-	while (str[i] != '\0')
+	if (n == 0)
+		return (1);
+	while (n >= 1)
 	{
-		j = 0;
-		while (to_find[j] == str[i + j])
-		{
-			if (to_find[j + 1] == '\0')
-				lastpost = i;
-			j++;
-		}
+		n = n /10;
 		i++;
 	}
-	if (lastpost > 0)
-		return (str + lastpos + ft_strlen(to_find));
-	return (str);
+	return (i);
+}
+	
+int					power_of_ten(int n)
+{
+	int 	i;
+
+	i = 1;
+	while (n > 0)
+	{
+		i = i * 10;
+		n--;
+	}
+	return (i);
 }

@@ -36,22 +36,27 @@ int					check_var_env_return(char *line)
 char				*env_question_found(char *line)
 {
 	int		i;
+	int		j;
+	int		size;
 	char	*ret;
 
-	i = 0;
-	if (!(ret = malloc(sizeof(char) * ft_strlen(line))))
+	i = -1;
+	j = 0;
+	size = size_int(g_data->ret) + 1;
+	if (!(ret = malloc(sizeof(char) * ft_strlen(line) + (size - 1) - 1)))
 		return (0);
-	ret[ft_strlen(line) - 1] = '\0';
-	while (line[i] && line[i] != '$')
-	{
+	ret[ft_strlen(line) + (size - 1) - 2] = '\0';
+	while (line[++i] && line[i] != '$')
 		ret[i] = line[i];
-		i++;
-	}
-	ret[i] = g_data->ret + '0';
-	i++;
-	while (line[i + 1])
+	while (--size > 0)
 	{
-		ret[i] = line[i + 1];
+		ret[i + j] = (g_data->ret / power_of_ten(size - 1)) + '0';
+		g_data->ret = g_data->ret % power_of_ten(size - 1);
+		j++;
+	}
+	while (line[i + 2]) 
+	{
+		ret[i + j] = line[i + 2];
 		i++;
 	}
 	return (ret);	

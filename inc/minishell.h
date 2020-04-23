@@ -100,6 +100,12 @@ void				ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path);
 void				signal_quit(int sig);
 void				signal_prevent(int sig);
 
+//--------------------------------Utils----------------------------------
+
+int					power_of_ten(int n);
+int					size_int(int n);
+
+
 //-------------------------------- TMP ----------------------------------
 
 void        redirect(int tube[2]);
