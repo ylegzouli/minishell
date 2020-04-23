@@ -59,7 +59,6 @@ int			executor(t_cmd **cmd, int **tube)
 		ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
 	else
 	{
-		g_data->thread = 1;
 		signal(SIGINT, signal_quit);
 		signal(SIGQUIT, signal_quit);
 		pid = fork();
@@ -86,7 +85,6 @@ int			executor(t_cmd **cmd, int **tube)
 			//ft_free_split(environnements);
 		}
 	}
-	g_data->thread = 0;
 	return (0);
 }
 

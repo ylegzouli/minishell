@@ -9,7 +9,10 @@ void	signal_prevent(int sig)
 		ft_print_prompt();
 	}
 	if (sig == SIGQUIT)
+	{
 		g_data->exit = 0;
+		g_data->ret = 0;
+	}
 }
 
 void	signal_quit(int sig)

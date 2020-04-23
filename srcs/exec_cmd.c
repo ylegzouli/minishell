@@ -58,6 +58,7 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 	{
 		command_var_env(g_data->lst_env, g_data->lst_env_waiting,
 				g_data->cmd_n_found);
+		g_data->ret = 1;
 		printf("Command fausse\n");
 	}
 }
