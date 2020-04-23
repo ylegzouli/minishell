@@ -81,6 +81,7 @@ typedef struct		s_data
 	int				size;
 	char			**cmd;
 	int				fd;
+	int				thread;
 }					t_data;
 
 extern	t_data		*g_data;

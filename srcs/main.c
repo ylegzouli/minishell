@@ -25,7 +25,7 @@ int		ft_start(t_data *data)
 		signal(SIGQUIT, signal_prevent);
 		while(data->exit == 0)
 		{
-		ft_print_prompt();
+			ft_print_prompt();
 			get_next_line(0, &line);
 			ft_lstadd_front_hist(data, line);
 			ft_exec_line(data);

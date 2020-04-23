@@ -4,7 +4,6 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 {
 	if (check_char(cmd, '$') == 1)
 		cmd = parse_env(g_data->lst_env, cmd);
-	printf("cmd = %s\n", cmd);
 	get_output(new_cmd, cmd, i, size);
 	clean_fdout(&new_cmd->fd_out);
 	get_cmd(new_cmd, cmd);
