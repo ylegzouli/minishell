@@ -18,14 +18,18 @@ int		ft_start(t_data *data)
 {
 	char *line;
 
-	while(data->exit == 0)
+	while (1)
 	{
-		signal(SIGQUIT, signal_quit);
-		signal(SIGINT, signal_quit);
+		data->exit = 0;
+		signal(SIGINT, signal_prevent);
+		signal(SIGQUIT, signal_prevent);
+		while(data->exit == 0)
+		{
 		ft_print_prompt();
-		get_next_line(0, &line);
-		ft_lstadd_front_hist(data, line);
-		ft_exec_line(data);
+			get_next_line(0, &line);
+			ft_lstadd_front_hist(data, line);
+			ft_exec_line(data);
+		}
 	}
 	return (0);
 }

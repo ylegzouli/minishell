@@ -98,6 +98,7 @@ int					init_fork(char *line);
 int					executor(t_cmd **cmd, int **tube);
 void				ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path);
 void				signal_quit(int sig);
+void				signal_prevent(int sig);
 
 //-------------------------------- TMP ----------------------------------
 
@@ -116,6 +117,7 @@ void				get_cmd(t_cmd *new_cmd, char *cmd);
 int					get_input(t_cmd *new_cmd, char *cmd, int i, int size);
 void				get_arg(char **arg, char *str);
 int					is_cmd_write(t_cmd *cmd);
+char				*ft_strrstr(char *str, char *to_find);
 
 
 //------------------------------- CMD ------------------------------------
@@ -147,7 +149,7 @@ int					copy_old_pwd();
 
 char				*parsing_file(char ***environnement, char ***arguments, char **tmp, t_cmd *cmd);
 char				*get_path_bin();
-char				*check_dir(char *path);
+char				*check_dir(char *path, int *j);
 char				**get_arguments(char *path, char *arg);
 char				*get_name(char *path);
 

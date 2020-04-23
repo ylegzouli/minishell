@@ -17,8 +17,10 @@ char		*get_path_bin()
 	char	**tmp;
 	char	*tmp2;
 	int		i;
+	int		j;
 
 	i = 0;
+	j = 0;
 	if(g_data->cmd_n_found[0] && (g_data->cmd_n_found[0] == '/'
 		|| g_data->cmd_n_found[0] == '.'))
 	{
@@ -28,10 +30,10 @@ char		*get_path_bin()
 	else
 	{
 		tmp = ft_split(get_env_value(g_data->lst_env, "PATH"), ':');
-		while (tmp[i] && path == NULL)
+		while (tmp[i] && j == 0)
 		{
 			tmp2 = ft_strjoin(tmp[i], "/");
-			path = check_dir(tmp2);
+			path = check_dir(tmp2, &j);
 			free(tmp2);
 			i++;
 		}
@@ -40,7 +42,7 @@ char		*get_path_bin()
 	return (path);
 }
 
-char		*check_dir(char *path)
+char		*check_dir(char *path, int *j)
 {
 	DIR				*dir;
 	struct dirent	*dent;
@@ -54,6 +56,7 @@ char		*check_dir(char *path)
 			{
 				if (dir)
 					closedir(dir);
+				*j = 1;
 				return (ft_strjoin(path, g_data->cmd_n_found));
 			}
 		}
