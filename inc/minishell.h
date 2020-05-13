@@ -14,7 +14,7 @@
 # include <dirent.h>
 # include <errno.h>
 
-//# define OPEN_MAX 256 // bug sur ordi arthur sinon
+# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 
 # define SUCCESS			0
@@ -34,7 +34,7 @@
 # define EXPORT 			5
 # define UNSET				6
 # define ENV				7
-# define NOTFOUND			8 // verifier si env=xx
+# define NOTFOUND			8
 # define EXEC				9
 
 
@@ -111,10 +111,10 @@ int					size_int(int n);
 
 //-------------------------------- TMP ----------------------------------
 
-void				redirect(int tube[2], t_cmd *cmd);
-void				ft_print(char *str, int size, t_cmd *cmd);
+void        		redirect(int tube[2], t_cmd *cmd);
 void				print_cmd_not_found(t_cmd *cmd);
 void				print_cd_error(char *s);
+void				ft_print(char *str, int size, t_cmd *cmd, int i);
 
 //------------------------------ PARSING ---------------------------------
 
@@ -134,8 +134,8 @@ char				*ft_strrstr(char *str, char *to_find);
 
 //------------------------------- CMD ------------------------------------
 
-void				pwd(t_data *data, char **result);
-int					echo(char *input, char **result);
+void				pwd(t_data *data, char **result, t_cmd *cmd);
+int					echo(char *input, char **result, t_cmd *cmd);
 int         		export(t_env *env, char *s, char **result);
 void				unset(t_env *env, char *s);
 int					env(t_env *envi, char **result, int print);

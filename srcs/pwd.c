@@ -10,11 +10,10 @@ void			find_path(t_data *data)
 }
 
 
-void			pwd(t_data *data, char **result)
+void			pwd(t_data *data, char **result, t_cmd *cmd)
 {
 	find_path(data);
-	write(1, &data->path, ft_strlen(data->path));
-	write(1, "\n", 1);
+	ft_print(data->path, ft_strlen(data->path), cmd, 1);
 //	*result = data->path;
 	g_data->ret = 0;
 }

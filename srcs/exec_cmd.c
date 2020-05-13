@@ -39,7 +39,7 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 	cmd->nb_cmd = g_data->step_cmd;
 
 	if (cmd->cmd == ECHO)
-		echo(cmd->arg, &cmd->result);
+		echo(cmd->arg, &cmd->result, cmd);
 	else if (cmd->cmd == CD)
 		cd(cmd->arg);
 	else if (cmd->cmd == EXIT)
@@ -54,7 +54,7 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 	else if (cmd->cmd == UNSET)
 		unset(g_data->lst_env, cmd->arg);
 	else if (cmd->cmd == PWD)
-		pwd(g_data, &cmd->result);
+		pwd(g_data, &cmd->result, cmd);
 	else if (cmd->cmd == EXEC)
 		execve(path, arg, envi);
 	else if (cmd->cmd == NOTFOUND)
@@ -81,16 +81,20 @@ void		redirect(int tube[2], t_cmd *cmd)
 	}
 }
 
-void		ft_print(char *str, int size, t_cmd *cmd)
+void		ft_print(char *str, int size, t_cmd *cmd, int i)
 {
 	if (cmd->fd_out->content == NULL)
 	{
-		write(1, &str, size);
+		write(1, str, size);
+		if (i == 1)
+			write(1, "\n", 1);
 		return ;
 	}
 	while (cmd->fd_out && cmd->fd_out->content && *(int *)cmd->fd_out->content != 0)
 	{
-		write(*(int *)cmd->fd_out->content, &str, size);
+		//if (i == 1)
+		//	str = ft_strjoin(str, "\n") ??
+		write(*(int *)cmd->fd_out->content, str, size);
 		cmd->fd_out = cmd->fd_out->next;
 	}
 }
