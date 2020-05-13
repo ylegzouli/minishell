@@ -13,7 +13,7 @@ int			check_variable_env(t_env *env, char *s, int equal)
 		size++;
 	while (tmp)
 	{
-		if (ft_strcmp(s, tmp->name) != 0)
+		if (ft_strncmp(s, tmp->name, size - 1) != 0)
 			tmp = tmp->next;
 		else if (equal == 1)
 		{

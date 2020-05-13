@@ -10,16 +10,20 @@ static void		list_sort(t_env **begin_list, int (*cmp)())
 	while (ptr)
 	{
 		ptr2 = *begin_list;
-		while (ptr2->next)
+		while (ptr2->next && ptr2->next->name)
 		{
+	write(1, "byee\n", 5);
 			if ((*cmp)(ptr2->name, ptr2->next->name) > 0)
 			{
+				printf("%s && %s\n", ptr2->name, ptr2->next->name);
 				next = ptr2->name;
 				ptr2->name = ptr2->next->name;
 				ptr2->next->name = next;
 			}
 			ptr2 = ptr2->next;
+	write(1, "helo\n", 5);
 		}
+	write(1, "outt\n", 5);
 		ptr = ptr->next;
 	}
 }
@@ -48,7 +52,9 @@ int			create_order_env(t_env *en, char **result)
 			tmp_new = tmp_new->next;
 		}
 	}
+	tmp_new->next = 0;
 	list_sort(&tmp_n_begin, &ft_strcmp);
+	write(1, "nana\n", 5);
 	env(tmp_n_begin, result, 1);
 	free_list_export(tmp_n_begin);
 	return (0);

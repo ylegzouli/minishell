@@ -101,7 +101,7 @@ int			command_var_env(t_env *env, t_env *env_w, char *line)
 	}
 	if (export_env_w(tmp, line) == 1)
 			return (1);	
-	return (-1);
+	return (0);
 }
 
 char		*get_env_value(t_env *env, char *name)
