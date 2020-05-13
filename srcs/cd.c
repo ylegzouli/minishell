@@ -14,6 +14,7 @@ int					check_cd_path(char *s)
 		else
 			return (4);
 	}
+	return (-1);
 }
 
 int			copy_old_pwd()
@@ -39,6 +40,7 @@ int			copy_old_pwd()
 			tmp = tmp->next;
 	}
 	g_data->ret = 0;
+	return (0);
 }
 
 int					new_pwd(char *s)
@@ -60,6 +62,7 @@ int					new_pwd(char *s)
 		else
 			tmp = tmp->next;
 	}
+	return (0);
 }
 
 static int			go_up()

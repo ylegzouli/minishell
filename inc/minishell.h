@@ -12,6 +12,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <dirent.h>
+# include <errno.h>
 
 //# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
