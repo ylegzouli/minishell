@@ -42,7 +42,8 @@ int			ft_parse_echo(char *input, int *fd, char **result)
 	i = 0;
 	opt = 0;
 	quote = 0;
-	while (input[i] == ' ')
+
+	while (input[i] && input[i] == ' ')
 		i++;
 	if (input[i] && input[i + 1] && input[i + 2] &&
 		input[i] == '-' && input[i + 1] == 'n' && input[i + 2] == ' ')
@@ -73,7 +74,8 @@ int			ft_parse_echo(char *input, int *fd, char **result)
 			// il faudrait free *result non ? 
 		i++;
 	}
-	write(1, *result, ft_strlen(*result));
+	if (input[i])
+		write(1, *result, ft_strlen(*result));
 	if (opt == 0)
 		write(1, "\n", 1);
 //		*result = ft_add_char(*result, '\n');

@@ -11,7 +11,7 @@ static int			size_var_env_not_found(char *line)
 		i++;
 	i++;
 	while (line[i + size] &&
-		(line[i + size] != ' ' || line[i + size] != '$'))
+		(line[i + size] != ' ' && line[i + size] != '$'))
 		size++;
 	return (size);
 }
@@ -77,14 +77,14 @@ static char			*var_env_not_found(t_env *env, char *line)
 	}
 	len_var = size_var_env_not_found(line);
 	size = ft_strlen(line) - 1 - len_var + 1;
-	if (!(ret = malloc(sizeof(char) * (size))))
+	if (!(ret = malloc(sizeof(char) * (size + 1))))
 		return (0);
 	ret[size] = '\0';
 	while (line[++i] && line[i] != '$')
 		ret[i] = line[i];
 	i--;
-	while (line[++i])
-		ret[i] = line[i + len_var + 1];	
+	while (line[++i + len_var + 1])
+		ret[i] = line[i + len_var + 1];
 	return (ret);
 }
 

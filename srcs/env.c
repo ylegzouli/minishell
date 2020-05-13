@@ -87,7 +87,7 @@ int			command_var_env(t_env *env, t_env *env_w, char *line)
 	tmp = env_w;
 	i = 0;
 	if (check_char(line, '=') == 0)
-		return (0);
+		return (-1);
 	if (check_variable_env(env, line, check_char(line, '=')) == 1 ||
 		check_variable_env(env_w, line, check_char(line, '=')) == 1)
 	{
@@ -101,7 +101,7 @@ int			command_var_env(t_env *env, t_env *env_w, char *line)
 	}
 	if (export_env_w(tmp, line) == 1)
 			return (1);	
-	return (0);
+	return (-1);
 }
 
 char		*get_env_value(t_env *env, char *name)

@@ -8,7 +8,7 @@ void		ft_exec_line(t_data *data)
 	i = 0;
 	cmd = ft_split_shell(data->historic->line, ';');
 	while (cmd[i] && !(data->exit))
-	{
+	{	
 		init_fork(cmd[i]);
 		i++;
 	}
@@ -35,6 +35,9 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 	// ce qu'on peut faire pour gagner de la place par exemple ce serait :
 	// if (cmd->cmd == ECHO && echo(cmd->arg, &cmd->result) == 1)
 	// 		return (1); ou return(m_error("Erreur sur echo"));
+	g_data->step_cmd++;
+	cmd->nb_cmd = g_data->step_cmd;
+
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result);
 	else if (cmd->cmd == CD)
@@ -56,10 +59,9 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 		execve(path, arg, envi);
 	else if (cmd->cmd == NOTFOUND)
 	{
-		command_var_env(g_data->lst_env, g_data->lst_env_waiting,
-				g_data->cmd_n_found);
-		g_data->ret = 1;
-		printf("Command fausse\n");
+		if (command_var_env(g_data->lst_env,
+			g_data->lst_env_waiting, g_data->cmd_n_found) == -1)
+			print_cmd_not_found(cmd);
 	}
 }
 

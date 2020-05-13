@@ -4,7 +4,8 @@ int					check_cd_path(char *s)
 {
 	if (s)
 	{
-		if (s[0] == '.' && s[1] == '.')
+		if (s[0] == '.' && s[1] == '.' &&
+			(s[2] == 0 || s[2] == '/'))
 			return (1);
 		else if (s[0] == '.' && (s[1] == '\0' || s[1] == ' '))
 			return (2);
@@ -65,13 +66,20 @@ static int			go_up()
 {
 	int		size;
 
+	find_path(g_data);
 	size = 0;
 	while (g_data->path[size])
 		size++;
 	size--;
 	while (g_data->path[size] && g_data->path[size] != '/')
 		size--;
-	g_data->path[size] = '\0';
+	if (size >= 0)
+		g_data->path[size] = '\0';
+	else
+	{
+		g_data->path[0] = '/';
+		g_data->path[1] = '\0';
+	}
 	chdir(g_data->path);
 	g_data->ret = 0;
 	return (0);
@@ -97,7 +105,8 @@ int					cd(char *s1)
 	}
 	else if (s[2 * i] == '.' || check_cd_path(s + 3 * i) == 3)
 	{
-		go_there(s + 3 * i);
+		if (go_there(s + 3 * i) != 0)
+			print_cd_error(s);
 		free(s2);
 		return (0);
 	}

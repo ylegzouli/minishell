@@ -55,6 +55,7 @@ typedef struct		s_cmd
 	char			*arg;
 	char			*result;	
 	struct s_cmd	*next;
+	int				nb_cmd;
 }					t_cmd;
 
 typedef struct		s_env
@@ -76,6 +77,7 @@ typedef struct		s_data
 	char			*pipe;
 	int				ret;
 	char			*cmd_n_found;
+	int				step_cmd;
 
 	int				i;
 	int				size;
@@ -108,7 +110,9 @@ int					size_int(int n);
 
 //-------------------------------- TMP ----------------------------------
 
-void        redirect(int tube[2]);
+void        		redirect(int tube[2]);
+void				print_cmd_not_found(t_cmd *cmd);
+void				print_cd_error(char *s);
 
 //------------------------------ PARSING ---------------------------------
 

@@ -55,7 +55,6 @@ int		go_there(char *s)
 	}
 	else if (from_where(s) == 2)
 	{
-			write(1, "cd: can't go in that dir\n", 25);
 			chdir(get_env_value(g_data->lst_env, "PWD"));
 			g_data->ret = 2;
 			return (0);
