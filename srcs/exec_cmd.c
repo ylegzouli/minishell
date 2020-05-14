@@ -92,9 +92,9 @@ void		ft_print(char *str, int size, t_cmd *cmd, int i)
 	}
 	while (cmd->fd_out && cmd->fd_out->content && *(int *)cmd->fd_out->content != 0)
 	{
-		//if (i == 1)
-		//	str = ft_strjoin(str, "\n") ??
 		write(*(int *)cmd->fd_out->content, str, size);
+		if (i == 1)
+			write(*(int *)cmd->fd_out->content, "\n", 1);
 		cmd->fd_out = cmd->fd_out->next;
 	}
 }
