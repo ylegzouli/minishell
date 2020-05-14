@@ -27,7 +27,7 @@ int			get_fd(t_cmd *new_cmd, char *cmd)
 			get_input(new_cmd, tmp[i], 0, 0);
 			tmp2 = ft_split_shell(tmp[i], '<');
 			path = get_path(ft_strtrim(tmp2[0], " >"));
-			//ft_free_split(tmp2);
+			free_split(tmp2);
 		}
 		else
 			path = get_path(ft_strtrim(tmp[i], " >"));
@@ -40,7 +40,7 @@ int			get_fd(t_cmd *new_cmd, char *cmd)
 		free(path);
 		i++;
 	}
-	//ft_free_split(tmp);
+	free_split(tmp);
 	return (0);
 }
 

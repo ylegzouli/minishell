@@ -2,7 +2,7 @@
 
 char		*parsing_file(char ***environnement, char ***arguments, char **tmp, t_cmd *cmd)
 {
-	env(g_data->lst_env, tmp, 0); //**tmp vaut quoi avant ? car faudrait le free avant de l'envoyer je pense
+	env(g_data->lst_env, tmp, cmd, 0); //**tmp vaut quoi avant ? car faudrait le free avant de l'envoyer je pense
 	*environnement = ft_split(*tmp, '\n');
 	free(*tmp);
 	if (!(*tmp = get_path_bin()))
@@ -37,7 +37,7 @@ char		*get_path_bin()
 			free(tmp2);
 			i++;
 		}
-		//ft_free_split(tmp);
+		free_split(tmp);
 	}
 	return (path);
 }
@@ -57,7 +57,7 @@ char		*check_dir(char *path, int *j)
 				if (dir)
 					closedir(dir);
 				*j = 1;
-				return (ft_strjoin(path, g_data->cmd_n_found));
+				return (ft_strjoin(path, g_data->cmd_n_found)); // ola pense à free ce truc please
 			}
 		}
 	}
@@ -83,7 +83,7 @@ char		*get_name(char *path)
 	ft_strlcpy(name, &path[i + 1], size + 1);
 	name[size] = ' ';
 	name[size + 1] = '\0';
-	return (name);
+	return (name);// faut free ça 
 }
 
 char		**get_arguments(char *path, char *arg)
@@ -100,5 +100,5 @@ char		**get_arguments(char *path, char *arg)
 	//clean_arg();  --> clean " ' \,
 	free(name);
 	free(tmp);
-	return (arguments);
+	return (arguments); //faut free ca
 }

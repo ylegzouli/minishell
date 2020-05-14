@@ -4,10 +4,13 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 {
 	if (check_char(cmd, '$') == 1)
 		cmd = parse_env(g_data->lst_env, cmd);
-	get_output(new_cmd, cmd, i, size);
-	clean_fdout(&new_cmd->fd_out);
-	get_cmd(new_cmd, cmd);
-	get_input(new_cmd, cmd, i, size);
+	if (cmd[0] != 0)
+	{
+		get_output(new_cmd, cmd, i, size);
+		clean_fdout(&new_cmd->fd_out);
+		get_cmd(new_cmd, cmd);
+		get_input(new_cmd, cmd, i, size);
+	}
 	return (0);
 }
 
@@ -35,7 +38,7 @@ void        get_cmd(t_cmd *new_cmd, char *cmd)
 		g_data->cmd_n_found = tmp[0];
 		new_cmd->cmd = EXEC;
 	}
-	//ft_free_split(tmp);
+	free_split(tmp);
 }
 
 int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
@@ -74,8 +77,10 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 //	{
 //		
 //	}
-	//ft_free_split(tmp);
-	// free tmp2
+	// free tmp 2 -> ne sert plus je pense
+
+
+	// free_split(tmp); -> si on free la, le message d'erreur de command not found n'apparait plus
 	return (0);
 }
 
@@ -93,5 +98,5 @@ void		get_arg(char **arg, char *str)
 	while (tmp[0][i] == ' ')
 		i++;
 	*arg = ft_strdup(ft_strtrim(&tmp[0][i], " "));
-	//ft_free_split(tmp);
+	free_split(tmp);
 }

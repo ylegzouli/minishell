@@ -12,7 +12,7 @@ void		ft_exec_line(t_data *data)
 		init_fork(cmd[i]);
 		i++;
 	}
-	//ft_free_split(cmd);
+	free_split(cmd);
 }
 
 int			is_cmd_write(t_cmd *cmd)
@@ -48,9 +48,9 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 		exit(0);
 	}
 	else if (cmd->cmd == EXPORT)
-		export(g_data->lst_env, cmd->arg, &cmd->result);
+		export(g_data->lst_env, cmd->arg, &cmd->result, cmd);
 	else if (cmd->cmd == ENV)
-		env(g_data->lst_env, &cmd->result, 1);
+		env(g_data->lst_env, &cmd->result, cmd, 1);
 	else if (cmd->cmd == UNSET)
 		unset(g_data->lst_env, cmd->arg);
 	else if (cmd->cmd == PWD)
@@ -97,4 +97,5 @@ void		ft_print(char *str, int size, t_cmd *cmd, int i)
 			write(*(int *)cmd->fd_out->content, "\n", 1);
 		cmd->fd_out = cmd->fd_out->next;
 	}
+	free(str);
 }

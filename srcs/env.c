@@ -18,10 +18,12 @@ static char		*env_copy(t_env *tmp, char *ret)
 		i++;
 		tmp = tmp->next;
 	}
+	ret[i] = '\0';
 	return (ret);
 }
 
-int				env(t_env *env, char **result, int print)
+int				env(t_env *env, char **result,
+			t_cmd *cmd, int print)
 {
 	int		size;
 	t_env	*tmp;
@@ -43,10 +45,9 @@ int				env(t_env *env, char **result, int print)
 	g_data->ret = 0;
 	*result = env_copy(tmp, ret);
 	if (print == 1)
-	{
-		write(1, *result, ft_strlen(*result));
-		free(*result);
-	}
+		ft_print(*result, ft_strlen(*result), cmd, 0);
+	else 
+		free(ret);
 	return (0);	
 }
 

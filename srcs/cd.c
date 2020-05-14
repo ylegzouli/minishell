@@ -103,14 +103,14 @@ int					cd(char *s1)
 	{
 		copy_old_pwd();
 		new_pwd(g_data->path);
-		free(s2);
+		free_split(s2);
 		return (0);
 	}
 	else if (s[2 * i] == '.' || check_cd_path(s + 3 * i) == 3)
 	{
 		if (go_there(s + 3 * i) != 0)
 			print_cd_error(s);
-		free(s2);
+		free_split(s2);
 		return (0);
 	}
 	return (0); // je crois que cette ligne ne sert plus

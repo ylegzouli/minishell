@@ -38,7 +38,7 @@ int			init_fork(char *line)
 	}
 //	dup2(1, 0);
 	dup2(STDOUT_FILENO, STDIN_FILENO);
-	//ft_free_split(cmd);
+	// free_split(cmd); -> segfault
 	return (0);
 }
 

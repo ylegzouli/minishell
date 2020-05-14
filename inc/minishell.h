@@ -115,6 +115,7 @@ void        		redirect(int tube[2], t_cmd *cmd);
 void				print_cmd_not_found(t_cmd *cmd);
 void				print_cd_error(char *s);
 void				ft_print(char *str, int size, t_cmd *cmd, int i);
+void				free_split(char **s);
 
 //------------------------------ PARSING ---------------------------------
 
@@ -136,9 +137,9 @@ char				*ft_strrstr(char *str, char *to_find);
 
 void				pwd(t_data *data, char **result, t_cmd *cmd);
 int					echo(char *input, char **result, t_cmd *cmd);
-int         		export(t_env *env, char *s, char **result);
+int         		export(t_env *env, char *s, char **result, t_cmd *cmd);
 void				unset(t_env *env, char *s);
-int					env(t_env *envi, char **result, int print);
+int					env(t_env *envi, char **result, t_cmd *cmd, int print);
 int					cd(char *s);
 
 //------------------------------- ENV ------------------------------------

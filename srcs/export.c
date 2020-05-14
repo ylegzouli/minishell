@@ -12,23 +12,19 @@ static void		list_sort(t_env **begin_list, int (*cmp)())
 		ptr2 = *begin_list;
 		while (ptr2->next && ptr2->next->name)
 		{
-	write(1, "byee\n", 5);
 			if ((*cmp)(ptr2->name, ptr2->next->name) > 0)
 			{
-				printf("%s && %s\n", ptr2->name, ptr2->next->name);
 				next = ptr2->name;
 				ptr2->name = ptr2->next->name;
 				ptr2->next->name = next;
 			}
 			ptr2 = ptr2->next;
-	write(1, "helo\n", 5);
 		}
-	write(1, "outt\n", 5);
 		ptr = ptr->next;
 	}
 }
 
-int			create_order_env(t_env *en, char **result)
+int			create_order_env(t_env *en, char **result, t_cmd *cmd)
 {
 	t_env	*tmp_o;
 	t_env	*tmp_new;
@@ -54,20 +50,19 @@ int			create_order_env(t_env *en, char **result)
 	}
 	tmp_new->next = 0;
 	list_sort(&tmp_n_begin, &ft_strcmp);
-	write(1, "nana\n", 5);
-	env(tmp_n_begin, result, 1);
+	env(tmp_n_begin, result, cmd, 1);
 	free_list_export(tmp_n_begin);
 	return (0);
 }
 
-int			check_arg_export(t_env *env, char *s, char **res)
+int			check_arg_export(t_env *env, char *s, char **res, t_cmd *cmd)
 {
 	int		i;
 
 	i = 0;
 	if (s[0] == '\0')
 	{
-		create_order_env(env, res);
+		create_order_env(env, res, cmd);
 		return (2);
 	}
 	while (s[i] && s[i] != '=')
@@ -79,7 +74,7 @@ int			check_arg_export(t_env *env, char *s, char **res)
 	return (0);
 }
 
-int			export(t_env *env, char *s2, char **res)
+int			export(t_env *env, char *s2, char **res, t_cmd *cmd)
 {
 	t_env 	*tmp;
 	int 	size;
@@ -89,7 +84,7 @@ int			export(t_env *env, char *s2, char **res)
 	char	*s;
 
 	if (s2[0] == '\0')
-		return (create_order_env(env, res));
+		return (create_order_env(env, res, cmd));
 	s1 = ft_split(s2, ' ');
 	i = 0;
 	while (s1[i])
@@ -97,7 +92,7 @@ int			export(t_env *env, char *s2, char **res)
 		size = 0;
 		s = s1[i];
 		tmp = env;
-		if (check_arg_export(env, s, res) == 1)
+		if (check_arg_export(env, s, res, cmd) == 1)
 		{
 			g_data->ret = 2;
 			write(1, "export: bad variable name\n", 26);
@@ -134,6 +129,6 @@ int			export(t_env *env, char *s2, char **res)
 		}
 		i++;
 	}
-	//free split 
+	free_split(s1);
 	return (0);
 }

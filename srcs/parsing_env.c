@@ -59,7 +59,7 @@ char				*env_question_found(char *line)
 		ret[i + j] = line[i + 2];
 		i++;
 	}
-	return (ret);	
+	return (ret);
 }
 
 static char			*var_env_not_found(t_env *env, char *line)
