@@ -38,6 +38,13 @@ int			switch_to_export(t_env *env, t_env *env_w, char *s)
 	return (0);
 }
 
+static void		unset2(t_env *tmp, t_env *tmp2)
+{
+	free(tmp->value);
+	free(tmp->name);
+	tmp2->next = tmp2->next->next;
+	free(tmp);
+}
 
 void			unset(t_env *env, char *s2)
 {
@@ -54,18 +61,13 @@ void			unset(t_env *env, char *s2)
 		while (tmp)
 		{
 			if (ft_strcmp(s1[i], tmp->name) != 0)
-			{
 				tmp2 = tmp;
-				tmp = tmp->next;
-			}
 			else
 			{
-				free(tmp->value);
-				free(tmp->name);
-				tmp2->next = tmp2->next->next;
-				free(tmp);
+				unset2(tmp, tmp2);
 				break;
 			}
+			tmp = tmp->next;
 		}
 		g_data->ret = 0;
 	}

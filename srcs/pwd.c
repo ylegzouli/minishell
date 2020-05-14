@@ -13,7 +13,7 @@ void			find_path(t_data *data)
 void			pwd(t_data *data, char **result, t_cmd *cmd)
 {
 	find_path(data);
-	ft_print(data->path, ft_strlen(data->path), cmd, 1);
-//	*result = data->path;
+	*result = data->path;
+	ft_print(*result, ft_strlen(*result), cmd, 1);
 	g_data->ret = 0;
 }

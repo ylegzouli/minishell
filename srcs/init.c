@@ -1,5 +1,24 @@
 #include "../inc/minishell.h"
 
+int			ft_init_data2(t_data *data)
+{
+	data->lst_cmd->next = NULL;
+	if (!(data->lst_env_waiting->name = malloc(1)))
+		return (ERROR_MALLOC);
+	data->lst_env_waiting->name[0] = '\0'; 
+	if (!(data->lst_env_waiting->value = malloc(1)))
+		return (ERROR_MALLOC);
+	data->lst_env_waiting->value[0] = '\0'; 
+	data->lst_env->next = NULL;
+	data->lst_env_waiting->next = NULL;
+	data->exit = 0;
+	data->ret = 0;
+	data->pipe = NULL;
+	g_data->step_cmd = 0;
+	return (SUCCESS);
+}
+
+
 int			ft_init_data(t_data *data)
 {
 	int		i;
@@ -17,43 +36,21 @@ int			ft_init_data(t_data *data)
 		return (ERROR_MALLOC);
 	if (!(data->lst_env_waiting = malloc(sizeof(t_env))))
 		return (ERROR_MALLOC);
-	data->lst_cmd->next = NULL;
-	/////
-	data->lst_env_waiting->name = malloc(1);
-	data->lst_env_waiting->name[0] = '\0'; 
-	data->lst_env_waiting->value = malloc(1);
-	data->lst_env_waiting->value[0] = '\0'; 
-	data->lst_env->next = NULL;
-	data->lst_env_waiting->next = NULL;
-	data->exit = 0;
-	data->ret = 0;
-	data->pipe = NULL;
-	g_data->step_cmd = 0;
+	if (ft_init_data2(data) == ERROR_MALLOC)
+		return (ERROR_MALLOC);
 	return (SUCCESS);
 }
 
-int			ft_init_env(t_env *env)
+int			ft_init_env2(t_env *env, t_env *tmp, char *s, int i)
 {
-	int		i;
-	int		size;
-	int		j;
-	char 	*s;
-	t_env	*tmp;
-	t_env	*begin;
+	int size;
+	int j;
 
-	i = 1;
-	s = *environ;
-	while (environ[i - 1])
-	{
-		if (!(env = malloc(sizeof(t_env))))
-			return (1); // return(m_error("Erreur: malloc t_env."));
-		if (i > 1)
-			tmp->next = env;
 		size = 0;
 		while (s[size] && s[size] != '=')
 			size++;
 		if (!(env->name = malloc(sizeof(char) * (size + 1))))
-			return (1); // return (m_error("Erreur: malloc name"));
+			return (ERROR_MALLOC);
 		j = size + 1;
 		env->name[size] = '\0';
 		while (--size >= 0)
@@ -61,21 +58,41 @@ int			ft_init_env(t_env *env)
 		while (s[size + j])
 			size++;
 		if (!(env->value = malloc(sizeof(char) * (size + 1))))
-			return (1); // return (m_error("Erreur : malloc env value));
+			return (ERROR_MALLOC);
 		env->value[size] = '\0';
 		while (--size >= 0)
 			env->value[size] = s[j + size];
-		s = *(environ+i);
 		env->next = 0;
+		return (SUCCESS);
+}
+
+
+int			ft_init_env(t_env *env)
+{
+	int		i;
+	char 	*s;
+	t_env	*tmp;
+	t_env	*begin;
+
+	i = 0;
+	s = *environ;
+	while (environ[++i - 1])
+	{
+		if (!(env = malloc(sizeof(t_env))))
+			return (ERROR_MALLOC);
+		if (i > 1)
+			tmp->next = env;
+		if (ft_init_env2(env, tmp, s, i) == ERROR_MALLOC)
+			return (ERROR_MALLOC);
 		if (i == 1)
 			begin = env;
 		tmp = env;
 		env = env->next;
-		i++;
+		s = *(environ+i);
 	}
 	tmp->next = 0;
 	g_data->lst_env = begin;
-	return (0);
+	return (SUCCESS);
 }
 
 int			ft_init_lst(t_cmd **lst_cmd)

@@ -31,10 +31,6 @@ int			is_cmd_write(t_cmd *cmd)
 
 void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 {
-	// il faudrait transformer les cmd en retour int pour les cas d'erreur..
-	// ce qu'on peut faire pour gagner de la place par exemple ce serait :
-	// if (cmd->cmd == ECHO && echo(cmd->arg, &cmd->result) == 1)
-	// 		return (1); ou return(m_error("Erreur sur echo"));
 	g_data->step_cmd++;
 	cmd->nb_cmd = g_data->step_cmd;
 
@@ -57,12 +53,9 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 		pwd(g_data, &cmd->result, cmd);
 	else if (cmd->cmd == EXEC)
 		execve(path, arg, envi);
-	else if (cmd->cmd == NOTFOUND)
-	{
-		if (command_var_env(g_data->lst_env,
-			g_data->lst_env_waiting, g_data->cmd_n_found) == -1)
+	else if (cmd->cmd == NOTFOUND && command_var_env(g_data->lst_env,
+		g_data->lst_env_waiting, g_data->cmd_n_found) == -1)
 			print_cmd_not_found(cmd);
-	}
 }
 
 void		redirect(int tube[2], t_cmd *cmd)
@@ -90,7 +83,8 @@ void		ft_print(char *str, int size, t_cmd *cmd, int i)
 			write(1, "\n", 1);
 		return ;
 	}
-	while (cmd->fd_out && cmd->fd_out->content && *(int *)cmd->fd_out->content != 0)
+	while (cmd->fd_out && cmd->fd_out->content &&
+		*(int *)cmd->fd_out->content != 0)
 	{
 		write(*(int *)cmd->fd_out->content, str, size);
 		if (i == 1)

@@ -151,6 +151,9 @@ int					switch_to_export(t_env *env, t_env *env_w, char *s);
 void				free_list_env(t_env *env);
 void				free_list_export(t_env *env);
 int					check_char(char *s, char c);
+int					create_order_env(t_env *en, char **result, t_cmd *cmd);
+int					size_var_env_not_found(char *line);
+int					check_var_env_return(char *line);
 
 //------------------------------- CD  ------------------------------------
 

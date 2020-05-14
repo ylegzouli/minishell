@@ -80,7 +80,7 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 	// free tmp 2 -> ne sert plus je pense
 
 
-	// free_split(tmp); -> si on free la, le message d'erreur de command not found n'apparait plus
+	// !!!!!! free_split(tmp); -> si on free la, le message d'erreur de command not found n'apparait plus
 	return (0);
 }
 
