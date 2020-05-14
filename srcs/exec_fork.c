@@ -2,7 +2,7 @@
 
 int			init_fork(char *line)
 {
-	char    **cmd;
+	char    **cmd; /// jamais utilise non?
     t_cmd   **new_cmd;
     int     i;
 	int		**tube;
@@ -38,7 +38,7 @@ int			init_fork(char *line)
 	}
 //	dup2(1, 0);
 	dup2(STDOUT_FILENO, STDIN_FILENO);
-	// free_split(cmd); -> segfault
+	// free_split(cmd); -> segfault cd com en haut
 	return (0);
 }
 
@@ -64,6 +64,7 @@ int			executor(t_cmd **cmd, int **tube)
 		pid = fork();
 		if (pid == 0)
 		{
+			write(1,"out\n",4);
 			pipe_out(tube[g_data->i]);
 			redirect(tube[g_data->i], cmd[g_data->i]);
 			if (is_cmd_write(cmd[g_data->i]) == 1)
@@ -76,6 +77,7 @@ int			executor(t_cmd **cmd, int **tube)
 		{
 			//ft_free_split(arguments);
 			//ft_free_split(environnements);
+			write(1,"inn\n",4);
 			pipe_in(tube[g_data->i], cmd[g_data->i]);
 			(g_data->i)++;
 			executor(cmd, tube);

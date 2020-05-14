@@ -42,22 +42,24 @@ int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 	i = 0;
 	opt = 0;
 	quote = 0;
-
 	while (input[i] && input[i] == ' ')
 		i++;
-	if (input[i] && input[i + 1] && input[i + 2] &&
-		input[i] == '-' && input[i + 1] == 'n' && input[i + 2] == ' ')
+	if (input[i] && input[i + 1] &&
+		input[i] == '-' && input[i + 1] == 'n')
 	{
-		i += 3;
 		opt = 1;
+		if (input[i + 2] && input[i + 2] == ' ')
+			i += 3;
+		else if (!input[i + 2])
+			return (0);
+		else if (input[i + 2])
+			opt = 0;
 	}
 	while (input[i])
 	{
-		if (input[i] == quote)
-		{
+		i--;
+		if (input[++i] == quote)
 			quote = 0;
-			i++;
-		}
 		else if (quote == 0 && (input[i] == '"' || input[i] == 39))
 			if (i == 0 || input[i - 1] != 92)
 			{
@@ -65,13 +67,9 @@ int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 				i++;
 			}
 		if (quote == 0 && (input[i] == '>' || input[i] == '<'))
-		{
-		//	if (ft_add_fd(fd, input, &i))
 				return (1);
-		}
 		else if (quote != 0 || input[i] != ' ' || (input[i - 1] != ' '))
 			*result = ft_add_char(*result, input[i]);
-			// il faudrait free *result non ? 
 		i++;
 	}
 	if (i > 0 && opt == 0)
@@ -80,9 +78,7 @@ int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 		ft_print(*result, ft_strlen(*result), cmd, 0);
 	else if (opt == 0)
 		ft_print("\n", 1, cmd, 0);
-//		*result = ft_add_char(*result, '\n');
-	free(*result);
-//	printf("|%s|\n", *result);
+	g_data->ret = 0;
 	return (0);
 }
 

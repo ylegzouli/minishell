@@ -10,7 +10,6 @@ int		main()
 	ft_init_data(&data);
 	ft_init_env(data.lst_env);
 	ft_start(&data);
-	//ft_free_data(&data);
 	return (0);
 }
 
@@ -29,6 +28,7 @@ int		ft_start(t_data *data)
 			get_next_line(0, &line);
 			ft_lstadd_front_hist(data, line);
 			ft_exec_line(data);
+			free(line);
 		}
 	}
 	return (0);
