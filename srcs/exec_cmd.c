@@ -65,16 +65,32 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 	}
 }
 
-void		redirect(int tube[2])
+void		redirect(int tube[2], t_cmd *cmd)
 {
-	char		buf;
-	char		*result;
-
-	result = ft_strdup("");
-	while (read(tube[0], &buf, 1) > 0)
+	while (cmd->fd_out && cmd->fd_out->content && *(int *)cmd->fd_out->content != 0)
 	{
-		// ?? trouver une condition d'arret ?? //
-		result = ft_add_char(result, buf);
-	}	
-	printf("[%s][%c]\n", result, buf);
+		dup2(*(int *)cmd->fd_out->content, STDOUT_FILENO);
+		close(*(int *)cmd->fd_out->content);
+		cmd->fd_out->content = NULL;
+		cmd->fd_out = cmd->fd_out->next;
+	}
+	if (cmd->fd_in)
+	{
+		dup2(cmd->fd_in, STDIN_FILENO);
+		close(cmd->fd_in);
+	}
+}
+
+void		ft_print(char *str, int size, t_cmd *cmd)
+{
+	if (cmd->fd_out->content == NULL)
+	{
+		write(1, &str, size);
+		return ;
+	}
+	while (cmd->fd_out && cmd->fd_out->content && *(int *)cmd->fd_out->content != 0)
+	{
+		write(*(int *)cmd->fd_out->content, &str, size);
+		cmd->fd_out = cmd->fd_out->next;
+	}
 }

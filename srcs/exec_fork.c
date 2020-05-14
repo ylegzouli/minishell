@@ -65,6 +65,7 @@ int			executor(t_cmd **cmd, int **tube)
 		if (pid == 0)
 		{
 			pipe_out(tube[g_data->i]);
+			redirect(tube[g_data->i], cmd[g_data->i]);
 			if (is_cmd_write(cmd[g_data->i]) == 1)
 				ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
 			g_data->exit = 1;
@@ -92,7 +93,6 @@ void		pipe_in(int tube[2], t_cmd *cmd)
 {
 	if (g_data->i < g_data->size - 1)
 	{
-//		redirect(tube);
 		if (cmd->cmd != EXEC)
 			wait(NULL);
 		close(tube[1]);

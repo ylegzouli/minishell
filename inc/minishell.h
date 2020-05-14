@@ -13,7 +13,7 @@
 # include <signal.h>
 # include <dirent.h>
 
-# define OPEN_MAX 256 // bug sur ordi arthur sinon
+//# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 
 # define SUCCESS			0
@@ -110,7 +110,8 @@ int					size_int(int n);
 
 //-------------------------------- TMP ----------------------------------
 
-void        		redirect(int tube[2]);
+void				redirect(int tube[2], t_cmd *cmd);
+void				ft_print(char *str, int size, t_cmd *cmd);
 void				print_cmd_not_found(t_cmd *cmd);
 void				print_cd_error(char *s);
 
