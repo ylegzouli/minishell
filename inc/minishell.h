@@ -107,6 +107,7 @@ void				signal_prevent(int sig);
 
 int					power_of_ten(int n);
 int					size_int(int n);
+int 				check_char(char *s, char c);
 
 
 //-------------------------------- TMP ----------------------------------

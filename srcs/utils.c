@@ -27,3 +27,15 @@ int					power_of_ten(int n)
 	}
 	return (i);
 }
+
+int 		check_char(char *s, char c)
+{
+	int		i;
+
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	if (i < ft_strlen(s))
+		return (1);
+	return (0);
+}

@@ -7,7 +7,8 @@ int					check_cd_path(char *s)
 		if (s[0] == '.' && s[1] == '.' &&
 			(s[2] == 0 || s[2] == '/'))
 			return (1);
-		else if (s[0] == '.' && (s[1] == '\0' || s[1] == ' '))
+		else if (s[0] == '.' && (s[1] == '\0' ||
+			s[1] == ' '))
 			return (2);
 		else if (s[0] != '\0')
 			return (3);
@@ -33,7 +34,8 @@ int			copy_old_pwd()
 			if (!(tmp->value = malloc(sizeof(char) * (size + 1))))
 				return (1); 
 			tmp->value[size] = '\0';
-			ft_memcpy(tmp->value, get_env_value(g_data->lst_env, "PWD"), size);
+			ft_memcpy(tmp->value,
+			get_env_value(g_data->lst_env, "PWD"), size);
 			return (0);
 		}
 		else
