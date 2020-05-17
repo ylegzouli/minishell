@@ -120,7 +120,7 @@ void				ft_print(char *str, int size, t_cmd *cmd, int i);
 void				free_split(char **s);
 void				free_data();
 
-void				get_empty_pipe(char *cmd);
+void				get_empty_pipe(char **cmd);
 
 //------------------------------ PARSING ---------------------------------
 

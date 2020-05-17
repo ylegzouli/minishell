@@ -6,7 +6,7 @@ void		ft_exec_line(t_data *data)
 	int		i;
 
 	i = 0;
-	get_empty_pipe(data->historic->line);
+	get_empty_pipe(&(data->historic->line));
 //	printf("%d\n", g_data->empty_pipe);
 	cmd = ft_split_shell(data->historic->line, ';');
 	while (cmd[i] && !(data->exit))
