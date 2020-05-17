@@ -4,7 +4,8 @@ char		*parsing_file(char ***environnement, char ***arguments, char **tmp, t_cmd 
 {
 	env(g_data->lst_env, tmp, cmd, 0); //**tmp vaut quoi avant ? car faudrait le free avant de l'envoyer je pense
 	*environnement = ft_split(*tmp, '\n');
-	free(*tmp);
+//	printf("%s\n", *tmp);
+//	free(*tmp);
 	if (!(*tmp = get_path_bin()))
 		cmd->cmd = NOTFOUND;
 	*arguments = get_arguments(*tmp, cmd->arg);

@@ -1,4 +1,3 @@
-
 #include "../inc/minishell.h"
 
 void		free_list_export(t_env *env)
@@ -35,8 +34,8 @@ void		free_split(char **s)
 	int		i;
 
 	i = -1;
-	while (s[++i])
-		free(s[i]);
-	free(s);
+//	while (s[++i])
+//		free(s[i]);
+//	free(s);
 }
 

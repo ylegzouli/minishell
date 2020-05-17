@@ -6,6 +6,8 @@ void		ft_exec_line(t_data *data)
 	int		i;
 
 	i = 0;
+	get_empty_pipe(data->historic->line);
+//	printf("%d\n", g_data->empty_pipe);
 	cmd = ft_split_shell(data->historic->line, ';');
 	while (cmd[i] && !(data->exit))
 	{	
@@ -33,7 +35,6 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 {
 	g_data->step_cmd++;
 	cmd->nb_cmd = g_data->step_cmd;
-
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result, cmd);
 	else if (cmd->cmd == CD)

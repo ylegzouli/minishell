@@ -14,7 +14,7 @@
 # include <dirent.h>
 # include <errno.h>
 
-# define OPEN_MAX 256 // bug sur ordi arthur sinon
+//# define OPEN_MAX 256 // bug sur ordi arthur sinon
 
 
 # define SUCCESS			0
@@ -84,6 +84,7 @@ typedef struct		s_data
 	int				size;
 	char			**cmd;
 	int				fd;
+	int				empty_pipe;
 }					t_data;
 
 extern	t_data		*g_data;
@@ -118,6 +119,8 @@ void				print_cd_error(char *s);
 void				ft_print(char *str, int size, t_cmd *cmd, int i);
 void				free_split(char **s);
 void				free_data();
+
+void				get_empty_pipe(char *cmd);
 
 //------------------------------ PARSING ---------------------------------
 
