@@ -27,7 +27,8 @@ int		ft_start(t_data *data)
 			ft_print_prompt();
 			get_next_line(0, &line);
 			ft_lstadd_front_hist(data, line);
-			ft_exec_line(data);
+			if (check_error_unexpected(line) == 0)
+				ft_exec_line(data);
 			free(line);
 		}
 	}

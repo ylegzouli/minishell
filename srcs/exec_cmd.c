@@ -15,6 +15,7 @@ void		ft_exec_line(t_data *data)
 		i++;
 	}
 	free_split(cmd);
+
 }
 
 int			is_cmd_write(t_cmd *cmd)

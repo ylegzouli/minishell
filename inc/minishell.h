@@ -14,7 +14,7 @@
 # include <dirent.h>
 # include <errno.h>
 
-//# define OPEN_MAX 256 // bug sur ordi arthur sinon
+# define OPEN_MAX 256 // bug sur VM 42
 
 
 # define SUCCESS			0
@@ -121,6 +121,8 @@ void				free_split(char **s);
 void				free_data();
 
 void				get_empty_pipe(char **cmd);
+int					print_error_unexpected(char c);
+int					check_error_unexpected(char *s);
 
 //------------------------------ PARSING ---------------------------------
 
