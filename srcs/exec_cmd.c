@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:32:44 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/19 13:35:26 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/19 15:51:14 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int			is_cmd_write(t_cmd *cmd)
 		if (cmd->arg[0] == '\0')
 			return (1);
 	}
+	if (cmd->cmd == NOTFOUND)
+		return (1);
 	return (0);
 }
 
@@ -69,7 +71,9 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 		execve(path, arg, envi);
 	else if (cmd->cmd == NOTFOUND && command_var_env(g_data->lst_env,
 		g_data->lst_env_waiting, g_data->cmd_n_found) == -1)
+	{	
 		print_cmd_not_found(cmd);
+	}
 }
 
 void		redirect(int tube[2], t_cmd *cmd)

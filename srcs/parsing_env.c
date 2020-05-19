@@ -125,7 +125,6 @@ char				*parse_env(t_env *env, char *line)
 			res = parse_env2(res, tmp, env, i);
 		}
 	}
-	printf("res = %s\n", res);
 	free(line);
 	return (res);
 }

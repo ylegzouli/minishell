@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:31:43 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/19 13:31:50 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/19 15:21:51 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char		*parsing_file(char ***envi, char ***arg, char **tmp, t_cmd *cmd)
 {
 	env(g_data->lst_env, tmp, cmd, 0);
 	*envi = ft_split(*tmp, '\n');
+	free(*tmp);
 	if (!(*tmp = get_path_bin()))
 		cmd->cmd = NOTFOUND;
 	*arg = get_arguments(*tmp, cmd->arg);

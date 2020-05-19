@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:55:15 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/19 14:01:41 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/19 15:41:13 by legzouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int			executor(t_cmd **cmd, int **tube)
 			redirect(tube[g_data->i], cmd[g_data->i]);
 			if (is_cmd_write(cmd[g_data->i]) == 1)
 				ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
-			g_data->exit = 1;
+			exit(0);
 		}
 		else if (pid < 0)
 			return (1);
