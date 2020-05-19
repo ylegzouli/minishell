@@ -14,7 +14,7 @@ void		free_cmd(t_cmd *lst_cmd)
 		tmp2 = tmp->next;
 		free(tmp);
 		tmp = tmp2;
-	}	
+	}
 }
 
 void		free_hist(t_hist *h)
@@ -29,8 +29,7 @@ void		free_hist(t_hist *h)
 		tmp2 = tmp->next;
 		free(tmp);
 		tmp = tmp2;
-	}	
-
+	}
 }
 
 void		free_data()

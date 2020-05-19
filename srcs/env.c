@@ -3,7 +3,7 @@
 static char		*env_copy(t_env *tmp, char *ret)
 {
 	int		i;
-	
+
 	i = 0;
 	while (tmp)
 	{
@@ -33,25 +33,25 @@ int				env(t_env *env, char **result,
 	tmp = env;
 	while (tmp)
 	{
-		size += ft_strlen(tmp->name) + 1 + ft_strlen(get_env_value(g_data->lst_env,
-		tmp->name)) + 1;
+		size += ft_strlen(tmp->name) + 1 +
+		ft_strlen(get_env_value(g_data->lst_env, tmp->name)) + 1;
 		tmp = tmp->next;
 	}
 	size++;
 	if (!(ret = malloc(sizeof(char) * size)))
 		return (1);
-	ret[size] = '\0';	
+	ret[size] = '\0';
 	tmp = env;
 	g_data->ret = 0;
 	*result = env_copy(tmp, ret);
 	if (print == 1)
 		ft_print(*result, ft_strlen(*result), cmd, 0);
-	else 
+	else
 		free(ret);
-	return (0);	
+	return (0);
 }
 
-static int	export_env_w(t_env *tmp, char *s)
+static int		export_env_w(t_env *tmp, char *s)
 {
 	int		j;
 	int		size;
@@ -80,7 +80,8 @@ static int	export_env_w(t_env *tmp, char *s)
 	return (0);
 }
 
-int			command_var_env(t_env *env, t_env *env_w, char *line)
+int				command_var_env(t_env *env,
+		t_env *env_w, char *line)
 {
 	int		i;
 	t_env	*tmp;
@@ -101,13 +102,13 @@ int			command_var_env(t_env *env, t_env *env_w, char *line)
 		i++;
 	}
 	if (export_env_w(tmp, line) == 1)
-			return (1);	
+		return (1);
 	return (0);
 }
 
-char		*get_env_value(t_env *env, char *name)
+char			*get_env_value(t_env *env, char *name)
 {
-	t_env 	*tmp;
+	t_env		*tmp;
 
 	tmp = env;
 	while (tmp)

@@ -1,8 +1,8 @@
 #include "../inc/minishell.h"
 
-t_data          *g_data;
+t_data		*g_data;
 
-int		main()
+int			main(void)
 {
 	t_data	data;
 
@@ -13,14 +13,14 @@ int		main()
 	return (0);
 }
 
-int		ft_start(t_data *data)
+int			ft_start(t_data *data)
 {
 	char *line;
 
 	while (1)
 	{
 		data->exit = 0;
-		while(data->exit == 0)
+		while (data->exit == 0)
 		{
 			signal(SIGINT, signal_prevent);
 			signal(SIGQUIT, signal_prevent);
@@ -35,7 +35,7 @@ int		ft_start(t_data *data)
 	return (0);
 }
 
-void		ft_print_prompt()
+void		ft_print_prompt(void)
 {
 	write(1, "minishell$> ", 12);
 }

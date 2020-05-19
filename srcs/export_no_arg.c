@@ -32,7 +32,7 @@ static void		create_order_env2(t_env *tmp_n_begin,
 	free_list_export(tmp_n_begin);
 }
 
-int			create_order_env(t_env *en, char **result, t_cmd *cmd)
+int				create_order_env(t_env *en, char **result, t_cmd *cmd)
 {
 	t_env	*tmp_o;
 	t_env	*tmp_new;

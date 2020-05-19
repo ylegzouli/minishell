@@ -2,7 +2,7 @@
 
 void		free_list_export(t_env *env)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 
 	tmp = env;
 	while (tmp)
@@ -16,7 +16,7 @@ void		free_list_export(t_env *env)
 
 void		free_list_env(t_env *env)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 
 	tmp = env;
 	while (tmp)
@@ -38,4 +38,3 @@ void		free_split(char **s)
 //		free(s[i]);
 //	free(s);
 }
-

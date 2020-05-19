@@ -2,16 +2,16 @@
 
 static int	check_variable_env2(t_env *tmp, char *s, int size, int i)
 {
-		free(tmp->value);
-		size++;
-		while (s[i + size])
-			i++;
-		if (!(tmp->value = malloc(sizeof(char) * (i + 1))))
-			return (-1);
-		tmp->value[i] = '\0';
-		while (--i >= 0)
-			tmp->value[i] = s[i + size];
-		return (0);
+	free(tmp->value);
+	size++;
+	while (s[i + size])
+		i++;
+	if (!(tmp->value = malloc(sizeof(char) * (i + 1))))
+		return (-1);
+	tmp->value[i] = '\0';
+	while (--i >= 0)
+		tmp->value[i] = s[i + size];
+	return (0);
 }
 
 int			check_variable_env(t_env *env, char *s, int equal)
@@ -35,7 +35,7 @@ int			check_variable_env(t_env *env, char *s, int equal)
 			return (1);
 		}
 		else if (equal == 0 && ft_strlen(tmp->name) > 0)
-			return (1);	
+			return (1);
 	}
 	return (0);
 }

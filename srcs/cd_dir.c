@@ -10,7 +10,7 @@ static int	from_where(char *s)
 		return (0);
 }
 
-static int 	go_absolue(char *s)
+static int	go_absolue(char *s)
 {
 	if (chdir(s) == 0)
 	{
@@ -46,7 +46,7 @@ static int	go_in_that_dir(char *s)
 	return (1);
 }
 
-int		go_there(char *s)
+int			go_there(char *s)
 {
 	if (from_where(s) == 1)
 	{
@@ -55,9 +55,9 @@ int		go_there(char *s)
 	}
 	else if (from_where(s) == 2)
 	{
-			chdir(get_env_value(g_data->lst_env, "PWD"));
-			g_data->ret = 2;
-			return (0);
+		chdir(get_env_value(g_data->lst_env, "PWD"));
+		g_data->ret = 2;
+		return (0);
 	}
 	else if (from_where(s) == 0)
 	{
@@ -65,5 +65,5 @@ int		go_there(char *s)
 			return (1);
 	}
 	g_data->ret = 0;
-	return (0);	
+	return (0);
 }

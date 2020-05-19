@@ -22,7 +22,7 @@ char				*env_question_found(char *line)
 		j++;
 	}
 	i--;
-	while (line[++i + 2]) 
+	while (line[++i + 2])
 		ret[i + j] = line[i + 2];
 	return (ret);
 }
@@ -32,11 +32,11 @@ static char			*var_env_not_found(t_env *env, char *line)
 	int		i;
 	int		len_var;
 	int		size;
-	char 	*ret;
+	char	*ret;
 
 	i = -1;
 	if (check_var_env_return(line) == 1)
-	{	
+	{
 		ret = env_question_found(line);
 		return (ret);
 	}
@@ -53,22 +53,22 @@ static char			*var_env_not_found(t_env *env, char *line)
 	return (ret);
 }
 
-static char 	*var_env_found(t_env *env, char *line, t_env *tmp)
+static char			*var_env_found(t_env *env, char *line, t_env *tmp)
 {
 	int		i;
 	int		j;
 	int		size;
-	char 	*ret;
+	char	*ret;
 
 	i = -1;
 	j = -1;
 	size = ft_strlen(line) - 1 - ft_strlen(tmp->name)
-			+ ft_strlen(tmp->value) + 1;
+		+ ft_strlen(tmp->value) + 1;
 	if (!(ret = malloc(sizeof(char) * (size + 1))))
 		return (0);
 	ret[size] = '\0';
 	while (line[++i] && line[i] != '$' && (ft_strncmp(line + i + 1,
-				tmp->name, ft_strlen(tmp->name)) != 0))
+					tmp->name, ft_strlen(tmp->name)) != 0))
 		ret[i] = line[i];
 	while (tmp->value[++j])
 		ret[i + j] = tmp->value[j];
@@ -80,20 +80,19 @@ static char 	*var_env_found(t_env *env, char *line, t_env *tmp)
 	return (ret);
 }
 
-char		*parse_env2(char *res, t_env *tmp, t_env *env, int i)
+char				*parse_env2(char *res, t_env *tmp, t_env *env, int i)
 {
-			if (res[i + 1] && tmp != 0 && (i + 1 + ft_strlen(tmp->name) >=
+	if (res[i + 1] && tmp != 0 && (i + 1 + ft_strlen(tmp->name) >=
 				ft_strlen(res) || res[i + 1 + ft_strlen(tmp->name)] == '$' ||
 				res[i + 1 + ft_strlen(tmp->name)] == ' '))
-				res = var_env_found(env, res, tmp);
-			else
-				res = var_env_not_found(env, res);
-
+		res = var_env_found(env, res, tmp);
+	else
+		res = var_env_not_found(env, res);
 }
 
-char		*parse_env(t_env *env, char *line)
+char				*parse_env(t_env *env, char *line)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 	int		i;
 	char	*res;
 
@@ -107,7 +106,7 @@ char		*parse_env(t_env *env, char *line)
 		if (res[i])
 		{
 			while (res[i + 1] && tmp && (ft_strncmp(res + i + 1,
-				tmp->name, ft_strlen(tmp->name)) != 0))
+							tmp->name, ft_strlen(tmp->name)) != 0))
 				tmp = tmp->next;
 			res = parse_env2(res, tmp, env, i);
 		}

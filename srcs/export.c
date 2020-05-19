@@ -50,7 +50,7 @@ int			export2(t_env *tmp, char *s, int size)
 
 int			export(t_env *env, char *s2, char **res, t_cmd *cmd)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 	int		i;
 	char	**s1;
 
@@ -61,7 +61,8 @@ int			export(t_env *env, char *s2, char **res, t_cmd *cmd)
 	while (s1[++i])
 	{
 		tmp = env;
-		if (check_arg_export(env, s1[i], res, cmd) == 1 && (g_data->ret = 2) != 0)
+		if (check_arg_export(env, s1[i], res, cmd) == 1 &&
+			(g_data->ret = 2) != 0)
 			write(1, "export: bad variable name\n", 26);
 		else if (check_variable_env(env, s1[i], check_char(s1[i], '=')) == 1)
 			g_data->ret = 0;

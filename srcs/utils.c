@@ -9,15 +9,15 @@ int					size_int(int n)
 		return (1);
 	while (n >= 1)
 	{
-		n = n /10;
+		n = n / 10;
 		i++;
 	}
 	return (i);
 }
-	
+
 int					power_of_ten(int n)
 {
-	int 	i;
+	int	i;
 
 	i = 1;
 	while (n > 0)
@@ -28,7 +28,7 @@ int					power_of_ten(int n)
 	return (i);
 }
 
-int 		check_char(char *s, char c)
+int					check_char(char *s, char c)
 {
 	int		i;
 
@@ -40,7 +40,7 @@ int 		check_char(char *s, char c)
 	return (0);
 }
 
-int			size_var_env_not_found(char *line)
+int					size_var_env_not_found(char *line)
 {
 	int		i;
 	int		size;
@@ -56,7 +56,7 @@ int			size_var_env_not_found(char *line)
 	return (size);
 }
 
-int			check_var_env_return(char *line)
+int					check_var_env_return(char *line)
 {
 	int		i;
 

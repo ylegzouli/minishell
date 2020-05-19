@@ -2,7 +2,6 @@
 
 void		print_cmd_not_found(t_cmd *cmd)
 {
-	
 	g_data->ret = 127;
 	write(2, "minishell: ", 11);
 	ft_putnbr_fd(cmd->nb_cmd, 2);
@@ -16,10 +15,8 @@ void		print_cmd_not_found(t_cmd *cmd)
 	write(2, ": not found\n", 12);
 }
 
-
 void		print_cd_error(char *s)
 {
-
 	write(2, "minishell: ", 11);
 	ft_putnbr_fd(g_data->step_cmd, 2);
 	write(2, ": cd: can't cd to ", 18);
@@ -36,10 +33,10 @@ int			print_error_unexpected(char c)
 	write(2, &c, 1);
 	write(2, "' unexpected\n", 13);
 	g_data->ret = 2;
-	return (1);	
+	return (1);
 }
 
-int		check_error_unexpected(char *s)
+int			check_error_unexpected(char *s)
 {
 	int		i;
 
@@ -51,11 +48,11 @@ int		check_error_unexpected(char *s)
 		if ((s[i] == '|' || s[i] == ';') && s[i + 1])
 		{
 			i++;
-			if (s[i] && ( s[i] == '|' || s[i] == ';'))
+			if (s[i] && (s[i] == '|' || s[i] == ';'))
 				return (print_error_unexpected(s[i]));
 			while (s[i] && s[i] == ' ')
 				i++;
-			if (s[i] && ( s[i] == '|' || s[i] == ';'))
+			if (s[i] && (s[i] == '|' || s[i] == ';'))
 				return (print_error_unexpected(s[i]));
 		}
 	}

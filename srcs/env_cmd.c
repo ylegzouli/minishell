@@ -1,6 +1,6 @@
 #include "../inc/minishell.h"
 
-void		switch_to_export2(t_env *env, t_env *tmp, t_env *tmp2)
+void			switch_to_export2(t_env *env, t_env *tmp, t_env *tmp2)
 {
 	t_env *tmp_e;
 
@@ -12,9 +12,10 @@ void		switch_to_export2(t_env *env, t_env *tmp, t_env *tmp2)
 	tmp->next = 0;
 }
 
-int			switch_to_export(t_env *env, t_env *env_w, char *s)
+int				switch_to_export(t_env *env,
+		t_env *env_w, char *s)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 	t_env	*tmp2;
 	int		size;
 
@@ -32,7 +33,7 @@ int			switch_to_export(t_env *env, t_env *env_w, char *s)
 		else
 		{
 			switch_to_export2(env, tmp, tmp2);
-			break;
+			break ;
 		}
 	}
 	return (0);
@@ -48,7 +49,7 @@ static void		unset2(t_env *tmp, t_env *tmp2)
 
 void			unset(t_env *env, char *s2)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 	t_env	*tmp2;
 	char	**s1;
 	int		i;
@@ -65,7 +66,7 @@ void			unset(t_env *env, char *s2)
 			else
 			{
 				unset2(tmp, tmp2);
-				break;
+				break ;
 			}
 			tmp = tmp->next;
 		}

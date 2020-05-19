@@ -5,10 +5,10 @@ int			ft_init_data2(t_data *data)
 	data->lst_cmd->next = NULL;
 	if (!(data->lst_env_waiting->name = malloc(1)))
 		return (ERROR_MALLOC);
-	data->lst_env_waiting->name[0] = '\0'; 
+	data->lst_env_waiting->name[0] = '\0';
 	if (!(data->lst_env_waiting->value = malloc(1)))
 		return (ERROR_MALLOC);
-	data->lst_env_waiting->value[0] = '\0'; 
+	data->lst_env_waiting->value[0] = '\0';
 	data->lst_env->next = NULL;
 	data->lst_env_waiting->next = NULL;
 	data->exit = 0;
@@ -17,7 +17,6 @@ int			ft_init_data2(t_data *data)
 	g_data->step_cmd = 0;
 	return (SUCCESS);
 }
-
 
 int			ft_init_data(t_data *data)
 {
@@ -46,31 +45,30 @@ int			ft_init_env2(t_env *env, t_env *tmp, char *s, int i)
 	int size;
 	int j;
 
-		size = 0;
-		while (s[size] && s[size] != '=')
-			size++;
-		if (!(env->name = malloc(sizeof(char) * (size + 1))))
-			return (ERROR_MALLOC);
-		j = size + 1;
-		env->name[size] = '\0';
-		while (--size >= 0)
-			env->name[size] = s[size];
-		while (s[size + j])
-			size++;
-		if (!(env->value = malloc(sizeof(char) * (size + 1))))
-			return (ERROR_MALLOC);
-		env->value[size] = '\0';
-		while (--size >= 0)
-			env->value[size] = s[j + size];
-		env->next = 0;
-		return (SUCCESS);
+	size = 0;
+	while (s[size] && s[size] != '=')
+		size++;
+	if (!(env->name = malloc(sizeof(char) * (size + 1))))
+		return (ERROR_MALLOC);
+	j = size + 1;
+	env->name[size] = '\0';
+	while (--size >= 0)
+		env->name[size] = s[size];
+	while (s[size + j])
+		size++;
+	if (!(env->value = malloc(sizeof(char) * (size + 1))))
+		return (ERROR_MALLOC);
+	env->value[size] = '\0';
+	while (--size >= 0)
+		env->value[size] = s[j + size];
+	env->next = 0;
+	return (SUCCESS);
 }
-
 
 int			ft_init_env(t_env *env)
 {
 	int		i;
-	char 	*s;
+	char	*s;
 	t_env	*tmp;
 	t_env	*begin;
 
@@ -88,7 +86,7 @@ int			ft_init_env(t_env *env)
 			begin = env;
 		tmp = env;
 		env = env->next;
-		s = *(environ+i);
+		s = *(environ + i);
 	}
 	tmp->next = 0;
 	g_data->lst_env = begin;
@@ -111,4 +109,3 @@ int			ft_init_lst(t_cmd **lst_cmd)
 	(*lst_cmd)->next = NULL;
 	return (SUCCESS);
 }
-

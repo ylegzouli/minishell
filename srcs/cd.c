@@ -18,9 +18,9 @@ int					check_cd_path(char *s)
 	return (-1);
 }
 
-int			copy_old_pwd()
+int					copy_old_pwd(void)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 	int		size;
 
 	size = 0;
@@ -32,7 +32,7 @@ int			copy_old_pwd()
 		{
 			free(tmp->value);
 			if (!(tmp->value = malloc(sizeof(char) * (size + 1))))
-				return (1); 
+				return (1);
 			tmp->value[size] = '\0';
 			ft_memcpy(tmp->value,
 			get_env_value(g_data->lst_env, "PWD"), size);
@@ -47,7 +47,7 @@ int			copy_old_pwd()
 
 int					new_pwd(char *s)
 {
-	t_env 	*tmp;
+	t_env		*tmp;
 
 	tmp = g_data->lst_env;
 	while (tmp)
@@ -67,7 +67,7 @@ int					new_pwd(char *s)
 	return (0);
 }
 
-static int			go_up()
+static int			go_up(void)
 {
 	int		size;
 
@@ -115,5 +115,5 @@ int					cd(char *s1)
 		free_split(s2);
 		return (0);
 	}
-	return (0); // je crois que cette ligne ne sert plus
+	return (0);
 }
