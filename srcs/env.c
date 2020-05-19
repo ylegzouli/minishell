@@ -46,8 +46,8 @@ int				env(t_env *env, char **result,
 	*result = env_copy(tmp, ret);
 	if (print == 1)
 		ft_print(*result, ft_strlen(*result), cmd, 0);
-	else if (print == 0)
-		free(ret);
+//	else if (print == 0)
+//		free(ret);
 	return (0);
 }
 
