@@ -46,6 +46,7 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 {
 	g_data->step_cmd++;
 	cmd->nb_cmd = g_data->step_cmd;
+	
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result, cmd);
 	else if (cmd->cmd == CD)

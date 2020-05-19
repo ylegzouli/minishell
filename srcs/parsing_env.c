@@ -27,6 +27,18 @@ char				*env_question_found(char *line)
 	return (ret);
 }
 
+int					check_space_after_dollar(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && line[i] != '$')
+		i++;
+	if (line[i] && (line[i + 1] == 0 || line[i + 1] == ' '))
+		return (1);
+	return (0);
+}
+
 static char			*var_env_not_found(t_env *env, char *line)
 {
 	int		i;
@@ -40,6 +52,8 @@ static char			*var_env_not_found(t_env *env, char *line)
 		ret = env_question_found(line);
 		return (ret);
 	}
+	if (check_space_after_dollar(line) == 1)
+		return (ft_strdup(line));
 	len_var = size_var_env_not_found(line);
 	size = ft_strlen(line) - 1 - len_var + 1;
 	if (!(ret = malloc(sizeof(char) * (size + 1))))
@@ -111,6 +125,7 @@ char				*parse_env(t_env *env, char *line)
 			res = parse_env2(res, tmp, env, i);
 		}
 	}
+	printf("res = %s\n", res);
 	free(line);
 	return (res);
 }
