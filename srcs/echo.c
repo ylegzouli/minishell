@@ -34,23 +34,9 @@ int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 		else if (input[i + 2])
 			opt = 0;
 	}
-	while (input[i])
-	{
-		i--;
-		if (input[++i] == quote)
-			quote = 0;
-		else if (quote == 0 && (input[i] == '"' || input[i] == 39))
-			if (i == 0 || input[i - 1] != 92)
-			{
-				quote = input[i];
-				i++;
-			}
-		if (quote == 0 && (input[i] == '>' || input[i] == '<'))
-			return (1);
-		else if (quote != 0 || input[i] != ' ' || (input[i - 1] != ' '))
-			*result = ft_add_char(*result, input[i]);
-		i++;
-	}
+	i--;
+	while (input[++i])
+		*result = ft_add_char(*result, input[i]);
 	if (i > 0 && opt == 0)
 		ft_print(*result, ft_strlen(*result), cmd, 1);
 	else if (i > 0 && opt != 0)

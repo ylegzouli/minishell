@@ -53,6 +53,63 @@ void		get_cmd(t_cmd *new_cmd, char *cmd)
 	free_split(tmp);
 }
 
+int			new_arg(char *s, char c)
+{
+	int		i;
+	int		j;
+	char	*old;
+
+	old = ft_strdup(s);
+	i = 0;
+	j = 0;
+	free(s);
+	if (!(s = malloc(ft_strlen(old) - 2)))
+		return (-1);
+	s[ft_strlen(old) - 2] = 0;
+	while (old[i])
+	{
+		if (old[i] != c)
+			s[i - j] = old[i];
+		else
+			j++;
+		i++;
+	}
+	return (0);
+}
+
+int			delete_quote2(char *s, int i, char c)
+{
+	int pos;
+
+	pos = i;
+	while (s[i] && s[i] != c)
+		i++;
+	i++;
+	if (s[i])
+	{
+		while (s[i] && s[i] != c)
+			i++;
+		if (s[i])
+			return(new_arg(s, c));
+	}
+	return (0);
+}
+
+void			delete_quote(char **arg)
+{
+	int		i;
+	char			*s;
+
+	i = 0;
+	s = *arg;
+	while (s[i])
+	{
+		delete_quote2(s, i, 39);
+		delete_quote2(s, i, '"');
+		i++;
+	}
+}
+
 int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 {
 	char	**tmp;
@@ -73,6 +130,7 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 	else if (!tmp[1])
 		new_cmd->input = ARG;
 	get_arg(&new_cmd->arg, tmp[0]);
+	delete_quote(&new_cmd->arg);
 	// free tmp 2 -> ne sert plus je pense
 	// !!!!!! free_split(tmp); -> si on free la, le message d'erreur de command not found n'apparait plus
 	return (0);
