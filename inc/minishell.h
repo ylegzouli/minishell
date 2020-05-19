@@ -14,7 +14,7 @@
 # include <dirent.h>
 # include <errno.h>
 
-//# define OPEN_MAX 256 // bug sur VM 42
+# define OPEN_MAX 256 // bug sur VM 42
 
 
 # define SUCCESS			0
