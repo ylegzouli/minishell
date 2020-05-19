@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_output.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/19 13:42:05 by ylegzoul          #+#    #+#             */
+/*   Updated: 2020/05/19 13:42:07 by ylegzoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 int			get_output(t_cmd *new_cmd, char *cmd, int i, int size)
@@ -13,7 +25,7 @@ int			get_output(t_cmd *new_cmd, char *cmd, int i, int size)
 int			get_fd(t_cmd *new_cmd, char *cmd)
 {
 	char		**tmp;
-	char 		**tmp2;
+	char		**tmp2;
 	int			i;
 	int			fd;
 	char		*path;
@@ -32,7 +44,7 @@ int			get_fd(t_cmd *new_cmd, char *cmd)
 		else
 			path = get_path(ft_strtrim(tmp[i], " >"));
 		new_cmd->output = REDIRECT;
-		if (tmp[i][0] == '>' && tmp[i][1] != '>') // attention
+		if (tmp[i][0] == '>' && tmp[i][1] != '>')
 			fd = open_file(path, 1);
 		else
 			fd = open_file(path, 2);
@@ -56,14 +68,14 @@ char		*get_path(char *str)
 	{
 		while (g_data->path[i] != 0)
 			i++;
-		if (g_data->path[i - 1] != '/') // attention !
+		if (g_data->path[i - 1] != '/')
 			g_data->path[i] = '/';
 		tmp = ft_strjoin(g_data->path, str);
 		g_data->path[i] = 0;
 		return (tmp);
 	}
 }
-	
+
 int			open_file(char *str, int opt)
 {
 	int		fd;
@@ -73,7 +85,6 @@ int			open_file(char *str, int opt)
 		fd = open(str, O_RDWR | O_CREAT | O_APPEND, 0664);
 	else if (opt == 2)
 		fd = open(str, O_TRUNC | O_RDWR | O_CREAT, 0644);
-//	printf("1=%d\n", fd);
 	return (fd);
 }
 
@@ -88,16 +99,3 @@ void		clean_fdout(t_list **fd)
 		free(tmp);
 	}
 }
-
-//_____________________________________________________________________________
-
-/*
-void        print_lst(t_list *li)
-{
-    while (li != NULL)
-    {
-        printf("%d\n", (int)li->content);
-        li = li->next;
-    }
-}
-*/

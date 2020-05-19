@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/19 13:31:59 by ylegzoul          #+#    #+#             */
+/*   Updated: 2020/05/19 13:32:01 by ylegzoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
@@ -14,12 +26,12 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 	return (0);
 }
 
-void        get_cmd(t_cmd *new_cmd, char *cmd)
+void		get_cmd(t_cmd *new_cmd, char *cmd)
 {
-    char **tmp;
+	char **tmp;
 
-    tmp = ft_split(cmd, ' ');
-    if (ft_strcmp(tmp[0], "exit") == 0)
+	tmp = ft_split(cmd, ' ');
+	if (ft_strcmp(tmp[0], "exit") == 0)
 		new_cmd->cmd = EXIT;
 	else if (ft_strcmp(tmp[0], "echo") == 0)
 		new_cmd->cmd = ECHO;
@@ -61,25 +73,7 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 	else if (!tmp[1])
 		new_cmd->input = ARG;
 	get_arg(&new_cmd->arg, tmp[0]);
-/*	if (new_cmd->input == PIPE && new_cmd->cmd == EXEC)
-	{
-		//printf("%s\n", new_cmd->arg);
-		new_cmd->arg = ft_add_char(new_cmd->arg, ' ');
-//		new_cmd->arg = ft_add_char(new_cmd->arg, '"');
-		tmp2 = ft_strjoin(new_cmd->arg, g_data->pipe);
-		//printf("%s\n", tmp2);
-		free(new_cmd->arg);
-		new_cmd->arg = tmp2;
-		new_cmd->arg = ft_add_char(new_cmd->arg, '"');
-		//printf("[%s]\n", new_cmd->arg);
-	}*/
-//	else if (new_cmd->input == REDIRECT && new_cmd == EXEC)
-//	{
-//		
-//	}
 	// free tmp 2 -> ne sert plus je pense
-
-
 	// !!!!!! free_split(tmp); -> si on free la, le message d'erreur de command not found n'apparait plus
 	return (0);
 }
@@ -87,7 +81,7 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 void		get_arg(char **arg, char *str)
 {
 	int		i;
-	char 	**tmp;
+	char	**tmp;
 
 	i = 0;
 	tmp = ft_split_shell(str, '>');

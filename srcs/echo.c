@@ -1,38 +1,17 @@
-#include "../inc/minishell.h"
-/*
-int			ft_add_fd(int *fd, char *input, int *i)
-{
-	int		j;
-	char	*path;
-	int		flag;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/19 13:46:20 by ylegzoul          #+#    #+#             */
+/*   Updated: 2020/05/19 13:47:32 by ylegzoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-	j = 0;
-	path = 0;
-	flag = 0;
-	while (j < OPEN_MAX && fd[j] != 0)
-		j++;
-	*i += 1;
-	if (input[*i] == input[*i - 1])
-	{
-		flag = 1;
-		*i += 1;
-	}
-	while (input[*i] == ' ')
-		*i += 1;
-	while (input[*i] && input[*i] != ' ')
-	{
-		path = ft_add_char(path, input[*i]);
-		*i += 1;
-	}
-	if (flag == 0)
-		if ((fd[j] = open(path, O_CREAT | O_RDWR | O_TRUNC)) == -1)
-			return (1);	
-	if (flag == 1)
-		if ((fd[j] = open(path, O_CREAT | O_RDWR | O_APPEND)) == -1)
-			return (1);	
-	return (0);
-}
-*/
+#include "../inc/minishell.h"
+
 int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 {
 	int		i;
@@ -67,7 +46,7 @@ int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 				i++;
 			}
 		if (quote == 0 && (input[i] == '>' || input[i] == '<'))
-				return (1);
+			return (1);
 		else if (quote != 0 || input[i] != ' ' || (input[i - 1] != ' '))
 			*result = ft_add_char(*result, input[i]);
 		i++;
@@ -92,17 +71,5 @@ int			echo(char *input, char **result, t_cmd *cmd)
 	ft_init_tab(fd, OPEN_MAX);
 	if (ft_parse_echo(input, fd, result, cmd))
 		return (1);
-/*	while (i == 0 || fd[i] != 0)
-	{
-		j = 0;
-		while (result[j])
-		{
-			write(fd[i], &result[j], 1);
-			j++;
-		}
-		if (fd[i] != 0)
-			close(fd[i]);
-		i++;
-	}*/
 	return (0);
 }

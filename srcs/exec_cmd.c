@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/19 13:32:44 by ylegzoul          #+#    #+#             */
+/*   Updated: 2020/05/19 13:35:26 by ylegzoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 void		ft_exec_line(t_data *data)
@@ -7,22 +19,20 @@ void		ft_exec_line(t_data *data)
 
 	i = 0;
 	get_empty_pipe(&(data->historic->line));
-//	printf("%d\n", g_data->empty_pipe);
 	cmd = ft_split_shell(data->historic->line, ';');
 	while (cmd[i] && !(data->exit))
-	{	
+	{
 		init_fork(cmd[i]);
 		i++;
 	}
 	free_split(cmd);
-
 }
 
 int			is_cmd_write(t_cmd *cmd)
 {
 	if (cmd->cmd == ECHO || cmd->cmd == ENV || cmd->cmd == PWD)
 		return (1);
-	if (cmd->cmd == EXEC) // ca prend en compte les not found
+	if (cmd->cmd == EXEC)
 		return (1);
 	if (cmd->cmd == EXPORT)
 	{
@@ -42,7 +52,7 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 		cd(cmd->arg);
 	else if (cmd->cmd == EXIT)
 	{
-		g_data->exit = 1; //ft_exit()   (don't quit if output = PIPE)
+		g_data->exit = 1;
 		free_data();
 		exit(0);
 	}
@@ -58,12 +68,13 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 		execve(path, arg, envi);
 	else if (cmd->cmd == NOTFOUND && command_var_env(g_data->lst_env,
 		g_data->lst_env_waiting, g_data->cmd_n_found) == -1)
-			print_cmd_not_found(cmd);
+		print_cmd_not_found(cmd);
 }
 
 void		redirect(int tube[2], t_cmd *cmd)
 {
-	while (cmd->fd_out && cmd->fd_out->content && *(int *)cmd->fd_out->content != 0)
+	while (cmd->fd_out && cmd->fd_out->content
+		&& *(int *)cmd->fd_out->content != 0)
 	{
 		dup2(*(int *)cmd->fd_out->content, STDOUT_FILENO);
 		close(*(int *)cmd->fd_out->content);

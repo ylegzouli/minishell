@@ -1,20 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_file.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/19 13:31:43 by ylegzoul          #+#    #+#             */
+/*   Updated: 2020/05/19 13:31:50 by ylegzoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
-char		*parsing_file(char ***environnement, char ***arguments, char **tmp, t_cmd *cmd)
+char		*parsing_file(char ***envi, char ***arg, char **tmp, t_cmd *cmd)
 {
-	env(g_data->lst_env, tmp, cmd, 0); //**tmp vaut quoi avant ? car faudrait le free avant de l'envoyer je pense
-	*environnement = ft_split(*tmp, '\n');
-//	printf("%s\n", *tmp);
-//	free(*tmp);
+	env(g_data->lst_env, tmp, cmd, 0);
+	*envi = ft_split(*tmp, '\n');
 	if (!(*tmp = get_path_bin()))
 		cmd->cmd = NOTFOUND;
-	*arguments = get_arguments(*tmp, cmd->arg);
+	*arg = get_arguments(*tmp, cmd->arg);
 	return (0);
 }
 
-char		*get_path_bin()
+char		*get_path_bin(void)
 {
-	char 	*path;
+	char	*path;
 	char	**tmp;
 	char	*tmp2;
 	int		i;
@@ -22,12 +32,9 @@ char		*get_path_bin()
 
 	i = 0;
 	j = 0;
-	if(g_data->cmd_n_found[0] && (g_data->cmd_n_found[0] == '/'
+	if (g_data->cmd_n_found[0] && (g_data->cmd_n_found[0] == '/'
 		|| g_data->cmd_n_found[0] == '.'))
-	{
 		path = get_path(g_data->cmd_n_found);
-		//checker si le fichier existe ??
-	}
 	else
 	{
 		tmp = ft_split(get_env_value(g_data->lst_env, "PATH"), ':');
@@ -58,7 +65,7 @@ char		*check_dir(char *path, int *j)
 				if (dir)
 					closedir(dir);
 				*j = 1;
-				return (ft_strjoin(path, g_data->cmd_n_found)); // ola pense à free ce truc please
+				return (ft_strjoin(path, g_data->cmd_n_found));
 			}
 		}
 	}
@@ -84,12 +91,12 @@ char		*get_name(char *path)
 	ft_strlcpy(name, &path[i + 1], size + 1);
 	name[size] = ' ';
 	name[size + 1] = '\0';
-	return (name);// faut free ça 
+	return (name);
 }
 
 char		**get_arguments(char *path, char *arg)
 {
-	char 	**arguments;
+	char	**arguments;
 	char	*tmp;
 	char	*name;
 
@@ -98,8 +105,7 @@ char		**get_arguments(char *path, char *arg)
 	name = get_name(path);
 	tmp = ft_strjoin(name, arg);
 	arguments = ft_split_shell(tmp, ' ');
-	//clean_arg();  --> clean " ' \,
 	free(name);
 	free(tmp);
-	return (arguments); //faut free ca
+	return (arguments);
 }

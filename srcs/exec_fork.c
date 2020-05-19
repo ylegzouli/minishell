@@ -1,19 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_fork.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/19 13:55:15 by ylegzoul          #+#    #+#             */
+/*   Updated: 2020/05/19 14:01:41 by ylegzoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 int			init_fork(char *line)
 {
-	char    **cmd; /// jamais utilise non?
-    t_cmd   **new_cmd;
-    int     i;
+	t_cmd	**new_cmd;
+	int		i;
 	int		**tube;
 
 	i = 0;
-    g_data->i = 0;
-    g_data->size = 0;
-    g_data->cmd = ft_split_shell(line, '|');
-    while (g_data->cmd[g_data->size])
-        (g_data->size)++;
-   	if (!(new_cmd = malloc(sizeof(t_cmd *) * g_data->size)))
+	g_data->i = 0;
+	g_data->size = 0;
+	g_data->cmd = ft_split_shell(line, '|');
+	while (g_data->cmd[g_data->size])
+		(g_data->size)++;
+	if (!(new_cmd = malloc(sizeof(t_cmd *) * g_data->size)))
 		return (1);
 	if (!(tube = malloc(sizeof(int *) * g_data->size)))
 		return (1);
@@ -36,24 +47,22 @@ int			init_fork(char *line)
 		wait(NULL);
 		i++;
 	}
-//	dup2(1, 0);
 	dup2(STDOUT_FILENO, STDIN_FILENO);
-	// free_split(cmd); -> segfault cd com en haut
 	return (0);
 }
 
 int			executor(t_cmd **cmd, int **tube)
 {
 	pid_t	pid;
-	char    *tmp;
-    char    **arguments;
-    char    **environnement;
+	char	*tmp;
+	char	**arguments;
+	char	**environnement;
 	int		i;
 
 	i = 0;
 	ft_init_lst(&cmd[g_data->i]);
-    ft_parse(cmd[g_data->i], g_data->cmd[g_data->i], g_data->i, g_data->size);
-    if (cmd[g_data->i]->cmd == EXEC) 
+	ft_parse(cmd[g_data->i], g_data->cmd[g_data->i], g_data->i, g_data->size);
+	if (cmd[g_data->i]->cmd == EXEC)
 		parsing_file(&environnement, &arguments, &tmp, cmd[g_data->i]);
 	if (g_data->size == 1 && cmd[g_data->i]->cmd != EXEC)
 		ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
@@ -71,7 +80,7 @@ int			executor(t_cmd **cmd, int **tube)
 			g_data->exit = 1;
 		}
 		else if (pid < 0)
-			return (1) ;
+			return (1);
 		else if (g_data->i < g_data->size - 1 && !(g_data->exit))
 		{
 			//ft_free_split(arguments);
@@ -79,11 +88,6 @@ int			executor(t_cmd **cmd, int **tube)
 			pipe_in(tube[g_data->i], cmd[g_data->i]);
 			(g_data->i)++;
 			executor(cmd, tube);
-		}
-		else
-		{	
-			//ft_free_split(arguments);   !!!!! free impossible ? !!!!!
-			//ft_free_split(environnements);
 		}
 	}
 	return (0);
@@ -103,7 +107,7 @@ void		pipe_in(int tube[2], t_cmd *cmd)
 void		pipe_out(int tube[2])
 {
 	if (g_data->i < g_data->size - 1)
-	{	
+	{
 		close(tube[0]);
 		dup2(tube[1], STDOUT_FILENO);
 	}

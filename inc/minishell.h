@@ -14,7 +14,7 @@
 # include <dirent.h>
 # include <errno.h>
 
-# define OPEN_MAX 256 // bug sur VM 42
+//# define OPEN_MAX 256 // bug sur VM 42
 
 
 # define SUCCESS			0
@@ -193,7 +193,6 @@ void				pipe_in(int tube[2], t_cmd *cmd);
 void				pipe_out(int tube[2]);
 
 //void		check_return(t_data *data);
-//void		print_lst(t_list *li);
 
 //------------------------------------------------------------------------
 
