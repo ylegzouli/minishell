@@ -14,9 +14,6 @@
 # include <dirent.h>
 # include <errno.h>
 
-# define OPEN_MAX 256 // bug sur VM 42
-
-
 # define SUCCESS			0
 # define ERROR_MALLOC		1
 
@@ -100,6 +97,9 @@ void				ft_print_prompt();
 void				ft_exec_line(t_data *data);
 int					init_fork(char *line);
 int					executor(t_cmd **cmd, int **tube);
+void				close_tube(int **tube);
+void				parser(t_cmd ***c, char ***envi, char ***arg, char **tmp);
+void				dad(int **tube, t_cmd **cmd, char **environnement, char **arguments);
 void				ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path);
 void				signal_quit(int sig);
 void				signal_prevent(int sig);
@@ -109,7 +109,7 @@ void				signal_prevent(int sig);
 int					power_of_ten(int n);
 int					size_int(int n);
 int 				check_char(char *s, char c);
-
+void				printer(int i, char **result, t_cmd *cmd, int opt);
 
 //-------------------------------- TMP ----------------------------------
 

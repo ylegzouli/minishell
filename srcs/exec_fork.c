@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:55:15 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/19 15:41:13 by legzouli         ###   ########.fr       */
+/*   Updated: 2020/05/20 03:01:12 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,20 @@ int			init_fork(char *line)
 		return (1);
 	while (i < g_data->size)
 	{
-		if (!(tube[i] = malloc(sizeof(int) * 2)))
-			return (1);
-		if (pipe(tube[i]) == -1)
+		if (!(tube[i] = malloc(sizeof(int) * 2)) || pipe(tube[i]) == -1)
 			return (1);
 		i++;
 	}
 	if (g_data->cmd[g_data->i] && !(g_data->exit))
 		executor(new_cmd, tube);
+	close_tube(tube);
+	return (0);
+}
+
+void		close_tube(int **tube)
+{
+	int		i;
+
 	i = 0;
 	while (i < g_data->size)
 	{
@@ -48,7 +54,6 @@ int			init_fork(char *line)
 		i++;
 	}
 	dup2(STDOUT_FILENO, STDIN_FILENO);
-	return (0);
 }
 
 int			executor(t_cmd **cmd, int **tube)
@@ -57,16 +62,9 @@ int			executor(t_cmd **cmd, int **tube)
 	char	*tmp;
 	char	**arguments;
 	char	**environnement;
-	int		i;
 
-	i = 0;
-	ft_init_lst(&cmd[g_data->i]);
-	ft_parse(cmd[g_data->i], g_data->cmd[g_data->i], g_data->i, g_data->size);
-	if (cmd[g_data->i]->cmd == EXEC)
-		parsing_file(&environnement, &arguments, &tmp, cmd[g_data->i]);
-	if (g_data->size == 1 && cmd[g_data->i]->cmd != EXEC)
-		ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
-	else
+	parser(&cmd, &environnement, &arguments, &tmp);
+	if (!(g_data->size == 1 && cmd[g_data->i]->cmd != EXEC))
 	{
 		signal(SIGINT, signal_quit);
 		signal(SIGQUIT, signal_quit);
@@ -81,16 +79,21 @@ int			executor(t_cmd **cmd, int **tube)
 		}
 		else if (pid < 0)
 			return (1);
-		else if (g_data->i < g_data->size - 1 && !(g_data->exit))
-		{
-			//ft_free_split(arguments);
-			//ft_free_split(environnements);
-			pipe_in(tube[g_data->i], cmd[g_data->i]);
-			(g_data->i)++;
-			executor(cmd, tube);
-		}
+		dad(tube, cmd, environnement, arguments);
 	}
 	return (0);
+}
+
+void		dad(int **tube, t_cmd **cmd, char **environnement, char **arguments)
+{
+	if (g_data->i < g_data->size - 1 && !(g_data->exit))
+	{
+		//ft_free_split(arguments);
+		//ft_free_split(environnements);
+		pipe_in(tube[g_data->i], cmd[g_data->i]);
+		(g_data->i)++;
+		executor(cmd, tube);
+	}
 }
 
 void		pipe_in(int tube[2], t_cmd *cmd)

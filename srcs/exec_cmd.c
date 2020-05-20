@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:32:44 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/19 15:51:14 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/19 19:26:16 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 {
 	g_data->step_cmd++;
 	cmd->nb_cmd = g_data->step_cmd;
-	
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result, cmd);
 	else if (cmd->cmd == CD)
@@ -71,9 +70,7 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 		execve(path, arg, envi);
 	else if (cmd->cmd == NOTFOUND && command_var_env(g_data->lst_env,
 		g_data->lst_env_waiting, g_data->cmd_n_found) == -1)
-	{	
 		print_cmd_not_found(cmd);
-	}
 }
 
 void		redirect(int tube[2], t_cmd *cmd)

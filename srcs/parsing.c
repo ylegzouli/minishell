@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:31:59 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/19 13:32:01 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/19 19:25:07 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,15 @@ int			delete_quote2(char *s, int i, char c)
 		while (s[i] && s[i] != c)
 			i++;
 		if (s[i])
-			return(new_arg(s, c));
+			return (new_arg(s, c));
 	}
 	return (0);
 }
 
-void			delete_quote(char **arg)
+void		delete_quote(char **arg)
 {
 	int		i;
-	char			*s;
+	char	*s;
 
 	i = 0;
 	s = *arg;
@@ -131,8 +131,6 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 		new_cmd->input = ARG;
 	get_arg(&new_cmd->arg, tmp[0]);
 	delete_quote(&new_cmd->arg);
-	// free tmp 2 -> ne sert plus je pense
-	// !!!!!! free_split(tmp); -> si on free la, le message d'erreur de command not found n'apparait plus
 	return (0);
 }
 
