@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:42:05 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/19 13:42:07 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/20 14:52:55 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int			get_output(t_cmd *new_cmd, char *cmd, int i, int size)
 int			get_fd(t_cmd *new_cmd, char *cmd)
 {
 	char		**tmp;
-	char		**tmp2;
 	int			i;
 	int			fd;
 	char		*path;
@@ -34,14 +33,8 @@ int			get_fd(t_cmd *new_cmd, char *cmd)
 	i = 1;
 	while (tmp[i])
 	{
-		if (ft_strchr(tmp[i], '<'))
-		{
-			get_input(new_cmd, tmp[i], 0, 0);
-			tmp2 = ft_split_shell(tmp[i], '<');
-			path = get_path(ft_strtrim(tmp2[0], " >"));
-			free_split(tmp2);
-		}
-		else
+		input_case(i, tmp, new_cmd, &path);
+		if (!(ft_strchr(tmp[i], '<')))
 			path = get_path(ft_strtrim(tmp[i], " >"));
 		new_cmd->output = REDIRECT;
 		if (tmp[i][0] == '>' && tmp[i][1] != '>')
@@ -54,6 +47,19 @@ int			get_fd(t_cmd *new_cmd, char *cmd)
 	}
 	free_split(tmp);
 	return (0);
+}
+
+void		input_case(int i, char **tmp, t_cmd *new_cmd, char **path)
+{
+	char		**tmp2;
+
+	if (ft_strchr(tmp[i], '<'))
+	{
+		get_input(new_cmd, tmp[i], 0, 0);
+		tmp2 = ft_split_shell(tmp[i], '<');
+		*path = get_path(ft_strtrim(tmp2[0], " >"));
+		free_split(tmp2);
+	}
 }
 
 char		*get_path(char *str)

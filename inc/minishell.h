@@ -129,6 +129,7 @@ int					check_error_unexpected(char *s);
 int					ft_parse(t_cmd *new_cmd, char *cmd, int i, int size);
 char				*parse_env(t_env *env, char *line);
 int					get_output(t_cmd *new_cmd, char *cmd, int i, int size);
+void				input_case(int i, char **tmp, t_cmd *new_cmd, char **path);
 int					get_fd(t_cmd *new_cmd, char *cmd);
 char				*get_path(char *str);
 int					open_file(char *str, int opt);
