@@ -23,7 +23,6 @@ int			export2(t_env *tmp, char *s, int size)
 {
 	int j;
 
-	j = 0;
 	while (tmp->next)
 		tmp = tmp->next;
 	if (!(tmp->next = malloc(sizeof(t_env))))
@@ -46,6 +45,7 @@ int			export2(t_env *tmp, char *s, int size)
 		tmp->value[size] = s[j + size];
 	tmp->next = 0;
 	g_data->ret = 0;
+	return (0);
 }
 
 int			export(t_env *env, char *s2, char **res, t_cmd *cmd)

@@ -94,7 +94,7 @@ static char			*var_env_found(t_env *env, char *line, t_env *tmp)
 	return (ret);
 }
 
-char				*parse_env2(char *res, t_env *tmp, t_env *env, int i)
+void				*parse_env2(char *res, t_env *tmp, t_env *env, int i)
 {
 	if (res[i + 1] && tmp != 0 && (i + 1 + ft_strlen(tmp->name) >=
 				ft_strlen(res) || res[i + 1 + ft_strlen(tmp->name)] == '$' ||

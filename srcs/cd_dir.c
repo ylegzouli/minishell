@@ -25,7 +25,11 @@ static int	go_in_that_dir(char *s)
 {
 	char	*path;
 	char	*tmp;
-
+	if (s[0] && s[0] == '.' && s[1] == 0)
+	{
+		g_data->ret = 0;
+		return (0);
+	}
 	if (!(tmp = ft_strjoin("/", s)))
 		return (1);
 	if (!(path = ft_strjoin(g_data->path, tmp)))
