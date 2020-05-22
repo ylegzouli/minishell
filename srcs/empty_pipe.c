@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:45:32 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/20 03:12:53 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/22 12:55:44 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void		get_empty_pipe(char **cmd)
 		get_next_line(0, &line);
 		*cmd = ft_strjoin(tmp, line);
 		free(line);
+		if (check_error_unexpected(*cmd))
+			exit(1);
 		get_empty_pipe(cmd);
 	}
 	free(tmp);
