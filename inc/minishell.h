@@ -115,7 +115,7 @@ void				printer(int i, char **result, t_cmd *cmd, int opt);
 
 void        		redirect(int tube[2], t_cmd *cmd);
 void				print_cmd_not_found(t_cmd *cmd);
-void				print_cd_error(char *s);
+int						print_cd_error(char *s);
 void				ft_print(char *str, int size, t_cmd *cmd, int i);
 void				free_split(char **s);
 void				free_data();

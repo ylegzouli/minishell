@@ -97,6 +97,8 @@ int					cd(char *s1)
 	int			i;
 
 	i = -1;
+	if (s1[0] == 0)
+		return(print_cd_error(s1));
 	s2 = ft_split(s1, ' ');
 	s = s2[0];
 	while (check_cd_path(s + 3 * ++i) == 1)
@@ -113,7 +115,6 @@ int					cd(char *s1)
 		if (go_there(s + 3 * i) != 0)
 			print_cd_error(s);
 		free_split(s2);
-		return (0);
 	}
 	return (0);
 }
