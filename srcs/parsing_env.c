@@ -96,12 +96,15 @@ static char			*var_env_found(t_env *env, char *line, t_env *tmp)
 
 void				*parse_env2(char *res, t_env *tmp, t_env *env, int i)
 {
+	void	*null;
+
 	if (res[i + 1] && tmp != 0 && (i + 1 + ft_strlen(tmp->name) >=
 				ft_strlen(res) || res[i + 1 + ft_strlen(tmp->name)] == '$' ||
 				res[i + 1 + ft_strlen(tmp->name)] == ' '))
 		res = var_env_found(env, res, tmp);
 	else
 		res = var_env_not_found(env, res);
+	return (null);
 }
 
 char				*parse_env(t_env *env, char *line)

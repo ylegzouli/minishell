@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:32:44 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/22 17:48:07 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/22 18:49:17 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,13 @@ int			is_cmd_write(t_cmd *cmd)
 
 void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 {
-	g_data->step_cmd++;
-	cmd->nb_cmd = g_data->step_cmd;
+	cmd->nb_cmd = ++(g_data->step_cmd);
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result, cmd);
 	else if (cmd->cmd == CD)
 		cd(cmd->arg);
 	else if (cmd->cmd == EXIT)
 	{
-		g_data->exit = 1;
 		free_data();
 		exit(0);
 	}
@@ -69,7 +67,10 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 	else if (cmd->cmd == PWD)
 		pwd(g_data, &cmd->result, cmd);
 	else if (cmd->cmd == EXEC)
-		execve(path, arg, envi);
+	{
+		if (execve(path, arg, envi) == -1)
+			write(1, "Erreur ouverture fichier\n", 25); 
+	}
 	else if (cmd->cmd == NOTFOUND && command_var_env(g_data->lst_env,
 		g_data->lst_env_waiting, g_data->cmd_n_found) == -1)
 		print_cmd_not_found(cmd);
@@ -99,6 +100,7 @@ void		ft_print(char *str, int size, t_cmd *cmd, int i)
 		write(1, str, size);
 		if (i == 1)
 			write(1, "\n", 1);
+		free(str);
 		return ;
 	}
 	while (cmd->fd_out && cmd->fd_out->content &&
