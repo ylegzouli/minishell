@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:45:32 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/22 12:55:44 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/22 17:47:31 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,20 @@ void		get_empty_pipe(char **cmd)
 	char	*line;
 
 	g_data->empty_pipe = 0;
+	if (check_error_unexpected(*cmd))
+	{
+		g_data->empty_pipe = 1;
+		return ;
+	}
 	tmp = ft_strtrim(*cmd, " ");
 	if (tmp[ft_strlen(tmp) - 1] == '|')
 	{
-		g_data->empty_pipe = 1;
+//		g_data->empty_pipe = 1;
 		free(*cmd);
 		write(1, "> ", 2);
 		get_next_line(0, &line);
 		*cmd = ft_strjoin(tmp, line);
 		free(line);
-		if (check_error_unexpected(*cmd))
-			exit(1);
 		get_empty_pipe(cmd);
 	}
 	free(tmp);

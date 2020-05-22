@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:32:44 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/22 12:44:42 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/22 17:48:07 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		ft_exec_line(t_data *data)
 
 	i = 0;
 	get_empty_pipe(&(data->historic->line));
-	if (check_error_unexpected(data->historic->line))
+	if (g_data->empty_pipe == 1)
 		return ;
 	cmd = ft_split_shell(data->historic->line, ';');
 	while (cmd[i] && !(data->exit))
