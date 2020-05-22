@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strchr_shell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylegzoul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 10:15:28 by ylegzoul          #+#    #+#             */
-/*   Updated: 2019/11/07 11:52:55 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/22 17:55:10 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int      ft_is_sep(const char *str, char c2, char *quote, int i)
+static int		ft_is_sep(const char *str, char c2, char *quote, int i)
 {
-    if (str[i] == *quote)
-        *quote = 0;
-    else if (*quote == 0 && (str[i] == '"' || str[i] == 39))
-        *quote = str[i];
-    if (i > 0 && str[i - 1] == 92)
-        return (0);
-    if (str[i] == c2 && *quote == 0)
-        return (1);
-    return (0);
+	if (str[i] == *quote)
+		*quote = 0;
+	else if (*quote == 0 && (str[i] == '"' || str[i] == 39))
+		*quote = str[i];
+	if (i > 0 && str[i - 1] == 92)
+		return (0);
+	if (str[i] == c2 && *quote == 0)
+		return (1);
+	return (0);
 }
 
-char		*ft_strchr_shell(char const *s, int c)
+char			*ft_strchr_shell(char const *s, int c)
 {
 	int		i;
 	char	*tmp;

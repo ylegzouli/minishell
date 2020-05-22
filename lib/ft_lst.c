@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lst.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/22 18:20:15 by ylegzoul          #+#    #+#             */
+/*   Updated: 2020/05/22 18:21:32 by ylegzoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 int			ft_lstadd_front_hist(t_data *data, char *line)
@@ -12,14 +24,13 @@ int			ft_lstadd_front_hist(t_data *data, char *line)
 	return (SUCCESS);
 }
 
-void			ft_lstadd_front_cmd(t_data *data, t_cmd *new)
+void		ft_lstadd_front_cmd(t_data *data, t_cmd *new)
 {
 	new->next = data->lst_cmd->next;
 	data->lst_cmd = new;
 }
 
-
-void			ft_lstadd_back_cmd(t_cmd *new)
+void		ft_lstadd_back_cmd(t_cmd *new)
 {
 	t_cmd	*tmp;
 

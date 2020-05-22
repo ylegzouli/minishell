@@ -6,7 +6,7 @@
 /*   By: ylegzoul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:21:44 by ylegzoul          #+#    #+#             */
-/*   Updated: 2019/11/18 16:50:15 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/22 17:55:59 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char				*ft_strjoin(char const *s1, char const *s2)
 	return (ret);
 }
 
-char		*ft_substr(char const *s, unsigned int start, size_t len)
+char				*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*s2;
 	size_t			j;

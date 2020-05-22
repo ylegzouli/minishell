@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_shell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylegzoul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 14:09:28 by ylegzoul          #+#    #+#             */
-/*   Updated: 2019/11/21 11:11:16 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/22 18:21:51 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ char			**ft_split_shell(char const *str, char charset)
 	j = 0;
 	quote = 0;
 	liste = 0;
-	if (str == 0)
-		return (ft_strnull(liste));
 	if (!(liste = malloc((1 + ft_nb(str, charset, &quote)) * sizeof(char *))))
 		return (0);
 	while (str[i] && quote == 0 && ft_is_sep(str, charset, &quote, i))
