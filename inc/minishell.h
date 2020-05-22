@@ -98,7 +98,7 @@ void				ft_exec_line(t_data *data);
 int					init_fork(char *line);
 int					executor(t_cmd **cmd, int **tube);
 void				close_tube(int **tube);
-void				parser(t_cmd ***c, char ***envi, char ***arg, char **tmp);
+int					parser(t_cmd ***c, char ***envi, char ***arg, char **tmp);
 void				dad(int **tube, t_cmd **cmd, char **environnement, char **arguments);
 void				ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path);
 void				signal_quit(int sig);
@@ -115,14 +115,15 @@ void				printer(int i, char **result, t_cmd *cmd, int opt);
 
 void        		redirect(int tube[2], t_cmd *cmd);
 void				print_cmd_not_found(t_cmd *cmd);
-int						print_cd_error(char *s);
+int					print_cd_error(char *s);
 void				ft_print(char *str, int size, t_cmd *cmd, int i);
 void				free_split(char **s);
 void				free_data();
-
+void				clean_input(char **path);
 void				get_empty_pipe(char **cmd);
 int					print_error_unexpected(char c);
 int					check_error_unexpected(char *s);
+void				clean_cmd(char **cmd);
 
 //------------------------------ PARSING ---------------------------------
 

@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:55:15 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/20 03:01:12 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/22 19:45:54 by ylegzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int			executor(t_cmd **cmd, int **tube)
 	char	**arguments;
 	char	**environnement;
 
-	parser(&cmd, &environnement, &arguments, &tmp);
-	if (!(g_data->size == 1 && cmd[g_data->i]->cmd != EXEC))
+	if (parser(&cmd, &environnement, &arguments, &tmp) == 0
+		&& !(g_data->size == 1 && cmd[g_data->i]->cmd != EXEC))
 	{
 		signal(SIGINT, signal_quit);
 		signal(SIGQUIT, signal_quit);
