@@ -34,7 +34,11 @@ OBJLIB = $(addprefix $(OBJLIB_PATH)/,$(OBJLIB_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJLIB)
-	gcc -Wall -Wextra -Werror -o ${NAME} ${OBJLIB} ${OBJ} lib/libft.a
+	gcc -Wall -Wextra -Werror -o ${NAME} ${OBJLIB} ${OBJ}
+
+valgrind: $(OBJ) $(OBJLIB)
+	gcc -Wall -Wextra -Werror -ggdb3 -o ${NAME} ${OBJLIB} ${OBJ} 
+	valgrind --leak-check=full --show-leak-kinds=all ./minishell
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
