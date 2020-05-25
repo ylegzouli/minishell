@@ -58,6 +58,11 @@ int			echo(char *input, char **result, t_cmd *cmd)
 	int		fd[1];
 
 	i = 0;
+	if (input[0] == 0)
+	{
+		ft_print("", 0, cmd, 2);
+		return (0);
+	}
 	if (ft_parse_echo(input, fd, result, cmd))
 		return (1);
 	return (0);
