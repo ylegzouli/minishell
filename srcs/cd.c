@@ -114,7 +114,7 @@ int					cd(char *s1)
 	{
 		if (go_there(s + 3 * i) != 0)
 			print_cd_error(s);
-		free_split(s2);
 	}
+	free_split(s2);
 	return (0);
 }

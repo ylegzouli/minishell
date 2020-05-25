@@ -17,7 +17,8 @@ int			ft_start(t_data *data)
 {
 	char *line;
 
-	while (1)
+//	while (1) ------- MODIF
+	while (data->exit == 0)
 	{
 		data->exit = 0;
 		while (data->exit == 0)
@@ -37,6 +38,5 @@ int			ft_start(t_data *data)
 
 void		ft_print_prompt(void)
 {
-	write(1, "minishell$> ", 0);
-	//write(1, "minishell$> ", 12);
+	write(1, "minishell$> ", 12);
 }

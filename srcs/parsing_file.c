@@ -20,6 +20,7 @@ char		*parsing_file(char ***envi, char ***arg, char **tmp, t_cmd *cmd)
 	if (!(*tmp = get_path_bin()))
 		cmd->cmd = NOTFOUND;
 	*arg = get_arguments(*tmp, cmd->arg);
+//	free(*tmp); -----> MODIF fais bug "ls | grep M | wc"
 	return (0);
 }
 

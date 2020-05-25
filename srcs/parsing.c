@@ -49,7 +49,7 @@ void		get_cmd(t_cmd *new_cmd, char *cmd)
 		new_cmd->cmd = ENV;
 	else if (tmp[0])
 	{
-		g_data->cmd_n_found = tmp[0];
+		g_data->cmd_n_found = ft_strdup(tmp[0]);
 		new_cmd->cmd = EXEC;
 	}
 	free_split(tmp);
@@ -158,6 +158,7 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 		new_cmd->input = ARG;
 	get_arg(&new_cmd->arg, tmp[0]);
 	delete_quote(&new_cmd->arg);
+	free_split(tmp); //--------- MODIF comment free ?
 	return (0);
 }
 
@@ -169,7 +170,8 @@ void		clean_input(char **path)
 	{
 		tmp = ft_split_shell(*path, '>');
 		free(*path);
-		*path = ft_strtrim(tmp[0], " ");
+//		*path = ft_strtrim(tmp[0], " ");
+		*path = ft_strdup(ft_strtrim(tmp[0], " "));
 		free_split(tmp);
 	}
 }
@@ -187,6 +189,7 @@ void		get_arg(char **arg, char *str)
 		i++;
 	while (tmp[0][i] == ' ')
 		i++;
-	*arg = ft_strdup(ft_strtrim(&tmp[0][i], " "));
+//	*arg = ft_strdup(ft_strtrim(&tmp[0][i], " "));
+	*arg = ft_strtrim(&tmp[0][i], " ");
 	free_split(tmp);
 }

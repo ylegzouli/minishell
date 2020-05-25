@@ -37,6 +37,8 @@ int			init_fork(char *line)
 	if (g_data->cmd[g_data->i] && !(g_data->exit))
 		executor(new_cmd, tube);
 	close_tube(tube);
+	free_split(g_data->cmd);
+	free(new_cmd);
 	return (0);
 }
 
@@ -47,12 +49,15 @@ void		close_tube(int **tube)
 	i = 0;
 	while (i < g_data->size)
 	{
+//		printf("yolo\n");
 		close(tube[i][0]);
 		close(tube[i][1]);
 		wait(NULL);
 		wait(NULL);
+		free(tube[i]);
 		i++;
 	}
+	free(tube);
 	dup2(STDOUT_FILENO, STDIN_FILENO);
 }
 
@@ -64,7 +69,8 @@ int			executor(t_cmd **cmd, int **tube)
 	char	**environnement;
 
 	if (parser(&cmd, &environnement, &arguments, &tmp) == 0
-		&& !(g_data->size == 1 && cmd[g_data->i]->cmd != EXEC))
+		&& !(g_data->size == 1 && cmd[g_data->i]->cmd != EXEC)
+		&& !g_data->exit) //----------- MODIF
 	{
 		signal(SIGINT, signal_quit);
 		signal(SIGQUIT, signal_quit);
@@ -88,12 +94,12 @@ void		dad(int **tube, t_cmd **cmd, char **environnement, char **arguments)
 {
 	if (g_data->i < g_data->size - 1 && !(g_data->exit))
 	{
-		//ft_free_split(arguments);
-		//ft_free_split(environnements);
 		pipe_in(tube[g_data->i], cmd[g_data->i]);
 		(g_data->i)++;
 		executor(cmd, tube);
 	}
+	free_split(arguments);
+	free_split(environnement);
 }
 
 void		pipe_in(int tube[2], t_cmd *cmd)

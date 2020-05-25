@@ -43,6 +43,7 @@ int			parser(t_cmd ***c, char ***envi, char ***arg, char **tmp)
 		return (1);
 	if ((*c)[g_data->i]->cmd == EXEC)
 		parsing_file(envi, arg, tmp, (*c)[g_data->i]);
+	ft_lstadd_back_cmd((*c)[g_data->i]);
 	if (g_data->size == 1 && (*c)[g_data->i]->cmd != EXEC)
 		ft_exec_cmd((*c)[g_data->i], *arg, *envi, *tmp);
 	return (0);

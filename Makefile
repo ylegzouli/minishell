@@ -38,7 +38,8 @@ $(NAME): $(OBJ) $(OBJLIB)
 
 valgrind: $(OBJ) $(OBJLIB)
 	gcc -Wall -Wextra -Werror -ggdb3 -o ${NAME} ${OBJLIB} ${OBJ} 
-	valgrind --leak-check=full --show-leak-kinds=all ./minishell
+	#valgrind --leak-check=full --show-leak-kinds=all ./minishell
+	valgrind --leak-check=full ./minishell
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true

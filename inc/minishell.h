@@ -119,6 +119,7 @@ int					print_cd_error(char *s);
 void				ft_print(char *str, int size, t_cmd *cmd, int i);
 void				free_split(char **s);
 void				free_data();
+void				free_cmd(t_cmd *lst_cmd);
 void				clean_input(char **path);
 void				get_empty_pipe(char **cmd);
 int					print_error_unexpected(char c);
