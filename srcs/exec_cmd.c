@@ -47,7 +47,7 @@ int			is_cmd_write(t_cmd *cmd)
 }
 
 void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
-{
+{	
 	cmd->nb_cmd = ++(g_data->step_cmd);
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result, cmd);
@@ -69,7 +69,7 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 	else if (cmd->cmd == EXEC)
 	{
 		if (execve(path, arg, envi) == -1)
-			write(1, "Erreur ouverture fichier\n", 25); 
+			write(1, "Erreur ouverture fichier\n", 25);
 	}
 	else if (cmd->cmd == NOTFOUND && command_var_env(g_data->lst_env,
 		g_data->lst_env_waiting, g_data->cmd_n_found) == -1)

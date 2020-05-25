@@ -23,8 +23,7 @@ int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 	quote = 0;
 	while (input[i] && input[i] == ' ')
 		i++;
-	if (input[i] && input[i + 1] &&
-		input[i] == '-' && input[i + 1] == 'n')
+	while (input[i] && input[i + 1] && input[i] == '-' && input[i + 1] == 'n')
 	{
 		opt = 1;
 		if (input[i + 2] && input[i + 2] == ' ')
