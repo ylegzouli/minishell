@@ -25,6 +25,7 @@ static int	go_in_that_dir(char *s)
 {
 	char	*path;
 	char	*tmp;
+	
 	if (s[0] && s[0] == '.' && s[1] == 0)
 	{
 		g_data->ret = 0;
@@ -38,6 +39,7 @@ static int	go_in_that_dir(char *s)
 	{
 		copy_old_pwd();
 		new_pwd(path);
+		find_path(g_data);
 		free(path);
 		free(tmp);
 		g_data->ret = 0;

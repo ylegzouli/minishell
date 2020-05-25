@@ -103,7 +103,7 @@ int					cd(char *s1)
 	s = s2[0];
 	while (check_cd_path(s + 3 * ++i) == 1)
 		go_up();
-	if (s[2 * i] == '\0')
+	if (s[2 * i] == '\0' || (s[2 * i + 1] == '\0') )
 	{
 		copy_old_pwd();
 		new_pwd(g_data->path);

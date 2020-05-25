@@ -94,7 +94,7 @@ static char			*var_env_found(t_env *env, char *line, t_env *tmp)
 	return (ret);
 }
 
-void				*parse_env2(char *res, t_env *tmp, t_env *env, int i)
+char				*parse_env2(char *res, t_env *tmp, t_env *env, int i)
 {
 	void	*null;
 
@@ -104,7 +104,7 @@ void				*parse_env2(char *res, t_env *tmp, t_env *env, int i)
 		res = var_env_found(env, res, tmp);
 	else
 		res = var_env_not_found(env, res);
-	return (null);
+	return (res);
 }
 
 char				*parse_env(t_env *env, char *line)
