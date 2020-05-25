@@ -61,6 +61,7 @@ int			export(t_env *env, char *s2, char **res, t_cmd *cmd)
 	while (s1[++i])
 	{
 		tmp = env;
+		printf("s = %s\n", s1[i]);
 		if (check_arg_export(env, s1[i], res, cmd) == 1 &&
 			(g_data->ret = 2) != 0)
 			write(1, "export: bad variable name\n", 26);
