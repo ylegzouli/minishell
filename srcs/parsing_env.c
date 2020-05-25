@@ -126,6 +126,7 @@ char				*parse_env(t_env *env, char *line)
 							tmp->name, ft_strlen(tmp->name)) != 0))
 				tmp = tmp->next;
 			res = parse_env2(res, tmp, env, i);
+			i = 0;
 		}
 	}
 	free(line);
