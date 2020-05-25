@@ -98,8 +98,9 @@ void		ft_print(char *str, int size, t_cmd *cmd, int i)
 	if (cmd->fd_out->content == NULL)
 	{
 		write(1, str, size);
-		if (i == 1)
+		if (i >= 1)
 			write(1, "\n", 1);
+		if (i != 2)
 		free(str);
 		return ;
 	}
@@ -107,9 +108,10 @@ void		ft_print(char *str, int size, t_cmd *cmd, int i)
 		*(int *)cmd->fd_out->content != 0)
 	{
 		write(*(int *)cmd->fd_out->content, str, size);
-		if (i == 1)
+		if (i >= 1)
 			write(*(int *)cmd->fd_out->content, "\n", 1);
 		cmd->fd_out = cmd->fd_out->next;
 	}
-	free(str);
+	if (i != 2)
+		free(str);
 }
