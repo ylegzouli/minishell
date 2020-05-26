@@ -38,6 +38,16 @@ int			print_error_unexpected(char c)
 	return (1);
 }
 
+int			print_error_nl_expected()
+{
+	g_data->step_cmd++;
+	write(2, "minishell: ", 11);
+	ft_putnbr_fd(g_data->step_cmd, 2);
+	write(2, ": Synthax error: newline expected\n", 35);
+	g_data->ret = 2;
+	return (1);
+}
+
 int			check_error_unexpected(char *s)
 {
 	int		i;
@@ -45,6 +55,8 @@ int			check_error_unexpected(char *s)
 	i = -1;
 	if (s[0] && (s[0] == '|' || s[0] == ';'))
 		return (print_error_unexpected(s[0]));
+//	if (s[0] && (s[0] == '<' || s[0] == '>'))
+//		return (print_error_nl_expected()); faut pas les mettre pour le > lol echo cou
 	while (s[++i])
 	{
 		if ((s[i] == '|' || s[i] == ';') && s[i + 1])
@@ -52,11 +64,28 @@ int			check_error_unexpected(char *s)
 			i++;
 			if (s[i] && (s[i] == '|' || s[i] == ';'))
 				return (print_error_unexpected(s[i]));
+			if (s[i] && (s[i] == '<' || s[i] == '>'))
+				return (print_error_nl_expected());
 			while (s[i] && s[i] == ' ')
 				i++;
 			if (s[i] && (s[i] == '|' || s[i] == ';'))
 				return (print_error_unexpected(s[i]));
+			if (s[i] && (s[i] == '<' || s[i] == '>'))
+				return (print_error_nl_expected());
 		}
+	}
+	return (0);
+}
+
+int			check_red(char *line)
+{
+	int		i;
+	
+	i = ft_strlen(line);
+	if (i > 0)
+	{
+		if (line[i - 1] == '<' || line[i - 1] == '>')
+			return (print_error_nl_expected());
 	}
 	return (0);
 }

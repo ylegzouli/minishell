@@ -127,6 +127,8 @@ void				get_empty_pipe(char **cmd);
 int					print_error_unexpected(char c);
 int					check_error_unexpected(char *s);
 void				clean_cmd(char **cmd);
+int					print_error_nl_expected();
+int					check_red(char *line);
 
 //------------------------------ PARSING ---------------------------------
 
