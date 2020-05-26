@@ -12,7 +12,7 @@
 
 #include "../inc/minishell.h"
 
-int			get_output(t_cmd *new_cmd, char *cmd, int i, int size)
+int			get_output(t_cmd *new_cmd, char **cmd, int i, int size)
 {
 	get_fd(new_cmd, cmd);
 	if (i < size - 1)
@@ -22,14 +22,15 @@ int			get_output(t_cmd *new_cmd, char *cmd, int i, int size)
 	return (0);
 }
 
-int			get_fd(t_cmd *new_cmd, char *cmd)
+int			get_fd(t_cmd *new_cmd, char **cmd)
 {
 	char		**tmp;
 	int			i;
 	int			fd;
 	char		*path;
 
-	tmp = ft_split_sh(cmd, '>');
+	exept_case(cmd, new_cmd);
+	tmp = ft_split_sh(*cmd, '>');
 	i = 1;
 	while (tmp[i])
 	{
@@ -47,6 +48,34 @@ int			get_fd(t_cmd *new_cmd, char *cmd)
 	}
 	free_split(tmp);
 	return (0);
+}
+
+void		exept_case(char **cmd, t_cmd *new_cmd)
+{
+	char	*tmp;
+	char	**tmp2;
+	int		fd;
+
+	fd = 0;
+	tmp = ft_strtrim(*cmd, " ");
+	if (tmp[0] && tmp[0] == '>')
+	{
+		while (tmp[0] == '>' && (++fd))
+			tmp = tmp + 1;
+		tmp2 = ft_split(tmp, ' ');
+		tmp = get_path(ft_strtrim(tmp2[0], " "));
+		if (fd == 2)
+			fd = open_file(tmp, 1);
+		else
+			fd = open_file(tmp, 2);
+		ft_lstadd_back(&new_cmd->fd_out, ft_lstnew_malloc(&fd, sizeof(fd)));
+		fd = ft_strlen(tmp2[0]);
+		free(tmp);
+		tmp = ft_strnstr(*cmd, tmp2[0], 1000) + 1;
+		free(*cmd);
+		*cmd = ft_strdup(tmp);
+		free_split(tmp2);
+	}
 }
 
 void		input_case(int i, char **tmp, t_cmd *new_cmd, char **path)

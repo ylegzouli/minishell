@@ -84,7 +84,7 @@ int			executor(t_cmd **cmd, int **tube)
 			redirect(tube[g_data->i], cmd[g_data->i]);
 			if (is_cmd_write(cmd[g_data->i]) == 1)
 				ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
-			exit(0);
+			g_data->exit = 1;
 		}
 		else if (pid < 0)
 			return (1);
@@ -95,14 +95,20 @@ int			executor(t_cmd **cmd, int **tube)
 
 void		dad(int **tube, t_cmd **cmd, char **environnement, char **arguments)
 {
+	int	i;
+
+	i = 0;
 	if (g_data->i < g_data->size - 1 && !(g_data->exit))
 	{
 		pipe_in(tube[g_data->i], cmd[g_data->i]);
+		if (cmd[g_data->i]->cmd == 9)
+		{	
+			free_split(arguments);
+			free_split(environnement);
+		}
 		(g_data->i)++;
 		executor(cmd, tube);
 	}
-	free_split(arguments);
-	free_split(environnement);
 }
 
 void		pipe_in(int tube[2], t_cmd *cmd)

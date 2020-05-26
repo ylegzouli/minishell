@@ -14,16 +14,20 @@
 
 int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 {
+	char	*tmp;
+
+	tmp = ft_strdup(cmd);
 	if (check_char(cmd, '$') == 1)
-		cmd = parse_env(g_data->lst_env, cmd);
+		tmp = parse_env(g_data->lst_env, cmd);
 	if (cmd[0] != 0)
 	{
-		get_output(new_cmd, cmd, i, size);
+		get_output(new_cmd, &tmp, i, size);
 		clean_fdout(&new_cmd->fd_out);
-		get_cmd(new_cmd, cmd);
-		if (get_input(new_cmd, cmd, i, size) == 1)
+		get_cmd(new_cmd, tmp);
+		if (get_input(new_cmd, tmp, i, size) == 1)
 			return (1);
 	}
+	free(tmp);
 	return (0);
 }
 
