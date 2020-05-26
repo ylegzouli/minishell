@@ -19,17 +19,28 @@ int			check_arg_export(t_env *env, char *s, char **res, t_cmd *cmd)
 	return (0);
 }
 
-int			export3(t_env *tmp, char *s, int size, int j)
+int			export_quoted(t_env *tmp, char *s, int size, int j)
 {
-	if (!(tmp->value = malloc(sizeof(char) * (size - 1))))
+	size = size - 2;
+	if (!(tmp->value = malloc(sizeof(char) * (size + 1))))
 		return (1);
-	tmp->value[size - 2] = '\0';
-	while (--size - 3 >= 0)
-		tmp->value[size - 2] = s[j + size - 1];
+	tmp->value[size] = '\0';
+	while (--size >= 0)
+		tmp->value[size] = s[j + size + 1];
 	tmp->next = 0;
 	g_data->ret = 0;
-	printf("value = %s\n", tmp->value);
 	return (0);
+}
+
+int			export_no_quote(t_env *tmp, char *s, int size, int j)
+{
+	if (!(tmp->value = malloc(sizeof(char) * (size + 1))))
+		return (1);
+	tmp->value[size] = '\0';
+	while (--size >= 0)
+		tmp->value[size] = s[j + size];
+	tmp->next = 0;
+	g_data->ret = 0;
 }
 
 int			export2(t_env *tmp, char *s, int size)
@@ -52,14 +63,9 @@ int			export2(t_env *tmp, char *s, int size)
 	while (s[size + j])
 		size++;
 	if (s[size + j - 1] == '"' || s[size + j - 1] == 39)
-		return (export3(tmp, s, size, j));
-	if (!(tmp->value = malloc(sizeof(char) * (size + 1))))
-		return (1);
-	tmp->value[size] = '\0';
-	while (--size >= 0)
-		tmp->value[size] = s[j + size];
-	tmp->next = 0;
-	g_data->ret = 0;
+		return (export_quoted(tmp, s, size, j));
+	else
+		return (export_no_quote(tmp, s, size, j));
 	return (0);
 }
 

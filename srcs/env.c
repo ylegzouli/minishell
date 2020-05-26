@@ -68,30 +68,41 @@ static int		export_env_w(t_env *tmp, char *s)
 		tmp->name[size] = s[size];
 	while (s[size + j])
 		size++;
-	if (!(tmp->value = malloc(sizeof(char) * (size + 1))))
-		return (1);
-	tmp->value[size] = '\0';
-	while (--size >= 0)
-		tmp->value[size] = s[j + size];
-	tmp->next = 0;
-	g_data->ret = 0;
+	if (s[size + j - 1] == '"' || s[size + j - 1] == 39)
+		return (export_quoted(tmp, s, size, j));
+	else
+		return (export_no_quote(tmp, s, size, j));
 	return (0);
 }
 
+char		*get_cmd_n_found(t_cmd *cmd)
+{
+	char 	**tmp;
+	char	*nl;
+
+	tmp = ft_split_shell(cmd->cmd_temp, ' ');
+	nl = ft_strdup(tmp[0]);
+	free_split(tmp);
+	return (nl);
+}
+
 int				command_var_env(t_env *env,
-		t_env *env_w, char *line)
+		t_env *env_w, char *line, t_cmd *cmd)
 {
 	int		i;
 	t_env	*tmp;
+	char	*nl;
 
 	tmp = env_w;
 	i = 0;
+	nl = get_cmd_n_found(cmd);
 	if (check_char(line, '=') == 0)
 		return (-1);
-	if (check_variable_env(env, line, check_char(line, '=')) == 1 ||
-		check_variable_env(env_w, line, check_char(line, '=')) == 1)
+	if (check_variable_env(env, line, check_char(nl, '=')) == 1 ||
+		check_variable_env(env_w, line, check_char(nl, '=')) == 1)
 	{
 		g_data->ret = 0;
+		free(nl);
 		return (0);
 	}
 	while (tmp->next)
@@ -99,8 +110,11 @@ int				command_var_env(t_env *env,
 		tmp = tmp->next;
 		i++;
 	}
-	if (export_env_w(tmp, line) == 1)
+	if (export_env_w(tmp, nl) == 1)
+	{
+		free(nl);
 		return (1);
+	}
 	return (0);
 }
 
