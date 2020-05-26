@@ -11,7 +11,7 @@ void		free_cmd(t_cmd *lst_cmd)
 //		printf("rrererere\n");
 		ft_lstclear(&tmp->fd_out, &free);
 		free(tmp->arg);
-		free(tmp->result); //--- MODIF fais abort env
+//		free(tmp->result); //--- MODIF fais abort env
 		tmp2 = tmp->next;
 		free(tmp);
 		tmp = tmp2;
