@@ -31,6 +31,7 @@ void		free_hist(t_hist *h)
 		free(tmp);
 		tmp = tmp2;
 	}
+//	free(tmp);
 }
 
 void		free_data()

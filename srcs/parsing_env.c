@@ -129,6 +129,5 @@ char				*parse_env(t_env *env, char *line)
 			i = 0;
 		}
 	}
-	free(line);
 	return (res);
 }

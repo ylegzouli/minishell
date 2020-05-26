@@ -36,13 +36,13 @@ int			init_fork(char *line)
 	}
 	if (g_data->cmd[g_data->i] && !(g_data->exit))
 		executor(new_cmd, tube);
-	close_tube(tube);
-//	free_split(g_data->cmd); //---------> MODIF fais abort echo $var
+	close_tube(tube, *new_cmd);
+	free_split(g_data->cmd); //---------> MODIF fais abort echo $var
 	free(new_cmd);
 	return (0);
 }
 
-void		close_tube(int **tube)
+void		close_tube(int **tube, t_cmd *cmd)
 {
 	int		i;
 
@@ -58,6 +58,8 @@ void		close_tube(int **tube)
 		i++;
 	}
 	free(tube);
+	if (cmd->cmd == 8 || cmd->cmd == 9)
+		free(g_data->cmd_n_found);
 	dup2(STDOUT_FILENO, STDIN_FILENO);
 }
 

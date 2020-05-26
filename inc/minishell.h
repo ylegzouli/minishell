@@ -97,7 +97,7 @@ void				ft_print_prompt();
 void				ft_exec_line(t_data *data);
 int					init_fork(char *line);
 int					executor(t_cmd **cmd, int **tube);
-void				close_tube(int **tube);
+void				close_tube(int **tube, t_cmd *cmd);
 int					parser(t_cmd ***c, char ***envi, char ***arg, char **tmp);
 void				dad(int **tube, t_cmd **cmd, char **environnement, char **arguments);
 void				ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path);
