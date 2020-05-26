@@ -37,6 +37,7 @@ int			init_fork(char *line)
 	if (g_data->cmd[g_data->i] && !(g_data->exit))
 		executor(new_cmd, tube);
 	close_tube(tube, *new_cmd);
+//	print_hist(g_data->historic);
 	free_split(g_data->cmd); //---------> MODIF fais abort echo $var
 	free(new_cmd);
 	return (0);
