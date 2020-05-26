@@ -157,7 +157,8 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 	else if (!tmp[1])
 		new_cmd->input = ARG;
 	get_arg(&new_cmd->arg, tmp[0]);
-	delete_quote(&new_cmd->arg);
+	if (new_cmd->cmd != EXPORT)
+		delete_quote(&new_cmd->arg);
 	free_split(tmp); //--------- MODIF comment free ?
 	return (0);
 }
