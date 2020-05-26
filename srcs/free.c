@@ -11,7 +11,7 @@ void		free_cmd(t_cmd *lst_cmd)
 //		printf("rrererere\n");
 		ft_lstclear(&tmp->fd_out, &free);
 		free(tmp->arg);
-		if (tmp->cmd == 8)
+		if (tmp->cmd == 8 || tmp->cmd == 9)
 			free(tmp->cmd_temp);
 //		free(tmp->result); //--- MODIF fais abort env
 		tmp2 = tmp->next;
@@ -44,5 +44,5 @@ void		free_data()
 	free_hist(g_data->historic);
 	free(g_data->pipe);
 //	free(g_data->cmd_n_found);
-	//free_split(g_data->cmd);
+//	free_split(g_data->cmd);
 }

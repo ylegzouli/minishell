@@ -72,8 +72,7 @@ int			executor(t_cmd **cmd, int **tube)
 	char	**environnement;
 
 	if (parser(&cmd, &environnement, &arguments, &tmp) == 0
-		&& !(g_data->size == 1 && cmd[g_data->i]->cmd != EXEC)
-		&& !g_data->exit) //----------- MODIF
+		&& !(g_data->size == 1 && cmd[g_data->i]->cmd != EXEC) && !g_data->exit) //----------- MODIF
 	{
 		signal(SIGINT, signal_quit);
 		signal(SIGQUIT, signal_quit);
@@ -89,6 +88,9 @@ int			executor(t_cmd **cmd, int **tube)
 		else if (pid < 0)
 			return (1);
 		dad(tube, cmd, environnement, arguments);
+		if (cmd[g_data->i]->cmd == 9)
+			free(tmp);
+
 	}
 	return (0);
 }

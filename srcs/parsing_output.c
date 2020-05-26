@@ -53,16 +53,19 @@ int			get_fd(t_cmd *new_cmd, char **cmd)
 void		exept_case(char **cmd, t_cmd *new_cmd)
 {
 	char	*tmp;
+	char	*tmp3;
 	char	**tmp2;
 	int		fd;
 
 	fd = 0;
 	tmp = ft_strtrim(*cmd, " ");
+	tmp3 = tmp;
 	if (tmp[0] && tmp[0] == '>')
 	{
 		while (tmp[0] == '>' && (++fd))
 			tmp = tmp + 1;
 		tmp2 = ft_split(tmp, ' ');
+		free(tmp3);
 		tmp = get_path(ft_strtrim(tmp2[0], " "));
 		if (fd == 2)
 			fd = open_file(tmp, 1);
@@ -76,6 +79,7 @@ void		exept_case(char **cmd, t_cmd *new_cmd)
 		*cmd = ft_strdup(tmp);
 		free_split(tmp2);
 	}
+	free(tmp3);
 }
 
 void		input_case(int i, char **tmp, t_cmd *new_cmd, char **path)
