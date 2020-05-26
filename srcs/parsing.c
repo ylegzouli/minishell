@@ -33,6 +33,7 @@ void		get_cmd(t_cmd *new_cmd, char *cmd)
 
 	tmp = ft_split(cmd, ' ');
 	clean_cmd(&tmp[0]);
+	//new_cmd->cmd_temp = ft_strdup(cmd);
 	if (ft_strcmp(tmp[0], "exit") == 0)
 		new_cmd->cmd = EXIT;
 	else if (ft_strcmp(tmp[0], "echo") == 0)
