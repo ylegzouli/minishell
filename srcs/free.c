@@ -31,7 +31,7 @@ void		free_hist(t_hist *h)
 		free(tmp);
 		tmp = tmp2;
 	}
-//	free(tmp);
+	free(tmp);
 }
 
 void		free_data()
@@ -40,7 +40,6 @@ void		free_data()
 	free_list_env(g_data->lst_env_waiting);
 	free_cmd(g_data->lst_cmd);
 	free_hist(g_data->historic);
-//	free(g_data->historic);
 	free(g_data->pipe);
 //	free(g_data->cmd_n_found);
 	//free_split(g_data->cmd);

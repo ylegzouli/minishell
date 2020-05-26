@@ -20,7 +20,7 @@ char		*parsing_file(char ***envi, char ***arg, char **tmp, t_cmd *cmd)
 	if (!(*tmp = get_path_bin()))
 		cmd->cmd = NOTFOUND;
 	*arg = get_arguments(*tmp, cmd->arg);
-//	free(*tmp); -----> MODIF fais bug "ls | grep M | wc"
+//	free(*tmp);// -----> MODIF fais bug "ls | grep M | wc"
 	return (0);
 }
 
@@ -56,6 +56,7 @@ char		*check_dir(char *path, int *j)
 {
 	DIR				*dir;
 	struct dirent	*dent;
+//	char			*tmp;
 
 	dir = opendir(path);
 	if (dir)
@@ -67,6 +68,9 @@ char		*check_dir(char *path, int *j)
 				if (dir)
 					closedir(dir);
 				*j = 1;
+			//	tmp = ft_strjoin(path, g_data->cmd_n_found);
+			//	free(path);
+			//	return (tmp);
 				return (ft_strjoin(path, g_data->cmd_n_found));
 			}
 		}

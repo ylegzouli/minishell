@@ -19,8 +19,8 @@ int			ft_lstadd_front_hist(t_data *data, char *line)
 	if (!(new = malloc(sizeof(t_hist))))
 		return (ERROR_MALLOC);
 	new->line = ft_strdup(line);
-	new->next = data->historic->next;
-	data->historic = new;
+	new->next = g_data->historic;
+	g_data->historic = new;
 	return (SUCCESS);
 }
 
@@ -38,4 +38,17 @@ void		ft_lstadd_back_cmd(t_cmd *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+}
+
+void        print_hist(t_hist *h)
+{
+    t_hist *tmp;
+
+    tmp = h;
+    while (tmp)
+    {
+		printf("%s\n", tmp->line);
+        tmp = tmp->next;
+    }
+//  free(tmp);
 }

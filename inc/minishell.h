@@ -120,6 +120,7 @@ void				ft_print(char *str, int size, t_cmd *cmd, int i);
 void				free_split(char **s);
 void				free_data();
 void				free_cmd(t_cmd *lst_cmd);
+void				free_hist(t_hist *h);
 void				clean_input(char **path);
 void				get_empty_pipe(char **cmd);
 int					print_error_unexpected(char c);
@@ -195,6 +196,7 @@ int 				check_equal(char *s);
 void				pipe_in(int tube[2], t_cmd *cmd);
 void				pipe_out(int tube[2]);
 
+void        print_hist(t_hist *h);
 //void		check_return(t_data *data);
 
 //------------------------------------------------------------------------

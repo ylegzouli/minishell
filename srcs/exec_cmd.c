@@ -27,6 +27,7 @@ void		ft_exec_line(t_data *data)
 		init_fork(cmd[i]);
 		i++;
 	}
+//	free_hist(g_data->historic);
 	free_split(cmd);
 }
 
