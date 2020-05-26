@@ -56,14 +56,17 @@ static char			*var_env_not_found(t_env *env, char *line)
 		return (ft_strdup(line));
 	len_var = size_var_env_not_found(line);
 	size = ft_strlen(line) - 1 - len_var + 1;
+	size--;
 	if (!(ret = malloc(sizeof(char) * (size + 1))))
 		return (0);
 	ret[size] = '\0';
 	while (line[++i] && line[i] != '$')
 		ret[i] = line[i];
-	i--;
-	while (line[++i + len_var + 1])
-		ret[i] = line[i + len_var + 1];
+	while (line[i + len_var + 2])
+	{
+		ret[i] = line[i + len_var + 2];
+		i++;
+	}
 	return (ret);
 }
 
