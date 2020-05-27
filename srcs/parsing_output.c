@@ -38,11 +38,12 @@ int			get_fd(t_cmd *new_cmd, char **cmd)
 		if (!(ft_strchr(tmp[i], '<')))
 			path = get_path(ft_strtrim(tmp[i], " >"));
 		new_cmd->output = REDIRECT;
-		if (tmp[i][0] == '>' && tmp[i][1] != '>')
+		if (tmp[i][0] == '>' && tmp[i][1] != '>' && !is_open(fd, new_cmd->fd_out))
 			fd = open_file(path, 1);
-		else
+		else if (!is_open(fd, new_cmd->fd_out))
 			fd = open_file(path, 2);
 		ft_lstadd_back(&new_cmd->fd_out, ft_lstnew_malloc(&fd, sizeof(fd)));
+		ft_lstadd_back(&new_cmd->fd_out, new_cmd->fd_out2);
 		free(path);
 		i++;
 	}
@@ -66,11 +67,11 @@ void		exept_case(char **cmd, t_cmd *new_cmd)
 			tmp = tmp + 1;
 		tmp2 = ft_split(tmp, ' ');
 		tmp = get_path(ft_strtrim(tmp2[0], " "));
-		if (fd == 2)
+		if (fd == 2 && !is_open(fd, new_cmd->fd_out))
 			fd = open_file(tmp, 1);
-		else
+		else if (!is_open(fd, new_cmd->fd_out))
 			fd = open_file(tmp, 2);
-		ft_lstadd_back(&new_cmd->fd_out, ft_lstnew_malloc(&fd, sizeof(fd)));
+		ft_lstadd_back(&new_cmd->fd_out2, ft_lstnew_malloc(&fd, sizeof(fd)));
 		fd = ft_strlen(tmp2[0]);
 		free(tmp);
 		tmp = ft_strnstr(*cmd, tmp2[0], 1000) + 1;
@@ -137,3 +138,19 @@ void		clean_fdout(t_list **fd)
 		free(tmp);
 	}
 }
+
+int			is_open(int	fd, t_list *li)
+{
+	while (li->next)
+	{
+		printf("%d\n", *(int*)(li->content));
+//		if (fd == *(int *)li->content)
+//			return (1);
+		printf("ICI\n");
+		li = li->next;
+	}
+	return (0);
+}
+
+
+
