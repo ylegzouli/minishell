@@ -55,13 +55,15 @@ static char			*var_env_not_found(t_env *env, char *line)
 	if (check_space_after_dollar(line) == 1)
 		return (ft_strdup(line));
 	len_var = size_var_env_not_found(line);
-	size = ft_strlen(line) - 1 - len_var + 1;
-	size--;
+	size = ft_strlen(line) - 1 - len_var;
 	if (!(ret = malloc(sizeof(char) * (size + 1))))
 		return (0);
 	ret[size] = '\0';
-	while (line[++i] && line[i] != '$')
+	while (line[++i] && line[i] != '$' )
 		ret[i] = line[i];
+	len_var--;
+	if (i > 0 && line[i - 1] == '"' && line[i+ len_var + 1] == '"')
+		len_var--;
 	while (line[i + len_var + 2])
 	{
 		ret[i] = line[i + len_var + 2];
@@ -102,8 +104,7 @@ char				*parse_env2(char *res, t_env *tmp, t_env *env, int i)
 	void	*null;
 
 	if (res[i + 1] && tmp != 0 && (i + 1 + ft_strlen(tmp->name) >=
-				ft_strlen(res) || res[i + 1 + ft_strlen(tmp->name)] == '$' ||
-				res[i + 1 + ft_strlen(tmp->name)] == ' '))
+				ft_strlen(res) || ft_isalpha(res[i + 1 + ft_strlen(tmp->name)]) == 1))
 		res = var_env_found(env, res, tmp);
 	else
 		res = var_env_not_found(env, res);
@@ -123,7 +124,8 @@ char				*parse_env(t_env *env, char *line)
 		tmp = env;
 		while (res[i] && res[i] != '$')
 			i++;
-		if (res[i])
+		if (res[i] && res[i + 1] && (ft_isalpha(res[i + 1]) == 1
+				|| res[i + 1] == '?'))
 		{
 			while (res[i + 1] && tmp && (ft_strncmp(res + i + 1,
 							tmp->name, ft_strlen(tmp->name)) != 0))
