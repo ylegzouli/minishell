@@ -101,20 +101,20 @@ void		ft_print(char *str, int size, t_cmd *cmd, int i)
 	if (cmd->fd_out->content == NULL)
 	{
 		write(1, str, size);
-		if (i >= 1)
+		if (i == 1 || i == 2)
 			write(1, "\n", 1);
-		if (i != 2)
-		free(str);
+		if (!(i == 2 || i == 3))
+			free(str);
 		return ;
 	}
 	while (cmd->fd_out && cmd->fd_out->content &&
 		*(int *)cmd->fd_out->content != 0)
 	{
 		write(*(int *)cmd->fd_out->content, str, size);
-		if (i >= 1)
+		if (i == 1 || i == 2)
 			write(*(int *)cmd->fd_out->content, "\n", 1);
 		cmd->fd_out = cmd->fd_out->next;
 	}
-	if (i != 2)
+	if (!(i == 2 || i == 3))
 		free(str);
 }

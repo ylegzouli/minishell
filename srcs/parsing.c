@@ -22,11 +22,14 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 		tmp = parse_env(g_data->lst_env, cmd);
 	if (tmp[0] != 0)
 	{
-		get_output(new_cmd, &tmp, i, size);
+		get_output(new_cmd, &tmp, i, size);	
 		clean_fdout(&new_cmd->fd_out);
 		get_cmd(new_cmd, tmp);
 		if (get_input(new_cmd, tmp, i, size) == 1)
+		{
+			free(tmp);
 			return (1);
+		}
 	}
 	free(tmp);
 	return (0);
@@ -109,43 +112,44 @@ void		clean_cmd(char **cmd)
 	}
 }
 
-int			new_arg(char *s, char c)
+int			new_arg(char **s, char c)
 {
 	int		i;
 	int		j;
 	char	*old;
 
-	old = ft_strdup(s);
+	old = ft_strdup(*s);
 	i = 0;
 	j = 0;
-	free(s);
-	if (!(s = malloc(ft_strlen(old) - 2)))
+	free(*s);
+	if (!((*s) = malloc(ft_strlen(old) - 2)))
 		return (-1);
-	s[ft_strlen(old) - 2] = 0;
+	(*s)[ft_strlen(old) - 2] = 0;
 	while (old[i])
 	{
 		if (old[i] != c)
-			s[i - j] = old[i];
+			(*s)[i - j] = old[i];
 		else
 			j++;
 		i++;
 	}
+	free(old);
 	return (0);
 }
 
-int			delete_quote2(char *s, int i, char c)
+int			delete_quote2(char **s, int i, char c)
 {
 	int pos;
 
 	pos = i;
-	while (s[i] && s[i] != c)
+	while ((*s)[i] && (*s)[i] != c)
 		i++;
 	i++;
-	if (s[i])
+	if ((*s)[i])
 	{
-		while (s[i] && s[i] != c)
+		while ((*s)[i] && (*s)[i] != c)
 			i++;
-		if (s[i])
+		if ((*s)[i])
 			return (new_arg(s, c));
 	}
 	return (0);
@@ -157,15 +161,15 @@ void		delete_quote(char **arg)
 	char	*s;
 
 	i = 0;
-	s = *arg;
-//	printf("%s\n", s);
+	s = ft_strdup(*arg);
+	free(*arg);
 	while (s[i])
 	{
-		delete_quote2(s, i, 39);
-		delete_quote2(s, i, '"');
+		delete_quote2(&s, i, 39);
+		delete_quote2(&s, i, '"');
 		i++;
 	}
-//	printf("%s\n", *arg);
+	*arg = s;
 }
 
 int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
@@ -193,10 +197,8 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 	else if (!tmp[1])
 		new_cmd->input = ARG;
 	get_arg(&new_cmd->arg, tmp[0]);
-//	if (new_cmd->cmd == CD)
 	if (new_cmd->cmd != EXPORT && new_cmd->cmd != EXEC && new_cmd->cmd != CD)
 		delete_quote(&new_cmd->arg);
-//	printf("%s\n", new_cmd->arg);
 	free_split(tmp); //--------- MODIF comment free ?
 	return (0);
 }

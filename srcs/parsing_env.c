@@ -69,6 +69,7 @@ static char			*var_env_not_found(t_env *env, char *line)
 		ret[i] = line[i + len_var + 2];
 		i++;
 	}
+	free(line);
 	return (ret);
 }
 
@@ -96,6 +97,7 @@ static char			*var_env_found(t_env *env, char *line, t_env *tmp)
 		ret[i + j] = line[i + ft_strlen(tmp->name) + 1];
 		i++;
 	}
+	free(line);
 	return (ret);
 }
 
@@ -103,8 +105,8 @@ char				*parse_env2(char *res, t_env *tmp, t_env *env, int i)
 {
 	void	*null;
 
-	if (res[i + 1] && tmp != 0 && (i + 1 + ft_strlen(tmp->name) >=
-				ft_strlen(res) || ft_isalpha(res[i + 1 + ft_strlen(tmp->name)]) == 1))
+	if (res[i + 1] && tmp != 0 && (i + 1 + ft_strlen(tmp->name) >= ft_strlen(res)
+		|| ft_isalpha(res[i + 1 + ft_strlen(tmp->name)]) == 0))
 		res = var_env_found(env, res, tmp);
 	else
 		res = var_env_not_found(env, res);
@@ -118,7 +120,7 @@ char				*parse_env(t_env *env, char *line)
 	char	*res;
 
 	i = -1;
-	res = line;
+	res = ft_strdup(line);
 	while (res[++i])
 	{
 		tmp = env;

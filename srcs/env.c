@@ -45,7 +45,8 @@ int				env(t_env *env, char **result,
 	g_data->ret = 0;
 	*result = env_copy(tmp, ret);
 	if (print == 1)
-		ft_print(*result, ft_strlen(*result), cmd, 0);
+		ft_print(*result, ft_strlen(*result), cmd, 3);
+		// je dois enlever le free depuis que tu as mis des free partout
 	return (0);
 }
 
