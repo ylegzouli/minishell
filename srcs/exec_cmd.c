@@ -27,7 +27,6 @@ void		ft_exec_line(t_data *data)
 		init_fork(cmd[i]);
 		i++;
 	}
-//	free_hist(g_data->historic);
 	free_split(cmd);
 }
 
@@ -49,7 +48,6 @@ int			is_cmd_write(t_cmd *cmd)
 
 void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 {
-//	printf("%s\n", cmd->arg);
 	cmd->nb_cmd = ++(g_data->step_cmd);
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result, cmd);
@@ -59,7 +57,6 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 	{
 		free_data();
 		g_data->exit = 1;
-//		exit(0); //------- MODIF
 	}
 	else if (cmd->cmd == EXPORT)
 		export(g_data->lst_env, cmd->arg, &cmd->result, cmd);

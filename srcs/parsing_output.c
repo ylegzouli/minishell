@@ -65,7 +65,6 @@ void		exept_case(char **cmd, t_cmd *new_cmd)
 		while (tmp[0] == '>' && (++fd))
 			tmp = tmp + 1;
 		tmp2 = ft_split(tmp, ' ');
-		free(tmp3);
 		tmp = get_path(ft_strtrim(tmp2[0], " "));
 		if (fd == 2)
 			fd = open_file(tmp, 1);

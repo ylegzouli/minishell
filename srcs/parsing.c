@@ -43,6 +43,8 @@ void		delete_char(char **cmd)
 	int		i;
 
 	i = 0;
+	if (ft_strnstr(*cmd, "\\\\", 1000) != 0)
+		return ;
 	tmp = ft_split_shell(*cmd, '\\');
 //	printf("%s\n", *cmd);
 	if (!(tmp2 = malloc(1)))
@@ -50,7 +52,7 @@ void		delete_char(char **cmd)
 	tmp2[0] = 0;
 	while (tmp[i])
 	{
-		printf("%s\n", tmp[i]);
+//		printf("%s\n", tmp[i]);
 		tmp3 = ft_strjoin(tmp2, tmp[i]);
 		free(tmp2);
 		tmp2 = tmp3;
