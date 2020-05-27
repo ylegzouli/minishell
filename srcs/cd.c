@@ -99,7 +99,8 @@ int					cd(char *s1)
 	i = -1;
 	if (s1[0] == 0)
 		return(print_cd_error(s1));
-	s2 = ft_split(s1, ' ');
+	s2 = ft_split_shell(s1, ' ');
+	delete_quote(&s2[0]);
 	s = s2[0];
 	while (check_cd_path(s + 3 * ++i) == 1)
 		go_up();

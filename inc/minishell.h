@@ -130,8 +130,8 @@ int					check_error_unexpected(char *s);
 void				clean_cmd(char **cmd);
 int					print_error_nl_expected();
 int					check_red(char *line);
-
 void				exept_case(char **cmd, t_cmd *new_cmd);
+void				delete_quote(char **arg);
 
 //------------------------------ PARSING ---------------------------------
 
