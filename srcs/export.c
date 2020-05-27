@@ -1,5 +1,35 @@
 #include "../inc/minishell.h"
 
+int			check_quote_export(char **s)
+{
+	int		i;
+	int		q;
+	int		k;
+
+	i = 0;
+	q = 0;
+	k = 0;
+	while ((*s)[i] && (*s)[i] != '=')
+	{
+		if ((*s)[i] == '"')
+			q++;
+		else if ((*s)[i] != 39)
+			k++;
+		i++;
+	}
+	if (q >= 2)
+	{
+		delete_quote2(s, 0, '"');
+		return (1);
+	}
+	if (k >= 2)
+	{
+		delete_quote2(s, 0, 39);
+		return (1);
+	}
+	return (0);
+}
+
 int			check_arg_export(t_env *env, char *s, char **res, t_cmd *cmd)
 {
 	int		i;
@@ -13,7 +43,12 @@ int			check_arg_export(t_env *env, char *s, char **res, t_cmd *cmd)
 	while (s[i] && s[i] != '=')
 	{
 		if (ft_isalpha(s[i]) == 0)
-			return (1);
+		{
+			if (check_quote_export(&s) == 0)
+				return (1);
+			if (ft_isalpha(s[i]) == 0)
+				return (1);
+		}
 		i++;
 	}
 	return (0);

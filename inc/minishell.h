@@ -132,6 +132,7 @@ int					print_error_nl_expected();
 int					check_red(char *line);
 void				exept_case(char **cmd, t_cmd *new_cmd);
 void				delete_quote(char **arg);
+int					delete_quote2(char **s, int i, char c);
 
 //------------------------------ PARSING ---------------------------------
 
