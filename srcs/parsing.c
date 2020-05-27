@@ -34,11 +34,29 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 
 void		delete_char(char **cmd)
 {
-	char	*tmp;
+	char	**tmp;
+	char	*tmp2;
+	char	*tmp3;
+	int		i;
 
+	i = 0;
+	tmp = ft_split_shell(*cmd, '\\');
 //	printf("%s\n", *cmd);
-	tmp = ft_strchr_shell(*cmd, '\\');
-//	printf("%s\n", tmp);
+	if (!(tmp2 = malloc(1)))
+		return ;
+	tmp2[0] = 0;
+	while (tmp[i])
+	{
+		printf("%s\n", tmp[i]);
+		tmp3 = ft_strjoin(tmp2, tmp[i]);
+		free(tmp2);
+		tmp2 = tmp3;
+		i++;
+	}
+	free_split(tmp);
+	free(*cmd);
+	*cmd = tmp2;
+//	printf("%s\n", *cmd);
 
 }
 
