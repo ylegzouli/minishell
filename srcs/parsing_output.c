@@ -15,10 +15,12 @@
 int			get_output(t_cmd *new_cmd, char **cmd, int i, int size)
 {
 	get_fd(new_cmd, cmd);
+//	printf("ICI\n");
 	if (i < size - 1)
 		new_cmd->output = PIPE;
-	else if (i == size - 1 && ft_lstsize(new_cmd->fd_out) == 1)
+	else if (i == size - 1)// && ft_lstsize(new_cmd->fd_out) == 1)
 		new_cmd->output = STDOUT;
+//	printf("ICI\n");
 	return (0);
 }
 
@@ -48,6 +50,7 @@ int			get_fd(t_cmd *new_cmd, char **cmd)
 		i++;
 	}
 	free_split(tmp);
+//	printf("ICI\n");
 	return (0);
 }
 
@@ -141,12 +144,14 @@ void		clean_fdout(t_list **fd)
 
 int			is_open(int	fd, t_list *li)
 {
-	while (li->next)
+	li = li->next;
+	while (li)
 	{
-		printf("%d\n", *(int*)(li->content));
-//		if (fd == *(int *)li->content)
-//			return (1);
-		printf("ICI\n");
+//		printf("%d\n", *(int*)(li->content));
+//		printf("%d\n", fd);
+		if (fd == *(int *)li->content)
+			return (1);
+//		printf("ICI\n");
 		li = li->next;
 	}
 	return (0);
