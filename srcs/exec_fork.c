@@ -74,6 +74,7 @@ int			executor(t_cmd **cmd, int **tube)
 	if (parser(&cmd, &environnement, &arguments, &tmp) == 0
 		&& !(g_data->size == 1 && cmd[g_data->i]->cmd != EXEC) && !g_data->exit) //----------- MODIF
 	{
+	//	printf("%s\n", cmd[g_data->i]->arg);
 		signal(SIGINT, signal_quit);
 		signal(SIGQUIT, signal_quit);
 		pid = fork();

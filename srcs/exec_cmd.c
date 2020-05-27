@@ -48,7 +48,8 @@ int			is_cmd_write(t_cmd *cmd)
 }
 
 void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
-{	
+{
+//	printf("%s\n", cmd->arg);
 	cmd->nb_cmd = ++(g_data->step_cmd);
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result, cmd);

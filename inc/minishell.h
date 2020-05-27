@@ -111,6 +111,7 @@ int					power_of_ten(int n);
 int					size_int(int n);
 int 				check_char(char *s, char c);
 void				printer(int i, char **result, t_cmd *cmd, int opt);
+void				delete_char(char **cmd);
 
 //-------------------------------- TMP ----------------------------------
 

@@ -21,8 +21,8 @@ int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 	i = 0;
 	opt = 0;
 	quote = 0;
-	while (input[i] && input[i] == ' ')
-		i++;
+//	while (input[i] && input[i] == ' ')
+//		i++;
 	while (input[i] && input[i + 1] && input[i] == '-' && input[i + 1] == 'n')
 	{
 		opt = 1;
@@ -63,7 +63,7 @@ int			echo(char *input, char **result, t_cmd *cmd)
 		ft_print("", 0, cmd, 2);
 		return (0);
 	}
-	printf("echo = %s\n", input);
+//	printf("echo = %s\n", input);
 	if (ft_parse_echo(input, fd, result, cmd))
 		return (1);
 	return (0);

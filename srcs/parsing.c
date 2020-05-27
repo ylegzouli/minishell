@@ -17,6 +17,7 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 	char	*tmp;
 
 	tmp = ft_strdup(cmd);
+	delete_char(&tmp);
 	if (check_char(cmd, '$') == 1)
 		tmp = parse_env(g_data->lst_env, cmd);
 	if (tmp[0] != 0)
@@ -29,6 +30,16 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 	}
 	free(tmp);
 	return (0);
+}
+
+void		delete_char(char **cmd)
+{
+	char	*tmp;
+
+//	printf("%s\n", *cmd);
+	tmp = ft_strchr_shell(*cmd, '\\');
+//	printf("%s\n", tmp);
+
 }
 
 void		get_cmd(t_cmd *new_cmd, char *cmd)
@@ -129,12 +140,14 @@ void		delete_quote(char **arg)
 
 	i = 0;
 	s = *arg;
+//	printf("%s\n", s);
 	while (s[i])
 	{
 		delete_quote2(s, i, 39);
 		delete_quote2(s, i, '"');
 		i++;
 	}
+//	printf("%s\n", *arg);
 }
 
 int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
@@ -162,8 +175,10 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 	else if (!tmp[1])
 		new_cmd->input = ARG;
 	get_arg(&new_cmd->arg, tmp[0]);
-	if (new_cmd->cmd != EXPORT)
+//	if (new_cmd->cmd == CD)
+	if (new_cmd->cmd != EXPORT && new_cmd->cmd != EXEC)
 		delete_quote(&new_cmd->arg);
+//	printf("%s\n", new_cmd->arg);
 	free_split(tmp); //--------- MODIF comment free ?
 	return (0);
 }
