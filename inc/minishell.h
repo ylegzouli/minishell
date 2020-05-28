@@ -48,7 +48,7 @@ typedef struct		s_cmd
 	int				cmd;
 	int				output;
 	t_list			*fd_out;
-	t_list			*fd_out2;
+//	t_list			*fd_out2;
 	int				input;
 	int				fd_in;
 	char			*arg;
@@ -113,7 +113,8 @@ int					size_int(int n);
 int 				check_char(char *s, char c);
 void				printer(int i, char **result, t_cmd *cmd, int opt);
 void				delete_char(char **cmd);
-int					is_open(int fd, t_list *li);
+//int					is_open(int fd, t_list *li);
+void				clean_com(char **cmd, t_cmd *new_cmd, char *tmp, char **tmp2);
 
 //-------------------------------- TMP ----------------------------------
 

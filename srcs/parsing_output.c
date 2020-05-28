@@ -18,7 +18,7 @@ int			get_output(t_cmd *new_cmd, char **cmd, int i, int size)
 //	printf("ICI\n");
 	if (i < size - 1)
 		new_cmd->output = PIPE;
-	else if (i == size - 1)// && ft_lstsize(new_cmd->fd_out) == 1)
+	else if (i == size - 1 && ft_lstsize(new_cmd->fd_out) >= 1)
 		new_cmd->output = STDOUT;
 //	printf("ICI\n");
 	return (0);
@@ -40,12 +40,12 @@ int			get_fd(t_cmd *new_cmd, char **cmd)
 		if (!(ft_strchr(tmp[i], '<')))
 			path = get_path(ft_strtrim(tmp[i], " >"));
 		new_cmd->output = REDIRECT;
-		if (tmp[i][0] == '>' && tmp[i][1] != '>' && !is_open(fd, new_cmd->fd_out))
+		if (tmp[i][0] == '>' && tmp[i][1] != '>')// && !is_open(fd, new_cmd->fd_out))
 			fd = open_file(path, 1);
-		else if (!is_open(fd, new_cmd->fd_out))
+		else// if (!is_open(fd, new_cmd->fd_out))
 			fd = open_file(path, 2);
 		ft_lstadd_back(&new_cmd->fd_out, ft_lstnew_malloc(&fd, sizeof(fd)));
-		ft_lstadd_back(&new_cmd->fd_out, new_cmd->fd_out2);
+//		ft_lstadd_back(&new_cmd->fd_out, new_cmd->fd_out2);
 		free(path);
 		i++;
 	}
@@ -70,19 +70,32 @@ void		exept_case(char **cmd, t_cmd *new_cmd)
 			tmp = tmp + 1;
 		tmp2 = ft_split(tmp, ' ');
 		tmp = get_path(ft_strtrim(tmp2[0], " "));
-		if (fd == 2 && !is_open(fd, new_cmd->fd_out))
+		if (fd == 2)// && !is_open(fd, new_cmd->fd_out))
 			fd = open_file(tmp, 1);
-		else if (!is_open(fd, new_cmd->fd_out))
+		else// if (!is_open(fd, new_cmd->fd_out))
 			fd = open_file(tmp, 2);
-		ft_lstadd_back(&new_cmd->fd_out2, ft_lstnew_malloc(&fd, sizeof(fd)));
-		fd = ft_strlen(tmp2[0]);
-		free(tmp);
-		tmp = ft_strnstr(*cmd, tmp2[0], 1000) + 1;
-		free(*cmd);
-		*cmd = ft_strdup(tmp);
-		free_split(tmp2);
+		ft_lstadd_back(&new_cmd->fd_out, ft_lstnew_malloc(&fd, sizeof(fd)));
+//		fd = ft_strlen(tmp2[0]);
+//		free(tmp);
+//		tmp = ft_strnstr(*cmd, tmp2[0], 1000) + 1;
+//		free(*cmd);
+//		*cmd = ft_strdup(tmp);
+//		free_split(tmp2);
+		clean_com(cmd, new_cmd, tmp, tmp2);
 	}
 	free(tmp3);
+}
+
+void		clean_com(char **cmd, t_cmd *new_cmd, char *tmp, char **tmp2)
+{
+	free(tmp);
+	tmp = ft_strnstr(*cmd, tmp2[0], 1000) + 1;
+	free(*cmd);
+	*cmd = ft_strdup(ft_strtrim(tmp, " "));
+//	printf("%s\n", *cmd);
+	free_split(tmp2);
+	if ((*cmd)[0] == '>')
+		exept_case(cmd, new_cmd);
 }
 
 void		input_case(int i, char **tmp, t_cmd *new_cmd, char **path)
@@ -141,7 +154,7 @@ void		clean_fdout(t_list **fd)
 		free(tmp);
 	}
 }
-
+/*
 int			is_open(int	fd, t_list *li)
 {
 	li = li->next;
@@ -156,6 +169,6 @@ int			is_open(int	fd, t_list *li)
 	}
 	return (0);
 }
-
+*/
 
 

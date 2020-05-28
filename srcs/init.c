@@ -121,10 +121,10 @@ int			ft_init_lst(t_cmd **lst_cmd)
 		return (ERROR_MALLOC);
 	(*lst_cmd)->fd_out->content = 0;
 	(*lst_cmd)->fd_out->next = NULL;
-	if (!((*lst_cmd)->fd_out2 = malloc(sizeof(t_list))))
-		return (ERROR_MALLOC);
-	(*lst_cmd)->fd_out2->content = 0;
-	(*lst_cmd)->fd_out2->next = NULL;
+//	if (!((*lst_cmd)->fd_out2 = malloc(sizeof(t_list))))
+//		return (ERROR_MALLOC);
+//	(*lst_cmd)->fd_out2->content = 0;
+//	(*lst_cmd)->fd_out2->next = NULL;
 	(*lst_cmd)->result = NULL;
 	(*lst_cmd)->next = NULL;
 	return (SUCCESS);
