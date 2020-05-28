@@ -88,8 +88,11 @@ void		exept_case(char **cmd, t_cmd *new_cmd)
 
 void		clean_com(char **cmd, t_cmd *new_cmd, char *tmp, char **tmp2)
 {
+	int		fd;
+
+	fd = ft_strlen(tmp2[0]);
 	free(tmp);
-	tmp = ft_strnstr(*cmd, tmp2[0], 1000) + 1;
+	tmp = ft_strnstr(*cmd, tmp2[0], 1000) + fd;
 	free(*cmd);
 	*cmd = ft_strdup(ft_strtrim(tmp, " "));
 //	printf("%s\n", *cmd);
