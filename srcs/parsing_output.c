@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:42:05 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/22 18:33:57 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/28 15:35:21 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void		clean_com(char **cmd, t_cmd *new_cmd, char *tmp, char **tmp2)
 
 	fd = ft_strlen(tmp2[0]);
 	free(tmp);
-	tmp = ft_strnstr(*cmd, tmp2[0], 1000) + fd;
+	tmp = ft_strdup(ft_strnstr(*cmd, tmp2[0], 1000) + fd);
 	free(*cmd);
 	*cmd = ft_strdup(ft_strtrim(tmp, " "));
 //	printf("%s\n", *cmd);
