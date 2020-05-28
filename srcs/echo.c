@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:46:20 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/28 10:48:36 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/05/28 14:53:33 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,17 @@ int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 		else if (input[i + 2])
 			opt = 0;
 	}
-	i--;
-	while (input[++i])
-		*result = ft_add_char(*result, input[i]);
+	*result = ft_strdup(input + i);
 	printer(i, result, cmd, opt);
 	return (0);
 }
 
 void		printer(int i, char **result, t_cmd *cmd, int opt)
 {
-	if (i > 0 && opt == 0)
+	if (opt == 0)
 		ft_print(*result, ft_strlen(*result), cmd, 1);
-	else if (i > 0 && opt != 0)
+	else if (opt != 0)
 		ft_print(*result, ft_strlen(*result), cmd, 0);
-	else if (opt == 0)
-		ft_print("\n", 1, cmd, 0);
 	g_data->ret = 0;
 }
 
