@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd_dir.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/28 10:46:24 by acoudouy          #+#    #+#             */
+/*   Updated: 2020/05/28 10:47:43 by acoudouy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 static int	from_where(char *s)
@@ -25,12 +37,9 @@ static int	go_in_that_dir(char *s)
 {
 	char	*path;
 	char	*tmp;
-	
-	if (s[0] && s[0] == '.' && s[1] == 0)
-	{
-		g_data->ret = 0;
+
+	if (s[0] && s[0] == '.' && s[1] == 0 && (g_data->ret = 0) != 1)
 		return (0);
-	}
 	if (!(tmp = ft_strjoin("/", s)))
 		return (1);
 	if (!(path = ft_strjoin(g_data->path, tmp)))

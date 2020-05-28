@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/28 10:49:11 by acoudouy          #+#    #+#             */
+/*   Updated: 2020/05/28 10:54:24 by acoudouy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 static char		*env_copy(t_env *tmp, char *ret)
@@ -46,7 +58,6 @@ int				env(t_env *env, char **result,
 	*result = env_copy(tmp, ret);
 	if (print == 1)
 		ft_print(*result, ft_strlen(*result), cmd, 3);
-		// je dois enlever le free depuis que tu as mis des free partout
 	return (0);
 }
 
@@ -78,7 +89,7 @@ static int		export_env_w(t_env *tmp, char *s)
 
 char		*get_cmd_n_found(t_cmd *cmd)
 {
-	char 	**tmp;
+	char	**tmp;
 	char	*nl;
 
 	tmp = ft_split_shell(cmd->cmd_temp, ' ');
@@ -90,12 +101,10 @@ char		*get_cmd_n_found(t_cmd *cmd)
 int				command_var_env(t_env *env,
 		t_env *env_w, char *line, t_cmd *cmd)
 {
-	int		i;
 	t_env	*tmp;
 	char	*nl;
 
 	tmp = env_w;
-	i = 0;
 	nl = get_cmd_n_found(cmd);
 	if (check_char(line, '=') == 0)
 		return (-1);
@@ -107,10 +116,7 @@ int				command_var_env(t_env *env,
 		return (0);
 	}
 	while (tmp->next)
-	{
 		tmp = tmp->next;
-		i++;
-	}
 	if (export_env_w(tmp, nl) == 1)
 	{
 		free(nl);

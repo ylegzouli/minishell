@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:31:59 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/23 01:03:07 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/28 11:25:17 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 		tmp = parse_env(g_data->lst_env, cmd);
 	if (tmp[0] != 0)
 	{
-		get_output(new_cmd, &tmp, i, size);	
+		get_output(new_cmd, &tmp, i, size);
 		clean_fdout(&new_cmd->fd_out);
 		get_cmd(new_cmd, tmp);
 		if (get_input(new_cmd, tmp, i, size) == 1)
@@ -35,35 +35,6 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 	return (0);
 }
 
-void		delete_char(char **cmd)
-{
-	char	**tmp;
-	char	*tmp2;
-	char	*tmp3;
-	int		i;
-
-	i = 0;
-	if (ft_strnstr(*cmd, "\\\\", 1000) != 0)
-		return ;
-	tmp = ft_split_shell(*cmd, '\\');
-//	printf("%s\n", *cmd);
-	if (!(tmp2 = malloc(1)))
-		return ;
-	tmp2[0] = 0;
-	while (tmp[i])
-	{
-//		printf("%s\n", tmp[i]);
-		tmp3 = ft_strjoin(tmp2, tmp[i]);
-		free(tmp2);
-		tmp2 = tmp3;
-		i++;
-	}
-	free_split(tmp);
-	free(*cmd);
-	*cmd = tmp2;
-//	printf("%s\n", *cmd);
-
-}
 
 void		get_cmd(t_cmd *new_cmd, char *cmd)
 {
@@ -106,72 +77,12 @@ void		clean_cmd(char **cmd)
 		free_split(tmp);
 	}
 	if (ft_strchr(*cmd, '>'))
-	{	
+	{
 		tmp = ft_split_shell(*cmd, '>');
 		free(*cmd);
 		*cmd = ft_strdup(tmp[0]);
 		free_split(tmp);
 	}
-}
-
-int			new_arg(char **s, char c)
-{
-	int		i;
-	int		j;
-	char	*old;
-
-	old = ft_strdup(*s);
-	i = 0;
-	j = 0;
-	free(*s);
-	if (!((*s) = malloc(ft_strlen(old) - 2)))
-		return (-1);
-	(*s)[ft_strlen(old) - 2] = 0;
-	while (old[i])
-	{
-		if (old[i] != c)
-			(*s)[i - j] = old[i];
-		else
-			j++;
-		i++;
-	}
-	free(old);
-	return (0);
-}
-
-int			delete_quote2(char **s, int i, char c)
-{
-	int pos;
-
-	pos = i;
-	while ((*s)[i] && (*s)[i] != c)
-		i++;
-	i++;
-	if ((*s)[i])
-	{
-		while ((*s)[i] && (*s)[i] != c)
-			i++;
-		if ((*s)[i])
-			return (new_arg(s, c));
-	}
-	return (0);
-}
-
-void		delete_quote(char **arg)
-{
-	int		i;
-	char	*s;
-
-	i = 0;
-	s = ft_strdup(*arg);
-	free(*arg);
-	while (s[i])
-	{
-		delete_quote2(&s, i, 39);
-		delete_quote2(&s, i, '"');
-		i++;
-	}
-	*arg = s;
 }
 
 int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
@@ -188,11 +99,11 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 		path = get_path(ft_strtrim(tmp[1], " "));
 		clean_input(&path);
 		if ((new_cmd->fd_in = open(path, O_RDONLY)) == -1)
-		{	
+		{
 			write(1, "No sush file or directory\n", 26);
 			return (1);
 		}
-		free(path);
+		free(path); // ca m'a l'air chelou ce free @yamin
 	}
 	if (i > 0)
 		new_cmd->input = PIPE;
@@ -213,26 +124,7 @@ void		clean_input(char **path)
 	{
 		tmp = ft_split_shell(*path, '>');
 		free(*path);
-//		*path = ft_strtrim(tmp[0], " ");
 		*path = ft_strdup(ft_strtrim(tmp[0], " "));
 		free_split(tmp);
 	}
-}
-
-void		get_arg(char **arg, char *str)
-{
-	int		i;
-	char	**tmp;
-
-	i = 0;
-	tmp = ft_split_shell(str, '>');
-	while (tmp[0][i] == ' ')
-		i++;
-	while (tmp[0][i] && tmp[0][i] != ' ')
-		i++;
-	while (tmp[0][i] == ' ')
-		i++;
-//	*arg = ft_strdup(ft_strtrim(&tmp[0][i], " "));
-	*arg = ft_strtrim(&tmp[0][i], " ");
-	free_split(tmp);
 }

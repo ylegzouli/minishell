@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/28 10:58:45 by acoudouy          #+#    #+#             */
+/*   Updated: 2020/05/28 10:58:47 by acoudouy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 void		free_cmd(t_cmd *lst_cmd)
@@ -8,7 +20,6 @@ void		free_cmd(t_cmd *lst_cmd)
 	tmp = lst_cmd;
 	while (tmp)
 	{
-//		printf("rrererere\n");
 		ft_lstclear(&tmp->fd_out, &free);
 		free(tmp->arg);
 		if (tmp->cmd == 8 || tmp->cmd == 9)

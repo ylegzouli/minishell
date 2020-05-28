@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/28 10:43:49 by acoudouy          #+#    #+#             */
+/*   Updated: 2020/05/28 10:45:58 by acoudouy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 int					check_cd_path(char *s)
@@ -98,18 +110,16 @@ int					cd(char *s1)
 
 	i = -1;
 	if (s1[0] == 0)
-		return(print_cd_error(s1));
+		return (print_cd_error(s1));
 	s2 = ft_split_shell(s1, ' ');
 	delete_quote(&s2[0]);
 	s = s2[0];
 	while (check_cd_path(s + 3 * ++i) == 1)
 		go_up();
-	if (s[2 * i] == '\0' || (s[2 * i + 1] == '\0') )
+	if (s[2 * i] == '\0' || (s[2 * i + 1] == '\0'))
 	{
 		copy_old_pwd();
 		new_pwd(g_data->path);
-		free_split(s2);
-		return (0);
 	}
 	else if (s[2 * i] == '.' || check_cd_path(s + 3 * i) == 3)
 	{

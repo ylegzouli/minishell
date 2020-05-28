@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:46:20 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/20 03:23:28 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/28 10:48:36 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int			echo(char *input, char **result, t_cmd *cmd)
 	int		fd[1];
 
 	i = 0;
-	if (input[0] == 0 )
+	if (input[0] == 0)
 	{
 		ft_print("", 0, cmd, 2);
 		return (0);

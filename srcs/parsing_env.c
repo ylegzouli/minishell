@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_env.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/28 11:05:06 by acoudouy          #+#    #+#             */
+/*   Updated: 2020/05/28 11:20:42 by acoudouy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 char				*env_question_found(char *line)
@@ -39,6 +51,20 @@ int					check_space_after_dollar(char *line)
 	return (0);
 }
 
+static void			var_env_not_found2(char **ret, char *line,
+			int i, int len_var)
+{
+	len_var--;
+	if (i > 0 && line[i - 1] == '"' && line[i + len_var + 1] == '"')
+		len_var--;
+	while (line[i + len_var + 2])
+	{
+		(*ret)[i] = line[i + len_var + 2];
+		i++;
+	}
+	free(line);
+}
+
 static char			*var_env_not_found(t_env *env, char *line)
 {
 	int		i;
@@ -59,17 +85,9 @@ static char			*var_env_not_found(t_env *env, char *line)
 	if (!(ret = malloc(sizeof(char) * (size + 1))))
 		return (0);
 	ret[size] = '\0';
-	while (line[++i] && line[i] != '$' )
+	while (line[++i] && line[i] != '$')
 		ret[i] = line[i];
-	len_var--;
-	if (i > 0 && line[i - 1] == '"' && line[i+ len_var + 1] == '"')
-		len_var--;
-	while (line[i + len_var + 2])
-	{
-		ret[i] = line[i + len_var + 2];
-		i++;
-	}
-	free(line);
+	var_env_not_found2(&ret, line, i, len_var);
 	return (ret);
 }
 
@@ -105,7 +123,8 @@ char				*parse_env2(char *res, t_env *tmp, t_env *env, int i)
 {
 	void	*null;
 
-	if (res[i + 1] && tmp != 0 && (i + 1 + ft_strlen(tmp->name) >= ft_strlen(res)
+	if (res[i + 1] && tmp != 0 &&
+		(i + 1 + ft_strlen(tmp->name) >= ft_strlen(res)
 		|| ft_isalpha(res[i + 1 + ft_strlen(tmp->name)]) == 0))
 		res = var_env_found(env, res, tmp);
 	else
@@ -136,5 +155,6 @@ char				*parse_env(t_env *env, char *line)
 			i = 0;
 		}
 	}
+	// ici il faudra free RES et LINE plus tard, attention
 	return (res);
 }

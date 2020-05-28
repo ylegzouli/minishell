@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/28 10:56:53 by acoudouy          #+#    #+#             */
+/*   Updated: 2020/05/28 10:58:00 by acoudouy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 int			check_quote_export(char **s)
@@ -18,15 +30,11 @@ int			check_quote_export(char **s)
 		i++;
 	}
 	if (q >= 2)
-	{
 		delete_quote2(s, 0, '"');
-		return (1);
-	}
 	if (k >= 2)
-	{
 		delete_quote2(s, 0, 39);
+	if (q >= 2 || k >= 2)
 		return (1);
-	}
 	return (0);
 }
 

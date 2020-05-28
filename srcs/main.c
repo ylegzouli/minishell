@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/28 10:59:55 by acoudouy          #+#    #+#             */
+/*   Updated: 2020/05/28 11:00:23 by acoudouy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 t_data		*g_data;
@@ -13,12 +25,10 @@ int			main(void)
 	return (0);
 }
 
-
 int			ft_start(t_data *data)
 {
 	char *line;
 
-//	while (1) ------- MODIF
 	while (data->exit == 0)
 	{
 		data->exit = 0;
@@ -39,6 +49,5 @@ int			ft_start(t_data *data)
 
 void		ft_print_prompt(void)
 {
-//	write(1, "minishell$> ", 0);
-	write(1, "minishell$> ", 0);
+	write(1, "minishell$> ", 12);
 }

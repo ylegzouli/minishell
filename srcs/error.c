@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/28 10:55:36 by acoudouy          #+#    #+#             */
+/*   Updated: 2020/05/28 10:56:32 by acoudouy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 void		print_cmd_not_found(t_cmd *cmd)
@@ -38,7 +50,7 @@ int			print_error_unexpected(char c)
 	return (1);
 }
 
-int			print_error_nl_expected()
+int			print_error_nl_expected(void)
 {
 	g_data->step_cmd++;
 	write(2, "minishell: ", 11);
@@ -97,7 +109,7 @@ int			check_error_unexpected(char *s)
 int			check_red(char *line)
 {
 	int		i;
-	
+
 	i = ft_strlen(line);
 	if (i > 0)
 	{
