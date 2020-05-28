@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:46:20 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/28 14:53:33 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/05/28 16:23:14 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 		else if (input[i + 2])
 			opt = 0;
 	}
-	*result = ft_strdup(input + i);
+	if ((*result = ft_strdup(input + i)) == 0)
+		return (1);
 	printer(i, result, cmd, opt);
 	return (0);
 }
@@ -57,7 +58,7 @@ int			echo(char *input, char **result, t_cmd *cmd)
 		ft_print("", 0, cmd, 2);
 		return (0);
 	}
-	if (ft_parse_echo(input, fd, result, cmd))
+	if (ft_parse_echo(input, fd, result, cmd) == 1)
 		return (1);
 	return (0);
 }

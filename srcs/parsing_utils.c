@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 11:22:34 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/05/28 11:37:04 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/05/28 16:35:14 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int			new_arg(char **s, char c)
 	(*s)[ft_strlen(old) - 2] = 0;
 	while (old[i])
 	{
-		if (old[i] != c)
+		if (old[i] != c || j >= 2)
 			(*s)[i - j] = old[i];
 		else
 			j++;
