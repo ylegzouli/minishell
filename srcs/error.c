@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:55:36 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/05/28 10:56:32 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/05/28 16:05:12 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int			check_error_unexpected(char *s)
 
 	i = -1;
 	if (s[0] && (s[0] == '|' || s[0] == ';'))
+		return (print_error_unexpected(s[0]));
+	if (s[0] && s[0] == '<')
 		return (print_error_unexpected(s[0]));
 	while (s[++i])
 	{
