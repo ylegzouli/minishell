@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:59:55 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/05/28 11:00:23 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/05/28 16:56:59 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int			ft_start(t_data *data)
 		{
 			signal(SIGINT, signal_prevent);
 			signal(SIGQUIT, signal_prevent);
+			signal(EOF, signal_exit);
 			ft_print_prompt();
 			get_next_line(0, &line);
 			ft_lstadd_front_hist(data, line);

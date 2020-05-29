@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 11:21:21 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/05/28 11:21:22 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/05/28 16:54:03 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ void	signal_prevent(int sig)
 		g_data->ret = 0;
 	}
 }
+void	signal_exit(int sig)
+{
+	if (sig == EOF)
+		exit(0);
+}
+
 
 void	signal_quit(int sig)
 {

@@ -136,7 +136,7 @@ int					check_red(char *line);
 void				exept_case(char **cmd, t_cmd *new_cmd);
 void				delete_quote(char **arg);
 int					delete_quote2(char **s, int i, char c);
-
+void				signal_exit(int sig);
 //------------------------------ PARSING ---------------------------------
 
 int					ft_parse(t_cmd *new_cmd, char *cmd, int i, int size);
