@@ -24,11 +24,14 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 	{
 		get_output(new_cmd, &tmp, i, size);
 		clean_fdout(&new_cmd->fd_out);
-		get_cmd(new_cmd, tmp);
-		if (get_input(new_cmd, tmp, i, size) == 1)
+		if (tmp[0] != 0)
 		{
-			free(tmp);
-			return (1);
+			get_cmd(new_cmd, tmp);
+			if (get_input(new_cmd, tmp, i, size) == 1)
+			{
+				free(tmp);
+				return (1);
+			}
 		}
 	}
 	free(tmp);

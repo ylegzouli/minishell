@@ -50,7 +50,6 @@ int			get_fd(t_cmd *new_cmd, char **cmd)
 		i++;
 	}
 	free_split(tmp);
-//	printf("ICI\n");
 	return (0);
 }
 
@@ -95,10 +94,10 @@ void		clean_com(char **cmd, t_cmd *new_cmd, char *tmp, char **tmp2)
 	tmp = ft_strdup(ft_strnstr(*cmd, tmp2[0], 1000) + fd);
 	free(*cmd);
 	*cmd = ft_strdup(ft_strtrim(tmp, " "));
-//	printf("%s\n", *cmd);
 	free_split(tmp2);
 	if ((*cmd)[0] == '>')
 		exept_case(cmd, new_cmd);
+//	printf("%s\n", tmp);
 }
 
 void		input_case(int i, char **tmp, t_cmd *new_cmd, char **path)
