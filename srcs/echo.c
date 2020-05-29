@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:46:20 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/28 16:23:14 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/05/29 10:12:05 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 	i = 0;
 	opt = 0;
 	quote = 0;
+//	write(1,"debut echo\n",11);
 	while (input[i] && input[i + 1] && input[i] == '-' && input[i + 1] == 'n')
 	{
 		opt = 1;
@@ -34,6 +35,7 @@ int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 	if ((*result = ft_strdup(input + i)) == 0)
 		return (1);
 	printer(i, result, cmd, opt);
+//	write(1,"hello\n",6);
 	return (0);
 }
 
@@ -53,6 +55,7 @@ int			echo(char *input, char **result, t_cmd *cmd)
 	int		fd[1];
 
 	i = 0;
+//	write(1,"echo1\n",6);
 	if (input[0] == 0)
 	{
 		ft_print("", 0, cmd, 2);

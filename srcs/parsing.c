@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:31:59 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/28 16:35:52 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/05/29 10:44:20 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 		if ((new_cmd->fd_in = open(path, O_RDONLY)) == -1)
 		{
 			write(1, "No sush file or directory\n", 26);
-			return (1);
+			return (1); // free_split tmp aussi ?
 		}
 		free(path); // ca m'a l'air chelou ce free @yamin
 	}

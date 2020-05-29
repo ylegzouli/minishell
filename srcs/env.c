@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:49:11 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/05/28 10:54:24 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/05/29 11:04:03 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int				env(t_env *env, char **result,
 	tmp = env;
 	g_data->ret = 0;
 	*result = env_copy(tmp, ret);
+	free(ret);
 	if (print == 1)
 		ft_print(*result, ft_strlen(*result), cmd, 3);
 	return (0);
@@ -107,7 +108,10 @@ int				command_var_env(t_env *env,
 	tmp = env_w;
 	nl = get_cmd_n_found(cmd);
 	if (check_char(line, '=') == 0)
+	{
+		free(nl);
 		return (-1);
+	}
 	if (check_variable_env(env, line, check_char(nl, '=')) == 1 ||
 		check_variable_env(env_w, line, check_char(nl, '=')) == 1)
 	{
@@ -122,6 +126,7 @@ int				command_var_env(t_env *env,
 		free(nl);
 		return (1);
 	}
+	free(nl);
 	return (0);
 }
 

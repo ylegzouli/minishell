@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:42:05 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/28 15:35:21 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/05/29 10:08:38 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void		exept_case(char **cmd, t_cmd *new_cmd)
 			tmp = tmp + 1;
 		tmp2 = ft_split(tmp, ' ');
 		tmp = get_path(ft_strtrim(tmp2[0], " "));
+		//mec tu remalloc un truc deja malloc
 		if (fd == 2)// && !is_open(fd, new_cmd->fd_out))
 			fd = open_file(tmp, 1);
 		else// if (!is_open(fd, new_cmd->fd_out))

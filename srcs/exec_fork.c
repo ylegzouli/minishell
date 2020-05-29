@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:55:15 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/22 19:45:54 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/05/29 10:50:12 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void		close_tube(int **tube, t_cmd *cmd)
 	}
 	free(tube);
 	if (cmd->cmd == 8 || cmd->cmd == 9)
-		free(g_data->cmd_n_found);
+		free(g_data->cmd_n_found); // double free non ? 
 	dup2(STDOUT_FILENO, STDIN_FILENO);
 }
 
