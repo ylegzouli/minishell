@@ -18,7 +18,10 @@ char		*parsing_file(char ***envi, char ***arg, char **tmp, t_cmd *cmd)
 	*envi = ft_split(*tmp, '\n');
 	free(*tmp);
 	if (!(*tmp = get_path_bin()))
+	{
+		free_split(*envi);
 		cmd->cmd = NOTFOUND;
+	}
 	*arg = get_arguments(*tmp, cmd->arg);
 //	free(*tmp);// -----> MODIF fais bug "ls | grep M | wc"
 	return (0);

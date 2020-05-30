@@ -47,7 +47,7 @@ int			ft_init_data(t_data *data)
 //	printf("%p\n", data->lst_cmd);
 	if (!(data->lst_env = malloc(sizeof(t_env))))
 		return (ERROR_MALLOC);
-//	printf("%p\n", data->lst_env);
+//	printf("LEAK INIT_DATA: %p\n", data->lst_env);
 	if (!(data->lst_env_waiting = malloc(sizeof(t_env))))
 		return (ERROR_MALLOC);
 //	printf("%p\n", data->lst_env_waiting);

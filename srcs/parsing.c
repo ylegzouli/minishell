@@ -99,14 +99,19 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 	if (tmp[1] && new_cmd->fd_in == -1)
 	{
 		new_cmd->input = REDIRECT;
-		path = get_path(ft_strtrim(tmp[1], " "));
+		tmp2 = ft_strtrim(tmp[1], " ");
+		path = get_path(tmp2);
+		free(tmp2);
 		clean_input(&path);
 		if ((new_cmd->fd_in = open(path, O_RDONLY)) == -1)
 		{
+			free(path);
+			free_split(tmp);
+			free_cmd(new_cmd);
 			write(1, "No sush file or directory\n", 26);
-			return (1); // free_split tmp aussi ?
+			return (1); // free_split tmp aussi ? YES
 		}
-		free(path); // ca m'a l'air chelou ce free @yamin
+		free(path); // ca m'a l'air chelou ce free | NO trkl
 	}
 	if (i > 0)
 		new_cmd->input = PIPE;
@@ -115,7 +120,7 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 	get_arg(&new_cmd->arg, tmp[0]);
 	if (new_cmd->cmd != EXPORT && new_cmd->cmd != EXEC && new_cmd->cmd != CD)
 		delete_quote(&new_cmd->arg);
-	free_split(tmp); //--------- MODIF comment free ?
+	free_split(tmp);
 	return (0);
 }
 

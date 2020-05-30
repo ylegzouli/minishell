@@ -15,18 +15,17 @@
 int			get_output(t_cmd *new_cmd, char **cmd, int i, int size)
 {
 	get_fd(new_cmd, cmd);
-//	printf("ICI\n");
 	if (i < size - 1)
 		new_cmd->output = PIPE;
 	else if (i == size - 1 && ft_lstsize(new_cmd->fd_out) >= 1)
 		new_cmd->output = STDOUT;
-//	printf("ICI\n");
 	return (0);
 }
 
 int			get_fd(t_cmd *new_cmd, char **cmd)
 {
 	char		**tmp;
+	char		*temp;
 	int			i;
 	int			fd;
 	char		*path;
@@ -37,15 +36,16 @@ int			get_fd(t_cmd *new_cmd, char **cmd)
 	while (tmp[i])
 	{
 		input_case(i, tmp, new_cmd, &path);
+		temp = ft_strtrim(tmp[i], " >");
 		if (!(ft_strchr(tmp[i], '<')))
-			path = get_path(ft_strtrim(tmp[i], " >"));
-		new_cmd->output = REDIRECT;
-		if (tmp[i][0] == '>' && tmp[i][1] != '>')// && !is_open(fd, new_cmd->fd_out))
+			path = get_path(temp);
+		free(temp);
+		new_cmd->output = REDIRECT;//--> Pas utile ? (norme)
+		if (tmp[i][0] == '>' && tmp[i][1] != '>')
 			fd = open_file(path, 1);
-		else// if (!is_open(fd, new_cmd->fd_out))
+		else
 			fd = open_file(path, 2);
 		ft_lstadd_back(&new_cmd->fd_out, ft_lstnew_malloc(&fd, sizeof(fd)));
-//		ft_lstadd_back(&new_cmd->fd_out, new_cmd->fd_out2);
 		free(path);
 		i++;
 	}
@@ -59,31 +59,32 @@ void		exept_case(char **cmd, t_cmd *new_cmd)
 	char	*tmp3;
 	char	**tmp2;
 	int		fd;
+//	t_list	*lst;
 
 	fd = 0;
 	tmp = ft_strtrim(*cmd, " ");
-	tmp3 = tmp;
 	if (tmp[0] && tmp[0] == '>')
 	{
-		while (tmp[0] == '>' && (++fd))
-			tmp = tmp + 1;
-		tmp2 = ft_split(tmp, ' ');
-		tmp = get_path(ft_strtrim(tmp2[0], " "));
-		//mec tu remalloc un truc deja malloc
-		if (fd == 2)// && !is_open(fd, new_cmd->fd_out))
+		while (tmp[fd] == '>')
+			fd++;
+		tmp2 = ft_split(&tmp[fd], ' ');
+		free(tmp);
+		tmp3 = ft_strtrim(tmp2[0], " ");
+		tmp = get_path(tmp3);
+		free(tmp3);
+		if (fd == 2)
 			fd = open_file(tmp, 1);
-		else// if (!is_open(fd, new_cmd->fd_out))
+		else
 			fd = open_file(tmp, 2);
+//		lst = ft_lstnew_malloc(&fd, sizeof(int));
+//		ft_lstadd_back(&new_cmd->fd_out, lst);
+//		ft_lstclear(&lst, &free);
+//		free(lst->content);
 		ft_lstadd_back(&new_cmd->fd_out, ft_lstnew_malloc(&fd, sizeof(fd)));
-//		fd = ft_strlen(tmp2[0]);
-//		free(tmp);
-//		tmp = ft_strnstr(*cmd, tmp2[0], 1000) + 1;
-//		free(*cmd);
-//		*cmd = ft_strdup(tmp);
-//		free_split(tmp2);
 		clean_com(cmd, new_cmd, tmp, tmp2);
 	}
-	free(tmp3);
+	else
+		free(tmp);
 }
 
 void		clean_com(char **cmd, t_cmd *new_cmd, char *tmp, char **tmp2)
@@ -94,11 +95,11 @@ void		clean_com(char **cmd, t_cmd *new_cmd, char *tmp, char **tmp2)
 	free(tmp);
 	tmp = ft_strdup(ft_strnstr(*cmd, tmp2[0], 1000) + fd);
 	free(*cmd);
-	*cmd = ft_strdup(ft_strtrim(tmp, " "));
+	*cmd = ft_strtrim(tmp, " ");
+	free(tmp);
 	free_split(tmp2);
 	if ((*cmd)[0] == '>')
 		exept_case(cmd, new_cmd);
-//	printf("%s\n", tmp);
 }
 
 void		input_case(int i, char **tmp, t_cmd *new_cmd, char **path)
@@ -157,21 +158,3 @@ void		clean_fdout(t_list **fd)
 		free(tmp);
 	}
 }
-/*
-int			is_open(int	fd, t_list *li)
-{
-	li = li->next;
-	while (li)
-	{
-//		printf("%d\n", *(int*)(li->content));
-//		printf("%d\n", fd);
-		if (fd == *(int *)li->content)
-			return (1);
-//		printf("ICI\n");
-		li = li->next;
-	}
-	return (0);
-}
-*/
-
-

@@ -58,6 +58,7 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 	else if (cmd->cmd == EXIT)
 	{
 		free_data();
+//		while (1) {};
 		g_data->exit = 1;
 	}
 	else if (cmd->cmd == EXPORT)
