@@ -19,7 +19,10 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 	tmp = ft_strdup(cmd);
 	delete_char(&tmp);
 	if (check_char(cmd, '$') == 1)
+	{
+		free(tmp);
 		tmp = parse_env(g_data->lst_env, cmd);
+	}
 	if (tmp[0] != 0)
 	{
 		get_output(new_cmd, &tmp, i, size);
