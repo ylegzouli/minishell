@@ -21,7 +21,7 @@ void		print_cmd_not_found(t_cmd *cmd)
 	ft_putnbr_fd(cmd->nb_cmd, 2);
 	write(2, ": ", 2);
 	write(2, g_data->cmd_n_found, ft_strlen(g_data->cmd_n_found));
-	if (cmd->arg[0] != 0)
+	if (cmd->arg && cmd->arg[0] != 0)
 	{
 		write(2, " ", 1);
 		write(2, cmd->arg, ft_strlen(cmd->arg));

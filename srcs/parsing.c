@@ -107,10 +107,11 @@ int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 		clean_input(&path);
 		if ((new_cmd->fd_in = open(path, O_RDONLY)) == -1)
 		{
+			print_cmd_not_found(new_cmd);
+//			write(1, "No sush file or directory\n", 26);
 			free(path);
 			free_split(tmp);
 			free_cmd(new_cmd);
-			write(1, "No sush file or directory\n", 26);
 			return (1); // free_split tmp aussi ? YES
 		}
 		free(path); // ca m'a l'air chelou ce free | NO trkl

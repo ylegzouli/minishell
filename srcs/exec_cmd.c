@@ -72,7 +72,7 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 	else if (cmd->cmd == EXEC)
 	{
 		if (execve(path, arg, envi) == -1)
-			write(1, "Erreur ouverture fichier\n", 25);
+			print_cmd_not_found(cmd);
 	}
 	else if (cmd->cmd == NOTFOUND && command_var_env(g_data->lst_env,
 		g_data->lst_env_waiting, g_data->cmd_n_found, cmd) == -1)
