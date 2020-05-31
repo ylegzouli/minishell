@@ -39,16 +39,3 @@ void		ft_lstadd_back_cmd(t_cmd *new)
 		tmp = tmp->next;
 	tmp->next = new;
 }
-
-void        print_hist(t_hist *h)
-{
-    t_hist *tmp;
-
-    tmp = h;
-    while (tmp)
-    {
-		printf("%s\n", tmp->line);
-        tmp = tmp->next;
-    }
-//  free(tmp);
-}

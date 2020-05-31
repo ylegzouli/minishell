@@ -39,7 +39,8 @@ void		get_empty_pipe(char **cmd)
 int			parser(t_cmd ***c, char ***envi, char ***arg, char **tmp)
 {
 	ft_init_lst(&(*c)[g_data->i]);
-	if (ft_parse((*c)[g_data->i], g_data->cmd[g_data->i], g_data->i, g_data->size) == 1)
+	if (ft_parse((*c)[g_data->i],
+		g_data->cmd[g_data->i], g_data->i, g_data->size) == 1)
 		return (1);
 	if ((*c)[g_data->i]->cmd == EXEC)
 		parsing_file(envi, arg, tmp, (*c)[g_data->i]);
@@ -47,4 +48,13 @@ int			parser(t_cmd ***c, char ***envi, char ***arg, char **tmp)
 	if (g_data->size == 1 && (*c)[g_data->i]->cmd != EXEC)
 		ft_exec_cmd((*c)[g_data->i], *arg, *envi, *tmp);
 	return (0);
+}
+
+void		start_input(char **tmp, char **path)
+{
+	char	*tmp2;
+
+	tmp2 = ft_strtrim(tmp[1], " ");
+	*path = get_path(tmp2);
+	free(tmp2);
 }

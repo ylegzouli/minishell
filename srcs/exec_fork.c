@@ -37,7 +37,6 @@ int			init_fork(char *line)
 	if (g_data->cmd[g_data->i] && !(g_data->exit))
 		executor(new_cmd, tube);
 	close_tube(tube, *new_cmd);
-	free_split(g_data->cmd); //---------> MODIF fais abort echo $var
 	free(new_cmd);
 	return (0);
 }
@@ -52,8 +51,8 @@ void		close_tube(int **tube, t_cmd *cmd)
 	{
 		close(tube[i][0]);
 		close(tube[i][1]);
-			wait(&status);
-			wait(&status);
+		wait(&status);
+		wait(&status);
 		free(tube[i]);
 		i++;
 	}
@@ -61,8 +60,9 @@ void		close_tube(int **tube, t_cmd *cmd)
 	if (cmd->cmd == 9)
 		g_data->ret = WEXITSTATUS(status);
 	if (cmd->cmd == 8 || cmd->cmd == 9)
-		free(g_data->cmd_n_found); // double free non ? 
+		free(g_data->cmd_n_found);
 	dup2(STDOUT_FILENO, STDIN_FILENO);
+	free_split(g_data->cmd);
 }
 
 int			executor(t_cmd **cmd, int **tube)
@@ -73,10 +73,9 @@ int			executor(t_cmd **cmd, int **tube)
 	char	**environnement;
 
 	if (parser(&cmd, &environnement, &arguments, &tmp) == 0
-		&& !(g_data->size == 1 && cmd[g_data->i]->cmd != EXEC) && !g_data->exit) //----------- MODIF
+		&& !(g_data->size == 1 && cmd[g_data->i]->cmd != EXEC) && !g_data->exit)
 	{
-		signal(SIGINT, signal_quit);
-		signal(SIGQUIT, signal_quit);
+		sigsig();
 		pid = fork();
 		if (pid == 0)
 		{
@@ -84,15 +83,13 @@ int			executor(t_cmd **cmd, int **tube)
 			redirect(tube[g_data->i], cmd[g_data->i]);
 			if (is_cmd_write(cmd[g_data->i]) == 1)
 				ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
-			free_data();
-			g_data->exit = 1;
+			ft_exit();
 		}
 		else if (pid < 0)
 			return (1);
 		if (cmd[g_data->i]->cmd == 9)
 			free(tmp);
 		dad(tube, cmd, environnement, arguments);
-
 	}
 	return (0);
 }
@@ -103,7 +100,7 @@ void		dad(int **tube, t_cmd **cmd, char **environnement, char **arguments)
 
 	i = 0;
 	if (cmd[g_data->i]->cmd == 9)
-	{	
+	{
 		free_split(arguments);
 		free_split(environnement);
 	}

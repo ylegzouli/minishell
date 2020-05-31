@@ -40,17 +40,14 @@ int			ft_init_data(t_data *data)
 	find_path(data);
 	if (!(data->historic = malloc(sizeof(t_hist))))
 		return (ERROR_MALLOC);
-//	printf("%p\n", data->historic);
 	data->historic->next = NULL;
 	if (!(data->lst_cmd = malloc(sizeof(t_cmd))))
 		return (ERROR_MALLOC);
-//	printf("%p\n", data->lst_cmd);
 	if (!(data->lst_env = malloc(sizeof(t_env))))
 		return (ERROR_MALLOC);
 //	printf("LEAK INIT_DATA: %p\n", data->lst_env);
 	if (!(data->lst_env_waiting = malloc(sizeof(t_env))))
 		return (ERROR_MALLOC);
-//	printf("%p\n", data->lst_env_waiting);
 	if (ft_init_data2(data) == ERROR_MALLOC)
 		return (ERROR_MALLOC);
 	return (SUCCESS);

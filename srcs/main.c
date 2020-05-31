@@ -52,3 +52,9 @@ void		ft_print_prompt(void)
 {
 	write(1, "minishell$> ", 12);
 }
+
+void		ft_exit(void)
+{
+	free_data();
+	g_data->exit = 1;
+}

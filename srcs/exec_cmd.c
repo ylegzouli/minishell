@@ -49,18 +49,12 @@ int			is_cmd_write(t_cmd *cmd)
 void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 {
 	cmd->nb_cmd = ++(g_data->step_cmd);
-//	printf("%d\n", cmd->nb_cmd);
-//	printf("%d\n", g_data->step_cmd);
 	if (cmd->cmd == ECHO)
 		echo(cmd->arg, &cmd->result, cmd);
 	else if (cmd->cmd == CD)
 		cd(cmd->arg);
 	else if (cmd->cmd == EXIT)
-	{
-		free_data();
-//		while (1) {};
-		g_data->exit = 1;
-	}
+		ft_exit();
 	else if (cmd->cmd == EXPORT)
 		export(g_data->lst_env, cmd->arg, &cmd->result, cmd);
 	else if (cmd->cmd == ENV)
@@ -114,7 +108,7 @@ void		ft_print(char *str, int size, t_cmd *cmd, int i)
 		*(int *)tmp->content != 0)
 	{
 		if (tmp->next == NULL)
-		{	
+		{
 			write(*(int *)tmp->content, str, size);
 			if (i == 1 || i == 2)
 				write(*(int *)tmp->content, "\n", 1);

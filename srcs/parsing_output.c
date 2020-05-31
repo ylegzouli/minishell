@@ -22,7 +22,7 @@ int			get_output(t_cmd *new_cmd, char **cmd, int i, int size)
 	return (0);
 }
 
-int			get_fd(t_cmd *new_cmd, char **cmd)
+void		get_fd(t_cmd *new_cmd, char **cmd)
 {
 	char		**tmp;
 	char		*temp;
@@ -40,7 +40,6 @@ int			get_fd(t_cmd *new_cmd, char **cmd)
 		if (!(ft_strchr(tmp[i], '<')))
 			path = get_path(temp);
 		free(temp);
-//		new_cmd->output = REDIRECT;//--> Pas utile ? (norme)
 		if (tmp[i][0] == '>' && tmp[i][1] != '>')
 			fd = open_file(path, 1);
 		else
@@ -50,7 +49,6 @@ int			get_fd(t_cmd *new_cmd, char **cmd)
 		i++;
 	}
 	free_split(tmp);
-	return (0);
 }
 
 void		exept_case(char **cmd, t_cmd *new_cmd)

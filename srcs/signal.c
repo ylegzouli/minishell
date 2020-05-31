@@ -32,6 +32,11 @@ void	signal_exit(int sig)
 		exit(0);
 }
 
+void	sigsig(void)
+{
+	signal(SIGINT, signal_quit);
+	signal(SIGQUIT, signal_quit);
+}
 
 void	signal_quit(int sig)
 {

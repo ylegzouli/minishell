@@ -22,9 +22,7 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 		tmp = parse_env(g_data->lst_env, cmd);
 	if (tmp[0] != 0)
 	{
-//		printf("[%s]\n", tmp);
 		get_output(new_cmd, &tmp, i, size);
-//		printf("[%s]\n", tmp);
 		clean_fdout(&new_cmd->fd_out);
 		if (tmp[0] != 0)
 		{
@@ -39,7 +37,6 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 	free(tmp);
 	return (0);
 }
-
 
 void		get_cmd(t_cmd *new_cmd, char *cmd)
 {
@@ -93,28 +90,20 @@ void		clean_cmd(char **cmd)
 int			get_input(t_cmd *new_cmd, char *cmd, int i, int size)
 {
 	char	**tmp;
-	char	*tmp2;
 	int		j;
 	char	*path;
 
 	tmp = ft_split_shell(cmd, '<');
 	if (tmp[1] && new_cmd->fd_in == -1)
 	{
-		new_cmd->input = REDIRECT;
-		tmp2 = ft_strtrim(tmp[1], " ");
-		path = get_path(tmp2);
-		free(tmp2);
 		clean_input(&path);
+		start_input(tmp, &path);
 		if ((new_cmd->fd_in = open(path, O_RDONLY)) == -1)
 		{
-			print_cmd_not_found(new_cmd);
-//			write(1, "No sush file or directory\n", 26);
-			free(path);
-			free_split(tmp);
-			free_cmd(new_cmd);
-			return (1); // free_split tmp aussi ? YES
+			free_input_error(new_cmd, path, tmp);
+			return (1);
 		}
-		free(path); // ca m'a l'air chelou ce free | NO trkl
+		free(path);
 	}
 	if (i > 0)
 		new_cmd->input = PIPE;

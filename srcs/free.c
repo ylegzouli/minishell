@@ -21,16 +21,23 @@ void		free_cmd(t_cmd *lst_cmd)
 	while (tmp)
 	{
 		ft_lstclear(&tmp->fd_out, &free);
-//		free(tmp->fd_out);
 		free(tmp->arg);
 		if (tmp->cmd == 8 || tmp->cmd == 9)
 			free(tmp->cmd_temp);
 		if (tmp->cmd == 7)
-			free(tmp->result); //--- MODIF fais abort env
+			free(tmp->result);
 		tmp2 = tmp->next;
 		free(tmp);
 		tmp = tmp2;
 	}
+}
+
+void		free_input_error(t_cmd *cmd, char *path, char **tmp)
+{
+	print_cmd_not_found(cmd);
+	free(path);
+	free_split(tmp);
+	free_cmd(cmd);
 }
 
 void		free_hist(t_hist *h)
@@ -49,16 +56,11 @@ void		free_hist(t_hist *h)
 	free(tmp);
 }
 
-void		free_data()
+void		free_data(void)
 {
 	free_list_env(g_data->lst_env);
 	free_list_env(g_data->lst_env_waiting);
 	free_cmd(g_data->lst_cmd);
-//	free(g_data->lst_env);
 	free_hist(g_data->historic);
 	free(g_data->pipe);
-//	free(g_data->path);
-//	free(g_data);
-//	free(g_data->cmd_n_found);
-//	free_split(g_data->cmd);
 }

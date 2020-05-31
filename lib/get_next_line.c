@@ -93,11 +93,7 @@ int		get_next_line(int fd, char **line)
 		return (0);
 	if (ft_newline(str) == 1)
 		ft_buffer_cpy(&str, size_line);
-//	else
-//	{
-		free(str);
-		str = NULL;
-		return (0);
-//	}
-	return (1);
+	free(str);
+	str = NULL;
+	return (0);
 }
