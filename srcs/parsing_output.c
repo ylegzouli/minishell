@@ -40,7 +40,7 @@ int			get_fd(t_cmd *new_cmd, char **cmd)
 		if (!(ft_strchr(tmp[i], '<')))
 			path = get_path(temp);
 		free(temp);
-		new_cmd->output = REDIRECT;//--> Pas utile ? (norme)
+//		new_cmd->output = REDIRECT;//--> Pas utile ? (norme)
 		if (tmp[i][0] == '>' && tmp[i][1] != '>')
 			fd = open_file(path, 1);
 		else
@@ -59,7 +59,6 @@ void		exept_case(char **cmd, t_cmd *new_cmd)
 	char	*tmp3;
 	char	**tmp2;
 	int		fd;
-//	t_list	*lst;
 
 	fd = 0;
 	tmp = ft_strtrim(*cmd, " ");
@@ -76,10 +75,6 @@ void		exept_case(char **cmd, t_cmd *new_cmd)
 			fd = open_file(tmp, 1);
 		else
 			fd = open_file(tmp, 2);
-//		lst = ft_lstnew_malloc(&fd, sizeof(int));
-//		ft_lstadd_back(&new_cmd->fd_out, lst);
-//		ft_lstclear(&lst, &free);
-//		free(lst->content);
 		ft_lstadd_back(&new_cmd->fd_out, ft_lstnew_malloc(&fd, sizeof(fd)));
 		clean_com(cmd, new_cmd, tmp, tmp2);
 	}
@@ -96,6 +91,12 @@ void		clean_com(char **cmd, t_cmd *new_cmd, char *tmp, char **tmp2)
 	tmp = ft_strdup(ft_strnstr(*cmd, tmp2[0], 1000) + fd);
 	free(*cmd);
 	*cmd = ft_strtrim(tmp, " ");
+	if ((*cmd)[0] == 0)
+	{
+		new_cmd->exept_case = 1;
+		free(*cmd);
+		*cmd = ft_strdup("yolo");
+	}
 	free(tmp);
 	free_split(tmp2);
 	if ((*cmd)[0] == '>')

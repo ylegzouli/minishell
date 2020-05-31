@@ -45,18 +45,21 @@ int			init_fork(char *line)
 void		close_tube(int **tube, t_cmd *cmd)
 {
 	int		i;
+	int		status;
 
 	i = 0;
 	while (i < g_data->size)
 	{
 		close(tube[i][0]);
 		close(tube[i][1]);
-		wait(NULL);
-		wait(NULL);
+			wait(&status);
+			wait(&status);
 		free(tube[i]);
 		i++;
 	}
 	free(tube);
+	if (cmd->cmd == 9)
+		g_data->ret = WEXITSTATUS(status);
 	if (cmd->cmd == 8 || cmd->cmd == 9)
 		free(g_data->cmd_n_found); // double free non ? 
 	dup2(STDOUT_FILENO, STDIN_FILENO);

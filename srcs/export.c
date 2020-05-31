@@ -84,6 +84,7 @@ int			export_no_quote(t_env *tmp, char *s, int size, int j)
 		tmp->value[size] = s[j + size];
 	tmp->next = 0;
 	g_data->ret = 0;
+	return (0);
 }
 
 int			export2(t_env *tmp, char *s, int size)

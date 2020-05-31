@@ -98,6 +98,9 @@ void		redirect(int tube[2], t_cmd *cmd)
 
 void		ft_print(char *str, int size, t_cmd *cmd, int i)
 {
+	t_list	*tmp;
+
+	tmp = cmd->fd_out;
 	if (cmd->fd_out->content == NULL)
 	{
 		write(1, str, size);
@@ -107,16 +110,16 @@ void		ft_print(char *str, int size, t_cmd *cmd, int i)
 			free(str);
 		return ;
 	}
-	while (cmd->fd_out && cmd->fd_out->content &&
-		*(int *)cmd->fd_out->content != 0)
+	while (tmp && tmp->content &&
+		*(int *)tmp->content != 0)
 	{
-		if (cmd-> fd_out->next == NULL)
+		if (tmp->next == NULL)
 		{	
-			write(*(int *)cmd->fd_out->content, str, size);
+			write(*(int *)tmp->content, str, size);
 			if (i == 1 || i == 2)
-				write(*(int *)cmd->fd_out->content, "\n", 1);
+				write(*(int *)tmp->content, "\n", 1);
 		}
-		cmd->fd_out = cmd->fd_out->next;
+		tmp = tmp->next;
 	}
 	if (!(i == 2 || i == 3))
 		free(str);

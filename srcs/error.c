@@ -14,6 +14,8 @@
 
 void		print_cmd_not_found(t_cmd *cmd)
 {
+	if (cmd->exept_case)
+		return ;
 	g_data->ret = 127;
 	write(2, "minishell: ", 11);
 	ft_putnbr_fd(cmd->nb_cmd, 2);

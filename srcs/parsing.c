@@ -22,7 +22,9 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 		tmp = parse_env(g_data->lst_env, cmd);
 	if (tmp[0] != 0)
 	{
+//		printf("[%s]\n", tmp);
 		get_output(new_cmd, &tmp, i, size);
+//		printf("[%s]\n", tmp);
 		clean_fdout(&new_cmd->fd_out);
 		if (tmp[0] != 0)
 		{

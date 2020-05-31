@@ -56,6 +56,7 @@ typedef struct		s_cmd
 	struct s_cmd	*next;
 	int				nb_cmd;
 	char			*cmd_temp;
+	int				exept_case;
 }					t_cmd;
 
 typedef struct		s_env
