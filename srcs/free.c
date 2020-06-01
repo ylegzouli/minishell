@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:58:45 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/05/29 10:35:53 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 20:09:08 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		free_cmd(t_cmd *lst_cmd)
 		free(tmp->arg);
 		if (tmp->cmd == 8 || tmp->cmd == 9)
 		{
-			free(tmp->cmd_n_found);	
+			free(tmp->cmd_n_found);
 			free(tmp->cmd_temp);
 		}
 		if (tmp->cmd == 7)

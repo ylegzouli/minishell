@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:49:11 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 17:00:47 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 19:54:57 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int				env(t_env *env, char **result,
 	if (print == 1)
 		ft_print(*result, ft_strlen(*result), cmd, 3);
 	if (cmd->cmd == 5)
-		free(ret);// ------------ MODIF (fais bug env + binaire)
+		free(ret);
 	return (0);
 }
 
-static int		export_env_w(t_env *tmp, char *s)
+int				export_env_w(t_env *tmp, char *s)
 {
 	int		j;
 	int		size;
@@ -89,7 +89,7 @@ static int		export_env_w(t_env *tmp, char *s)
 	return (0);
 }
 
-char		*get_cmd_n_found(t_cmd *cmd)
+char			*get_cmd_n_found(t_cmd *cmd)
 {
 	char	**tmp;
 	char	*nl;
@@ -112,52 +112,6 @@ int				check_arg_not_found(char *s)
 		if (ft_isalpha(s[i]) == 0)
 			return (1);
 		i++;
-	}
-	return (0);
-}
-
-int				command_var_env(t_env *env,
-		t_env *env_w, char *line, t_cmd *cmd)
-{
-	t_env	*tmp;
-	char	*nl;
-
-	tmp = env_w;
-	nl = get_cmd_n_found(cmd);
-	if (check_char(line, '=') == 0 || check_arg_not_found(nl) == 1)
-	{
-		free(nl);
-		return (-1);
-	}
-	if (check_variable_env(env, line, check_char(nl, '=')) == 1 ||
-		check_variable_env(env_w, line, check_char(nl, '=')) == 1)
-	{
-		g_data->ret = 0;
-		free(nl);
-		return (0);
-	}
-	while (tmp->next)
-		tmp = tmp->next;
-	if (export_env_w(tmp, nl) == 1)
-	{
-		free(nl);
-		return (1);
-	}
-	free(nl);
-	return (0);
-}
-
-char			*get_env_value(t_env *env, char *name)
-{
-	t_env		*tmp;
-
-	tmp = env;
-	while (tmp)
-	{
-		if (ft_strcmp(tmp->name, name) != 0)
-			tmp = tmp->next;
-		else
-			return (tmp->value);
 	}
 	return (0);
 }

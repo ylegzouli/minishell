@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/01 20:20:07 by acoudouy          #+#    #+#             */
+/*   Updated: 2020/06/01 20:21:55 by acoudouy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -106,6 +118,7 @@ int					size_int(int n);
 int					check_char(char *s, char c);
 void				printer(int i, char **result, t_cmd *cmd, int opt);
 void				delete_char(char **cmd);
+int					check_space_after_dollar(char *line);
 void				clean_com(char **cmd, t_cmd *new_cmd,
 char *tmp, char **tmp2);
 void				redirect(int tube[2], t_cmd *cmd);
@@ -183,5 +196,10 @@ void				pipe_out(int tube[2]);
 void				free_input_error(t_cmd *cmd, char *path, char **tmp);
 void				start_input(char **tmp, char **path);
 void				sigsig(void);
-
+int					look_for_back_slash(char **result);
+int					export_env_w(t_env *tmp, char *s);
+char				*get_cmd_n_found(t_cmd *cmd);
+int					check_arg_not_found(char *s);
+int					check_quote_export(char **s);
+char				*env_question_found(char **line);
 #endif

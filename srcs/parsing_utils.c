@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 11:22:34 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 17:07:35 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 20:17:00 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void		delete_char(char **cmd)
 	free(*cmd);
 	*cmd = tmp2;
 }
+
 int			new_arg(char **s, char c)
 {
 	int		i;

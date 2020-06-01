@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:46:20 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/29 10:12:05 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 19:18:52 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 	}
 	if ((*result = ft_strdup(input + i)) == 0)
 		return (1);
+	look_for_back_slash(result);
 	printer(i, result, cmd, opt);
 	return (0);
 }

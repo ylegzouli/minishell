@@ -6,37 +6,11 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:56:53 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/05/29 11:31:02 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 20:07:11 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int			check_quote_export(char **s)
-{
-	int		i;
-	int		q;
-	int		k;
-
-	i = 0;
-	q = 0;
-	k = 0;
-	while ((*s)[i] && (*s)[i] != '=')
-	{
-		if ((*s)[i] == '"')
-			q++;
-		else if ((*s)[i] != 39)
-			k++;
-		i++;
-	}
-	if (q >= 2)
-		delete_quote2(s, 0, '"');
-	if (k >= 2)
-		delete_quote2(s, 0, 39);
-	if (q >= 2 || k >= 2)
-		return (1);
-	return (0);
-}
 
 int			check_arg_export(t_env *env, char *s, char **res, t_cmd *cmd)
 {
