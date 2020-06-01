@@ -1,6 +1,6 @@
 .PHONY: all clean fclean re norme
 
-CC = gcc
+CC = clang
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -34,16 +34,16 @@ OBJLIB = $(addprefix $(OBJLIB_PATH)/,$(OBJLIB_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJLIB)
-	gcc -Wall -Wextra -Werror -o ${NAME} ${OBJLIB} ${OBJ}
+	${CC} -Wall -Wextra -Werror -o ${NAME} ${OBJLIB} ${OBJ}
 
 valgrind: $(OBJ) $(OBJLIB)
-	gcc -Wall -Wextra -Werror -ggdb3 -o ${NAME} ${OBJLIB} ${OBJ} 
+	${CC} -Wall -Wextra -Werror -ggdb3 -o ${NAME} ${OBJLIB} ${OBJ} 
 	#valgrind --leak-check=full --show-leak-kinds=all ./minishell
 	valgrind --leak-check=full ./minishell
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) -o $@ -c $<
+	${CC} -o $@ -c $<
 
 $(OBJLIB_PATH)/%.o: $(LIB_PATH)/%.c
 	@mkdir $(OBJLIB_PATH) 2> /dev/null || true

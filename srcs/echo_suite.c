@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 19:18:10 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 19:22:48 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 20:41:59 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,5 @@ int			look_for_back_slash(char **result)
 		}
 		i++;
 	}
+	return (0);
 }
