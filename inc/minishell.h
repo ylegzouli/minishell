@@ -183,6 +183,5 @@ void				pipe_out(int tube[2]);
 void				free_input_error(t_cmd *cmd, char *path, char **tmp);
 void				start_input(char **tmp, char **path);
 void				sigsig(void);
-int					ft_is_sep(const char *str, char c2, char *quote, int i);
 
 #endif
