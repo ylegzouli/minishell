@@ -59,8 +59,6 @@ void		close_tube(int **tube, t_cmd *cmd)
 	free(tube);
 	if (cmd->cmd == 9)
 		g_data->ret = WEXITSTATUS(status);
-	if (cmd->cmd == 8 || cmd->cmd == 9)
-		free(g_data->cmd_n_found);
 	dup2(STDOUT_FILENO, STDIN_FILENO);
 	free_split(g_data->cmd);
 }

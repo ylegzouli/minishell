@@ -20,7 +20,7 @@ void		print_cmd_not_found(t_cmd *cmd)
 	write(2, "minishell: ", 11);
 	ft_putnbr_fd(cmd->nb_cmd, 2);
 	write(2, ": ", 2);
-	write(2, g_data->cmd_n_found, ft_strlen(g_data->cmd_n_found));
+	write(2, cmd->cmd_n_found, ft_strlen(cmd->cmd_n_found));
 	if (cmd->arg && cmd->arg[0] != 0)
 	{
 		write(2, " ", 1);

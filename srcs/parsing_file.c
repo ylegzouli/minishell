@@ -17,7 +17,7 @@ char		*parsing_file(char ***envi, char ***arg, char **tmp, t_cmd *cmd)
 	env(g_data->lst_env, tmp, cmd, 0);
 	*envi = ft_split(*tmp, '\n');
 	free(*tmp);
-	if (!(*tmp = get_path_bin()))
+	if (!(*tmp = get_path_bin(cmd)))
 	{
 		free_split(*envi);
 		cmd->cmd = NOTFOUND;
@@ -26,7 +26,7 @@ char		*parsing_file(char ***envi, char ***arg, char **tmp, t_cmd *cmd)
 	return (0);
 }
 
-char		*get_path_bin(void)
+char		*get_path_bin(t_cmd *cmd)
 {
 	char	*path;
 	char	**tmp;
@@ -36,16 +36,16 @@ char		*get_path_bin(void)
 
 	i = 0;
 	j = 0;
-	if (g_data->cmd_n_found[0] && (g_data->cmd_n_found[0] == '/'
-		|| g_data->cmd_n_found[0] == '.'))
-		path = get_path(g_data->cmd_n_found);
+	if (cmd->cmd_n_found[0] && (cmd->cmd_n_found[0] == '/'
+		|| cmd->cmd_n_found[0] == '.'))
+		path = get_path(cmd->cmd_n_found);
 	else
 	{
 		tmp = ft_split(get_env_value(g_data->lst_env, "PATH"), ':');
 		while (tmp[i] && j == 0)
 		{
 			tmp2 = ft_strjoin(tmp[i], "/");
-			path = check_dir(tmp2, &j);
+			path = check_dir(tmp2, &j, cmd);
 			free(tmp2);
 			i++;
 		}
@@ -54,7 +54,7 @@ char		*get_path_bin(void)
 	return (path);
 }
 
-char		*check_dir(char *path, int *j)
+char		*check_dir(char *path, int *j, t_cmd *cmd)
 {
 	DIR				*dir;
 	struct dirent	*dent;
@@ -64,12 +64,12 @@ char		*check_dir(char *path, int *j)
 	{
 		while ((dent = readdir(dir)))
 		{
-			if (ft_strcmp(dent->d_name, g_data->cmd_n_found) == 0)
+			if (ft_strcmp(dent->d_name, cmd->cmd_n_found) == 0)
 			{
 				if (dir)
 					closedir(dir);
 				*j = 1;
-				return (ft_strjoin(path, g_data->cmd_n_found));
+				return (ft_strjoin(path, cmd->cmd_n_found));
 			}
 		}
 	}

@@ -23,7 +23,10 @@ void		free_cmd(t_cmd *lst_cmd)
 		ft_lstclear(&tmp->fd_out, &free);
 		free(tmp->arg);
 		if (tmp->cmd == 8 || tmp->cmd == 9)
+		{
+			free(tmp->cmd_n_found);	
 			free(tmp->cmd_temp);
+		}
 		if (tmp->cmd == 7)
 			free(tmp->result);
 		tmp2 = tmp->next;

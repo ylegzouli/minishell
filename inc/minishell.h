@@ -51,6 +51,7 @@ typedef struct		s_cmd
 	int				nb_cmd;
 	char			*cmd_temp;
 	int				exept_case;
+	char			*cmd_n_found;
 }					t_cmd;
 
 typedef struct		s_env
@@ -71,7 +72,6 @@ typedef struct		s_data
 	char			path[1000];
 	char			*pipe;
 	int				ret;
-	char			*cmd_n_found;
 	int				step_cmd;
 
 	int				i;
@@ -164,8 +164,8 @@ int					new_pwd(char *s);
 int					copy_old_pwd();
 char				*parsing_file(char ***environnement,
 char ***arguments, char **tmp, t_cmd *cmd);
-char				*get_path_bin();
-char				*check_dir(char *path, int *j);
+char				*get_path_bin(t_cmd *cmd);
+char				*check_dir(char *path, int *j, t_cmd *cmd);
 char				**get_arguments(char *path, char *arg);
 char				*get_name(char *path);
 void				find_path(t_data *data);

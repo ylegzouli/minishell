@@ -56,9 +56,10 @@ int				env(t_env *env, char **result,
 	tmp = env;
 	g_data->ret = 0;
 	*result = env_copy(tmp, ret);
-//	free(ret); ------------ MODIF (fais bug env + binaire)
 	if (print == 1)
 		ft_print(*result, ft_strlen(*result), cmd, 3);
+	if (cmd->cmd == 5)
+		free(ret);// ------------ MODIF (fais bug env + binaire)
 	return (0);
 }
 

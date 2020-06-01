@@ -63,7 +63,7 @@ void		get_cmd(t_cmd *new_cmd, char *cmd)
 		new_cmd->cmd = ENV;
 	else if (tmp[0])
 	{
-		g_data->cmd_n_found = ft_strdup(tmp[0]);
+		new_cmd->cmd_n_found = ft_strdup(tmp[0]);
 		new_cmd->cmd_temp = ft_strdup(cmd);
 		new_cmd->cmd = EXEC;
 	}

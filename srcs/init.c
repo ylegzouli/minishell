@@ -45,7 +45,6 @@ int			ft_init_data(t_data *data)
 		return (ERROR_MALLOC);
 	if (!(data->lst_env = malloc(sizeof(t_env))))
 		return (ERROR_MALLOC);
-//	printf("LEAK INIT_DATA: %p\n", data->lst_env);
 	if (!(data->lst_env_waiting = malloc(sizeof(t_env))))
 		return (ERROR_MALLOC);
 	if (ft_init_data2(data) == ERROR_MALLOC)
@@ -89,7 +88,7 @@ int			ft_init_env(t_env *env)
 	s = *environ;
 	while (environ[++i - 1])
 	{
-		if (!(env = malloc(sizeof(t_env))))
+		if ((i != 1) && !(env = malloc(sizeof(t_env))))
 			return (ERROR_MALLOC);
 		if (i > 1)
 			tmp->next = env;
