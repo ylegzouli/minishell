@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 11:05:06 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 15:28:30 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 15:34:09 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ char				*parse_env2(char **res, t_env *tmp, t_env *env, int i)
 		*res = var_env_found(env, res, tmp);
 	else
 		*res = var_env_not_found(env, res);
-	printf("res = %s\n", *res);
 	return (*res);
 }
 
@@ -159,6 +158,5 @@ char				*parse_env(t_env *env, char *line)
 			i = -1;
 		}
 	}
-	printf("post parse env\n");
 	return (res);
 }
