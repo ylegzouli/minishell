@@ -26,12 +26,13 @@ void	signal_prevent(int sig)
 		g_data->ret = 0;
 	}
 }
+/*
 void	signal_exit(int sig)
 {
 	if (sig == EOF)
 		exit(0);
 }
-
+*/
 void	sigsig(void)
 {
 	signal(SIGINT, signal_quit);
