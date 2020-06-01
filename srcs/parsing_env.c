@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 11:05:06 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 20:14:37 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 20:32:50 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void			var_env_not_found2(char **ret, char **line,
 	len_var--;
 	if (i > 0 && (*line)[i - 1] == '"' && (*line)[i + len_var + 1] == '"')
 		len_var--;
-	while ((*line)[i + len_var + 2] && (*ret)[i])
+	while ((*line)[i + len_var + 2] && i < ft_strlen(*line) - 1 - len_var)
 	{
 		(*ret)[i] = (*line)[i + len_var + 2];
 		i++;
