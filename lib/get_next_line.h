@@ -19,7 +19,7 @@
 # include <stdio.h>
 # include <string.h>
 
-# define BUFFER_SIZE	32
+# define BUFFER_SIZE	1
 
 int				get_next_line(int fd, char **line);
 int				ft_check_error(int fd, char **str, char **line);
