@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 11:05:06 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 15:34:09 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 15:41:19 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ char				*parse_env(t_env *env, char *line)
 	t_env	*tmp;
 	int		i;
 	char	*res;
+	char	*ret;
 
 	i = -1;
 	res = ft_strdup(line);
@@ -158,5 +159,7 @@ char				*parse_env(t_env *env, char *line)
 			i = -1;
 		}
 	}
-	return (res);
+	ret = ft_strtrim(res, " ");
+	free(res);
+	return (ret);
 }
