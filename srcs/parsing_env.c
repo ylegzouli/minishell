@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 11:05:06 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/05/29 10:12:26 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 15:28:30 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,6 @@ static char			*var_env_found(t_env *env, char **line, t_env *tmp)
 	if (!(ret = malloc(sizeof(char) * (size + 1))))
 		return (0);
 	ret[size] = '\0';
-	//write(1, "coucou\n",7);
-	//printf("line = %s\n", *line);
 	while ((*line)[++i] && (*line)[i] != '$' && (ft_strncmp(*line + i + 1,
 					tmp->name, ft_strlen(tmp->name)) != 0))
 		ret[i] = (*line)[i];
@@ -123,7 +121,6 @@ static char			*var_env_found(t_env *env, char **line, t_env *tmp)
 		i++;
 	}
 	free(*line);
-//	printf("ret = %s\n", ret);
 	return (ret);
 }
 
@@ -135,6 +132,7 @@ char				*parse_env2(char **res, t_env *tmp, t_env *env, int i)
 		*res = var_env_found(env, res, tmp);
 	else
 		*res = var_env_not_found(env, res);
+	printf("res = %s\n", *res);
 	return (*res);
 }
 
@@ -155,13 +153,12 @@ char				*parse_env(t_env *env, char *line)
 				|| res[i + 1] == '?'))
 		{
 			while (res[i + 1] && tmp && (ft_strncmp(res + i + 1,
-							tmp->name, ft_strlen(tmp->name)) != 0))
+				tmp->name, ft_strlen(tmp->name)) != 0))
 				tmp = tmp->next;
 			res = parse_env2(&res, tmp, env, i);
-			i = 0;
+			i = -1;
 		}
 	}
-//	printf("final res = %s\n", res);
-	// ici il faudra free RES et LINE plus tard, attention
+	printf("post parse env\n");
 	return (res);
 }

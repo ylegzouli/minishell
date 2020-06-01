@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:49:11 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/05/29 11:04:03 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 15:08:44 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,22 @@ char		*get_cmd_n_found(t_cmd *cmd)
 	return (nl);
 }
 
+int				check_arg_not_found(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (s && s[0] == '=')
+		return (1);
+	while (s[i] && s[i] != '=')
+	{
+		if (ft_isalpha(s[i]) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int				command_var_env(t_env *env,
 		t_env *env_w, char *line, t_cmd *cmd)
 {
@@ -108,7 +124,7 @@ int				command_var_env(t_env *env,
 
 	tmp = env_w;
 	nl = get_cmd_n_found(cmd);
-	if (check_char(line, '=') == 0)
+	if (check_char(line, '=') == 0 || check_arg_not_found(nl) == 1)
 	{
 		free(nl);
 		return (-1);
