@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int		ft_is_sep(const char *str, char c2, char *quote, int i)
+int				ft_is_sep(const char *str, char c2, char *quote, int i)
 {
 	if (str[i] == *quote)
 		*quote = 0;

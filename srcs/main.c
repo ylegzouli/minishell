@@ -27,8 +27,10 @@ int			main(void)
 
 int			ft_start(t_data *data)
 {
-	char *line;
+	char	*line;
+	int		ex;
 
+	ex = 0;
 	while (data->exit == 0)
 	{
 		data->exit = 0;
@@ -36,13 +38,18 @@ int			ft_start(t_data *data)
 		{
 			signal(SIGINT, signal_prevent);
 			signal(SIGQUIT, signal_prevent);
-			signal(EOF, signal_exit);
 			ft_print_prompt();
-			get_next_line(0, &line);
+			if (get_next_line(0, &line) == 0)
+				ex = 1;
 			ft_lstadd_front_hist(data, line);
 			if (check_error_unexpected(line) == 0 && check_red(line) == 0)
 				ft_exec_line(data);
 			free(line);
+			if (ex)
+			{
+				ft_print_prompt();
+				ft_exit();
+			}
 		}
 	}
 	return (0);

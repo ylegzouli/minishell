@@ -15,13 +15,15 @@
 int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 {
 	char	*tmp;
+	char	*tmp2;
 
 	tmp = ft_strdup(cmd);
 	delete_char(&tmp);
 	if (check_char(cmd, '$') == 1)
 	{
+		tmp2 = parse_env(g_data->lst_env, tmp);
 		free(tmp);
-		tmp = parse_env(g_data->lst_env, cmd);
+		tmp = tmp2;
 	}
 	if (tmp[0] != 0)
 	{
