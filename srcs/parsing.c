@@ -17,17 +17,7 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 	char	*tmp;
 	char	*tmp2;
 
-	tmp = ft_strdup(cmd);
-	delete_char(&tmp);
-	if (check_char(cmd, '$') == 1)
-	{
-		tmp2 = parse_env(g_data->lst_env, tmp);
-		free(tmp);
-		tmp = tmp2;
-	}
-	tmp2 = ft_strtrim(tmp, " ");
-	free(tmp);
-	tmp = tmp2;
+	start_parse(cmd, &tmp);
 	if (tmp[0] != 0)
 	{
 		get_output(new_cmd, &tmp, i, size);

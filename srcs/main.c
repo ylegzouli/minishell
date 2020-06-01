@@ -44,12 +44,8 @@ int			ft_start(t_data *data)
 			ft_lstadd_front_hist(data, line);
 			if (check_error_unexpected(line) == 0 && check_red(line) == 0)
 				ft_exec_line(data);
+			ft_exit_d(ex, line);
 			free(line);
-			if (ex)
-			{
-				ft_print_prompt();
-				ft_exit();
-			}
 		}
 	}
 	return (0);
@@ -64,4 +60,14 @@ void		ft_exit(void)
 {
 	free_data();
 	g_data->exit = 1;
+}
+
+void		ft_exit_d(int ex, char *line)
+{
+	if (ex)
+	{
+		if (line[0] != 0)
+			ft_print_prompt();
+		ft_exit();
+	}
 }

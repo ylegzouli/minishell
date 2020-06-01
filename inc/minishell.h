@@ -201,4 +201,7 @@ char				*get_cmd_n_found(t_cmd *cmd);
 int					check_arg_not_found(char *s);
 int					check_quote_export(char **s);
 char				*env_question_found(char **line);
+void				start_parse(char *cmd, char **tmp);
+void				ft_exit_d(int ex, char *line);
+
 #endif
