@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:59:17 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/05/28 10:59:18 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 20:23:40 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int			ft_init_env2(t_env *env, t_env *tmp, char *s, int i)
 	return (SUCCESS);
 }
 
-int			ft_init_env(t_env *env)
+int			ft_init_env(t_env *env, char **environ)
 {
 	int		i;
 	char	*s;

@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:59:55 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/05/28 16:56:59 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 20:23:25 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 t_data		*g_data;
 
-int			main(void)
+int			main(int ac, char **av, char **environ)
 {
 	t_data	data;
 
 	g_data = &data;
 	ft_init_data(&data);
-	ft_init_env(data.lst_env);
+	ft_init_env(data.lst_env, environ);
 	ft_start(&data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 20:20:07 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 20:21:55 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 20:24:28 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,11 @@ typedef struct		s_data
 }					t_data;
 
 extern	t_data		*g_data;
-extern	char		**environ;
 
 int					ft_start(t_data *data);
 void				ft_exit(void);
 int					ft_init_data(t_data *data);
-int					ft_init_env(t_env *env);
+int					ft_init_env(t_env *env, char **environ);
 int					ft_init_lst(t_cmd **lst_cmd);
 void				ft_print_prompt();
 void				ft_exec_line(t_data *data);
