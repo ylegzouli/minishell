@@ -6,7 +6,7 @@
 /*   By: ylegzoul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:21:47 by ylegzoul          #+#    #+#             */
-/*   Updated: 2019/11/18 16:50:12 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/06/01 16:13:51 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int		get_next_line(int fd, char **line)
 	else
 	{
 		free(str);
-		str = NULL;
 		return (0);
 	}
 	return (1);

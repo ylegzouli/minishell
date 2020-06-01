@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:31:59 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/06/01 15:30:25 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 16:24:07 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 		free(tmp);
 		tmp = tmp2;
 	}
+	tmp2 = ft_strtrim(tmp, " ");
+	free(tmp);
+	tmp = tmp2;
 	if (tmp[0] != 0)
 	{
 		get_output(new_cmd, &tmp, i, size);
