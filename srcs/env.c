@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:49:11 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 15:08:44 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 17:00:47 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int				env(t_env *env, char **result,
 	size++;
 	if (!(ret = malloc(sizeof(char) * size)))
 		return (1);
-	ret[size] = '\0';
+	ret[size - 1] = '\0';
 	tmp = env;
 	g_data->ret = 0;
 	*result = env_copy(tmp, ret);

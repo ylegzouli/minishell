@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 11:22:34 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/05/28 16:35:14 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/01 17:07:35 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			new_arg(char **s, char c)
 	i = 0;
 	j = 0;
 	free(*s);
-	if (!((*s) = malloc(ft_strlen(old) - 2)))
+	if (!((*s) = malloc(ft_strlen(old) - 1)))
 		return (-1);
 	(*s)[ft_strlen(old) - 2] = 0;
 	while (old[i])
