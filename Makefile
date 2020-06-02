@@ -56,6 +56,3 @@ fclean: clean
 	rm -rf ./obj $(NAME)
 
 re: fclean all
-
-norme:
-	@norminette $(SRC) $(LIB) $(INC)
