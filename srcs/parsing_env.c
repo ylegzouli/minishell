@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 11:05:06 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 20:32:50 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/02 10:08:17 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void			var_env_not_found2(char **ret, char **line,
 	len_var--;
 	if (i > 0 && (*line)[i - 1] == '"' && (*line)[i + len_var + 1] == '"')
 		len_var--;
-	while ((*line)[i + len_var + 2] && i < ft_strlen(*line) - 1 - len_var)
+	while (i < ft_strlen(*line) - 1 - len_var + 1)
 	{
 		(*ret)[i] = (*line)[i + len_var + 2];
 		i++;
@@ -75,7 +75,7 @@ static char			*var_env_found(t_env *env, char **line, t_env *tmp)
 		ret[i] = (*line)[i];
 	while (tmp->value[++j])
 		ret[i + j] = tmp->value[j];
-	while ((*line)[i])
+	while (i + j < size)
 	{
 		ret[i + j] = (*line)[i + ft_strlen(tmp->name) + 1];
 		i++;
@@ -109,7 +109,8 @@ char				*parse_env(t_env *env, char *line)
 		while (res[i] && res[i] != '$')
 			i++;
 		if (res[i] && res[i + 1] && (ft_isalpha(res[i + 1]) == 1
-				|| res[i + 1] == '?'))
+				|| res[i + 1] == '?'
+				|| res[i + 1] == '_'))
 		{
 			while (res[i + 1] && tmp && (ft_strncmp(res + i + 1,
 				tmp->name, ft_strlen(tmp->name)) != 0))

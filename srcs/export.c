@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:56:53 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 20:07:11 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/02 10:11:40 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int			check_arg_export(t_env *env, char *s, char **res, t_cmd *cmd)
 		{
 			if (check_quote_export(&s) == 0)
 				return (1);
+			if (s[i] == '_')
+				return (0);
 			if (ft_isalpha(s[i]) == 0)
 				return (1);
 		}
