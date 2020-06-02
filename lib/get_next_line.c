@@ -89,9 +89,7 @@ int		get_next_line(int fd, char **line)
 	while (str[size_line] && str[size_line] != '\n')
 		size_line++;
 	(*line) = ft_substr(str, 0, size_line);
-	if (!(str[0]))
-		return (0);
-	if (ft_newline(str) != 1)
+	if (!(str[0]) || ft_newline(str) != 1)
 	{
 		free(str);
 		str = NULL;

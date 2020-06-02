@@ -18,6 +18,12 @@ int			main(int ac, char **av, char **environ)
 {
 	t_data	data;
 
+	if (ac != 1)
+	{
+		write(1, "Error: nb argument invalid.\n", 28);
+		write(1, "Must be zero.\n", 14);
+		return (1);
+	}
 	g_data = &data;
 	ft_init_data(&data);
 	ft_init_env(data.lst_env, environ);
