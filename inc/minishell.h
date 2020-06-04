@@ -204,5 +204,6 @@ char				*env_question_found(char **line);
 void				start_parse(char *cmd, char **tmp);
 void				ft_exit_d(int ex, char *line);
 int					n_inside_q(char *s, int i);
+int					check_err(char *str);
 
 #endif

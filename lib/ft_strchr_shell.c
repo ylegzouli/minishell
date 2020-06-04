@@ -10,17 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/minishell.h"
 
-int				ft_is_sep(const char *str, char c2, char *quote, int i)
+int				ft_is_sep(char *str, char c2, int i)
 {
-	if (str[i] == *quote)
-		*quote = 0;
-	else if (*quote == 0 && (str[i] == '"' || str[i] == 39))
-		*quote = str[i];
 	if (i > 0 && str[i - 1] == 92)
 		return (0);
-	if (str[i] == c2 && *quote == 0)
+	if (str[i] == c2 && n_inside_q(str, i) == 0)
 		return (1);
 	return (0);
 }
@@ -29,18 +25,16 @@ char			*ft_strchr_shell(char const *s, int c)
 {
 	int		i;
 	char	*tmp;
-	char	quote;
 
 	i = 0;
-	quote = 0;
 	tmp = (char *)s;
 	while (tmp[i] != '\0')
 	{
-		if (ft_is_sep(s, c, &quote, i))
+		if (ft_is_sep((char *)s, c, i))
 			return (&tmp[i]);
 		i++;
 	}
-	if (ft_is_sep(s, c, &quote, i))
+	if (ft_is_sep((char *)s, c, i))
 		return (&tmp[i]);
 	return (NULL);
 }
