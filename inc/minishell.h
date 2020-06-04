@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 20:20:07 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 20:24:28 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/04 11:50:22 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void				find_path(t_data *data);
 void				ft_lstadd_back_cmd(t_cmd *new);
 void				ft_lstadd_front_cmd(t_data *data, t_cmd *new);
 int					ft_lstadd_front_hist(t_data *data, char *line);
-char				**ft_split_shell(char const *str, char charset);
+char				**ft_split_shell(char *str, char charset);
 char				**ft_split_sh(char const *str, char charset);
 char				*ft_strchr_shell(char const *s, int c);
 void				ft_init_tab(int	*tab, int len);
@@ -203,5 +203,6 @@ int					check_quote_export(char **s);
 char				*env_question_found(char **line);
 void				start_parse(char *cmd, char **tmp);
 void				ft_exit_d(int ex, char *line);
+int					n_inside_q(char *s, int i);
 
 #endif

@@ -6,29 +6,43 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:55:36 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 19:58:58 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/04 12:12:22 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int			n_inside_q(char *s, int i)
+int			is_quote_dir_pair(char *s, int i, char quote, char dir)
 {
 	int		j;
-	int		k;
-	char	c;
+	int		count;
+	int		signe;
 
-	j = 0;
-	while (s[j] && s[j] != '"' && s[j] != 39)
-		j++;
-	k = j;
-	if (s[j])
-		c = s[j];
-	while (s[k] && s[k] != c)
-		k++;
-	if (s[k] && j < i && k > i)
+	j = i;
+	count = 0;
+	if (dir == '<')
+		signe = -1;
+	else 
+		signe = 1;
+	while (j >= 0 && s[j])
+	{
+		if (s[j] == quote)
+			count++;
+		j = j + signe * 1;
+	}
+	return (count % 2);
+}
+
+int			n_inside_q(char *s, int i)
+{
+	if (i == ft_strlen(s) - 1)
+		return (0);
+	if (is_quote_dir_pair(s, i, '"', '<') == 1 && ft_strchr(s + i, '"') != NULL)
+		return (1);
+	if (is_quote_dir_pair(s, i, 39, '>') == 1 && ft_strchr(s + i, 39) != NULL)
 		return (1);
 	return (0);
+	
 }
 
 int			check_error_unexpected(char *s)
@@ -45,17 +59,24 @@ int			check_error_unexpected(char *s)
 		if ((s[i] == '|' || s[i] == ';') && s[i + 1])
 		{
 			i++;
-			if (s[i] && (s[i] == '|' || s[i] == ';') && n_inside_q(s, i) == 1)
+			if (s[i] && (s[i] == '|' || s[i] == ';') && n_inside_q(s, i) == 0)
 				return (print_error_unexpected(s[i]));
-			if (s[i] && (s[i] == '<' || s[i] == '>') && n_inside_q(s, i) == 1)
+			if (s[i] && (s[i] == '<' || s[i] == '>') && n_inside_q(s, i) == 0)
 				return (print_error_nl_expected());
 			while (s[i] && s[i] == ' ')
 				i++;
-			if (s[i] && (s[i] == '|' || s[i] == ';') && n_inside_q(s, i) == 1)
+			if (s[i] && (s[i] == '|' || s[i] == ';') && n_inside_q(s, i) == 0)
 				return (print_error_unexpected(s[i]));
-			if (s[i] && (s[i] == '<' || s[i] == '>') && n_inside_q(s, i) == 1)
+			if (s[i] && (s[i] == '<' || s[i] == '>') && n_inside_q(s, i) == 0)
 				return (print_error_nl_expected());
 		}
+		if ((s[i] == '<' || s[i] == '>') && s[i + 1])
+		{
+			i++;
+			if (s[i] && s[i] == ';' && n_inside_q(s, i) == 0)
+				return (print_error_unexpected(s[i]));
+		}	
+
 	}
 	return (0);
 }

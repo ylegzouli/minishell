@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:31:43 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/06/04 10:26:50 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/04 12:16:52 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,16 @@ char		**get_arguments(char *path, char *arg)
 	char	**arguments;
 	char	*tmp;
 	char	*name;
-
+	int 		i;
+	
+	i = 0;
 	if (!path)
 		return (NULL);
 	name = get_name(path);
 	tmp = ft_strjoin(name, arg);
 	arguments = ft_split_shell(tmp, ' ');
-	int 		i;
-	i = 0;
 	while (arguments[i])
 	{
-		printf("s = %s\n", arguments[i]);
 		delete_quote(&(arguments[i]));
 		i++;
 	}
