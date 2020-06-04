@@ -98,31 +98,12 @@ int			check_red(char *line)
 	i = ft_strlen(line);
 	if (check_err(line) == 1)
 		return (print_error_unexpected('>'));
+	if (check_err_bis(line) == 1)
+		return (print_error_unexpected('<'));
 	if (i > 0)
 	{
 		if (line[i - 1] == '<' || line[i - 1] == '>')
 			return (print_error_nl_expected());
-	}
-	return (0);
-}
-
-int			check_err(char *str)
-{
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	if ((tmp = ft_strchr_shell(str, '>')) != NULL)
-	{
-		if (tmp[1] && tmp[2] && tmp[1] == '>' && tmp[2] == '>')
-			return (1);
-		if (tmp[1] && tmp[1] == ' ')
-		{
-			while (tmp[i] && tmp[i] == ' ')
-				i++;
-			if (tmp[i] && tmp[i] == '>')
-				return (1);
-		}
 	}
 	return (0);
 }

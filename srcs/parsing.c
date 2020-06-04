@@ -12,51 +12,6 @@
 
 #include "../inc/minishell.h"
 
-int			count_char(char *s, char c)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-void		direction_cd(char **s)
-{
-	int		i;
-	char	*res;
-	int		j;
-
-	i = 2;
-	j = 0;
-	while ((*s)[i] && (*s)[i] == ' ')
-		i++;
-	if ((*s)[i] != '<' ||
-	!(res = malloc(ft_strlen(*s) + 1 - count_char(*s, '<'))))
-		return ;
-	i = 0;
-	while ((*s)[i + j])
-	{
-		if ((*s)[i + j] != '<')
-		{
-			res[i] = (*s)[i + j];
-			i++;
-		}
-		else
-			j++;
-	}
-	res[ft_strlen(*s) - count_char(*s, '<')] = '\0';
-	free(*s);
-	*s = res;
-}
-
 int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 {
 	char	*tmp;
@@ -77,8 +32,6 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 				free(tmp);
 				return (1);
 			}
-			//			if (new_cmd->cmd != EXEC)
-			//				new_cmd->fd_in = -1;
 		}
 	}
 	free(tmp);

@@ -205,5 +205,7 @@ void				start_parse(char *cmd, char **tmp);
 void				ft_exit_d(int ex, char *line);
 int					n_inside_q(char *s, int i);
 int					check_err(char *str);
+int					check_err_bis(char *str);
+void				direction_cd(char **s);
 
 #endif
