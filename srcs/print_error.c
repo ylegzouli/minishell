@@ -14,6 +14,7 @@
 
 void		print_cmd_not_found(t_cmd *cmd)
 {
+	cmd->nb_cmd = g_data->step_cmd;
 	if (cmd->exept_case)
 		return ;
 	g_data->ret = 127;
