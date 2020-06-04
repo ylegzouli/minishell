@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:55:36 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/04 12:12:22 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/04 17:38:14 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			is_quote_dir_pair(char *s, int i, char quote, char dir)
 	count = 0;
 	if (dir == '<')
 		signe = -1;
-	else 
+	else
 		signe = 1;
 	while (j >= 0 && s[j])
 	{
@@ -42,7 +42,25 @@ int			n_inside_q(char *s, int i)
 	if (is_quote_dir_pair(s, i, 39, '>') == 1 && ft_strchr(s + i, 39) != NULL)
 		return (1);
 	return (0);
-	
+}
+
+int			check_error_unexpected2(char *s, int *j)
+{
+	int	i;
+
+	i = *j;
+	*j = i;
+	if (s[i] && (s[i] == '|' || s[i] == ';') && n_inside_q(s, i) == 0)
+		return (print_error_unexpected(s[i]));
+	if (s[i] && (s[i] == '<' || s[i] == '>') && n_inside_q(s, i) == 0)
+		return (print_error_nl_expected());
+	while (s[i] && s[i] == ' ')
+		i++;
+	if (s[i] && (s[i] == '|' || s[i] == ';') && n_inside_q(s, i) == 0)
+		return (print_error_unexpected(s[i]));
+	if (s[i] && (s[i] == '<' || s[i] == '>') && n_inside_q(s, i) == 0)
+		return (print_error_nl_expected());
+	return (0);
 }
 
 int			check_error_unexpected(char *s)
@@ -59,24 +77,16 @@ int			check_error_unexpected(char *s)
 		if ((s[i] == '|' || s[i] == ';') && s[i + 1])
 		{
 			i++;
-			if (s[i] && (s[i] == '|' || s[i] == ';') && n_inside_q(s, i) == 0)
-				return (print_error_unexpected(s[i]));
-			if (s[i] && (s[i] == '<' || s[i] == '>') && n_inside_q(s, i) == 0)
-				return (print_error_nl_expected());
-			while (s[i] && s[i] == ' ')
-				i++;
-			if (s[i] && (s[i] == '|' || s[i] == ';') && n_inside_q(s, i) == 0)
-				return (print_error_unexpected(s[i]));
-			if (s[i] && (s[i] == '<' || s[i] == '>') && n_inside_q(s, i) == 0)
-				return (print_error_nl_expected());
+			if (check_error_unexpected2(s, &i) != 0)
+				return (1);
 		}
 		if ((s[i] == '<' || s[i] == '>') && s[i + 1])
 		{
 			i++;
-			if (s[i] && s[i] == ';' && n_inside_q(s, i) == 0)
+			if (s[i] && (s[i] == '|' || s[i] == ';')
+			&& n_inside_q(s, i) == 0)
 				return (print_error_unexpected(s[i]));
-		}	
-
+		}
 	}
 	return (0);
 }

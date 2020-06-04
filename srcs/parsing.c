@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:31:59 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/06/04 17:02:48 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/04 17:27:53 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			count_char(char *s, char c)
 {
-	int 	i;
+	int	i;
 	int	count;
 
 	i = 0;
@@ -25,7 +25,7 @@ int			count_char(char *s, char c)
 			count++;
 		i++;
 	}
-	return (count);		
+	return (count);
 }
 
 void		direction_cd(char **s)
@@ -38,27 +38,23 @@ void		direction_cd(char **s)
 	j = 0;
 	while ((*s)[i] && (*s)[i] == ' ')
 		i++;
-	if ((*s)[i] != '<')
+	if ((*s)[i] != '<' ||
+	!(res = malloc(ft_strlen(*s) + 1 - count_char(*s, '<'))))
 		return ;
-	else
+	i = 0;
+	while ((*s)[i + j])
 	{
-		if (!(res = malloc(ft_strlen(*s) + 1 - count_char(*s, '<'))))
-			return ;
-		i = 0;
-		while ((*s)[i + j])
+		if ((*s)[i + j] != '<')
 		{
-			if ((*s)[i + j] != '<')
-			{
-				res[i] = (*s)[i + j];
-				i++;
-			}
-			else
-				j++;
+			res[i] = (*s)[i + j];
+			i++;
 		}
-		res[ft_strlen(*s) - count_char(*s, '<')] = '\0';
-		free(*s);
-		*s = res;
+		else
+			j++;
 	}
+	res[ft_strlen(*s) - count_char(*s, '<')] = '\0';
+	free(*s);
+	*s = res;
 }
 
 int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
@@ -74,7 +70,6 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 		if (tmp[0] != 0)
 		{
 			get_cmd(new_cmd, tmp);
-		//	printf("tmp = %s\n", tmp);
 			if (new_cmd->cmd == CD)
 				direction_cd(&tmp);
 			if (get_input(new_cmd, tmp, i, size) == 1)
@@ -82,8 +77,8 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 				free(tmp);
 				return (1);
 			}
-//			if (new_cmd->cmd != EXEC)
-//				new_cmd->fd_in = -1;
+			//			if (new_cmd->cmd != EXEC)
+			//				new_cmd->fd_in = -1;
 		}
 	}
 	free(tmp);

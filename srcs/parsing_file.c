@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:31:43 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/06/04 12:16:52 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/04 17:28:39 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ char		**get_arguments(char *path, char *arg)
 	char	**arguments;
 	char	*tmp;
 	char	*name;
-	int 		i;
-	
+	int		i;
+
 	i = 0;
 	if (!path)
 		return (NULL);
