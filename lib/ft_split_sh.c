@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_sh.c                                      :+:      :+:    :+:   */
+/*   ft_split_shell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylegzoul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 14:09:28 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/05/22 18:19:57 by ylegzoul         ###   ########.fr       */
+/*   Updated: 2020/06/04 12:13:04 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int		ft_is_sep(const char *str, char c2, char *quote, int i)
+static int		ft_is_sep(char *str, char c2, int i)
 {
-	if (str[i] == *quote)
-		*quote = 0;
-	else if (*quote == 0 && (str[i] == '"' || str[i] == 39))
-		*quote = str[i];
 	if (i > 0 && str[i - 1] == 92)
 		return (0);
-	if (str[i] == c2 && *quote == 0 && str[i - 1] != c2)
+	if (str[i] == c2 && n_inside_q(str, i) == 0 && str[i - 1] != c2)
 		return (1);
 	return (0);
 }
@@ -49,38 +45,39 @@ static char		**ft_strnull(char **liste)
 	}
 }
 
-static int		ft_nb(const char *str, char charset, char *quote)
+static int		ft_nb(char *str, char charset)
 {
 	int i;
 	int nb_chaine;
 
 	i = 0;
 	nb_chaine = 0;
-	while (str[i] && ft_is_sep(str, charset, quote, i))
+	while (str[i] && ft_is_sep(str, charset, i) == 1)
 		i++;
 	while (str[i])
 	{
-		while (str[i] && !ft_is_sep(str, charset, quote, i))
+		while (str[i] && ft_is_sep(str, charset, i) == 0)
 			i++;
-		while (str[i] && ft_is_sep(str, charset, quote, i))
+		while (str[i] && ft_is_sep(str, charset, i) == 1)
 			i++;
 		nb_chaine++;
 	}
 	return (nb_chaine);
 }
 
-static char		*ft_create_str(const char *str, char charset, char *quote)
+static char		*ft_create_str(char *str, char charset)
 {
 	char	*str_ret;
 	int		i;
 
 	i = 0;
-	while (str[i] && !ft_is_sep(str, charset, quote, i))
+	while (str[i] && ft_is_sep(str, charset, i) == 0)
 		i++;
 	if (!(str_ret = malloc((i + 1) * sizeof(char))))
 		return (0);
+	str_ret[i] = '\0';
 	i = 0;
-	while (str[i] && !ft_is_sep(str, charset, quote, i))
+	while (str[i] && ft_is_sep(str, charset, i) == 0)
 	{
 		str_ret[i] = str[i];
 		i++;
@@ -89,29 +86,27 @@ static char		*ft_create_str(const char *str, char charset, char *quote)
 	return (str_ret);
 }
 
-char			**ft_split_sh(char const *str, char charset)
+char			**ft_split_sh(char *str, char charset)
 {
 	int		i;
 	int		j;
-	char	quote;
 	char	**liste;
 
 	i = 0;
 	j = 0;
-	quote = 0;
 	liste = 0;
-	if (!(liste = malloc((1 + ft_nb(str, charset, &quote)) * sizeof(char *))))
+	if (!(liste = malloc((1 + ft_nb(str, charset)) * sizeof(char *))))
 		return (0);
-	while (str[i] && quote == 0 && ft_is_sep(str, charset, &quote, i))
+	while (str[i] && ft_is_sep(str, charset, i))
 		i++;
 	while (str[i])
 	{
-		if (!(liste[j] = ft_create_str(str + i, charset, &quote)))
+		if (!(liste[j] = ft_create_str(str + i, charset)))
 			return (ft_strnull(liste));
 		j++;
-		while (str[i] && !ft_is_sep(str, charset, &quote, i))
+		while (str[i] && !ft_is_sep(str, charset, i))
 			i++;
-		while (str[i] && ft_is_sep(str, charset, &quote, i))
+		while (str[i] && ft_is_sep(str, charset, i))
 			i++;
 	}
 	liste[j] = 0;

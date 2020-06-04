@@ -185,7 +185,7 @@ void				ft_lstadd_back_cmd(t_cmd *new);
 void				ft_lstadd_front_cmd(t_data *data, t_cmd *new);
 int					ft_lstadd_front_hist(t_data *data, char *line);
 char				**ft_split_shell(char *str, char charset);
-char				**ft_split_sh(char const *str, char charset);
+char				**ft_split_sh(char *str, char charset);
 char				*ft_strchr_shell(char const *s, int c);
 void				ft_init_tab(int	*tab, int len);
 int					check_variable_env(t_env *env, char *s, int equal);

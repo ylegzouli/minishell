@@ -55,18 +55,20 @@ char		*get_path(char *str)
 {
 	int		i;
 	char	*tmp;
+	char	*tmp2;
+	char 	*path;
 
 	i = 0;
-	if (str[0] == '/')
-		return (str);
+	tmp2 = ft_strdup(str);
+	delete_quote(&tmp2);
+	if (tmp2[0] == '/')
+		return (tmp2);
 	else
 	{
-		while (g_data->path[i] != 0)
-			i++;
-		if (g_data->path[i - 1] != '/')
-			g_data->path[i] = '/';
-		tmp = ft_strjoin(g_data->path, str);
-		g_data->path[i] = 0;
+		path = ft_strjoin(get_env_value(g_data->lst_env, "PWD"), "/");
+		tmp = ft_strjoin(path, tmp2);
+		free(path);
+		free(tmp2);
 		return (tmp);
 	}
 }
