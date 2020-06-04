@@ -30,6 +30,8 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 				free(tmp);
 				return (1);
 			}
+//			if (new_cmd->cmd != EXEC)
+//				new_cmd->fd_in = -1;
 		}
 	}
 	free(tmp);
