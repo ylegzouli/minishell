@@ -6,11 +6,60 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:31:59 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/06/01 19:03:51 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/04 17:02:48 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int			count_char(char *s, char c)
+{
+	int 	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			count++;
+		i++;
+	}
+	return (count);		
+}
+
+void		direction_cd(char **s)
+{
+	int		i;
+	char	*res;
+	int		j;
+
+	i = 2;
+	j = 0;
+	while ((*s)[i] && (*s)[i] == ' ')
+		i++;
+	if ((*s)[i] != '<')
+		return ;
+	else
+	{
+		if (!(res = malloc(ft_strlen(*s) + 1 - count_char(*s, '<'))))
+			return ;
+		i = 0;
+		while ((*s)[i + j])
+		{
+			if ((*s)[i + j] != '<')
+			{
+				res[i] = (*s)[i + j];
+				i++;
+			}
+			else
+				j++;
+		}
+		res[ft_strlen(*s) - count_char(*s, '<')] = '\0';
+		free(*s);
+		*s = res;
+	}
+}
 
 int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 {
@@ -25,6 +74,9 @@ int			ft_parse(t_cmd *new_cmd, char *cmd, int i, int size)
 		if (tmp[0] != 0)
 		{
 			get_cmd(new_cmd, tmp);
+		//	printf("tmp = %s\n", tmp);
+			if (new_cmd->cmd == CD)
+				direction_cd(&tmp);
 			if (get_input(new_cmd, tmp, i, size) == 1)
 			{
 				free(tmp);
