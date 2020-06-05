@@ -91,12 +91,13 @@ typedef struct		s_data
 	char			**cmd;
 	int				fd;
 	int				empty_pipe;
+	int				exit_status;
 }					t_data;
 
 extern	t_data		*g_data;
 
 int					ft_start(t_data *data);
-void				ft_exit(void);
+void				ft_exit(t_cmd *cmd);
 int					ft_init_data(t_data *data);
 int					ft_init_env(t_env *env, char **environ);
 int					ft_init_lst(t_cmd **lst_cmd);

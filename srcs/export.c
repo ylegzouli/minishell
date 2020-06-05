@@ -99,7 +99,6 @@ int			export(t_env *env, char *s2, char **res, t_cmd *cmd)
 		return (create_order_env(env, res, cmd));
 	s1 = ft_split_shell(s2, ' ');
 	i = -1;
-	printf("s2 = %s\ns1 = %s\n", s2, s1[0]);
 	while (s1[++i])
 	{
 		tmp = env;

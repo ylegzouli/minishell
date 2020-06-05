@@ -17,6 +17,7 @@ t_data		*g_data;
 int			main(int ac, char **av, char **environ)
 {
 	t_data	data;
+	int		exit_status;
 
 	if (ac != 1)
 	{
@@ -28,7 +29,9 @@ int			main(int ac, char **av, char **environ)
 	ft_init_data(&data);
 	ft_init_env(data.lst_env, environ);
 	ft_start(&data);
-	return (0);
+	exit_status = g_data->exit_status;
+	free_data();
+	return (exit_status);
 }
 
 int			ft_start(t_data *data)
@@ -62,9 +65,14 @@ void		ft_print_prompt(void)
 	write(1, "minishell$> ", 12);
 }
 
-void		ft_exit(void)
+void		ft_exit(t_cmd *cmd)
 {
-	free_data();
+	int		exit_status;
+
+	if (cmd->arg)
+		exit_status = ft_atoi(cmd->arg);
+	if (exit_status > 0 && exit_status < 256)
+		g_data->exit_status = exit_status;
 	g_data->exit = 1;
 }
 
@@ -74,6 +82,6 @@ void		ft_exit_d(int ex, char *line)
 	{
 		if (line[0] != 0)
 			ft_print_prompt();
-		ft_exit();
+		g_data->exit = 1;
 	}
 }

@@ -27,6 +27,7 @@ int			ft_init_data2(t_data *data)
 	data->ret = 0;
 	data->pipe = NULL;
 	g_data->step_cmd = 0;
+	g_data->exit_status = 0;
 	return (SUCCESS);
 }
 

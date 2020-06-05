@@ -59,7 +59,7 @@ int			executor(t_cmd **cmd, int **tube)
 			redirect(tube[g_data->i], cmd[g_data->i]);
 			if (is_cmd_write(cmd[g_data->i]) == 1)
 				ft_exec_cmd(cmd[g_data->i], arguments, environnement, tmp);
-			ft_exit();
+			ft_exit(cmd[g_data->i]);
 		}
 		else if (pid < 0)
 			return (1);

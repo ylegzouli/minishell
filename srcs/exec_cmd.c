@@ -54,7 +54,7 @@ void		ft_exec_cmd(t_cmd *cmd, char **arg, char **envi, char *path)
 	else if (cmd->cmd == CD)
 		cd(cmd->arg);
 	else if (cmd->cmd == EXIT)
-		ft_exit();
+		ft_exit(cmd);
 	else if (cmd->cmd == EXPORT)
 		export(g_data->lst_env, cmd->arg, &cmd->result, cmd);
 	else if (cmd->cmd == ENV)
