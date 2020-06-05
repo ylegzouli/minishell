@@ -6,31 +6,31 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:56:53 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/02 10:11:40 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/05 10:27:38 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int			check_arg_export(t_env *env, char *s, char **res, t_cmd *cmd)
+int			check_arg_export(t_env *env, char **s, char **res, t_cmd *cmd)
 {
 	int		i;
 
 	i = 0;
-	if (s[0] == '\0')
+	if ((*s)[0] == '\0')
 	{
 		create_order_env(env, res, cmd);
 		return (2);
 	}
-	while (s[i] && s[i] != '=')
+	while ((*s)[i] && (*s)[i] != '=')
 	{
-		if (ft_isalpha(s[i]) == 0)
+		if (ft_isalpha((*s)[i]) == 0)
 		{
-			if (check_quote_export(&s) == 0)
+			if (check_quote_export(s) == 0)
 				return (1);
-			if (s[i] == '_')
+			if ((*s)[i] == '_')
 				return (0);
-			if (ft_isalpha(s[i]) == 0)
+			if (ft_isalpha((*s)[i]) == 0)
 				return (1);
 		}
 		i++;
@@ -99,10 +99,11 @@ int			export(t_env *env, char *s2, char **res, t_cmd *cmd)
 		return (create_order_env(env, res, cmd));
 	s1 = ft_split_shell(s2, ' ');
 	i = -1;
+	printf("s2 = %s\ns1 = %s\n", s2, s1[0]);
 	while (s1[++i])
 	{
 		tmp = env;
-		if (check_arg_export(env, s1[i], res, cmd) == 1 &&
+		if (check_arg_export(env, &s1[i], res, cmd) == 1 &&
 			(g_data->ret = 2) != 0)
 			write(1, "export: bad variable name\n", 26);
 		else if (check_variable_env(env, s1[i], check_char(s1[i], '=')) == 1)

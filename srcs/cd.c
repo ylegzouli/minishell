@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:43:49 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/05/28 10:45:58 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/05 09:48:40 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static int			go_up(void)
 	size--;
 	while (g_data->path[size] && g_data->path[size] != '/')
 		size--;
-	if (size >= 0)
+	if (size > 0)
 		g_data->path[size] = '\0';
 	else
 	{
