@@ -80,7 +80,7 @@ void		ft_exit(t_cmd *cmd)
 			exit_status = -100;
 		i++;
 	}
-	if (exit_status < 0)
+	if (exit_status < 0 && cmd->cmd == EXIT)
 	{
 		write(2, "minishell: ", 11);
 		ft_putnbr_fd(cmd->nb_cmd, 2);

@@ -37,7 +37,6 @@ void		free_cmd(t_cmd *lst_cmd)
 
 void		free_input_error(t_cmd *cmd, char *path, char **tmp)
 {
-	(g_data->step_cmd)++;
 	print_cmd_not_found(cmd);
 	free(path);
 	free_split(tmp);
