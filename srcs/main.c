@@ -78,7 +78,7 @@ void		ft_exit(t_cmd *cmd)
 	{
 		if (ft_isdigit(cmd->arg[i]) != 1)
 			exit_status = -100;
-		i++;	
+		i++;
 	}
 	if (exit_status < 0)
 	{
@@ -101,6 +101,5 @@ void		ft_exit_d(int ex, char *line)
 		if (line[0] != 0)
 			ft_print_prompt();
 		g_data->exit = 1;
-
 	}
 }
