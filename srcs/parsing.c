@@ -59,12 +59,7 @@ void		get_cmd(t_cmd *new_cmd, char *cmd)
 	else if (ft_strcmp(tmp[0], "env") == 0)
 		new_cmd->cmd = ENV;
 	else if (tmp[0])
-	{
-		new_cmd->cmd_n_found = ft_strdup(tmp[0]);
-		new_cmd->cmd_temp = ft_strdup(cmd);
-		delete_quote(&new_cmd->cmd_n_found);
-		new_cmd->cmd = EXEC;
-	}
+		dupdup(new_cmd, tmp, cmd);
 	free_split(tmp);
 }
 

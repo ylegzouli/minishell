@@ -12,21 +12,6 @@
 
 #include "../inc/minishell.h"
 
-char		*parsing_file(char ***envi, char ***arg, char **tmp, t_cmd *cmd)
-{
-	env(g_data->lst_env, tmp, cmd, 0);
-	*envi = ft_split(*tmp, '\n');
-	free(*tmp);
-	*tmp = NULL;
-	if (!(*tmp = get_path_bin(cmd)))
-	{
-		free_split(*envi);
-		cmd->cmd = NOTFOUND;
-	}
-	*arg = get_arguments(*tmp, cmd->arg);
-	return (0);
-}
-
 char		*get_path_bin(t_cmd *cmd)
 {
 	char	*path;

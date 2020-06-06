@@ -209,5 +209,6 @@ int					check_err_bis(char *str);
 void				direction_cd(char **s);
 int					ft_isdigit(int c);
 void				make_quote_great_again(char **s);
+void				dupdup(t_cmd *new_cmd, char **tmp, char *cmd);
 
 #endif
