@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 11:22:34 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/06 15:04:36 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/06 15:17:34 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			new_arg(char **s, char c)
 		if ((old[i] != c && old[i] != q) || j >= 2)
 			(*s)[i - j] = old[i];
 		else if (old[i] == q)
-			(*s)[i - j] = (q == 39) ? 1 : 2;
+			(*s)[i - j] = (q == 39) ? 2 : 1;
 		else
 			j++;
 		i++;
@@ -63,14 +63,25 @@ void		delete_quote(char **arg)
 {
 	int		i;
 	char	*s;
+	int		j;
 
 	i = 0;
+	j = 0;
 	s = ft_strdup(*arg);
 	free(*arg);
+	while (s[j] && s[j] != 39 && s[j] != '"')
+		j++;
+	if (s[j] && s[j] == 39)
+		j = 2;
+	else if (s[j] && s[j] == '"')
+		j = 1;
+	else
+		j = 0;
 	while (s[i])
 	{
+		if (j == 1)
+			delete_quote2(&s, i, '"');
 		delete_quote2(&s, i, 39);
-		delete_quote2(&s, i, '"');
 		i++;
 	}
 	*arg = s;
