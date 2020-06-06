@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 11:22:34 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/06 12:23:31 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/06 13:29:50 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int			delete_quote2(char **s, int i, char c)
 	{
 		while ((*s)[i] && (*s)[i] != c)
 			i++;
-		if ((*s)[i])
+		if ((*s)[i] && (*s)[i] == c && i < ft_strlen(*s))
 			return (new_arg(s, c));
 	}
 	return (0);

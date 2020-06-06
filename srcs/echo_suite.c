@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 19:18:10 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/06 12:57:52 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/06 13:18:52 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int			find_space(char c)
 		return (12);
 	if (c == '"')
 		return (1);
-	else
+	if (c == 39)
 		return (2);
+	else
+		return (c);
 }
 
 int			bslash_found(char **result, int pos)
