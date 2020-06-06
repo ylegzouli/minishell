@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 19:18:10 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/06 12:40:34 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/06 12:57:52 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ int			bslash_found(char **result, int pos)
 	while (++i < pos)
 		temp[i] = (*result)[i];
 	temp[i] = find_space((*result)[i + 1]);
-	while ((*result)[++i + 1])
+	while ((*result)[++i + 1] && i < ft_strlen(*result))
 		temp[i] = (*result)[i + 1];
-	printf("len = %d\ni = %d\n", ft_strlen(*result) - 1, i);
 	free(*result);
 	*result = temp;
 	return (0);
@@ -79,6 +78,7 @@ int			look_for_back_slash(char **result, int order)
 	char	*ret;
 
 	i = 0;
+//	printf("argument = %s\n", *result);
 	while ((*result)[i])
 	{
 		while ((*result)[i] && (*result)[i] != 92)
@@ -91,5 +91,6 @@ int			look_for_back_slash(char **result, int order)
 		}
 		i++;
 	}
+//	printf("resultat = %s\n", *result);
 	return (0);
 }
