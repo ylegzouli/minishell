@@ -117,7 +117,6 @@ int					power_of_ten(int n);
 int					size_int(int n);
 int					check_char(char *s, char c);
 void				printer(int i, char **result, t_cmd *cmd, int opt);
-void				delete_char(char **cmd);
 int					check_space_after_dollar(char *line);
 void				clean_com(char **cmd, t_cmd *new_cmd,
 char *tmp, char **tmp2);
@@ -209,5 +208,6 @@ int					check_err(char *str);
 int					check_err_bis(char *str);
 void				direction_cd(char **s);
 int					ft_isdigit(int c);
+void				make_quote_great_again(char **s);
 
 #endif

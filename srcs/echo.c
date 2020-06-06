@@ -40,6 +40,7 @@ int			ft_parse_echo(char *input, int *fd, char **result, t_cmd *cmd)
 
 void		printer(int i, char **result, t_cmd *cmd, int opt)
 {
+	make_quote_great_again(result);
 	if (opt == 0)
 		ft_print(*result, ft_strlen(*result), cmd, 1);
 	else if (opt != 0)

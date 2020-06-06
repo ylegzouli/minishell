@@ -12,35 +12,6 @@
 
 #include "../inc/minishell.h"
 
-void		delete_char(char **cmd)
-{
-	char	**tmp;
-	char	*tmp2;
-	char	*tmp3;
-	int		i;
-
-	i = 0;
-	look_for_back_slash(cmd, EXEC);
-	/*
-	if (ft_strnstr(*cmd, "\\\\", 1000) != 0)
-		return ;
-	printf("cmd = %s\n", *cmd);
-	tmp = ft_split_shell(*cmd, '\\');
-	if (!(tmp2 = malloc(1)))
-		return ;
-	tmp2[0] = 0;
-	while (tmp[i])
-	{
-		tmp3 = ft_strjoin(tmp2, tmp[i]);
-		free(tmp2);
-		tmp2 = tmp3;
-		i++;
-	}
-	free_split(tmp);
-	free(*cmd);
-	*cmd = tmp2;*/
-}
-
 int			new_arg(char **s, char c)
 {
 	int		i;

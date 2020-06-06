@@ -17,7 +17,7 @@ void		start_parse(char *cmd, char **tmp)
 	char	*tmp2;
 
 	*tmp = ft_strdup(cmd);
-	delete_char(tmp);
+	look_for_back_slash(tmp, EXEC);
 	if (check_char(*tmp, '$') == 1)
 	{
 		tmp2 = parse_env(g_data->lst_env, *tmp);

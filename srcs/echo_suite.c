@@ -46,13 +46,15 @@ int			bslash_found(char **result, int pos)
 	i = -1;
 	if (!(temp = malloc(ft_strlen(*result))))
 		return (1);
+//	printf("%p\n", temp);
 	temp[ft_strlen(*result) - 1] = '\0';
+//	ft_bzero(temp, ft_strlen(*result));
 	while (++i < pos)
 		temp[i] = (*result)[i];
 	temp[i] = find_space((*result)[i + 1]);
 	while ((*result)[++i + 1] && i < ft_strlen(*result))
 		temp[i] = (*result)[i + 1];
-	free(*result);
+//	free(*result);
 	*result = temp;
 	return (0);
 }
