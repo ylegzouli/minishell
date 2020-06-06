@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 11:22:34 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 20:17:00 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/06 12:23:31 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ void		delete_char(char **cmd)
 	int		i;
 
 	i = 0;
+	look_for_back_slash(cmd, EXEC);
+	/*
 	if (ft_strnstr(*cmd, "\\\\", 1000) != 0)
 		return ;
+	printf("cmd = %s\n", *cmd);
 	tmp = ft_split_shell(*cmd, '\\');
 	if (!(tmp2 = malloc(1)))
 		return ;
@@ -35,7 +38,7 @@ void		delete_char(char **cmd)
 	}
 	free_split(tmp);
 	free(*cmd);
-	*cmd = tmp2;
+	*cmd = tmp2;*/
 }
 
 int			new_arg(char **s, char c)

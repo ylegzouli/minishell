@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 19:18:10 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 20:41:59 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/06 12:40:34 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,12 @@ int			find_space(char c)
 		return (10);
 	if (c == 'v')
 		return (11);
-	else
+	if (c == 'f')
 		return (12);
+	if (c == '"')
+		return (1);
+	else
+		return (2);
 }
 
 int			bslash_found(char **result, int pos)
@@ -46,21 +50,30 @@ int			bslash_found(char **result, int pos)
 	temp[i] = find_space((*result)[i + 1]);
 	while ((*result)[++i + 1])
 		temp[i] = (*result)[i + 1];
+	printf("len = %d\ni = %d\n", ft_strlen(*result) - 1, i);
 	free(*result);
 	*result = temp;
 	return (0);
 }
 
-int			react_with_bslash(char c)
+int			react_with_bslash(char c, int order)
 {
-	if (c == 'n' || c == 'v' || c == 'f' || c == 't')
-		return (1);
-	if (c == 'b' || c == 'r' || c == 'e' || c == 92)
-		return (1);
+	if (order == ECHO)
+	{
+		if (c == 'n' || c == 'v' || c == 'f' || c == 't')
+			return (1);
+		if (c == 'b' || c == 'r' || c == 'e' || c == 92)
+			return (1);
+	}
+	else if (order == EXEC)
+	{
+		if (c == 92 || c == '"' || c == 39)
+			return (1);
+	}
 	return (0);
 }
 
-int			look_for_back_slash(char **result)
+int			look_for_back_slash(char **result, int order)
 {
 	int		i;
 	char	*ret;
@@ -71,7 +84,7 @@ int			look_for_back_slash(char **result)
 		while ((*result)[i] && (*result)[i] != 92)
 			i++;
 		if ((*result)[i] && (*result)[i + 1] &&
-		react_with_bslash((*result)[i + 1]) == 1)
+		react_with_bslash((*result)[i + 1], order) == 1)
 		{
 			bslash_found(result, i);
 			i = -1;

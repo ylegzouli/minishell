@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:31:43 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/06/04 17:28:39 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/06 12:32:32 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,21 @@ char		*get_name(char *path)
 	return (name);
 }
 
+void		make_quote_great_again(char **s)
+{
+	int	i;
+
+	i = 0;
+	while ((*s)[i])
+	{
+		if ((*s)[i] == 1)
+			(*s)[i] = '"';
+		else if ((*s)[i] == 2)
+			(*s)[i] = 39;
+		i++;
+	}
+}
+
 char		**get_arguments(char *path, char *arg)
 {
 	char	**arguments;
@@ -116,6 +131,7 @@ char		**get_arguments(char *path, char *arg)
 	while (arguments[i])
 	{
 		delete_quote(&(arguments[i]));
+		make_quote_great_again(&(arguments[i]));
 		i++;
 	}
 	free(name);

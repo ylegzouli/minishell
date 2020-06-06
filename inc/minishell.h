@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 20:20:07 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/04 11:50:22 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/06 12:10:18 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ void				pipe_out(int tube[2]);
 void				free_input_error(t_cmd *cmd, char *path, char **tmp);
 void				start_input(char **tmp, char **path);
 void				sigsig(void);
-int					look_for_back_slash(char **result);
+int					look_for_back_slash(char **result, int a);
 int					export_env_w(t_env *tmp, char *s);
 char				*get_cmd_n_found(t_cmd *cmd);
 int					check_arg_not_found(char *s);
