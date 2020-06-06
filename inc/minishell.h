@@ -208,5 +208,6 @@ int					n_inside_q(char *s, int i);
 int					check_err(char *str);
 int					check_err_bis(char *str);
 void				direction_cd(char **s);
+int					ft_isdigit(int c);
 
 #endif

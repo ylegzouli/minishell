@@ -68,13 +68,20 @@ void		ft_print_prompt(void)
 void		ft_exit(t_cmd *cmd)
 {
 	int		exit_status;
+	int		i;
 
+	i = 0;
 	exit_status = g_data->ret;
-	if (cmd->arg[0] != 0)
-		exit_status = ft_atoi(cmd->arg);
-	if ((cmd->arg[0] < 48 || cmd->arg[0] > 57) && exit_status <= 0)
+	if (cmd->arg && cmd->arg[0] != 0)
+		exit_status = ft_atoi(cmd->arg) % 256;
+	while (cmd->arg && cmd->arg[i])
 	{
-		cmd->nb_cmd = g_data->step_cmd;
+		if (ft_isdigit(cmd->arg[i]) != 1)
+			exit_status = -100;
+		i++;	
+	}
+	if (exit_status < 0)
+	{
 		write(2, "minishell: ", 11);
 		ft_putnbr_fd(cmd->nb_cmd, 2);
 		write(2, ": exit : Illegal number: ", 25);
@@ -83,8 +90,7 @@ void		ft_exit(t_cmd *cmd)
 		g_data->ret = 2;
 		return ;
 	}
-	if (exit_status >= 0)
-		g_data->ret = exit_status % 256;
+	g_data->ret = exit_status % 256;
 	g_data->exit = 1;
 }
 

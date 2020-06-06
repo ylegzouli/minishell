@@ -16,7 +16,7 @@ INC_NAME =	minishell.h
 SRC_NAME =	main.c utils3.c utils2.c pwd.c echo.c parsing_output.c parsing.c init.c exec_cmd.c env.c check_env.c \
 			parsing_env.c env_cmd.c parsing_file.c export.c empty_pipe.c echo_suite.c  parsing_env_suite.c \
 			free_env.c cd.c cd_dir.c exec_fork.c signal.c utils.c error.c export_no_arg.c free.c parsing_utils.c env_suite.c print_error.c ft_split_shell.c
-LIB_NAME = ft_atoi.c ft_lst.c ft_lstclear.c  ft_strchr_shell.c ft_split_sh.c get_next_line.c ft_putchar_fd.c \
+LIB_NAME = isdigit.c ft_atoi.c ft_lst.c ft_lstclear.c  ft_strchr_shell.c ft_split_sh.c get_next_line.c ft_putchar_fd.c \
 			get_next_line_utils.c ft_strdup.c ft_strcmp.c ft_split.c  ft_strnstr.c\
 			ft_init_tab.c ft_bzero.c ft_strlcpy.c ft_strchr.c \
 			ft_strncmp.c ft_strlen.c ft_lstadd_back.c ft_lstnew_malloc.c ft_putnbr_fd.c \
