@@ -49,7 +49,7 @@ int			print_cd_error(char *s)
 
 int			print_error_unexpected(char c)
 {
-	g_data->step_cmd++;
+	(g_data->step_cmd)++;
 	write(2, "minishell: ", 11);
 	ft_putnbr_fd(g_data->step_cmd, 2);
 	write(2, ": Synthax error: '", 18);
@@ -61,7 +61,7 @@ int			print_error_unexpected(char c)
 
 int			print_error_nl_expected(void)
 {
-	g_data->step_cmd++;
+	(g_data->step_cmd)++;
 	write(2, "minishell: ", 11);
 	ft_putnbr_fd(g_data->step_cmd, 2);
 	write(2, ": Synthax error: newline expected\n", 35);
