@@ -57,14 +57,14 @@ int					copy_old_pwd(void)
 	return (0);
 }
 
-int					new_pwd(char *s)
+int					new_pwd(char *s, char *p)
 {
 	t_env		*tmp;
 
 	tmp = g_data->lst_env;
 	while (tmp)
 	{
-		if (ft_strcmp("PWD", tmp->name) == 0)
+		if (ft_strcmp(p, tmp->name) == 0)
 		{
 			free(tmp->value);
 			if (!(tmp->value = malloc(sizeof(char) * (ft_strlen(s) + 1))))
@@ -107,25 +107,30 @@ int					cd(char *s1)
 	char		**s2;
 	char		*s;
 	int			i;
+	char		*tmp;
 
 	i = -1;
 	if (s1[0] == 0)
 		return (print_cd_error(s1));
+	tmp = ft_strdup(get_env_value(g_data->lst_env, "PWD"));
 	s2 = ft_split_shell(s1, ' ');
 	delete_quote(&s2[0]);
 	s = s2[0];
 	while (check_cd_path(s + 3 * ++i) == 1)
 		go_up();
-	if (s[2 * i] == '\0' || (s[2 * i + 1] == '\0'))
-	{
-		copy_old_pwd();
-		new_pwd(g_data->path);
-	}
-	else if (s[2 * i] == '.' || check_cd_path(s + 3 * i) == 3)
+	copy_old_pwd();
+	new_pwd(g_data->path, "PWD");
+	if (s[2 * i] == '.' || check_cd_path(s + 3 * i) == 3)
 	{
 		if (go_there(s + 3 * i) != 0)
+		{
 			print_cd_error(s);
+			chdir(tmp);
+			new_pwd(tmp, "PWD");
+			new_pwd(tmp, "OLDPWD");
+		}
 	}
+	free(tmp);
 	free_split(s2);
 	return (0);
 }

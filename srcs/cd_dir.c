@@ -26,7 +26,7 @@ static int	go_absolue(char *s)
 {
 	if (chdir(s) == 0)
 	{
-		new_pwd(s);
+		new_pwd(s, "PWD");
 		return (0);
 	}
 	g_data->ret = 2;
@@ -47,7 +47,7 @@ static int	go_in_that_dir(char *s)
 	if (chdir(path) == 0)
 	{
 		copy_old_pwd();
-		new_pwd(path);
+		new_pwd(path, "PWD");
 		find_path(g_data);
 		free(path);
 		free(tmp);

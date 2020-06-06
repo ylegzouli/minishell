@@ -172,7 +172,7 @@ int					export_no_quote(t_env *tmp, char *s, int size, int j);
 int					export_quoted(t_env *tmp, char *s, int size, int j);
 int					check_cd_path(char *s);
 int					go_there(char *s);
-int					new_pwd(char *s);
+int					new_pwd(char *s, char *p);
 int					copy_old_pwd();
 char				*parsing_file(char ***environnement,
 char ***arguments, char **tmp, t_cmd *cmd);
