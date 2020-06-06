@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:59:55 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/01 20:23:25 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/06 10:31:54 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			main(int ac, char **av, char **environ)
 	ft_init_data(&data);
 	ft_init_env(data.lst_env, environ);
 	ft_start(&data);
-	exit_status = g_data->exit_status;
+	exit_status = g_data->ret;
 	free_data();
 	return (exit_status);
 }
@@ -69,10 +69,11 @@ void		ft_exit(t_cmd *cmd)
 {
 	int		exit_status;
 
-	if (cmd->arg)
+	exit_status = g_data->ret;
+	if (cmd->arg[0] != 0)
 		exit_status = ft_atoi(cmd->arg);
-	if (exit_status > 0 && exit_status < 256)
-		g_data->exit_status = exit_status;
+	if (exit_status >= 0)
+		g_data->ret = exit_status % 256;
 	g_data->exit = 1;
 }
 

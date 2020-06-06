@@ -6,7 +6,7 @@
 /*   By: ylegzoul <ylegzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 13:31:59 by ylegzoul          #+#    #+#             */
-/*   Updated: 2020/06/04 17:27:53 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/06 10:17:06 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void		get_cmd(t_cmd *new_cmd, char *cmd)
 	{
 		new_cmd->cmd_n_found = ft_strdup(tmp[0]);
 		new_cmd->cmd_temp = ft_strdup(cmd);
+		delete_quote(&new_cmd->cmd_n_found); ////
 		new_cmd->cmd = EXEC;
 	}
 	free_split(tmp);
