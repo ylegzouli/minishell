@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 10:43:49 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/05 09:48:40 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/07 11:12:15 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int					copy_old_pwd(void)
 	return (0);
 }
 
-int					new_pwd(char *s, char *p)
+int					new_pwd(char *p, char *s)
 {
 	t_env		*tmp;
 
@@ -107,30 +107,23 @@ int					cd(char *s1)
 	char		**s2;
 	char		*s;
 	int			i;
-	char		*tmp;
+	char		*save;
+	int			j;
 
 	i = -1;
+	j = 0;
 	if (s1[0] == 0)
 		return (print_cd_error(s1));
-	tmp = ft_strdup(get_env_value(g_data->lst_env, "PWD"));
+	save = ft_strdup(get_env_value(g_data->lst_env, "OLDPWD"));
 	s2 = ft_split_shell(s1, ' ');
 	delete_quote(&s2[0]);
 	s = s2[0];
-	while (check_cd_path(s + 3 * ++i) == 1)
+	while (check_cd_path(s + 3 * ++i) == 1 && (j = 1) != 2)
 		go_up();
-	copy_old_pwd();
-	new_pwd(g_data->path, "PWD");
-	if (s[2 * i] == '.' || check_cd_path(s + 3 * i) == 3)
-	{
-		if (go_there(s + 3 * i) != 0)
-		{
-			print_cd_error(s);
-			chdir(tmp);
-			new_pwd(tmp, "PWD");
-			new_pwd(tmp, "OLDPWD");
-		}
-	}
-	free(tmp);
+	if (j == 1 && copy_old_pwd() == 0)
+		new_pwd("PWD", g_data->path);
+	cd2(s, save, i, j);
 	free_split(s2);
+	free(save);
 	return (0);
 }

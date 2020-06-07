@@ -6,7 +6,7 @@
 /*   By: acoudouy <acoudouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 20:20:07 by acoudouy          #+#    #+#             */
-/*   Updated: 2020/06/06 12:10:18 by acoudouy         ###   ########.fr       */
+/*   Updated: 2020/06/07 11:11:01 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ int					export_no_quote(t_env *tmp, char *s, int size, int j);
 int					export_quoted(t_env *tmp, char *s, int size, int j);
 int					check_cd_path(char *s);
 int					go_there(char *s);
-int					new_pwd(char *s, char *p);
+int					new_pwd(char *p, char *s);
 int					copy_old_pwd();
 char				*parsing_file(char ***environnement,
 char ***arguments, char **tmp, t_cmd *cmd);
@@ -210,5 +210,6 @@ void				direction_cd(char **s);
 int					ft_isdigit(int c);
 void				make_quote_great_again(char **s);
 void				dupdup(t_cmd *new_cmd, char **tmp, char *cmd);
+void				cd2(char *s, char *save, int i, int j);
 
 #endif
